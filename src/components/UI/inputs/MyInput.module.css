@@ -1,0 +1,19 @@
+.input {
+    border: rgba(227, 227, 227, 0.9) 2px solid;
+    border-radius: 3px;
+    font-size: 18px;
+    padding-left: 13px;
+    padding-bottom: 2px;
+    height: 38px;
+    vertical-align: top;
+    background: linear-gradient(105deg, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 0.05) 100%);
+
+    margin-bottom: 15px;
+    width: 100%;
+    box-shadow: 1px 1px 5px #228dff;
+}
+
+.input:focus {
+    border-color: #ff1177;
+    outline: none;
+}

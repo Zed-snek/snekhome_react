@@ -1,0 +1,23 @@
+.main {
+    width: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+
+.px20 {
+    font-size: 20px;
+}
+
+.px16 {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .px20 {
+        font-size: 14px;
+    }
+    .px16 {
+        font-size: 11px;
+    }
+}

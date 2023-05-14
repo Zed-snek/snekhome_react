@@ -1,0 +1,125 @@
+.imageDiv {
+    width: 317px;
+    position: relative;
+}
+.image {
+    height: 356px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.overImage {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 34px;
+    font-family: PressStart, serif;
+    padding-top: 8px;
+    line-height: 20px;
+    justify-content: center;
+}
+
+
+.userInfoDiv {
+    margin-left: 13px;
+    flex: 1;
+}
+
+.name {
+    padding-top: 3px;
+}
+
+.nicknameDiv {
+    min-height: 45px;
+    margin-bottom: 17px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.nickname {
+    font-size: 25px;
+    padding-left: 10px;
+}
+.nicknameIco {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.test {
+    color: #2D5DB2;
+}
+
+.communitiesFriendsDiv {
+    min-height: 30px;
+    border-bottom: 2px #ff9900 solid;
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 12px;
+
+}
+
+@media (max-width: 767px) {
+    .friendsBtn {
+        margin-bottom: 7px;
+    }
+    .friendsBtn:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.friendsBtn {
+    margin-left: 11px;
+    margin-right: 4px;
+    user-select: none;
+    white-space: nowrap;
+    height: 15px;
+}
+.friendsBtn div{
+    line-height: 0;
+}
+.friendsBtn div:hover {
+    cursor: pointer;
+    color: rgba(227, 227, 227, 0.6);
+}
+
+.friendsBtn div:active {
+    padding-top: 2px;
+}
+
+.tagsDiv {
+    padding: 10px;
+}
+.tagsMap {
+    overflow-y: scroll;
+    height: 217px;
+}
+.tagsDiv h5 {
+    padding-left: 11px;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    line-height: 0;
+}
+
+
+.tagDiv {
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    flex: 1;
+}
+.tagTitle {
+    color: #949494;
+    font-weight: bold;
+    font-size: 15px;
+    width: 180px;
+    margin-right: 20px;
+}
+.tagText {
+    flex: 1;
+    font-size: 16px;
+}
+
+

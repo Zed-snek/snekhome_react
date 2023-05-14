@@ -1,0 +1,40 @@
+.main {
+    padding: 16px;
+    font-size: 20px;
+}
+
+.main h4 {
+    color: #949494;
+}
+
+.main label {
+    font-size: 18px;
+}
+
+.btnDiv {
+    display: flex;
+    justify-content: center;
+}
+.btnDiv button {
+    margin-right: 70px;
+}
+
+.changePassDiv {
+    max-width: 400px;
+    margin-bottom: 10px;
+}
+
+.currentEmailTitle {
+    font-weight: bold;
+    color: #949494;
+    font-size: 16px;
+    margin-right: 10px;
+}
+.currentEmailDiv {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.confirmPage {
+    height: 40px;
+}

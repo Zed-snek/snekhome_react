@@ -1,0 +1,12 @@
+.main {
+    position: absolute;
+    width: 300px;
+    border-radius: 10px;
+    border: 3px #495a8a solid;
+    color: #1B1B24;
+    background-color: #E9105E;
+}
+
+.none {
+    display: none;
+}

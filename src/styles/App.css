@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    color: #E3E3E3;
+    transition: all 0.2s;
+    word-break: break-word;
+}
+
+.App {
+    margin-top: 80px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Calibri Light", sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.flexDiv {
+    display: flex;
+}
+
+.noWrap {
+    white-space: nowrap;
+}
+
+body {
+    background-color: #15151D !important;
+}
+
+.own_bg_colorHeader {
+    background-color: #1B1B24;
+}
+
+@font-face {
+    font-family: "PressStart";
+    src: url("fonts/PressStart.ttf") format("truetype");
+}
+

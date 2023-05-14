@@ -1,0 +1,21 @@
+.pageButton {
+    background-color: white;
+    border: cadetblue solid 1px;
+    border-radius: 2px;
+}
+
+.pageButton:hover {
+    cursor: pointer;
+}
+
+.pageButton:active {
+    background-color: gray;
+}
+
+.currentPageButton {
+    border-color: coral;
+}
+
+.paginationDiv {
+    margin-top: 10px;
+}

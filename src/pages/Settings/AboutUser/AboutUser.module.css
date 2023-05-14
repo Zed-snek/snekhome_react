@@ -1,0 +1,82 @@
+.main {
+    padding: 16px;
+    font-size: 20px;
+}
+
+.main p {
+    font-size: 18px;
+    line-height: 18px;
+}
+
+
+.addButtonDiv {
+    margin-top: 30px;
+    flex: 1;
+}
+.addButton {
+    height: 50px;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+
+}
+
+.newTagDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons {
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.buttons button {
+    height: 50px;
+    width: 50%;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.inputComponentMain {
+    margin-top: 30px;
+}
+
+.inputDiv {
+    font-size: 16px;
+    color: #949494;
+}
+.inputDiv div{
+    font-size: 14px;
+    color: #949494;
+    min-width: 240px;
+}
+.inputDiv input{
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.edit {
+    border-radius: 16px;
+    margin-right: 12px;
+    padding-bottom: 2px;
+    padding-top: 0;
+}
+.cancel {
+    border-radius: 16px;
+    margin-right: 12px;
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.accept {
+    margin-left: 12px;
+}
+
+
+@media (min-width: 1000px) {
+    .inputDiv {
+        margin-right: 15px;
+    }
+}
+

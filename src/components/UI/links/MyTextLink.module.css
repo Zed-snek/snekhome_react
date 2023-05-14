@@ -1,0 +1,10 @@
+.link {
+    float: left;
+    text-decoration: underline;
+    font-size: 17px;
+}
+
+.link:hover {
+    color: #FF1177;
+    cursor: pointer;
+}

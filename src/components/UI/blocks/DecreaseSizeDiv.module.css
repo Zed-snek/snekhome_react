@@ -1,0 +1,29 @@
+.main {
+
+}
+
+.px25 {
+    font-size: 25px;
+}
+
+.px20 {
+    font-size: 20px;
+}
+
+@media(min-width: 768px) and (max-width: 991px) {
+    .px25 {
+        font-size: 20px;
+    }
+    .px20 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 767px) {
+    .px25 {
+        font-size: 16px;
+    }
+    .px20 {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,17 @@
+.message {
+    border: 1px solid #2c57a5;
+    background-color: rgba( 44, 87, 165, 0.2 );
+    width: 100%;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+}
+
+.displayNone {
+    display: none;
+}

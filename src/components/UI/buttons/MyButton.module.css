@@ -1,0 +1,58 @@
+.button {
+    font-weight: bold;
+    padding: 7px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+
+}
+
+.floatRight {
+    float: right;
+}
+
+.green {
+    background-color: #85B50E;
+    border-color: #85B50E;
+}
+.green:hover {
+    background-color: rgba(133, 181, 14, 0.8);
+}
+.green:active {
+    background: linear-gradient(45deg, rgba(133, 181, 14, 0.8) 30%, rgba(33, 185, 190, 0.8) 100%);
+}
+
+.blue {
+    background-color: rgba(45, 93, 178, 1);
+    border-color: rgba(45, 93, 178, 1);
+}
+.blue:hover {
+    background-color: rgba(45, 93, 178, 0.8);
+}
+.blue:active {
+    background: linear-gradient(60deg, rgba(45, 93, 178, 0.8) 50%, rgba(233, 16, 94, 0.8) 100%);
+}
+
+.red {
+    background-color: rgb(233, 16, 94);
+    border-color: rgba(233, 16, 94, 1);
+}
+.red:hover {
+    background-color: rgba(233, 16, 94, 0.8);
+}
+.red:active {
+    background: linear-gradient(80deg, rgba(233, 16, 94, 1) 0%, rgba(227, 42, 108, 0.8) 60%, rgba(67, 158, 236, 0.8) 100%);
+}
+
+.orange {
+    background-color: rgba(255, 153, 0, 1);
+    border-color: rgba(255, 153, 0, 1);
+}
+.orange:hover {
+    background-color: rgba(255, 153, 0, 0.8);
+}
+.orange:active {
+    background: linear-gradient(291deg, rgba(255, 153, 0, 0.8) 28%, rgba(249, 193, 42, 0.8) 100%);
+}
+
+
