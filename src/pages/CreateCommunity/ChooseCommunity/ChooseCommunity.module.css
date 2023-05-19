@@ -1,0 +1,50 @@
+.main {
+
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.item {
+    width: 200px;
+    height: 300px;
+    margin: 20px;
+    border: 2px solid;
+    border-radius: 25px;
+}
+.item:hover {
+    cursor: pointer;
+}
+
+.chosen {
+    box-shadow: 0 0 15px;
+}
+
+.blue {
+    border-color: #228dff;
+}
+.blue:hover {
+    box-shadow: 0 0 20px #228dff;
+}
+.red {
+    border-color: #ff1177;
+}
+.red:hover {
+    box-shadow: 0 0 20px #ff1177;
+}
+.green {
+    border-color: #85B50E;
+}
+.green:hover {
+    box-shadow: 0 0 20px #85B50E;
+}
+.purple {
+    border-color: #af0198;
+}
+.purple:hover {
+    box-shadow: 0 0 20px #af0198;
+}
+

@@ -8,12 +8,10 @@ function NotFound() {
     useDocumentTitle("404 Not Found")
 
     return (
-        <div>
-            <div className={style.sign}>
+        <div className={style.sign}>
 
-                <p className={neon.blue + ' ' + style.numbers}>404</p>
-                <p className={neon.blue}>Page Not Found</p>
-            </div>
+            <p className={neon.blue + ' ' + style.numbers}> 404 </p>
+            <p className={neon.blue}> Page Not Found </p>
         </div>
     );
 }

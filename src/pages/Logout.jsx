@@ -1,9 +1,9 @@
-import React, {useContext} from 'react';
-import {AuthContext} from "../components/Context";
+import React from 'react';
+import {useLogout} from "../hooks/useLogout";
 
 function Logout() {
 
-    const {logout} = useContext(AuthContext)
+    const logout = useLogout()
 
     return logout()
 }

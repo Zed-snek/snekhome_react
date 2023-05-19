@@ -86,35 +86,32 @@ function SettingsPage() {
     }
 
     return (
-        <div>
+        <div className={style.main}>
 
-            <div className={style.main}>
+            <SettingsNavbar callback={setPage} page={currentPage}/>
 
-                <SettingsNavbar callback={setPage} page={currentPage}/>
-
-                <div className={style.content}>
-                    <h2>
-                        Settings
-                        <div className={style.loader}>
-                            <MySyncLoader loading={isLoader}/>
-                        </div>
-                    </h2>
-                    <div className={style.link}>
-                        <MyTextLink to={"/u/" + userNickname}>Go back</MyTextLink>
+            <div className={style.content}>
+                <h2>
+                    Settings
+                    <div className={style.loader}>
+                        <MySyncLoader loading={isLoader}/>
                     </div>
-
-                    <MessageModal
-                        visible={isErrorModal}
-                        setVisible={setIsErrorModal}
-                    >
-                        {error}
-                    </MessageModal>
-
-                    <OutlineDiv>
-                        {content()}
-                    </OutlineDiv>
-
+                </h2>
+                <div className={style.link}>
+                    <MyTextLink to={"/u/" + userNickname}>Go back</MyTextLink>
                 </div>
+
+                <MessageModal
+                    visible={isErrorModal}
+                    setVisible={setIsErrorModal}
+                >
+                    {error}
+                </MessageModal>
+
+                <OutlineDiv>
+                    {content()}
+                </OutlineDiv>
+
             </div>
         </div>
     );

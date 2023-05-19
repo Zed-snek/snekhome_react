@@ -13,6 +13,7 @@ import SettingsPage from "../../pages/Settings/SettingsPage";
 import MySyncLoader from "../UI/loaders/MySyncLoader";
 import ConfirmChangingEmailPage from "../../pages/Settings/Security/ConfirmChangingEmailPage";
 import Logout from "../../pages/Logout";
+import CreateCommunityPage from "../../pages/CreateCommunity/CreateCommunityPage";
 
 
 function AllRoutes() {
@@ -32,6 +33,7 @@ function AllRoutes() {
                 </Route>
                 <Route path='/settings' element={<SettingsPage />} />
                 <Route path='/logout' element={<Logout />} />
+                <Route path='/newCommunity' element={<CreateCommunityPage />} />
             </Route>
 
             {/*Only for unauthorized*/}

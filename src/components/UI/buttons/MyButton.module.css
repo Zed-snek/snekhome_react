@@ -44,14 +44,14 @@
     background: linear-gradient(80deg, rgba(233, 16, 94, 1) 0%, rgba(227, 42, 108, 0.8) 60%, rgba(67, 158, 236, 0.8) 100%);
 }
 
-.orange {
+.purple {
     background-color: rgba(255, 153, 0, 1);
     border-color: rgba(255, 153, 0, 1);
 }
-.orange:hover {
+.purple:hover {
     background-color: rgba(255, 153, 0, 0.8);
 }
-.orange:active {
+.purple:active {
     background: linear-gradient(291deg, rgba(255, 153, 0, 0.8) 28%, rgba(249, 193, 42, 0.8) 100%);
 }
 

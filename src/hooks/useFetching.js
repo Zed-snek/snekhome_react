@@ -19,12 +19,11 @@ export function useFetching(callback) {
             else {
                 setError(err.response.data.message)
             }
-        } finally {
+        }
+        finally {
             setIsLoading(false)
         }
     }
 
     return [fetching, isLoading, error]
 }
-
-
