@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import InfoDiv from "../../../components/UI/blocks/InfoDiv";
 import style from "./Account.module.css";
-import {UserContext} from "../../../components/Context";
+import {UserContext} from "../../../components/context";
 import EditInput from "./EditInput";
 import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../API/UserService";

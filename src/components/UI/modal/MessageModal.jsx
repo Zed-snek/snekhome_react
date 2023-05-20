@@ -40,7 +40,8 @@ function MessageModal(props) {
                                 onClick={onHide}
                                 float={'right'}
                                 color={'red'}
-                            >Close
+                            >
+                                Close
                             </MyButton>
                             <MyButton
                                 onClick={onAccept}

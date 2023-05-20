@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {AuthContext} from "../Context";
+import {AuthContext} from "../context";
 import ModalLogin from "./ModalLogin";
 import {useFetching} from "../../hooks/useFetching";
 import AuthService from "../../API/AuthService";

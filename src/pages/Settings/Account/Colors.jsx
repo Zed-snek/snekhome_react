@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import ColorElement from "./ColorElement";
 import style from "./Colors.module.css";
-import {UserContext} from "../../../components/Context";
+import {UserContext} from "../../../components/context";
 import MyButton from "../../../components/UI/buttons/MyButton";
 
 function Colors({setIsShow, updateUser}) {

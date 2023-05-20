@@ -8,6 +8,8 @@
     justify-content: center;
 }
 
+
+
 .item {
     width: 200px;
     height: 300px;
@@ -17,6 +19,30 @@
 }
 .item:hover {
     cursor: pointer;
+}
+.item:active {
+    margin-top: 10px;
+}
+
+.title {
+    text-align: center;
+    font-family: PressStart;
+    margin-top: 5px;
+}
+
+.imageDiv {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.image {
+    width: 80%;
+}
+
+.description {
+    padding: 0 10px;
+    font-size: 13px;
 }
 
 .chosen {
@@ -41,10 +67,10 @@
 .green:hover {
     box-shadow: 0 0 20px #85B50E;
 }
-.purple {
-    border-color: #af0198;
+.orange {
+    border-color: #ff9900;
 }
-.purple:hover {
-    box-shadow: 0 0 20px #af0198;
+.orange:hover {
+    box-shadow: 0 0 20px #ff9900;
 }
 

@@ -1,12 +1,12 @@
 import React, {useContext} from 'react';
-import {AuthContext} from "../Context";
+import {AuthContext} from "../context";
 import {Routes, Route} from "react-router-dom";
 import InfoPage from "../../pages/InfoPage";
 import PostList from "../../pages/PostList";
 import PrivateRoute from "./PrivateRoute";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import UnauthorizedOnlyRoute from "./UnauthorizedOnlyRoute";
-import VerifyPage from "../Login/VerifyPage";
+import VerifyPage from "../login/VerifyPage";
 import UserPage from "../../pages/userPage/UserPage";
 import NotFound from "../../pages/NotFound/NotFound";
 import SettingsPage from "../../pages/Settings/SettingsPage";

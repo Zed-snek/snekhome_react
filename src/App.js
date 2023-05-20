@@ -2,10 +2,10 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/App.css';
 import './styles/scrollbar.css';
-import AllRoutes from "./components/Routes/AllRoutes";
-import NavigationBar from "./components/NavigationBar/NavigationBar";
+import AllRoutes from "./components/routes/AllRoutes";
+import NavigationBar from "./components/navigationBar/NavigationBar";
 import Container from "react-bootstrap/Container";
-import MyContextProvider from "./components/Context/MyContextProvider";
+import MyContextProvider from "./components/context/MyContextProvider";
 
 
 function App() {

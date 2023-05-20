@@ -10,7 +10,7 @@ import Security from "./Security/SecurityPage";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import MessageModal from "../../components/UI/modal/MessageModal";
 import MyTextLink from "../../components/UI/links/MyTextLink";
-import {UserContext} from "../../components/Context";
+import {UserContext} from "../../components/context";
 import {useDocumentTitle} from "usehooks-ts";
 
 function SettingsPage() {

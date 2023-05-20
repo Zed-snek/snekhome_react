@@ -15,7 +15,17 @@ function ChooseCommunityItem({color, title, children, image, id, chosen, setChos
             className={classes.join(' ')}
             onClick={() => setChosen(id)}
         >
-            {children}
+            <div className={style.title}>
+                {title}
+            </div>
+
+            <div className={style.imageDiv}>
+                <img src={image} className={style.image} alt={id}/>
+            </div>
+
+            <div className={style.description}>
+                {children}
+            </div>
         </div>
 
     );

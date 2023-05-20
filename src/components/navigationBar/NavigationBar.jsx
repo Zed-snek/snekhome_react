@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {Link} from "react-router-dom";
-import {AuthContext, UserContext} from "../Context";
+import {AuthContext, UserContext} from "../context";
 import './NavigationBar.css'
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,7 +8,7 @@ import logo from "../../images/logo.png"
 import signIco from "../../images/signpost.svg"
 import searchIco from "../../images/search.svg"
 import notificationIco from "../../images/directboxnotif.svg"
-import Login from "../Login/Login";
+import Login from "../login/Login";
 
 
 function NavigationBar() {
