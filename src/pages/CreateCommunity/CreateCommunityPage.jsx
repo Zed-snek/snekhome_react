@@ -19,6 +19,15 @@ function CreateCommunityPage() {
 
     const [type, setType] = useState(-1) //0 = corporate, 1 = anarchy, 2 = democracy, 3 = newspaper
 
+    const [settings, setSettings] = useState({ //todo add citizen role: title, bannerColor
+        anonAllowed: false,
+        isClosed: false,
+        idName: '',
+        name: '',
+        description: ''
+    }) //todo type
+
+
 
     function handleClick() {
         switch (stage) {
@@ -44,7 +53,9 @@ function CreateCommunityPage() {
                     chosen={type}
                 />
             case 1:
-                return <CommunitySettingsPage />
+                return <CommunitySettingsPage
+                    chosen={type}
+                />
             case 2:
                 return "Details"
             case 3:

@@ -1,5 +1,6 @@
 import React from 'react';
 import {useDocumentTitle} from "usehooks-ts";
+import MyCheckbox from "../components/UI/inputs/MyCheckbox";
 
 function InfoPage() {
 

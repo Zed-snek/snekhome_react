@@ -1,13 +1,12 @@
-.mainDiv {
-    display: flex;
-    align-items: center;
-}
-
-
 .label {
     font-size: 20px;
     cursor: pointer;
     user-select: none;
+}
+
+.mainDiv {
+    display: flex;
+    align-items: center;
 }
 
 .main {

@@ -1,0 +1,20 @@
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.item {
+    height: 200px;
+    width: 300px;
+    margin: 20px;
+}
+
+.title {
+    font-size: 19px;
+    color: #949494;
+    font-weight: 600;
+}
+
+.description {
+
+}
