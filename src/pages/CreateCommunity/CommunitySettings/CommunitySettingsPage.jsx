@@ -3,7 +3,16 @@ import style from "./CommunitySettings.module.css";
 import MyCheckbox from "../../../components/UI/inputs/MyCheckbox";
 import BooleanBlock from "../../../components/UI/blocks/BooleanBlock";
 
-function CommunitySettingsPage({chosen}) {
+function CommunitySettingsPage({chosen, setSettings}) {
+
+
+    function handleClosedCommunity(e) {
+        setSettings(prev => ({...prev, isClosed: e.target.checked}))
+    }
+    function handleAnonCommunity(e) {
+        setSettings(prev => ({...prev, anonAllowed: e.target.checked}))
+    }
+
 
     return (
         <div className={style.main}>
@@ -16,6 +25,7 @@ function CommunitySettingsPage({chosen}) {
                     If you allow anonymous posts, that will be mean anyone can post anything and no one will know who has posted it.
                 </div>
                 <MyCheckbox
+                    onChange={handleAnonCommunity}
                     label="Allow"
                 />
             </div>
@@ -28,9 +38,10 @@ function CommunitySettingsPage({chosen}) {
                         Is community closed
                     </div>
                     <div className={style.description}>
-                        If you allow anonymous posts, that will be mean anyone can post anything and no one will know who has posted it.
+                        Only members are allowed to see content and invite other users.
                     </div>
                     <MyCheckbox
+                        onChange={handleClosedCommunity}
                         label="Make community closed"
                     />
                 </div>

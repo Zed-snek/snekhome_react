@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import MyButton from "../../components/UI/buttons/MyButton";
 import style from "./CreateCommunityPage.module.css";
 

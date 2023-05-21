@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import style from "./registerPage.module.css"
+import style from "./RegisterPage.module.css"
 import MyInput from "../../components/UI/inputs/MyInput";
 import MyButton from "../../components/UI/buttons/MyButton";
 import {useForm} from "react-hook-form";
@@ -10,6 +10,7 @@ import MessageModal from "../../components/UI/modal/MessageModal";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import {isNotBannedSymbols} from "../../functions/stringFunctions";
 import {useDocumentTitle} from "usehooks-ts";
+import BooleanBlock from "../../components/UI/blocks/BooleanBlock";
 
 
 function RegisterPage() {
@@ -75,12 +76,13 @@ function RegisterPage() {
             <div className={style.title}>
                 <h2>Registration</h2>
                 <MySyncLoader loading={isRegisterLoading} />
-                { !isRegisterLoading ?
+
+                <BooleanBlock bool={!isRegisterLoading}>
                     <MyMessage>
                         {errorMessage}
                     </MyMessage>
-                    : <> </>
-                }
+                </BooleanBlock>
+
             </div>
 
             <form onSubmit={handleSubmit(sendData)}>
@@ -108,7 +110,7 @@ function RegisterPage() {
                         <div>
                             <label htmlFor="nickname">Your nickname:</label>
                             <MyInput
-                                type="" id="nickname" placeholder="nickname"
+                                type="text" id="nickname" placeholder="nickname"
                                 maxLength={18}
                                 register={register} name="nickname"
                                 required={true}

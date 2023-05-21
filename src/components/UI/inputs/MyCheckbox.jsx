@@ -1,7 +1,7 @@
 import React from 'react';
 import style from "./MyCheckbox.module.css"
 
-function MyCheckbox({label}) {
+function MyCheckbox({label, ...props}) {
 
     return (
         <label className={style.label}>
@@ -9,6 +9,7 @@ function MyCheckbox({label}) {
                 <input
                     className={style.main}
                     type="checkbox"
+                    {...props}
                 />
                 <div>
                     {label}
