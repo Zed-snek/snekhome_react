@@ -8,6 +8,7 @@ function InfoPage() {
     return (
         <div>
             <h1> Some Info </h1>
+
         </div>
     );
 }
