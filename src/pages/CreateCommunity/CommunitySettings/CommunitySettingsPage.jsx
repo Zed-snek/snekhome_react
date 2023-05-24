@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import style from "./CommunitySettings.module.css";
 import MyCheckbox from "../../../components/UI/inputs/MyCheckbox";
 import BooleanBlock from "../../../components/UI/blocks/BooleanBlock";
@@ -8,10 +8,19 @@ function CommunitySettingsPage({chosen, setSettings}) {
 
     function handleClosedCommunity(e) {
         setSettings(prev => ({...prev, isClosed: e.target.checked}))
+        if (chosen !== 1) //1 = anarchy
+            setShowInviteUsers(e.target.checked)
+        if (!e.target.checked)
+            setSettings(prev => ({...prev, inviteUsers: false}))
     }
     function handleAnonCommunity(e) {
         setSettings(prev => ({...prev, anonAllowed: e.target.checked}))
     }
+    function handleInviteUsers(e) {
+        setSettings(prev => ({...prev, inviteUsers: e.target.checked}))
+    }
+
+    const [showInviteUsers, setShowInviteUsers] = useState(false)
 
 
     return (
@@ -43,6 +52,23 @@ function CommunitySettingsPage({chosen, setSettings}) {
                     <MyCheckbox
                         onChange={handleClosedCommunity}
                         label="Make community closed"
+                    />
+                </div>
+            </BooleanBlock>
+
+            <BooleanBlock
+                bool={showInviteUsers}
+            >
+                <div className={style.item}>
+                    <div className={style.title}>
+                        Inviting users
+                    </div>
+                    <div className={style.description}>
+                        When community is closed, new users can be only invited to community. Can non ranked members invite other users?
+                    </div>
+                    <MyCheckbox
+                        onChange={handleInviteUsers}
+                        label="Allow invite users"
                     />
                 </div>
             </BooleanBlock>

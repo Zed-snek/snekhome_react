@@ -81,6 +81,7 @@ function AboutUserElement(props) {
                             required
                             onChange={event => setText(event.target.value)}
                             value={text}
+                            maxLength={1024}
                         >
                         </MyTextArea>
                     </div>

@@ -8,6 +8,10 @@ import CreateCommunityNextBtn from "./CreateCommunityNextBtn";
 import MessageModal from "../../components/UI/modal/MessageModal";
 import CommunitySettingsPage from "./CommunitySettings/CommunitySettingsPage";
 import CommunityDetailsPage from "./CommunityDetails/CommunityDetailsPage";
+import {isNotBannedSymbols} from "../../functions/stringFunctions";
+import {useFetching} from "../../hooks/useFetching";
+import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
+import CommunityCitizenRolePage from "./CommunityCitizenRole/CommunityCitizenRolePage";
 
 function CreateCommunityPage() {
 
@@ -19,6 +23,7 @@ function CreateCommunityPage() {
     const titles = ["Choose community type", "Set settings", "Set details of new community", "Create citizen role"]
     const [stage, setStage] = useState(0) //0 = choosing, 1 = settings, 2 = details, 3 = citizen role
 
+    const types = ["CORPORATE", "ANARCHY", "DEMOCRACY", "NEWSPAPER"]
     const [type, setType] = useState(-1) //0 = corporate, 1 = anarchy, 2 = democracy, 3 = newspaper
 
     const [settings, setSettings] = useState({ //todo add citizen role: title, bannerColor
@@ -26,8 +31,10 @@ function CreateCommunityPage() {
         isClosed: false,
         idName: '',
         name: '',
-        description: ''
-    }) //todo type
+        description: '',
+        inviteUsers: false
+    })
+
 
     function handleClick() {
         switch (stage) {
@@ -39,17 +46,36 @@ function CreateCommunityPage() {
                     setMessageModal("Hold your horses. Choose the community type first")
                     setIsMessageModal(true)
                 }
+                break
+
             case 1:
                 setStage(stage + 1)
+                break
+
             case 2:
-                if (type === 2) {
-                    setStage(stage + 1)
+                if (settings.idName && isNotBannedSymbols(settings.idName)) {
+                    if (type === 2) {
+                        setStage(stage + 1)
+                    }
+                    else {
+                        fetchNewCommunity()
+                    }
                 }
                 else {
-
+                    setMessageModal("Group id required and must have only allowed symbols: A-Z, a-z, 0-9, _, - ")
+                    setIsMessageModal(true)
                 }
+                break
+            case 3:
+                fetchNewCommunity()
+                break
         }
     }
+
+    const [fetchNewCommunity, isFetchLoading, errorFetch] = useFetching(() => {
+        console.log({...settings, type: types[type]})
+    })
+
 
     function stageContent() {
         switch (stage) {
@@ -69,7 +95,9 @@ function CreateCommunityPage() {
                     chosen={type}
                 />
             case 3:
-                return "Creating role" //only for democracy
+                return <CommunityCitizenRolePage
+                    setSettings={setSettings}
+                />
         }
     }
 
@@ -78,7 +106,11 @@ function CreateCommunityPage() {
         <OutlineDiv>
             <InfoDiv className={style.main}>
 
-                <h2> {titles[stage]} </h2>
+                    <h2>
+                        {titles[stage]}
+                        <MySyncLoader loading={isFetchLoading} />
+                    </h2>
+
                 {stageContent()}
 
                 <CreateCommunityNextBtn
@@ -86,6 +118,7 @@ function CreateCommunityPage() {
                     type={type}
                     stage={stage}
                 />
+
             </InfoDiv>
 
             <MessageModal

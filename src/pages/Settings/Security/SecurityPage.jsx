@@ -98,6 +98,7 @@ function SecurityPage({loader, currentEmail}) {
                             type="password"
                             id="newPass"
                             placeholder="new password..."
+                            maxLength={256}
                             onChange={event => setPass({...pass, newPass: event.target.value})}
                             required={true}
                         />

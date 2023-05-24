@@ -1,6 +1,5 @@
 .main {
-    padding-top: 20px;
-    padding-bottom: 30px;
+    padding: 20px 10% 30px 10%;
 }
 .main h2 {
     text-align: center;

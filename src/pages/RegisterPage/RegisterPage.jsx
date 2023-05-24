@@ -131,6 +131,7 @@ function RegisterPage() {
                         <label htmlFor="password">Your password:</label>
                         <MyInput
                             type="password" id="password" placeholder="password"
+                            maxLength={256}
                             register={register} name="password"
                             required={true}
                         />

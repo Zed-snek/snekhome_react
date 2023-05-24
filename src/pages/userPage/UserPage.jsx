@@ -134,10 +134,8 @@ function UserPage() {
 
                         </div>
 
-
                     </InfoDiv>
                 </div>
-
 
             </OutlineDiv>
         </div>
