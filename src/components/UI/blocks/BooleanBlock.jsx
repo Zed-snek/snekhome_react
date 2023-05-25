@@ -1,8 +1,8 @@
 import React from 'react';
 
-function BooleanBlock({bool, children, ifFalse}) {
+function BooleanBlock({bool, children, ifFalse, ...props}) {
     return (
-        <div>
+        <div {...props}>
             { bool
                 ? children
                 : ifFalse

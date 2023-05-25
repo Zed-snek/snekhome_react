@@ -1,0 +1,29 @@
+.description {
+    margin-bottom: 20px;
+}
+
+.settingsDiv {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.citizenRequirements {
+    width: 300px;
+    margin-right: 50px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #949494;
+}
+
+.citizenInputsDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+input[type="number"] {
+    width: 100px;
+}

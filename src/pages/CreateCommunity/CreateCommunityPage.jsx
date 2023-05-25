@@ -26,13 +26,20 @@ function CreateCommunityPage() {
     const types = ["CORPORATE", "ANARCHY", "DEMOCRACY", "NEWSPAPER"]
     const [type, setType] = useState(-1) //0 = corporate, 1 = anarchy, 2 = democracy, 3 = newspaper
 
-    const [settings, setSettings] = useState({ //todo add citizen role: title, bannerColor
+    const [settings, setSettings] = useState({
         anonAllowed: false,
         isClosed: false,
         idName: '',
         name: '',
         description: '',
-        inviteUsers: false
+        inviteUsers: false,
+        //democracy parameters:
+        color: '#E9105E',
+        textColor: '#E3E3E3',
+        title: 'citizen',
+        citizenDays: 60,
+        citizenRating: 150,
+        electionDays: 30
     })
 
 
@@ -67,7 +74,25 @@ function CreateCommunityPage() {
                 }
                 break
             case 3:
-                fetchNewCommunity()
+                if (!settings.title) {
+                    setMessageModal("Provide the title of citizen role flair")
+                    setIsMessageModal(true)
+                }
+                else if (settings.citizenDays < 3 || settings.citizenDays > 365) {
+                    setMessageModal("The amount of days, member needs to become a citizen must be in range: [3, 365]")
+                    setIsMessageModal(true)
+                }
+                else if (settings.citizenRating < 0 || settings.citizenRating > 10000) {
+                    setMessageModal("The amount of rating, member needs to become a citizen must be in range: [0, 10000]")
+                    setIsMessageModal(true)
+                }
+                else if (settings.electionDays < 7 || settings.electionDays > 365) {
+                    setMessageModal("The amount of days with which elections will be must be in range: [0, 10000]")
+                    setIsMessageModal(true)
+                }
+                else {
+                    fetchNewCommunity()
+                }
                 break
         }
     }
@@ -96,7 +121,9 @@ function CreateCommunityPage() {
                 />
             case 3:
                 return <CommunityCitizenRolePage
+                    settings={settings}
                     setSettings={setSettings}
+                    isClosed={settings.isClosed}
                 />
         }
     }

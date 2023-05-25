@@ -1,0 +1,53 @@
+.main {
+
+}
+
+.flairDiv {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.settingsDiv {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.rightDiv {
+    margin-left: 50px;
+}
+
+@media (max-width: 767px) {
+    .rightDiv {
+        margin-left: 0;
+    }
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #949494;
+}
+
+.textColorsDiv {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.input {
+    width: 225px;
+}
+
+.colorPicker {
+    background: transparent !important;
+}
+.colorPicker label {
+    color: #E3E3E3 !important;
+}
+.colorPicker input {
+    background: transparent !important;
+}
