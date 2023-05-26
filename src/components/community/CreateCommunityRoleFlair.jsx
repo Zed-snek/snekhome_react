@@ -15,7 +15,7 @@ function CreateCommunityRoleFlair({flair, setFlair}) {
     }
 
     function changeColorComplete(color) {
-        setFlair({...flair, color: color.hex})
+        setFlair({...flair, bannerColor: color.hex})
     }
     function setChosenColorOfText(id) {
         setFlair({...flair, textColor: id})

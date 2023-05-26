@@ -12,6 +12,7 @@ import {isNotBannedSymbols} from "../../functions/stringFunctions";
 import {useFetching} from "../../hooks/useFetching";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import CommunityCitizenRolePage from "./CommunityCitizenRole/CommunityCitizenRolePage";
+import CommunityService from "../../API/CommunityService";
 
 function CreateCommunityPage() {
 
@@ -34,7 +35,7 @@ function CreateCommunityPage() {
         description: '',
         inviteUsers: false,
         //democracy parameters:
-        color: '#E9105E',
+        bannerColor: '#E9105E',
         textColor: '#E3E3E3',
         title: 'citizen',
         citizenDays: 60,
@@ -42,6 +43,7 @@ function CreateCommunityPage() {
         electionDays: 30
     })
 
+    // const [isGroupNameNotTaken, setIsGroupNameNotTaken] = useState(false)
 
     function handleClick() {
         switch (stage) {
@@ -60,17 +62,21 @@ function CreateCommunityPage() {
                 break
 
             case 2:
-                if (settings.idName && isNotBannedSymbols(settings.idName)) {
-                    if (type === 2) {
-                        setStage(stage + 1)
-                    }
-                    else {
-                        fetchNewCommunity()
-                    }
-                }
-                else {
+                fetchIsNameNotTaken()
+
+                if (!isNotBannedSymbols(settings.idName) || !settings.idName) {
                     setMessageModal("Group id required and must have only allowed symbols: A-Z, a-z, 0-9, _, - ")
                     setIsMessageModal(true)
+                }
+                else {
+                    if (fetchIsNameNotTaken() === true) { //todo fix
+                        if (type === 2) {
+                            setStage(stage + 1)
+                        }
+                        else {
+                            fetchNewCommunity()
+                        }
+                    }
                 }
                 break
             case 3:
@@ -97,9 +103,26 @@ function CreateCommunityPage() {
         }
     }
 
-    const [fetchNewCommunity, isFetchLoading, errorFetch] = useFetching(() => {
-        console.log({...settings, type: types[type]})
+    const [fetchNewCommunity, isFetchLoading, errorFetch] = useFetching(async () => {
+        await CommunityService.newCommunity({...settings, type: types[type]})
     })
+    useEffect(() => {
+        if (errorFetch) {
+            setMessageModal(errorFetch)
+            setIsMessageModal(true)
+        }
+    }, [errorFetch])
+
+    const [fetchIsNameNotTaken, isNameTakenLoading, errorNameTaken] = useFetching(async () => {
+        await CommunityService.isNameNotTaken(settings.idName)
+    })
+    useEffect(() => {
+        if (errorNameTaken) {
+            setMessageModal(errorNameTaken)
+            setIsMessageModal(true)
+        }
+    }, [errorNameTaken])
+
 
 
     function stageContent() {
@@ -128,15 +151,14 @@ function CreateCommunityPage() {
         }
     }
 
-
     return (
         <OutlineDiv>
             <InfoDiv className={style.main}>
 
-                    <h2>
-                        {titles[stage]}
-                        <MySyncLoader loading={isFetchLoading} />
-                    </h2>
+                <h2>
+                    {titles[stage]}
+                    <MySyncLoader loading={isFetchLoading || isNameTakenLoading} />
+                </h2>
 
                 {stageContent()}
 
