@@ -13,10 +13,12 @@ import {useFetching} from "../../hooks/useFetching";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import CommunityCitizenRolePage from "./CommunityCitizenRole/CommunityCitizenRolePage";
 import CommunityService from "../../API/CommunityService";
+import {useNavigate} from "react-router-dom";
 
 function CreateCommunityPage() {
 
     useDocumentTitle("New community")
+    const navigate = useNavigate()
 
     const [isMessageModal, setIsMessageModal] = useState(false)
     const [messageModal, setMessageModal] = useState('')
@@ -62,21 +64,12 @@ function CreateCommunityPage() {
                 break
 
             case 2:
-                fetchIsNameNotTaken()
-
                 if (!isNotBannedSymbols(settings.idName) || !settings.idName) {
                     setMessageModal("Group id required and must have only allowed symbols: A-Z, a-z, 0-9, _, - ")
                     setIsMessageModal(true)
                 }
                 else {
-                    if (fetchIsNameNotTaken() === true) { //todo fix
-                        if (type === 2) {
-                            setStage(stage + 1)
-                        }
-                        else {
-                            fetchNewCommunity()
-                        }
-                    }
+                    fetchIsNameNotTaken()
                 }
                 break
             case 3:
@@ -105,17 +98,34 @@ function CreateCommunityPage() {
 
     const [fetchNewCommunity, isFetchLoading, errorFetch] = useFetching(async () => {
         await CommunityService.newCommunity({...settings, type: types[type]})
+        navigate("/c/" + settings.idName)
     })
+
+
+    const [isNameNotTaken, setIsNameNotTaken] = useState(false)
+    const [fetchIsNameNotTaken, isNameTakenLoading, errorNameTaken] = useFetching(async () => {
+        if (await CommunityService.isNameNotTaken(settings.idName)) {
+            setIsNameNotTaken(true)
+        }
+    })
+    useEffect(() => { //case 2 in handleClick()
+        if (isNameNotTaken) {
+            if (type === 2) {
+                setStage(s => s + 1)
+            }
+            else {
+                fetchNewCommunity()
+            }
+        }
+    }, [isNameNotTaken])
+
+    //errors
     useEffect(() => {
         if (errorFetch) {
             setMessageModal(errorFetch)
             setIsMessageModal(true)
         }
     }, [errorFetch])
-
-    const [fetchIsNameNotTaken, isNameTakenLoading, errorNameTaken] = useFetching(async () => {
-        await CommunityService.isNameNotTaken(settings.idName)
-    })
     useEffect(() => {
         if (errorNameTaken) {
             setMessageModal(errorNameTaken)

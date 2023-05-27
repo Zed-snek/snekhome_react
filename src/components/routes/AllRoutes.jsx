@@ -4,16 +4,16 @@ import {Routes, Route} from "react-router-dom";
 import InfoPage from "../../pages/InfoPage";
 import PostList from "../../pages/PostList";
 import PrivateRoute from "./PrivateRoute";
-import RegisterPage from "../../pages/RegisterPage/RegisterPage";
+import RegisterPage from "../../pages/registerPage/RegisterPage";
 import UnauthorizedOnlyRoute from "./UnauthorizedOnlyRoute";
 import VerifyPage from "../login/VerifyPage";
 import UserPage from "../../pages/userPage/UserPage";
-import NotFound from "../../pages/NotFound/NotFound";
-import SettingsPage from "../../pages/Settings/SettingsPage";
+import NotFound from "../../pages/notFound/NotFound";
+import SettingsPage from "../../pages/userSettings/SettingsPage";
 import MySyncLoader from "../UI/loaders/MySyncLoader";
-import ConfirmChangingEmailPage from "../../pages/Settings/Security/ConfirmChangingEmailPage";
+import ConfirmChangingEmailPage from "../../pages/userSettings/Security/ConfirmChangingEmailPage";
 import Logout from "../../pages/Logout";
-import CreateCommunityPage from "../../pages/CreateCommunity/CreateCommunityPage";
+import CreateCommunityPage from "../../pages/createCommunity/CreateCommunityPage";
 
 
 function AllRoutes() {
@@ -44,6 +44,7 @@ function AllRoutes() {
             </Route>
 
             {/*Public*/}
+            {/*<Route path='/c/:groupname' element={} />*/}
             <Route path='/u/:nickname' element={<UserPage />}/>
             <Route path='/resetMail/:token'
                    element={<ConfirmChangingEmailPage message="New list is sent on your new email to confirm it"/>}

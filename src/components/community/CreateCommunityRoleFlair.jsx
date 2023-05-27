@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import style from "./CreateCommunityRoleFlair.module.css";
-import colorsStyle from "../../pages/Settings/Account/Colors.module.css";
+import colorsStyle from "../../pages/userSettings/Account/Colors.module.css";
 import {SketchPicker} from 'react-color';
 import CommunityRoleFlair from "./CommunityRoleFlair";
 import BorderBottomDiv from "../UI/blocks/BorderBottomDiv";
 import MyInputOld from "../UI/inputs/MyInputOld";
-import ColorElement from "../../pages/Settings/Account/ColorElement";
+import ColorElement from "../../pages/userSettings/Account/ColorElement";
 
 function CreateCommunityRoleFlair({flair, setFlair}) {
 
-    const [color, setColor] = useState()
+    const [color, setColor] = useState(flair.bannerColor)
     function changeColor(color) {
         setColor(color.hex)
     }
@@ -28,7 +28,7 @@ function CreateCommunityRoleFlair({flair, setFlair}) {
         <BorderBottomDiv className={style.flairDiv}>
             <CommunityRoleFlair
                 title={flair.title}
-                color={flair.color}
+                color={color}
                 textColor={flair.textColor}
             />
         </BorderBottomDiv>
