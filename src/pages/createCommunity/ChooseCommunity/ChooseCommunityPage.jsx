@@ -5,7 +5,6 @@ import anarchyImage from "../../../images/communityTypes/anarchy.png";
 import corporateImage from "../../../images/communityTypes/corporate.png";
 import demImage from "../../../images/communityTypes/democracy.png";
 import newsImage from "../../../images/communityTypes/news.png";
-import MyButton from "../../../components/UI/buttons/MyButton";
 
 function ChooseCommunityPage({chosen, setChosen}) {
 

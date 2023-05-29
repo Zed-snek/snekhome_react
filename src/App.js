@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/App.css';
 import './styles/scrollbar.css';
+import './styles/bootstrapOverride.css';
 import AllRoutes from "./components/routes/AllRoutes";
 import NavigationBar from "./components/navigationBar/NavigationBar";
 import Container from "react-bootstrap/Container";

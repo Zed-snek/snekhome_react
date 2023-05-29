@@ -4,7 +4,7 @@ import MyInputOld from "../../../components/UI/inputs/MyInputOld";
 import MyTextArea from "../../../components/UI/inputs/MyTextArea";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
 import InfoTag from "../../userPage/InfoTag";
-import edit from "../../../images/edit.svg";
+import edit from "../../../images/icons/edit.svg";
 
 function AboutUserElement(props) {
 

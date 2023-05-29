@@ -7,7 +7,7 @@ import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../API/UserService";
 import {isNotBannedSymbols} from "../../../functions/stringFunctions"
 import MyFileInput from "../../../components/UI/inputs/MyFileInput";
-import edit from "../../../images/edit.svg";
+import edit from "../../../images/icons/edit.svg";
 import OverImageDiv from "../../../components/UI/blocks/OverImageDiv";
 import FadingMessage from "../../../components/UI/message/FadingMessage";
 import {getUserImage} from "../../../functions/functions";
@@ -135,11 +135,11 @@ function AccountPage(props) {
                         <img src={userImage} className={style.img}/>
                     </div>
 
-                    <div  className={style.imgSmall}>
+                    <div className={style.imgSmall}>
                         <div className={style.overImageDivText}>
                             Smaller size
                         </div>
-                        <img src={userImage} className="userImage"/>
+                        <img src={userImage} className={"userImage " + style.userImg}/>
                     </div>
 
                 </div>

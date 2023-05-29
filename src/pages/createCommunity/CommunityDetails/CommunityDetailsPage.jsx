@@ -45,7 +45,7 @@ function CommunityDetailsPage({chosen, setSettings}) {
                 <div>
                     <label htmlFor="description">Description:</label>
                     <MyTextArea
-                        maxLength={1024}
+                        maxLength={512}
                         onChange={handleDescription}
                         placeholder="description.."
                     >

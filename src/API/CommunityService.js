@@ -11,4 +11,8 @@ export default class CommunityService {
         return await getRequest("/community/isNotTaken/" + groupname)
     }
 
+    static async getCommunity(groupname) {
+        return await getRequest("/community/" + groupname)
+    }
+
 }

@@ -14,6 +14,7 @@ import MySyncLoader from "../UI/loaders/MySyncLoader";
 import ConfirmChangingEmailPage from "../../pages/userSettings/Security/ConfirmChangingEmailPage";
 import Logout from "../../pages/Logout";
 import CreateCommunityPage from "../../pages/createCommunity/CreateCommunityPage";
+import CommunityPage from "../../pages/communityPage/CommunityPage";
 
 
 function AllRoutes() {
@@ -44,7 +45,7 @@ function AllRoutes() {
             </Route>
 
             {/*Public*/}
-            {/*<Route path='/c/:groupname' element={} />*/}
+            <Route path='/c/:groupname' element={<CommunityPage />} />
             <Route path='/u/:nickname' element={<UserPage />}/>
             <Route path='/resetMail/:token'
                    element={<ConfirmChangingEmailPage message="New list is sent on your new email to confirm it"/>}

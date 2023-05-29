@@ -43,10 +43,6 @@
 
 }
 
-.navbar-toggler-icon {
-    background-image: url('../../images/hamburger-menu.svg');
-}
-
 .communitiesDiv {
     padding: 10px 10px 10px 7px;
     margin-left: 7.75%;
@@ -130,10 +126,7 @@
 }
 
 
-.userImage {
-    height: 50px;
-    width: 50px;
-    border-radius: 24px;
+.userImg {
     margin-left: 10px;
 }
 

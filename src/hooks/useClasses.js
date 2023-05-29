@@ -1,6 +1,6 @@
-export function useClasses(className, addClass){
+export function useClasses(mainClass, addClass){
 
-    const classes = [className]
+    const classes = [mainClass]
     if (addClass) {
         classes.push(addClass)
     }

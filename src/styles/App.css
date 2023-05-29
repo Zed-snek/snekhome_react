@@ -1,22 +1,8 @@
-* {
-    margin: 0;
-    color: #E3E3E3;
-    transition: all 0.2s;
-    word-break: break-word;
-}
-
 .App {
     margin-top: 80px;
 }
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Calibri Light", sans-serif;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-img {
-    user-select: none;
+body {
+    background-color: #15151D;
 }
 
 .flexDiv {
@@ -26,16 +12,16 @@ img {
     white-space: nowrap;
 }
 
-body {
-    background-color: #15151D;
-}
-
 .own_bg_colorHeader {
     background-color: #1B1B24;
 }
 
-@font-face {
-    font-family: "PressStart";
-    src: url("fonts/PressStart.ttf") format("truetype");
+.scrollEnable {
+    overflow-y: scroll;
 }
 
+.userImage {
+    height: 50px;
+    width: 50px;
+    border-radius: 24px;
+}

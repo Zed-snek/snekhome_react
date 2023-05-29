@@ -1,12 +1,18 @@
 import defaultUserImage from "../images/defaultUserImage.png";
+import defaultCommunityImage from "../images/defaultCommunityImage.png";
 
 export function getUserImage(image) {
-    if (!image) {
+    if (!image)
         return defaultUserImage
-    }
-    else {
+    else
         return getImageApiLink(image)
-    }
+}
+
+export function getCommunityImage(images) {
+    if (images.length === 0)
+        return defaultCommunityImage
+    else
+        return getImageApiLink(images[images.size - 1])
 }
 
 export function getImageApiLink(name) {

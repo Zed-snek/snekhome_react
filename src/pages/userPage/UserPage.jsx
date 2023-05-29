@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import style from './UserPage.module.css'
+import style from './UserPage.module.css';
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import InfoDiv from "../../components/UI/blocks/InfoDiv";
-import settingIco from '../../images/settingIco.svg'
-import logoutIco from  '../../images/logoutIco.svg'
+import settingIco from '../../images/icons/settingIco.svg';
+import logoutIco from '../../images/icons/logoutIco.svg';
 import MyTransparentButton from "../../components/UI/buttons/MyTransparentButton";
 import MessageModal from "../../components/UI/modal/MessageModal";
 import OverImageDiv from "../../components/UI/blocks/OverImageDiv";
@@ -16,13 +16,16 @@ import {useFetching} from "../../hooks/useFetching";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import {useDocumentTitle} from "usehooks-ts";
 import {useLogout} from "../../hooks/useLogout";
-
+import {UserContext} from "../../components/context";
+import addFriendIco from '../../images/icons/userAdd.svg';
+import removeFriendIco from '../../images/icons/userRemove.svg';
 
 function UserPage() {
 
     const params = useParams()
     const navigate = useNavigate()
     const logout = useLogout()
+    const {userNickname} = useContext(UserContext)
 
     useDocumentTitle(params.nickname)
 
@@ -82,27 +85,41 @@ function UserPage() {
                         </div>
 
                         <div className="noWrap">
-                            <MyTransparentButton
-                                className={style.nicknameIco}
-                                tooltip="SettingsPage"
-                                onClick={() => navigate('/settings')}>
-                                <img src={settingIco} alt="settings"/>
-                            </MyTransparentButton>
+                            { params.nickname === userNickname ?
+                                <>
+                                    <MyTransparentButton
+                                        className={style.nicknameIco}
+                                        tooltip="SettingsPage"
+                                        onClick={() => navigate('/settings')}>
+                                        <img src={settingIco} alt="settings"/>
+                                    </MyTransparentButton>
+                                    <MyTransparentButton
+                                        className={style.nicknameIco}
+                                        tooltip="Logout"
+                                        onClick={() => setLogoutModal(true)}>
+                                        <img src={logoutIco} alt="logout"/>
+                                    </MyTransparentButton>
+                                    <MessageModal
+                                        visible={isLogoutModal}
+                                        setVisible={setLogoutModal}
+                                        isAcceptButton={true}
+                                        acceptCallback={logout}
+                                    > {/*Logout Modal*/}
+                                        Are you sure you want to logout?
+                                    </MessageModal>
+                                </>
 
-                            <MyTransparentButton
-                                className={style.nicknameIco}
-                                tooltip="Logout"
-                                onClick={() => setLogoutModal(true)}>
-                                <img src={logoutIco} alt="logout"/>
-                            </MyTransparentButton>
-                            <MessageModal
-                                visible={isLogoutModal}
-                                setVisible={setLogoutModal}
-                                isAcceptButton={true}
-                                acceptCallback={logout}
-                            > {/*Logout Modal*/}
-                                Are you sure you want to logout?
-                            </MessageModal>
+                                :
+                                <>
+                                    <MyTransparentButton
+                                        className={style.nicknameIco}
+                                        tooltip="Add to friends"
+                                        onClick={() => console.log("WORKED ADD TO FRIENDS BUTTON")}>
+                                        <img src={addFriendIco} alt="Add"/>
+                                    </MyTransparentButton>
+                                </>
+                            }
+
 
                         </div>
 

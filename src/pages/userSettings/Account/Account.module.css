@@ -76,6 +76,9 @@
 .imgSmall {
     flex: 1;
 }
+.userImg {
+    margin-left: 10px;
+}
 
 .img {
     height: 317px;

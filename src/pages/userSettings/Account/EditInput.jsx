@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import style from "./Account.module.css";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
-import edit from "../../../images/edit.svg";
+import edit from "../../../images/icons/edit.svg";
 import MyInputOld from "../../../components/UI/inputs/MyInputOld";
 
 function EditInput(props) {
