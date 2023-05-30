@@ -2,7 +2,7 @@ import {
     deleteRequestWithAuth,
     getRequest,
     getRequestWithAuth,
-    postBodyRequestWithAuth,
+    postBodyRequestWithAuth, postParamsRequest,
     putRequestWithAuth
 } from "./requestFunctions";
 
@@ -43,6 +43,13 @@ export default class UserService {
 
     static async updateTag(data) {
         return await putRequestWithAuth('/tag', data)
+    }
+
+    static async addFriend(nickname) {
+        return await postParamsRequest('/auth/friend/' + nickname)
+    }
+    static async delFriend(nickname) {
+        return await deleteRequestWithAuth('/friend/' + nickname)
     }
 
 

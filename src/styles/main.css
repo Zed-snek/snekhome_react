@@ -1,0 +1,22 @@
+.flexDiv {
+    display: flex;
+}
+.noWrap {
+    white-space: nowrap;
+}
+
+.own_bg_colorHeader {
+    background-color: #1B1B24;
+}
+
+.scrollEnable {
+    overflow-y: scroll;
+}
+
+.userImage {
+    height: 50px;
+    width: 50px;
+    border-radius: 24px;
+}
+
+

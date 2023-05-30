@@ -3,10 +3,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import style from './UserPage.module.css';
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import InfoDiv from "../../components/UI/blocks/InfoDiv";
-import settingIco from '../../images/icons/settingIco.svg';
-import logoutIco from '../../images/icons/logoutIco.svg';
-import MyTransparentButton from "../../components/UI/buttons/MyTransparentButton";
-import MessageModal from "../../components/UI/modal/MessageModal";
 import OverImageDiv from "../../components/UI/blocks/OverImageDiv";
 import UserService from "../../API/UserService";
 import {getUserImage} from "../../functions/functions";
@@ -15,24 +11,17 @@ import InfoTag from "./InfoTag";
 import {useFetching} from "../../hooks/useFetching";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import {useDocumentTitle} from "usehooks-ts";
-import {useLogout} from "../../hooks/useLogout";
-import {UserContext} from "../../components/context";
-import addFriendIco from '../../images/icons/userAdd.svg';
-import removeFriendIco from '../../images/icons/userRemove.svg';
-
+import UserNicknameButtons from "./UserNicknameButtons";
 function UserPage() {
 
     const params = useParams()
     const navigate = useNavigate()
-    const logout = useLogout()
-    const {userNickname} = useContext(UserContext)
-
-    useDocumentTitle(params.nickname)
 
 
     const [user, setUser] = useState({
         communities: '',
         friends: '',
+        friendshipType: '',
         image: '',
         name: '',
         nickname: '',
@@ -40,13 +29,13 @@ function UserPage() {
         surname: '',
         tags: []
     })
-
-    const [isLogoutModal, setLogoutModal] = useState(false)
+    useDocumentTitle(user.nickname)
 
     const [fetchUser, isUserLoading, userError] = useFetching(async () => {
         const data = await UserService.userInfo(params.nickname)
         data.image = getUserImage(data.image)
         setUser(data)
+        console.log(data)
     })
 
     useEffect(() => {
@@ -59,18 +48,20 @@ function UserPage() {
         }
     }, [userError])
 
+    function setFriendshipType(type) {
+        setUser({...user, friendshipType: type})
+    }
 
     return (
         <div>
 
             <MySyncLoader loading={isUserLoading}/>
 
-
             <OutlineDiv className="flexDiv"> {/*User div*/}
 
                 <div className={style.imageDiv}>
                     <OverImageDiv className={style.overImage} style={{color: user.nicknameColor}} sizebylength={'true'}>
-                        {params.nickname}
+                        {user.nickname}
                     </OverImageDiv>
                     <img src={user.image} className={style.image}/>
                 </div>
@@ -84,44 +75,10 @@ function UserPage() {
                             </DecreaseSizeDiv>
                         </div>
 
-                        <div className="noWrap">
-                            { params.nickname === userNickname ?
-                                <>
-                                    <MyTransparentButton
-                                        className={style.nicknameIco}
-                                        tooltip="SettingsPage"
-                                        onClick={() => navigate('/settings')}>
-                                        <img src={settingIco} alt="settings"/>
-                                    </MyTransparentButton>
-                                    <MyTransparentButton
-                                        className={style.nicknameIco}
-                                        tooltip="Logout"
-                                        onClick={() => setLogoutModal(true)}>
-                                        <img src={logoutIco} alt="logout"/>
-                                    </MyTransparentButton>
-                                    <MessageModal
-                                        visible={isLogoutModal}
-                                        setVisible={setLogoutModal}
-                                        isAcceptButton={true}
-                                        acceptCallback={logout}
-                                    > {/*Logout Modal*/}
-                                        Are you sure you want to logout?
-                                    </MessageModal>
-                                </>
-
-                                :
-                                <>
-                                    <MyTransparentButton
-                                        className={style.nicknameIco}
-                                        tooltip="Add to friends"
-                                        onClick={() => console.log("WORKED ADD TO FRIENDS BUTTON")}>
-                                        <img src={addFriendIco} alt="Add"/>
-                                    </MyTransparentButton>
-                                </>
-                            }
-
-
-                        </div>
+                        <UserNicknameButtons
+                            friendshipType={user.friendshipType}
+                            setFriendshipType={setFriendshipType}
+                        />
 
                     </InfoDiv>
 
