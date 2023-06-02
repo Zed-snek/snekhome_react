@@ -2,7 +2,8 @@ import {
     deleteRequestWithAuth,
     getRequest,
     getRequestWithAuth,
-    postBodyRequestWithAuth, postParamsRequest,
+    postBodyRequestWithAuth,
+    postParamsRequest,
     putRequestWithAuth
 } from "./requestFunctions";
 

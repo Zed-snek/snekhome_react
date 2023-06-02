@@ -31,7 +31,7 @@ function NavigationBar() {
 
                 <Navbar.Collapse id="basic-navbar-nav" className={style.collapsedDiv}>
 
-                        <Nav.Link as={Link} to="/posts" className={style.communitiesDiv}  id={style["order_nav_Communities"]}>
+                        <Nav.Link as={Link} to="/communities" className={style.communitiesDiv}  id={style["order_nav_Communities"]}>
                                 <img className={style.communitiesIco + " bg-transparent"} src={signIco} />
                                 Communities
                         </Nav.Link>

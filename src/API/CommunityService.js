@@ -1,4 +1,9 @@
-import {getRequest, postBodyRequestWithAuth} from "./requestFunctions";
+import {
+    deleteRequestWithAuth,
+    getRequest,
+    postBodyRequestWithAuth,
+    postParamsRequestWithAuth
+} from "./requestFunctions";
 
 
 export default class CommunityService {
@@ -13,6 +18,13 @@ export default class CommunityService {
 
     static async getCommunity(groupname) {
         return await getRequest("/community/" + groupname)
+    }
+
+    static async joinCommunity(groupname) {
+        return await postParamsRequestWithAuth("/community/member/" + groupname)
+    }
+    static async leaveCommunity(groupname) {
+        return await deleteRequestWithAuth("/community/member/" + groupname)
     }
 
 }

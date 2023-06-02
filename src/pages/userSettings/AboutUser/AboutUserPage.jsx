@@ -72,18 +72,16 @@ function AboutUserPage({tags, fetchUser, setError, setLoader, setUser, ...props}
     }, [delId])
 
     const [fetchDel, isDelLoading, delError] = useFetching(async () => {
-        const responseData = await UserService.delTag(delId)
+        let responseData = await UserService.delTag(delId)
         if (responseData.status === 200) {
             setUser(prev => ({...prev, tags: prev.tags.filter(tag => tag.idTag !== delId)}))
         }
         setDeleteModal(false)
-
     })
     const [isDeleteModal, setDeleteModal] = useState(false)
     function deleteTag() {
         fetchDel()
     }
-
 
     useEffect(() => {
         if (newError)

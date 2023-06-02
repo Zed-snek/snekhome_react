@@ -15,6 +15,7 @@ import ConfirmChangingEmailPage from "../../pages/userSettings/Security/ConfirmC
 import Logout from "../../pages/Logout";
 import CreateCommunityPage from "../../pages/createCommunity/CreateCommunityPage";
 import CommunityPage from "../../pages/communityPage/CommunityPage";
+import CommunitiesPage from "../../pages/communitiesPage/CommunitiesPage";
 
 
 function AllRoutes() {
@@ -29,12 +30,12 @@ function AllRoutes() {
 
             {/*Private - only for authorized*/}
             <Route path='' element={<PrivateRoute auth={isAuth} />}>
-                <Route path='/posts'>
-                    <Route index element={<PostList />} />
+                <Route path='/communities'>
+                    <Route index element={<CommunitiesPage />} />
                 </Route>
                 <Route path='/settings' element={<SettingsPage />} />
                 <Route path='/logout' element={<Logout />} />
-                <Route path='/newCommunity' element={<CreateCommunityPage />} />
+                <Route path='/new_community' element={<CreateCommunityPage />} />
             </Route>
 
             {/*Only for unauthorized*/}

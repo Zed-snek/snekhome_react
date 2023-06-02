@@ -94,6 +94,7 @@
 .tagsMap {
     overflow-y: scroll;
     height: 217px;
+    margin-right: -10px;
 }
 .tagsDiv h5 {
     padding-left: 11px;

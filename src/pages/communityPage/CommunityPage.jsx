@@ -14,6 +14,8 @@ import {getCommunityImage, getUserImage} from "../../functions/functions";
 import {formatCommunityCreationDate} from "../../functions/stringFunctions";
 import MyOutlineButton from "../../components/UI/buttons/MyOutlineButton";
 import UserInfo from "../../components/post/userInfo";
+import MyPulseLoader from "../../components/UI/loaders/MyPulseLoader";
+import MessageModal from "../../components/UI/modal/MessageModal";
 function CommunityPage() {
 
     const [data, setData] = useState()
@@ -43,6 +45,36 @@ function CommunityPage() {
             navigate('/not_found')
     }, [communityError])
 
+    const [error, setError] = useState("")
+    const [isModalError, setModalError] = useState(false)
+
+    const [fetchMembership, isMembershipLoading, membershipError] = useFetching(async () => {
+        let n
+        if (data.member) {
+            await CommunityService.leaveCommunity(data.community.groupname)
+            n = -1
+        }
+        else {
+            await CommunityService.joinCommunity(data.community.groupname)
+            n = 1
+        }
+        setData(prev => ({...prev, member: !prev.member, members: prev.members + n}))
+    })
+
+    function handleJoinLeaveBtn() {
+        fetchMembership()
+    }
+
+    useEffect(() => {
+        if (membershipError)
+            setError(membershipError)
+    }, [membershipError])
+
+    useEffect(() => {
+        if (error)
+            setModalError(true)
+    }, [error])
+
     return (
         data ?
         <div>
@@ -56,7 +88,7 @@ function CommunityPage() {
                                 <img src={getCommunityImage(data.community.images)} />
                             </div>
                             <div className={style.groupname}>
-                                @{params.groupname}
+                                @{data.community.groupname}
                             </div>
                             <div className={style.date}>
                                 created {formatCommunityCreationDate(data.community.creation)}
@@ -90,11 +122,14 @@ function CommunityPage() {
                             />
                         </div>
                         <div className={style.members}>
-                            members (666)
+                            members ({data.members})
                         </div>
                         <div className={style.joinLeaveDiv}>
-                            <MyOutlineButton>
-                                Join
+                            <MyOutlineButton onClick={handleJoinLeaveBtn}>
+                                { isMembershipLoading
+                                    ? <MyPulseLoader />
+                                    : data.member ? "Leave" : "Join"
+                                }
                             </MyOutlineButton>
                         </div>
                     </div>
@@ -103,6 +138,9 @@ function CommunityPage() {
                 </InfoDiv>
             </OutlineDiv>
 
+            <MessageModal visible={isModalError} setVisible={setModalError}>
+                {error}
+            </MessageModal>
 
         </div>
         : <MySyncLoader />
