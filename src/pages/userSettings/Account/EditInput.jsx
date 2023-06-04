@@ -3,44 +3,43 @@ import style from "./Account.module.css";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
 import edit from "../../../images/icons/edit.svg";
 import MyInputOld from "../../../components/UI/inputs/MyInputOld";
+import MyTextArea from "../../../components/UI/inputs/MyTextArea";
 
-function EditInput(props) {
+function EditInput({isTextArea, children, current, name, callback, ...props}) {
 
 
     const [isInput, setIsInput] = useState(false)
 
     const [value, setValue] = useState({
-        name: props.name,
+        name: name,
         value: ''
     })
 
     useEffect(() => {
         cancel()
-    }, [props.current])
+    }, [current])
 
     function accept(e) {
         e.preventDefault()
-        if (value.value !== props.current) {
-            props.callback(value)
+        if (value.value !== current) {
+            callback(value)
         }
-
         setIsInput(false)
     }
 
     function cancel() {
-
         setIsInput(false)
-        setValue({...value, value: props.current})
+        setValue({...value, value: current})
     }
 
     return (
         <div className={style.block}>
             <div className={style.title}>
-                {props.children}
+                {children}
             </div>
 
                 <div className={style.afterTitle}>
-                {isInput
+                { isInput
                     ?
                     <div className={style.inputDiv}>
                         <div>
@@ -50,17 +49,25 @@ function EditInput(props) {
                         </div>
                         <form onSubmit={accept} className={style.inputDiv}>
 
-
                             <div>
-                                <MyInputOld
-                                    placeholder="new value..."
-                                    className={style.input}
-                                    onChange={event => setValue({...value, value: event.target.value})}
-                                    value={value.value}
-                                    type="text"
-                                    required={props.required}
-                                    maxLength={props.maxLength}
-                                />
+                                { isTextArea
+                                    ? <MyTextArea
+                                        className={style.textArea}
+                                        onChange={event => setValue({...value, value: event.target.value})}
+                                        value={value.value}
+                                        {...props}
+                                    >
+                                    </MyTextArea>
+                                    : <MyInputOld
+                                        placeholder="new value..."
+                                        className={style.input}
+                                        onChange={event => setValue({...value, value: event.target.value})}
+                                        value={value.value}
+                                        type="text"
+                                        {...props}
+                                    />
+                                }
+
                             </div>
                             <div>
                                 <MyTransparentButton className={style.cancel + ' ' + style.accept} tooltip="Accept">
@@ -74,7 +81,7 @@ function EditInput(props) {
                         <MyTransparentButton className={style.edit} tooltip="Edit" onClick={() => setIsInput(true)}>
                             <img src={edit} alt="edit"/>
                         </MyTransparentButton>
-                        {props.current}
+                        {current}
                     </div>
                 }
                 </div>

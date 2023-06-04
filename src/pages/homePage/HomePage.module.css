@@ -1,0 +1,67 @@
+.main {
+    display: flex;
+}
+
+.postList {
+    flex: 1;
+    margin-right: 22px;
+}
+.createCommunityLinkDiv {
+    display: flex;
+    justify-content: right;
+}
+.createCommunityLink {
+    line-height: 12px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+.content {
+
+}
+
+.cards {
+    padding-top: 13px;
+    width: 137px;
+    display: flex;
+}
+.cardItem {
+    font-size: 11px;
+    font-weight: bold;
+    position: relative;
+    width: 110px;
+    margin-bottom: 13px;
+}
+.cardItem:hover {
+    cursor: pointer;
+    margin-left: -3px;
+}
+.cardItem img {
+    width: 100%;
+    border-radius: 12px;
+}
+.cardItemOverImageDiv {
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+}
+
+.otherCommunitiesLink {
+    background-color: #E3E3E3;
+    color: #464646 !important;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    user-select: none;
+    height: 27px;
+    padding-top: 2px;
+}
+.otherCommunitiesLink:hover {
+    cursor: pointer;
+    background-color: rgba(227, 227, 227, 0.85);
+}
+.otherCommunitiesLink:active {
+    background-color: rgba(227, 227, 227, 0.7);
+}

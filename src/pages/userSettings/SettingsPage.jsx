@@ -88,7 +88,7 @@ function SettingsPage() {
     return (
         <div className={style.main}>
 
-            <SettingsNavbar callback={setPage} page={currentPage}/>
+            <SettingsNavbar callback={setPage} />
 
             <div className={style.content}>
                 <h2>

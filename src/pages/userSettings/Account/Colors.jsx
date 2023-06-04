@@ -21,7 +21,8 @@ function Colors({setIsShow, updateUser}) {
     const [chosen, setChosen] = useState(0)
 
     useEffect( () => {
-         setChosen( colors.find(c => c.code === nicknameColor).id )
+        setChosen(colors.findIndex(c => c.code === nicknameColor))
+
     }, [])
 
 

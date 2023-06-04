@@ -10,10 +10,11 @@ import MyFileInput from "../../../components/UI/inputs/MyFileInput";
 import edit from "../../../images/icons/edit.svg";
 import OverImageDiv from "../../../components/UI/blocks/OverImageDiv";
 import FadingMessage from "../../../components/UI/message/FadingMessage";
-import {getUserImage} from "../../../functions/functions";
+import {getUserImage} from "../../../functions/linkFunctions";
 import MyButton from "../../../components/UI/buttons/MyButton";
 import OverContentDiv from "../../../components/UI/blocks/OverContentDiv";
 import Colors from "./Colors";
+import {isObjectNotEmpty} from "../../../functions/objectFunctions";
 
 
 function AccountPage(props) {
@@ -57,15 +58,13 @@ function AccountPage(props) {
     }
 
     useEffect(() => {
-        if (Object.keys(updatedUser ).length > 0) { //checks if object updatedUser is empty
-
+        if (isObjectNotEmpty(updatedUser)) { //checks if object updatedUser is empty
             if (updatedUser.nickname && !isNotBannedSymbols(updatedUser.nickname)) {
                 props.setError("Nickname must contain only allowed symbols: a-z, A-Z, 0-9, -, _")
             }
             else {
                 fetchUpdateUser()
             }
-
         }
     }, [updatedUser])
 

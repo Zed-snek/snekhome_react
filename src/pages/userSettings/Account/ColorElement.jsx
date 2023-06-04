@@ -1,19 +1,19 @@
 import React from 'react';
 import style from "./Colors.module.css";
 
-function ColorElement(props) {
+function ColorElement({chosen, setChosen, id, active, color, ...props}) {
 
 
-    const classes = [style.colorElement, props.color]
-    if (props.chosen === props.id) {
-        classes.push(props.active)
-    }
+    const classes = [style.colorElement, color]
+    if (chosen === id)
+        classes.push(active)
+
 
     return (
-        <div className={style.mainColorElementDiv}>
+        <div className={style.mainColorElementDiv} {...props}>
             <div
                 className={classes.join(' ')}
-                onClick={() => props.setChosen(props.id)}
+                onClick={() => setChosen(id)}
             >
             </div>
         </div>

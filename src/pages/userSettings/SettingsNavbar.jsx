@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import style from './Settings.module.css'
+import style from './SettingsNavBar.module.css';
 
-function SettingsNavbar(props) {
+function SettingsNavbar({callback}) {
 
     const [visited, setVisited] = useState({
         1: style.liVisited,
@@ -15,7 +15,7 @@ function SettingsNavbar(props) {
             2: '',
             3: ''
         }
-        props.callback(number)
+        callback(number)
         empty[number] = style.liVisited
         setVisited(empty)
     }

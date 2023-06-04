@@ -77,13 +77,20 @@
     font-size: 16px;
     color: #949494;
 }
-.joinLeaveDiv {
+.buttonsDiv {
     margin-bottom: 10px;
     margin-top: 8px;
+    display: flex;
+    align-items: center;
 }
-.joinLeaveDiv button{
-    height: 30px;
-    width: 90px;
+.joinLeaveBtn {
+    height: 35px;
+    width: 100px;
     padding-left: 0;
     padding-right: 0;
+}
+.settingsBtn {
+    padding: 2px;
+    margin-right: 10px;
+    border-radius: 12px;
 }

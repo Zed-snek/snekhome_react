@@ -53,7 +53,7 @@ function UserNicknameButtons({friendshipType, setFriendshipType}) {
             return  <>
                 <MyTransparentButton
                     className={style.nicknameIco}
-                    tooltip="SettingsPage"
+                    tooltip="Settings Page"
                     onClick={() => navigate('/settings')}>
                     <img src={settingIco} alt="settings"/>
                 </MyTransparentButton>

@@ -5,18 +5,17 @@ import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import InfoDiv from "../../components/UI/blocks/InfoDiv";
 import OverImageDiv from "../../components/UI/blocks/OverImageDiv";
 import UserService from "../../API/UserService";
-import {getUserImage} from "../../functions/functions";
+import {getUserImage} from "../../functions/linkFunctions";
 import DecreaseSizeDiv from "../../components/UI/blocks/DecreaseSizeDiv";
 import InfoTag from "./InfoTag";
 import {useFetching} from "../../hooks/useFetching";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import {useDocumentTitle} from "usehooks-ts";
 import UserNicknameButtons from "./UserNicknameButtons";
+import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 function UserPage() {
 
     const params = useParams()
-    const navigate = useNavigate()
-
 
     const [user, setUser] = useState({
         communities: '',
@@ -42,11 +41,7 @@ function UserPage() {
         fetchUser()
     }, [params.nickname])
 
-    useEffect(() => {
-        if (userError) {
-            navigate('/not_found')
-        }
-    }, [userError])
+    useNotFoundNavigate(userError)
 
     function setFriendshipType(type) {
         setUser({...user, friendshipType: type})

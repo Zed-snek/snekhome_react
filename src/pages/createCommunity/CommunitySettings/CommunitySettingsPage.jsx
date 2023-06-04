@@ -39,22 +39,20 @@ function CommunitySettingsPage({chosen, setSettings}) {
                 />
             </div>
 
-            <BooleanBlock
-                bool={chosen !== 3}
-            >
-                <div className={style.item}>
-                    <div className={style.title}>
-                        Is community closed
-                    </div>
-                    <div className={style.description}>
-                        Only members are allowed to see content and invite other users.
-                    </div>
-                    <MyCheckbox
-                        onChange={handleClosedCommunity}
-                        label="Make community closed"
-                    />
+
+            <div className={style.item}>
+                <div className={style.title}>
+                    Is community closed
                 </div>
-            </BooleanBlock>
+                <div className={style.description}>
+                    Only members are allowed to see content and invite other users.
+                </div>
+                <MyCheckbox
+                    onChange={handleClosedCommunity}
+                    label="Make community closed"
+                />
+            </div>
+
 
             <BooleanBlock
                 bool={showInviteUsers}

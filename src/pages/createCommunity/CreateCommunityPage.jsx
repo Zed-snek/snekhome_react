@@ -7,13 +7,14 @@ import ChooseCommunityPage from "./ChooseCommunity/ChooseCommunityPage";
 import CreateCommunityNextBtn from "./CreateCommunityNextBtn";
 import MessageModal from "../../components/UI/modal/MessageModal";
 import CommunitySettingsPage from "./CommunitySettings/CommunitySettingsPage";
-import CommunityDetailsPage from "./CommunityDetails/CommunityDetailsPage";
+
 import {isNotBannedSymbols} from "../../functions/stringFunctions";
 import {useFetching} from "../../hooks/useFetching";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import CommunityCitizenRolePage from "./CommunityCitizenRole/CommunityCitizenRolePage";
 import CommunityService from "../../API/CommunityService";
 import {useNavigate} from "react-router-dom";
+import CommunityDetailsPage from "./CommunityDetails/CommunityDetailsPage";
 
 function CreateCommunityPage() {
 
@@ -148,7 +149,7 @@ function CreateCommunityPage() {
                     chosen={type}
                 />
             case 2:
-                return <CommunityDetailsPage
+                return<CommunityDetailsPage
                     setSettings={setSettings}
                     chosen={type}
                 />

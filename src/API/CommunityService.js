@@ -1,9 +1,10 @@
 import {
     deleteRequestWithAuth,
-    getRequest,
+    getRequest, getRequestWithAuth,
     postBodyRequestWithAuth,
-    postParamsRequestWithAuth
+    postParamsRequestWithAuth, putRequestWithAuth
 } from "./requestFunctions";
+
 
 
 export default class CommunityService {
@@ -25,6 +26,14 @@ export default class CommunityService {
     }
     static async leaveCommunity(groupname) {
         return await deleteRequestWithAuth("/community/member/" + groupname)
+    }
+
+    static async getHomeCards() {
+        return await getRequestWithAuth("/communities/home_cards")
+    }
+
+    static async updateCommunityDetails(data) {
+        return await putRequestWithAuth("/community", data)
     }
 
 }

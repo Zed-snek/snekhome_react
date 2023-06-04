@@ -10,18 +10,25 @@ import anarchyImage from "../../images/communityTypes/anarchy.png";
 import corporateImage from "../../images/communityTypes/corporate.png";
 import demImage from "../../images/communityTypes/democracy.png";
 import newsImage from "../../images/communityTypes/news.png";
-import {getCommunityImage, getUserImage} from "../../functions/functions";
+import {getCommunityImage, getUserImage} from "../../functions/linkFunctions";
 import {formatCommunityCreationDate} from "../../functions/stringFunctions";
 import MyOutlineButton from "../../components/UI/buttons/MyOutlineButton";
 import UserInfo from "../../components/post/userInfo";
 import MyPulseLoader from "../../components/UI/loaders/MyPulseLoader";
 import MessageModal from "../../components/UI/modal/MessageModal";
-function CommunityPage() {
+import settingIco from "../../images/icons/settingIco.svg";
+import MyTransparentButton from "../../components/UI/buttons/MyTransparentButton";
+import {useDocumentTitle} from "usehooks-ts";
+import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 
-    const [data, setData] = useState()
+function CommunityPage() {
 
     const params = useParams()
     const navigate = useNavigate()
+    useDocumentTitle(params.groupname.toLowerCase())
+
+    const [data, setData] = useState()
+
 
     const communityTypes = [
         {type: "ANARCHY", image: anarchyImage, color: '#ff1177'},
@@ -36,14 +43,12 @@ function CommunityPage() {
         console.log(responseData)
     })
 
+
     useEffect(() => {
         fetchCommunity()
     }, [])
 
-    useEffect(() => {
-        if (communityError)
-            navigate('/not_found')
-    }, [communityError])
+    useNotFoundNavigate(communityError)
 
     const [error, setError] = useState("")
     const [isModalError, setModalError] = useState(false)
@@ -114,6 +119,7 @@ function CommunityPage() {
 
 
                     <div className={style.rightDiv}>
+
                         <div className={style.owner}>
                             <UserInfo
                                 image={getUserImage(data.ownerImage)}
@@ -121,11 +127,25 @@ function CommunityPage() {
                                 flair={{title: "president", textColor: "#E3E3E3", color: "#15151D"}}
                             />
                         </div>
+
                         <div className={style.members}>
                             members ({data.members})
                         </div>
-                        <div className={style.joinLeaveDiv}>
-                            <MyOutlineButton onClick={handleJoinLeaveBtn}>
+
+
+                        <div className={style.buttonsDiv}>
+                            {
+                                data.currentUserRole && (data.currentUserRole.editDescription || data.currentUserRole.creator || data.currentUserRole.editId)
+                                ?
+                                <MyTransparentButton
+                                    className={style.settingsBtn}
+                                    tooltip="Settings Page"
+                                    onClick={() => navigate('/community_settings/' + data.community.groupname)}>
+                                    <img src={settingIco} alt="settings"/>
+                                </MyTransparentButton>
+                                : <></>
+                            }
+                            <MyOutlineButton className={style.joinLeaveBtn} onClick={handleJoinLeaveBtn}>
                                 { isMembershipLoading
                                     ? <MyPulseLoader />
                                     : data.member ? "Leave" : "Join"
@@ -133,7 +153,6 @@ function CommunityPage() {
                             </MyOutlineButton>
                         </div>
                     </div>
-
 
                 </InfoDiv>
             </OutlineDiv>

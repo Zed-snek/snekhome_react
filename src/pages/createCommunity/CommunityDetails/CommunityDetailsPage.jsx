@@ -37,7 +37,7 @@ function CommunityDetailsPage({chosen, setSettings}) {
                         type="text"
                         placeholder="community name.."
                         id="name"
-                        maxLength={32}
+                        maxLength={25}
                         onChange={handleName}
                     />
                 </div>

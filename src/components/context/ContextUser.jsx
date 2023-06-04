@@ -2,7 +2,7 @@ import React, {useEffect, useState, useContext} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import UserService from "../../API/UserService";
 import {AuthContext, UserContext} from "./index";
-import {getUserImage} from "../../functions/functions";
+import {getUserImage} from "../../functions/linkFunctions";
 
 function ContextUser({children}) {
 
