@@ -1,0 +1,36 @@
+.main {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.h2 {
+    line-height: 32px;
+}
+
+.community {
+    border-radius: 15px;
+    padding: 18px 38px;
+    height: 174px;
+    min-width: 480px;
+    display: flex;
+    justify-content: start;
+}
+
+.nickname {
+    margin-left: 10px;
+}
+
+.text {
+    font-size: 18px;
+}
+
+.button {
+    margin-top: 10px;
+}

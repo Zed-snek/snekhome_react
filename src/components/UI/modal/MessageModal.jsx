@@ -46,7 +46,9 @@ function MessageModal(props) {
                             <MyButton
                                 onClick={onAccept}
                                 float={'right'}
-                            > Accept </MyButton>
+                            >
+                                Accept
+                            </MyButton>
                         </>
                         : <MyButton onClick={onHide} float={'right'}>Close</MyButton>
                     }

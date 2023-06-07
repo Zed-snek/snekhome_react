@@ -1,22 +1,23 @@
 import React, {useState, useEffect} from 'react';
-import style from "../../userSettings/Settings.module.css";
+import style from "../userSettings/Settings.module.css";
 import styleThis from "./CommunitySettingsPage.module.css";
 import {useDocumentTitle} from "usehooks-ts";
 import {useParams} from "react-router-dom";
-import MySyncLoader from "../../../components/UI/loaders/MySyncLoader";
-import MyTextLink from "../../../components/UI/links/MyTextLink";
-import MessageModal from "../../../components/UI/modal/MessageModal";
-import OutlineDiv from "../../../components/UI/blocks/OutlineDiv";
+import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
+import MyTextLink from "../../components/UI/links/MyTextLink";
+import MessageModal from "../../components/UI/modal/MessageModal";
+import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import CommunitySettingsNavbar from "./CommunitySettingsNavbar";
-import {useFetching} from "../../../hooks/useFetching";
-import CommunityService from "../../../API/CommunityService";
-import {useNotFoundNavigate} from "../../../hooks/useNotFoundNavigate";
+import {useFetching} from "../../hooks/useFetching";
+import CommunityService from "../../API/CommunityService";
+import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 import CommunityDetailsSettings from "./Details/CommunityDetailsSettings";
-import InfoDiv from "../../../components/UI/blocks/InfoDiv";
+import InfoDiv from "../../components/UI/blocks/InfoDiv";
 import CommunityRoleManager from "./RoleManager/CommunityRoleManager";
 import CommunityUsers from "./Users/CommunityUsers";
 import CommunityDemocracySettings from "./Democracy/CommunityDemocracySettings";
 import CommunityRulesSettings from "./Rules/CommunityRulesSettings";
+import {getCommunityImageByArray} from "../../functions/linkFunctions";
 
 
 function CommunitySettingsPage() {
@@ -62,6 +63,9 @@ function CommunitySettingsPage() {
                         name={data.community.name}
                         description={data.community.description}
                         setData={setData}
+                        image={getCommunityImageByArray(data.community.images)}
+
+                        data={data}
                     />
                 case 2:
                     return <CommunityRoleManager />

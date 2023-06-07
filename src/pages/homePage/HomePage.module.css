@@ -32,14 +32,18 @@
     font-weight: bold;
     position: relative;
     width: 110px;
+    height: 117px;
     margin-bottom: 13px;
 }
-.cardItem:hover {
+
+.cardItemHover:hover {
     cursor: pointer;
     margin-left: -3px;
 }
+
 .cardItem img {
     width: 100%;
+    height: 100%;
     border-radius: 12px;
 }
 .cardItemOverImageDiv {

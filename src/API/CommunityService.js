@@ -36,4 +36,11 @@ export default class CommunityService {
         return await putRequestWithAuth("/community", data)
     }
 
+    static async newImage(file, groupname) {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        return await postBodyRequestWithAuth('/community/image/' + groupname, formData)
+    }
+
 }

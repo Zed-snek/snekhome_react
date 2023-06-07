@@ -10,7 +10,7 @@ import anarchyImage from "../../images/communityTypes/anarchy.png";
 import corporateImage from "../../images/communityTypes/corporate.png";
 import demImage from "../../images/communityTypes/democracy.png";
 import newsImage from "../../images/communityTypes/news.png";
-import {getCommunityImage, getUserImage} from "../../functions/linkFunctions";
+import {getCommunityImageByArray, getUserImage} from "../../functions/linkFunctions";
 import {formatCommunityCreationDate} from "../../functions/stringFunctions";
 import MyOutlineButton from "../../components/UI/buttons/MyOutlineButton";
 import UserInfo from "../../components/post/userInfo";
@@ -20,6 +20,7 @@ import settingIco from "../../images/icons/settingIco.svg";
 import MyTransparentButton from "../../components/UI/buttons/MyTransparentButton";
 import {useDocumentTitle} from "usehooks-ts";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
+import ClosedCommunityPage from "./ClosedCommunityPage";
 
 function CommunityPage() {
 
@@ -80,17 +81,37 @@ function CommunityPage() {
             setModalError(true)
     }, [error])
 
-    return (
-        data ?
-        <div>
 
+
+    function getNicknameColor() {
+        return communityTypes.find(type => type.type === data.community.type).color
+    }
+    function getTypeImage() {
+        return communityTypes.find(type => type.type === data.community.type).image
+    }
+
+
+    if (data)
+        if (!data.member && data.community.closed)
+            return (
+                <ClosedCommunityPage
+                    image={getCommunityImageByArray(data.community.images)}
+                    groupname={data.community.groupname}
+                    name={data.community.name}
+                    nameColor={getNicknameColor()}
+                    typeImage={getTypeImage()}
+                />
+            );
+        else
+            return (
+        <div>
             <OutlineDiv>
                 <InfoDiv className={style.bannerDiv}>
 
                     <div className={style.leftDiv}>
                         <div className={style.imageDateDiv}>
                             <div className={style.imgDiv}>
-                                <img src={getCommunityImage(data.community.images)} />
+                                <img src={getCommunityImageByArray(data.community.images)} />
                             </div>
                             <div className={style.groupname}>
                                 @{data.community.groupname}
@@ -102,11 +123,11 @@ function CommunityPage() {
 
                         <div>
                             <div className={style.titleDiv}>
-                                <span style={{color: communityTypes.find(type => type.type === data.community.type ).color}}>
+                                <span style={{color: getNicknameColor()}}>
                                     {data.community.name}
                                 </span>
                                 <img
-                                    src={communityTypes.find(type => type.type === data.community.type).image}
+                                    src={getTypeImage()}
                                     className={style.typeIcon}
                                     alt=""
                                 />
@@ -136,14 +157,14 @@ function CommunityPage() {
                         <div className={style.buttonsDiv}>
                             {
                                 data.currentUserRole && (data.currentUserRole.editDescription || data.currentUserRole.creator || data.currentUserRole.editId)
-                                ?
-                                <MyTransparentButton
-                                    className={style.settingsBtn}
-                                    tooltip="Settings Page"
-                                    onClick={() => navigate('/community_settings/' + data.community.groupname)}>
-                                    <img src={settingIco} alt="settings"/>
-                                </MyTransparentButton>
-                                : <></>
+                                    ?
+                                    <MyTransparentButton
+                                        className={style.settingsBtn}
+                                        tooltip="Settings Page"
+                                        onClick={() => navigate('/community_settings/' + data.community.groupname)}>
+                                        <img src={settingIco} alt="settings"/>
+                                    </MyTransparentButton>
+                                    : <></>
                             }
                             <MyOutlineButton className={style.joinLeaveBtn} onClick={handleJoinLeaveBtn}>
                                 { isMembershipLoading
@@ -160,10 +181,10 @@ function CommunityPage() {
             <MessageModal visible={isModalError} setVisible={setModalError}>
                 {error}
             </MessageModal>
-
         </div>
-        : <MySyncLoader />
-    );
+        );
+    else /*if content is loading*/
+        return <MySyncLoader />
 }
 
 export default CommunityPage;

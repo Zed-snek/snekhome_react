@@ -1,11 +1,7 @@
 import React from 'react';
 import style from './MyFileInput.module.css'
-import {useClasses} from "../../../hooks/useClasses";
-import myButtonStyle from "../buttons/MyTransparentButton.module.css"
 
 function MyFileInput({className, children, maxSize, setIsShow, setImage, ...props}) {
-
-    const classes = useClasses(myButtonStyle.main, className)
 
 
     function handleChange(e) {
@@ -24,15 +20,15 @@ function MyFileInput({className, children, maxSize, setIsShow, setImage, ...prop
 
 
     return (
-        <div>
-            <label htmlFor="id" className={classes.join(' ')}>
+        <div className={className}>
+            <label htmlFor="id" className={style.label}>
                 {children}
             </label>
             <input
                 {...props}
                 id="id"
                 type="file"
-                className={style.main}
+                className={style.input}
                 onChange={handleChange}
                 onClick={ event => {event.target.value = null} }
             />

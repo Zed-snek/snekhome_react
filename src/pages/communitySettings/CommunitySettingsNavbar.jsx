@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import style from "../../userSettings/SettingsNavBar.module.css";
+import style from "../userSettings/SettingsNavBar.module.css";
 
 function CommunitySettingsNavbar({callback, role}) {
     const [visited, setVisited] = useState({
@@ -38,7 +38,7 @@ function CommunitySettingsNavbar({callback, role}) {
 
                 <li className={visited[3]} onClick={() => changeVisited(3)}>
                     <div>Users</div>
-                    <span>Grant with roles, ban users</span>
+                    <span>Grant roles, ban users</span>
                 </li>
 
                 <li className={visited[4]} onClick={() => changeVisited(4)}>

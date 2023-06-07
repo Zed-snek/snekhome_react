@@ -17,7 +17,7 @@ import CreateCommunityPage from "../../pages/createCommunity/CreateCommunityPage
 import CommunityPage from "../../pages/communityPage/CommunityPage";
 import HomePage from "../../pages/homePage/HomePage";
 import CommunityListPage from "../../pages/communityListPage/CommunityListPage";
-import CommunitySettingsPage from "../../pages/communityPage/CommunitySettings/CommunitySettingsPage";
+import CommunitySettingsPage from "../../pages/communitySettings/CommunitySettingsPage";
 
 
 function AllRoutes() {

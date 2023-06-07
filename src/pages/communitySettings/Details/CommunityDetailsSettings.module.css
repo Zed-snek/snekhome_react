@@ -1,0 +1,46 @@
+.textArea {
+    width: 300px;
+}
+
+
+.fileBtn {
+    margin-top: 10px;
+    font-size: 17px;
+}
+.fileBtn:hover {
+    cursor: pointer;
+}
+
+.sizeExamples {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.imageExample {
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titleSizeExample {
+    color: #E3E3E3;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.communityPageImage {
+    width: 114px;
+    height: 114px;
+    border-radius: 57px;
+}
+
+
+.fadingMessageDiv {
+    position: relative;
+}
+.fadingMessage {
+    padding: 10px;
+    top: -55px;
+    left: 200px;
+}

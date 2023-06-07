@@ -15,6 +15,7 @@ import MyButton from "../../../components/UI/buttons/MyButton";
 import OverContentDiv from "../../../components/UI/blocks/OverContentDiv";
 import Colors from "./Colors";
 import {isObjectNotEmpty} from "../../../functions/objectFunctions";
+import myButtonStyle from "../../../components/UI/buttons/MyTransparentButton.module.css";
 
 
 function AccountPage(props) {
@@ -29,7 +30,7 @@ function AccountPage(props) {
 
     const [fetchUpdateUser, fetchLoading, fetchError] = useFetching(async () => {
         if (updatedUser.image) {
-            const response = await UserService.newImage(updatedUser.image)
+            let response = await UserService.newImage(updatedUser.image)
             setUserImage(getUserImage(response.message))
         }
         else {
@@ -114,7 +115,7 @@ function AccountPage(props) {
                         <OverImageDiv className={style.overImageDiv}>
                             <div className={style.overImageDivText}>User page size</div>
                             <MyFileInput
-                                className={style.fileBtn}
+                                className={style.fileBtn + " " + myButtonStyle.main}
                                 maxSize={5}
                                 accept="image/png, image/jpeg, image/gif"
                                 setIsShow={setShowError}

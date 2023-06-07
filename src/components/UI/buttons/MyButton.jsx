@@ -1,8 +1,8 @@
 import React from 'react';
-import buttonStyle from './MyButton.module.css'
+import buttonStyle from './MyButton.module.css';
 import {useClasses} from "../../../hooks/useClasses";
 
-function MyButton({children, className, ...props}) {
+function MyButton({children, className, color, ...props}) {
 
     const classes = useClasses(buttonStyle.button, className)
 
@@ -20,7 +20,7 @@ function MyButton({children, className, ...props}) {
         red: buttonStyle.red,
         orange: buttonStyle.orange,
     }
-    classes.push(colors[props.color] ?? colors.blue) /* Nullish coalescing operator "??" */
+    classes.push(colors[color] ?? colors.blue) /* Nullish coalescing operator "??" */
 
     return (
         <button {...props} className={classes.join(' ')} style={styleObject}>

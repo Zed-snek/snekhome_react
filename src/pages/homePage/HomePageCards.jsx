@@ -8,6 +8,7 @@ import style from "./HomePage.module.css";
 import OverImageDiv from "../../components/UI/blocks/OverImageDiv";
 import {getCommunityImage} from "../../functions/linkFunctions";
 import Nav from "react-bootstrap/Nav";
+import HomePageCardItem from "./HomePageCardItem";
 
 function HomePageCards() {
 
@@ -23,10 +24,6 @@ function HomePageCards() {
         fetchCards()
     }, [])
 
-    useEffect(() => {
-        console.log(data)
-    }, [data])
-
     return (
         <div>
             <MySyncLoader loading={isCardsLoading}/>
@@ -36,19 +33,25 @@ function HomePageCards() {
             <div>
                 {
                     data.map((card, index) =>
-                        <div key={index} className={style.cardItem} onClick={() => navigate("/c/" + card.groupname)}>
-                            <OverImageDiv className={style.cardItemOverImageDiv}>
-                                @{card.groupname}
-                            </OverImageDiv>
-                            <img src={getCommunityImage(card.image)}/>
-                        </div>
+                        <HomePageCardItem
+                            key={index}
+                            title={card.groupname}
+                            image={getCommunityImage(card.image)}
+                            className={style.cardItemHover}
+                            onClick={() => navigate("/c/" + card.groupname)}
+                        />
                     )
                 }
             </div>
 
-            <Nav.Link as={Link} to={"/communities"} className={style.otherCommunitiesLink}>
-                Other
-            </Nav.Link>
+            <BooleanBlock bool={!isCardsLoading && data.length > 0}>
+                <Nav.Link
+                    as={Link} to={"/communities"}
+                    className={style.otherCommunitiesLink}
+                >
+                    Other
+                </Nav.Link>
+            </BooleanBlock>
         </div>
     );
 }
