@@ -1,18 +1,18 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import React, {useState, useEffect} from 'react';
+import {Link, useParams} from "react-router-dom";
 import style from './UserPage.module.css';
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import InfoDiv from "../../components/UI/blocks/InfoDiv";
 import OverImageDiv from "../../components/UI/blocks/OverImageDiv";
 import UserService from "../../API/UserService";
 import {getUserImage} from "../../functions/linkFunctions";
-import DecreaseSizeDiv from "../../components/UI/blocks/DecreaseSizeDiv";
 import InfoTag from "./InfoTag";
 import {useFetching} from "../../hooks/useFetching";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import {useDocumentTitle} from "usehooks-ts";
 import UserNicknameButtons from "./UserNicknameButtons";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
+
 function UserPage() {
 
     const params = useParams()
@@ -48,14 +48,13 @@ function UserPage() {
     }
 
     return (
-        <div>
-
-            <MySyncLoader loading={isUserLoading}/>
+        <div className={style.main}>
+            <MySyncLoader loading={isUserLoading} />
 
             <OutlineDiv className="flexDiv"> {/*User div*/}
 
                 <div className={style.imageDiv}>
-                    <OverImageDiv className={style.overImage} style={{color: user.nicknameColor}} sizebylength={'true'}>
+                    <OverImageDiv className={style.overImage} style={{color: user.nicknameColor}} sizeByLength={true}>
                         {user.nickname}
                     </OverImageDiv>
                     <img src={user.image} className={style.image}/>
@@ -65,9 +64,9 @@ function UserPage() {
 
                     <InfoDiv className={style.nicknameDiv}>
                         <div className={style.name}>
-                            <DecreaseSizeDiv className={style.nickname} size="px25">
+                            <div className={style.nickname} >
                                 {user.name + " " + user.surname}
-                            </DecreaseSizeDiv>
+                            </div>
                         </div>
 
                         <UserNicknameButtons
@@ -80,12 +79,12 @@ function UserPage() {
                     <InfoDiv>
 
                         <div className={style.communitiesFriendsDiv}>
-                            <div className={style.friendsBtn}>
+                            <Link to={"/communities/" + user.nickname} className={style.friendsBtn}>
                                 <div>joined communities ({user.communities}) </div>
-                            </div>
-                            <div className={style.friendsBtn}>
+                            </Link>
+                            <Link to={"/friends/" + user.nickname} className={style.friendsBtn}>
                                 <div>friends ({user.friends})</div>
-                            </div>
+                            </Link>
                         </div>
 
                         <div className={style.tagsDiv}>

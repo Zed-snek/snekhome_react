@@ -1,0 +1,15 @@
+.btn {
+    padding: 4px 8px;
+    font-size: 15px;
+    user-select: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn:hover {
+    background-color: rgba(217, 217, 217, 0.2);
+    border-radius: 5px;
+}
+.btn:active, .btn_current {
+    background-color: rgba(217, 217, 217, 0.1);
+    border-radius: 5px;
+}

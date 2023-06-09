@@ -2,7 +2,6 @@ import React, {useContext} from 'react';
 import {AuthContext} from "../context";
 import {Routes, Route} from "react-router-dom";
 import InfoPage from "../../pages/InfoPage";
-import PostList from "../../pages/PostList";
 import PrivateRoute from "./PrivateRoute";
 import RegisterPage from "../../pages/registerPage/RegisterPage";
 import UnauthorizedOnlyRoute from "./UnauthorizedOnlyRoute";
@@ -18,6 +17,7 @@ import CommunityPage from "../../pages/communityPage/CommunityPage";
 import HomePage from "../../pages/homePage/HomePage";
 import CommunityListPage from "../../pages/communityListPage/CommunityListPage";
 import CommunitySettingsPage from "../../pages/communitySettings/CommunitySettingsPage";
+import FriendsListPage from "../../pages/friendsList/FriendsListPage";
 
 
 function AllRoutes() {
@@ -35,7 +35,6 @@ function AllRoutes() {
                 <Route path='/home'>
                     <Route index element={<HomePage />} />
                 </Route>
-                <Route path='/communities' element={<CommunityListPage />}/>
                 <Route path='community_settings/:groupname' element={<CommunitySettingsPage />}/>
                 <Route path='/settings' element={<SettingsPage />} />
                 <Route path='/logout' element={<Logout />} />
@@ -52,6 +51,8 @@ function AllRoutes() {
             {/*Public*/}
             <Route path='/c/:groupname' element={<CommunityPage />} />
             <Route path='/u/:nickname' element={<UserPage />}/>
+            <Route path='/communities/:nickname' element={<CommunityListPage />}/>
+            <Route path='/friends/:nickname' element={<FriendsListPage />}/>
             <Route path='/resetMail/:token'
                    element={<ConfirmChangingEmailPage message="New list is sent on your new email to confirm it"/>}
             />

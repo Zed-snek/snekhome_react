@@ -53,6 +53,10 @@ export default class UserService {
         return await deleteRequestWithAuth('/friend/' + nickname)
     }
 
+    static async getFriends(nickname) {
+        return await getRequest('/user/friends/' + nickname)
+    }
+
 
 }
 

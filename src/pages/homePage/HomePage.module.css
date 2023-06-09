@@ -51,7 +51,11 @@
     border-top-left-radius: 12px;
 }
 
+
 .otherCommunitiesLink {
+    text-decoration: none;
+}
+.otherCommunitiesDiv {
     background-color: #E3E3E3;
     color: #464646 !important;
     border-radius: 12px;
@@ -62,10 +66,10 @@
     height: 27px;
     padding-top: 2px;
 }
-.otherCommunitiesLink:hover {
+.otherCommunitiesDiv:hover {
     cursor: pointer;
     background-color: rgba(227, 227, 227, 0.85);
 }
-.otherCommunitiesLink:active {
+.otherCommunitiesDiv:active {
     background-color: rgba(227, 227, 227, 0.7);
 }

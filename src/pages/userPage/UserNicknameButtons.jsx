@@ -43,14 +43,20 @@ function UserNicknameButtons({friendshipType, setFriendshipType}) {
         }
     })
 
+    const types = [
+        {title: "FRIENDS", image: delFriendIco, alt: "Del", tooltip: "Remove from friends"},
+        {title: "NOT_FRIENDS", image: addFriendIco, alt: "Add", tooltip: "Add to friends"},
+        {title: "CURRENT_FOLLOW", image: delFriendIco, alt: "Del", tooltip: "Remove friend request"},
+        {title: "SECOND_FOLLOW", image: addFriendIco, alt: "Add", tooltip: "Accept friend request"}
+    ]
+
     function manageFriend() {
         fetchFriend()
     }
 
-
     function content() {
         if (params.nickname.toLowerCase() === userNickname.toLowerCase()) {
-            return  <>
+            return <>
                 <MyTransparentButton
                     className={style.nicknameIco}
                     tooltip="Settings Page"
@@ -73,56 +79,20 @@ function UserNicknameButtons({friendshipType, setFriendshipType}) {
                 </MessageModal>
             </>
         }
-        else {
-            if (friendshipType === "NOT_FRIENDS") {
-                return <>
-                    <MyTransparentButton
-                        className={style.nicknameIco}
-                        tooltip="Add to friends"
-                        onClick={manageFriend}
-                    >
-                        <img src={addFriendIco} alt="Add"/>
-                    </MyTransparentButton>
-                </>
-            }
-            else if (friendshipType === "FRIENDS") {
-                return <>
-                    <MyTransparentButton
-                        className={style.nicknameIco}
-                        tooltip="Remove from friends"
-                        onClick={manageFriend}
-                    >
-                        <img src={delFriendIco} alt="Add"/>
-                    </MyTransparentButton>
-                </>
-            }
-            else if (friendshipType === "CURRENT_FOLLOW") {
-                return <>
-                    <MyTransparentButton
-                        className={style.nicknameIco}
-                        tooltip="Remove friend request"
-                        onClick={manageFriend}
-                    >
-                        <img src={delFriendIco} alt="Del"/>
-                    </MyTransparentButton>
-                </>
-            }
-            else if (friendshipType === "SECOND_FOLLOW") {
-                return <>
-                    <MyTransparentButton
-                        className={style.nicknameIco}
-                        tooltip="Accept friend request"
-                        onClick={manageFriend}
-                    >
-                        <img src={addFriendIco} alt="Add"/>
-                    </MyTransparentButton>
-                </>
-            }
-
+        else if (friendshipType) {
+            let type = types.find(t => t.title === friendshipType)
+            return (
+                <MyTransparentButton
+                    className={style.nicknameIco}
+                    tooltip={type.tooltip}
+                    onClick={manageFriend}
+                >
+                    <img src={type.image} alt={type.alt} />
+                </MyTransparentButton>
+            );
         }
+
     }
-
-
 
     return (
         <div className="noWrap">

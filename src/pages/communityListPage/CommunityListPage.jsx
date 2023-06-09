@@ -1,10 +1,15 @@
 import React from 'react';
+import {useParams} from "react-router-dom";
 import style from "./CommunityListPage.module.css";
 
 function CommunityListPage() {
+
+    const params = useParams()
+
+
     return (
-        <div>
-            <h2>Community List</h2>
+        <div className={style.main}>
+
         </div>
     );
 }

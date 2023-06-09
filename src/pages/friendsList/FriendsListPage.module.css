@@ -1,0 +1,21 @@
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    width: 100%;
+    max-width: 845px;
+}
+
+.buttons {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+.dot {
+    font-size: 25px;
+    font-weight: bold;
+}
