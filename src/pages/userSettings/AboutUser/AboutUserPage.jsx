@@ -55,27 +55,25 @@ function AboutUserPage({tags, fetchUser, setError, setLoader, setUser, ...props}
 
     useEffect(() => {
         if (data.text !== '' && data.title !== '') {
-            if (editId === 0) {
+            if (editId === 0)
                 fetchNew()
-            }
-            else {
+
+            else
                 fetchEdit()
-            }
         }
     }, [data])
 
     const [delId, setDelId] = useState(0)
     useEffect(() => {
-        if (delId !== 0) {
+        if (delId !== 0)
             setDeleteModal(true)
-        }
     }, [delId])
 
     const [fetchDel, isDelLoading, delError] = useFetching(async () => {
         let responseData = await UserService.delTag(delId)
-        if (responseData.status === 200) {
+        if (responseData.status === 200)
             setUser(prev => ({...prev, tags: prev.tags.filter(tag => tag.idTag !== delId)}))
-        }
+
         setDeleteModal(false)
     })
     const [isDeleteModal, setDeleteModal] = useState(false)

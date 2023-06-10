@@ -8,8 +8,37 @@
     width: 100px;
     height: 100px;
     border-radius: 50px;
+    transition: all 0.1ms;
 }
 
 .centerDiv {
     flex: 1;
+}
+
+.title {
+    margin-top: 6px;
+    font-family: PressStart, serif;
+    font-size: 18px;
+    text-decoration: none;
+}
+.title:hover {
+    color: inherit;
+    text-shadow: 0 0 50px #228dff;
+}
+
+.idName {
+    color: #949494;
+    font-size: 16px;
+}
+
+.rightDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 9px;
+}
+
+.outlineBtn {
+    font-size: 18px;
+    padding: 12px 10px 14px 10px;
 }

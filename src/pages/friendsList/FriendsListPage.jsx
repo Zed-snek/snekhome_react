@@ -14,6 +14,7 @@ function FriendsListPage() {
 
     const params = useParams()
     const {userNickname} = useContext(UserContext)
+    const isCurrent = (userNickname.toLowerCase() === params.nickname.toLowerCase())
 
     const [activeBtn, setActiveBtn] = useState(0)
     const types = ["FRIENDS", "SECOND_FOLLOW", "CURRENT_FOLLOW"]
@@ -26,7 +27,8 @@ function FriendsListPage() {
             name: "" ,
             nickname: "",
             surname: ""
-        }])
+        }
+        ])
 
     const [fetchFriends, fetchLoading, fetchError] = useFetching(async () => {
         let response = await UserService.getFriends(params.nickname)
@@ -37,14 +39,49 @@ function FriendsListPage() {
         fetchFriends()
     }, [])
 
-    function manageFriend() {
-        //todo manageFriend usings types = ["FRIENDS", "SECOND_FOLLOW", "CURRENT_FOLLOW"]
+
+    async function manageFriend(nickname) {
+        let type = types[activeBtn]
+        let func
+        if (type === "SECOND_FOLLOW")
+            func = UserService.addFriend(nickname)
+        else
+            func = UserService.delFriend(nickname)
+        await func.then(() => {
+            let newType
+            switch (type) {
+                case "FRIENDS":
+                    newType = "SECOND_FOLLOW"
+                    break
+                case "SECOND_FOLLOW":
+                    newType = "FRIENDS"
+                    break
+                case "CURRENT_FOLLOW":
+                    newType = "NOT_FRIENDS"
+                    break
+            }
+            let index = data.findIndex(element => element.nickname === nickname)
+            setData(prev => ([...prev, prev[index].friendshipType = newType]))
+        })
     }
 
-    function buttonContent() {
-        if (userNickname.toLowerCase() === params.nickname.toLowerCase())
-            return btnContent[activeBtn]
-        return '';
+    function content() {
+        let friends = data.filter(u => u.friendshipType === types[activeBtn])
+        if (friends.length > 0)
+            return friends.map( (user, index) =>
+                        <div key={index} className={style.item}>
+                            <ListItemBlock
+                                image={getUserImage(user.image)}
+                                title={user.name + ' ' + user.surname}
+                                link={"/u/" + user.nickname}
+                                idName={user.nickname}
+                                buttonContent={isCurrent ? btnContent[activeBtn] : ''}
+                                onClick={() => manageFriend(user.nickname)}
+                            />
+                        </div>
+            )
+        else
+            return "Users not found"
     }
 
     return (
@@ -64,7 +101,7 @@ function FriendsListPage() {
                         ·
                     </div>
                     <MySortButton isActive={activeBtn === 2} onClick={() => setActiveBtn(2)}>
-                        Users you follow
+                        {isCurrent ? "Users you follow" : "Users " + params.nickname + " follow"}
                     </MySortButton>
                 </div>
 
@@ -73,18 +110,9 @@ function FriendsListPage() {
                         {fetchError}
                     </MyMessage>
 
-                    { data.filter(u => u.friendshipType === types[activeBtn]).map( (user, index) =>
-                        <ListItemBlock
-                            key={index}
-                            image={getUserImage(user.image)}
-                            title={user.name + ' ' + user.surname}
-                            link={"/u/" + user.nickname}
-                            idName={user.nickname}
-                            buttonContent={buttonContent()}
-                            onClick={() => manageFriend}
-                        />
-                    )}
-
+                    <div>
+                        {content()}
+                    </div>
                 </OutlineDiv>
             </div>
         </div>
