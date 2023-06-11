@@ -8,13 +8,14 @@ import {useFetching} from "../../hooks/useFetching";
 import MyMessage from "../../components/UI/message/MyMessage";
 import UserService from "../../API/UserService";
 import {getUserImage} from "../../functions/linkFunctions";
-import {UserContext} from "../../components/context";
+import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
+import {useDocumentTitle} from "usehooks-ts";
 
 function FriendsListPage() {
 
     const params = useParams()
-    const {userNickname} = useContext(UserContext)
-    const isCurrent = (userNickname.toLowerCase() === params.nickname.toLowerCase())
+    const isCurrent = useIsCurrentUser(params.nickname)
+    useDocumentTitle('Friends')
 
     const [activeBtn, setActiveBtn] = useState(0)
     const types = ["FRIENDS", "SECOND_FOLLOW", "CURRENT_FOLLOW"]
@@ -69,19 +70,20 @@ function FriendsListPage() {
         let friends = data.filter(u => u.friendshipType === types[activeBtn])
         if (friends.length > 0)
             return friends.map( (user, index) =>
-                        <div key={index} className={style.item}>
                             <ListItemBlock
+                                key={index}
                                 image={getUserImage(user.image)}
                                 title={user.name + ' ' + user.surname}
                                 link={"/u/" + user.nickname}
                                 idName={user.nickname}
                                 buttonContent={isCurrent ? btnContent[activeBtn] : ''}
-                                onClick={() => manageFriend(user.nickname)}
+                                buttonClick={() => manageFriend(user.nickname)}
                             />
-                        </div>
             )
         else
-            return "Users not found"
+            return <MyMessage>
+                Users not found
+            </MyMessage>
     }
 
     return (

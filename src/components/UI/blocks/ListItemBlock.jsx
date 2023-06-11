@@ -5,10 +5,10 @@ import MyOutlineButton from "../buttons/MyOutlineButton";
 import MyTextLink from "../links/MyTextLink";
 import {Link} from "react-router-dom";
 
-function ListItemBlock({children, image, title, link, idName, buttonContent, buttonClick, rightCornerContent, ...props}) {
+function ListItemBlock({children, image, title, link, idName, buttonContent, buttonClick, underIdContent, rightCornerContent, ...props}) {
 
     return (
-        <div {...props}>
+        <div className={style.item} {...props}>
             <InfoDiv className={style.main}>
                 <div>
                     <Link to={link}>
@@ -22,13 +22,14 @@ function ListItemBlock({children, image, title, link, idName, buttonContent, but
                     <div className={style.idName}>
                         @{idName}
                     </div>
+                    {underIdContent}
                 </div>
                 <div className={style.rightDiv}>
                     <div>
                         {rightCornerContent}
                     </div>
                     { buttonContent ?
-                        <MyOutlineButton className={style.outlineBtn}>
+                        <MyOutlineButton className={style.outlineBtn} onClick={buttonClick}>
                             {buttonContent}
                         </MyOutlineButton>
                         : <> </>

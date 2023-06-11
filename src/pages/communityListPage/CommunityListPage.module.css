@@ -7,3 +7,17 @@
     width: 100%;
     max-width: 845px;
 }
+.title {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.description {
+    font-size: 13px;
+    line-height: 17px;
+}
+
+.members {
+    font-weight: bold;
+    font-size: 13px;
+}

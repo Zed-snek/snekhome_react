@@ -20,16 +20,6 @@
     font-weight: bold;
 }
 
-.item {
-    margin-bottom: 11px;
-    padding-bottom: 11px;
-    border-bottom: 1px solid #939393;
-}
-.item:last-child {
-    border: none;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
 
 
 

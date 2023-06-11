@@ -17,3 +17,10 @@ export function formatCommunityCreationDate(date) {
     }
     return new Date(date).toLocaleString('en-US', options)
 }
+
+export function limitTextByLength(text, newLength) {
+    if (text.length < newLength)
+        return text
+    else
+        return text.substring(0, newLength) + "..."
+}

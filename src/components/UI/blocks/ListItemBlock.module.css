@@ -18,9 +18,10 @@
 .title {
     margin-top: 6px;
     font-family: PressStart, serif;
-    font-size: 18px;
     text-decoration: none;
+    font-size: 16px;
 }
+
 .title:hover {
     color: inherit;
     text-shadow: 0 0 50px #228dff;
@@ -29,6 +30,7 @@
 .idName {
     color: #949494;
     font-size: 16px;
+    margin-top: -6px;
 }
 
 .rightDiv {
@@ -36,9 +38,22 @@
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 9px;
+    padding-left: 10px;
 }
 
 .outlineBtn {
     font-size: 18px;
     padding: 12px 10px 14px 10px;
 }
+
+.item {
+    margin-bottom: 11px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid #939393;
+}
+.item:last-child {
+    border: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+

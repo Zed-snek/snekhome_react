@@ -43,4 +43,8 @@ export default class CommunityService {
         return await postBodyRequestWithAuth('/community/image/' + groupname, formData)
     }
 
+    static async getJoinedCommunities(nickname) {
+        return await getRequest('/community_list/' + nickname)
+    }
+
 }
