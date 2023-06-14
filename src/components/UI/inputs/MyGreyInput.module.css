@@ -1,0 +1,8 @@
+.main {
+    box-shadow: none;
+    background-color: rgba(217, 217, 217, 0.1);
+    border-color: #939393;
+}
+.main:focus {
+    border-color: #2c57a5;
+}

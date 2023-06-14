@@ -68,17 +68,17 @@
 .imgDiv {
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
 }
 .imgBig {
     width: 250px;
     position: relative;
 }
-.imgSmall {
-    flex: 1;
-}
+
 .userImg {
     margin-left: 10px;
 }
+
 
 .img {
     height: 317px;

@@ -71,11 +71,21 @@
     margin-top: 10px;
     flex: 1;
 }
+
 .members {
     font-weight: 600;
     font-size: 16px;
-    color: #949494;
+    color: rgba(217, 217, 217, 0.65);
+    text-decoration: none;
 }
+.members:hover {
+    color: rgba(217, 217, 217, 0.5);
+}
+.members:active {
+    color: rgba(217, 217, 217, 0.3);
+}
+
+
 .buttonsDiv {
     margin-bottom: 10px;
     margin-top: 8px;

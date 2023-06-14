@@ -1,0 +1,9 @@
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.dot {
+    font-size: 25px;
+    font-weight: bold;
+}

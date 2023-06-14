@@ -47,4 +47,8 @@ export default class CommunityService {
         return await getRequest('/community_list/' + nickname)
     }
 
+    static async getMembers(groupname) {
+        return await getRequest('/members/' + groupname )
+    }
+
 }

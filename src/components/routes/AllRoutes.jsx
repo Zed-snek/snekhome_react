@@ -18,6 +18,7 @@ import HomePage from "../../pages/homePage/HomePage";
 import CommunityListPage from "../../pages/communityListPage/CommunityListPage";
 import CommunitySettingsPage from "../../pages/communitySettings/CommunitySettingsPage";
 import FriendsListPage from "../../pages/friendsList/FriendsListPage";
+import MembersListPage from "../../pages/membersListPage/MembersListPage";
 
 
 function AllRoutes() {
@@ -40,6 +41,8 @@ function AllRoutes() {
                 <Route path='/logout' element={<Logout />} />
                 <Route path='/new_community' element={<CreateCommunityPage />} />
             </Route>
+            {/*Private - only for authorized*/}
+
 
             {/*Only for unauthorized*/}
             <Route path='' element={<UnauthorizedOnlyRoute auth={!isAuth} />}>
@@ -47,21 +50,27 @@ function AllRoutes() {
                 <Route path='/register' element={<RegisterPage />} />
                 <Route path='/confirmation/:token' element={<VerifyPage />} />
             </Route>
+            {/*Only for unauthorized*/}
+
 
             {/*Public*/}
             <Route path='/c/:groupname' element={<CommunityPage />} />
             <Route path='/u/:nickname' element={<UserPage />}/>
-            <Route path='/communities/:nickname' element={<CommunityListPage />}/>
-            <Route path='/friends/:nickname' element={<FriendsListPage />}/>
+            <Route path='/communities/:nickname' element={<CommunityListPage />} />
+            <Route path='/friends/:nickname' element={<FriendsListPage />} />
+            <Route path='/members/:groupname' element={<MembersListPage />} />
+            <Route path='/not_found' element={<NotFound />} />
+            <Route path='/info' element={<InfoPage />} />
+
             <Route path='/resetMail/:token'
                    element={<ConfirmChangingEmailPage message="New list is sent on your new email to confirm it"/>}
             />
             <Route path='/newMail/:token'
                    element={<ConfirmChangingEmailPage message="logout"/>}
             />
-            <Route path='/not_found' element={<NotFound />} />
-            <Route path='/info' element={<InfoPage />} />
+
             <Route path='/*' element={<InfoPage />} />
+            {/*Public*/}
 
         </Routes>
     );

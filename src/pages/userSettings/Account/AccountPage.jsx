@@ -135,7 +135,13 @@ function AccountPage(props) {
                         <img src={userImage} className={style.img}/>
                     </div>
 
-                    <div className={style.imgSmall}>
+                    <div>
+                        <div className={style.overImageDivText}>
+                            Medium size
+                        </div>
+                        <img src={userImage} className={"mediumUserImage " + style.userImg}/>
+                    </div>
+                    <div>
                         <div className={style.overImageDivText}>
                             Smaller size
                         </div>

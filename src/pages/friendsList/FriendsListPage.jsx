@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useMemo, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import style from "./FriendsListPage.module.css";
 import MySortButton from "../../components/UI/buttons/MySortButton";
@@ -10,26 +10,37 @@ import UserService from "../../API/UserService";
 import {getUserImage} from "../../functions/linkFunctions";
 import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
 import {useDocumentTitle} from "usehooks-ts";
+import BooleanBlock from "../../components/UI/blocks/BooleanBlock";
+import MyGreyInput from "../../components/UI/inputs/MyGreyInput";
+import MidSizeContent from "../../components/UI/blocks/MidSizeContent";
+import SortButtons from "../../components/UI/navigation/SortButtons";
 
 function FriendsListPage() {
 
     const params = useParams()
     const isCurrent = useIsCurrentUser(params.nickname)
-    useDocumentTitle('Friends')
+    useDocumentTitle('Friends - ' + params.nickname)
 
     const [activeBtn, setActiveBtn] = useState(0)
     const types = ["FRIENDS", "SECOND_FOLLOW", "CURRENT_FOLLOW"]
     const btnContent = ["Remove", "Accept", "Unfollow"]
 
-    const [data, setData] = useState([
-        {
+    const [data, setData] = useState([{
             friendshipType: "",
             image: "",
             name: "" ,
             nickname: "",
             surname: ""
-        }
-        ])
+        }])
+
+    const [searchQuery, setSearchQuery] = useState('')
+    const searchedElements = useMemo(() => {
+        return data.filter(c =>
+            c.name.toLowerCase().includes(searchQuery.toLowerCase())
+            || c.surname.toLowerCase().includes(searchQuery.toLowerCase())
+            || c.nickname.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+    }, [data, searchQuery])
 
     const [fetchFriends, fetchLoading, fetchError] = useFetching(async () => {
         let response = await UserService.getFriends(params.nickname)
@@ -67,7 +78,7 @@ function FriendsListPage() {
     }
 
     function content() {
-        let friends = data.filter(u => u.friendshipType === types[activeBtn])
+        let friends = searchedElements.filter(u => u.friendshipType === types[activeBtn])
         if (friends.length > 0)
             return friends.map( (user, index) =>
                             <ListItemBlock
@@ -87,37 +98,34 @@ function FriendsListPage() {
     }
 
     return (
-        <div className={style.main}>
-            <div className={style.content}>
+        <MidSizeContent>
+
                 <div className={style.buttons}>
-                    <MySortButton isActive={activeBtn === 0} onClick={() => setActiveBtn(0)}>
-                        Friends
-                    </MySortButton>
-                    <div className={style.dot}>
-                        ·
-                    </div>
-                    <MySortButton isActive={activeBtn === 1} onClick={() => setActiveBtn(1)}>
-                        Followers
-                    </MySortButton>
-                    <div className={style.dot}>
-                        ·
-                    </div>
-                    <MySortButton isActive={activeBtn === 2} onClick={() => setActiveBtn(2)}>
-                        {isCurrent ? "Users you follow" : "Users " + params.nickname + " follow"}
-                    </MySortButton>
+                    <SortButtons
+                        buttons={["Friends", "Followers", isCurrent ? "Users you follow" : "Users " + params.nickname + " follow"]}
+                        activeBtn={activeBtn}
+                        setActiveBtn={setActiveBtn}
+                    />
                 </div>
+
 
                 <OutlineDiv>
                     <MyMessage>
                         {fetchError}
                     </MyMessage>
 
+                    <BooleanBlock bool={!fetchLoading && data.length > 0}>
+                        <MyGreyInput
+                            onChange={event => setSearchQuery(event.target.value)}
+                            placeholder="search friends..."
+                        />
+                    </BooleanBlock>
+
                     <div>
                         {content()}
                     </div>
                 </OutlineDiv>
-            </div>
-        </div>
+        </MidSizeContent>
     );
 }
 

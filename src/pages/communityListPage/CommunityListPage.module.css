@@ -1,15 +1,6 @@
-.main {
-    display: flex;
-    justify-content: center;
-}
-
-.content {
-    width: 100%;
-    max-width: 845px;
-}
 .title {
-    font-size: 20px;
     margin-bottom: 5px;
+    text-align: center;
 }
 
 .description {
@@ -21,3 +12,4 @@
     font-weight: bold;
     font-size: 13px;
 }
+

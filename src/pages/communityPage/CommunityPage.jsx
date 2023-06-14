@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
 import CommunityService from "../../API/CommunityService";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
@@ -149,9 +149,9 @@ function CommunityPage() {
                             />
                         </div>
 
-                        <div className={style.members}>
+                        <Link to={'/members/' + params.groupname} className={style.members}>
                             members ({data.members})
-                        </div>
+                        </Link>
 
 
                         <div className={style.buttonsDiv}>

@@ -12,7 +12,7 @@ function ListItemBlock({children, image, title, link, idName, buttonContent, but
             <InfoDiv className={style.main}>
                 <div>
                     <Link to={link}>
-                        <img src={image} className={style.image} />
+                        <img src={image} className="mediumUserImage" />
                     </Link>
                 </div>
                 <div className={style.centerDiv}>

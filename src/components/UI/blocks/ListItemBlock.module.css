@@ -4,12 +4,6 @@
     flex-wrap: wrap;
     gap: 15px;
 }
-.image {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-    transition: all 0.1ms;
-}
 
 .centerDiv {
     flex: 1;

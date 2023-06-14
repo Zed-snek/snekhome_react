@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {useParams} from "react-router-dom";
 import style from "./CommunityListPage.module.css";
 import MyMessage from "../../components/UI/message/MyMessage";
@@ -10,6 +10,10 @@ import {useDocumentTitle} from "usehooks-ts";
 import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
 import {getCommunityImage} from "../../functions/linkFunctions";
 import {limitTextByLength} from "../../functions/stringFunctions";
+import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
+import BooleanBlock from "../../components/UI/blocks/BooleanBlock";
+import MyGreyInput from "../../components/UI/inputs/MyGreyInput";
+import MidSizeContent from "../../components/UI/blocks/MidSizeContent";
 
 function CommunityListPage() {
 
@@ -17,6 +21,7 @@ function CommunityListPage() {
     useDocumentTitle('Communities')
     const isCurrent = useIsCurrentUser(params.nickname)
 
+    const [searchQuery, setSearchQuery] = useState('')
     const [data, setData] = useState([{
         groupname: '',
         image: '',
@@ -28,12 +33,27 @@ function CommunityListPage() {
     const [fetchCommunities, fetchLoading, fetchError] = useFetching(async () => {
         let response = await CommunityService.getJoinedCommunities(params.nickname)
         setData(response)
-        console.log(response)
     })
+
+    const [message, setMessage] = useState('')
+    useEffect(() => {
+        if (fetchError)
+            setMessage(fetchError)
+        else if (!fetchLoading && data.length === 0) {
+            if (isCurrent)
+                setMessage("You haven't joined to any communities yet")
+            else
+                setMessage(`${params.nickname} hasn't joined to any communities yet`)
+        }
+    }, [data, fetchError])
 
     useEffect(() => {
         fetchCommunities()
     }, [])
+
+    const searchedElements = useMemo(() => {
+        return data.filter(c => c.name.toLowerCase().includes(searchQuery.toLowerCase()) || c.groupname.toLowerCase().includes(searchQuery.toLowerCase()))
+    }, [data, searchQuery])
 
     async function manageCommunity(arrayIndex) {
         let name = data[arrayIndex].groupname
@@ -41,20 +61,29 @@ function CommunityListPage() {
             .then(() => setData(data.filter(o => o.groupname !== name)))
     }
 
+
     return (
-        <div className={style.main}>
-            <div className={style.content}>
-                <div className={style.title}>
+        <MidSizeContent>
+                <h4 className={style.title}>
                     {isCurrent ? 'Communities you have joined' : `Communities ${params.nickname} has joined`}
-                </div>
+                </h4>
                 <OutlineDiv>
                     <MyMessage>
-                        {fetchError}
+                        {message}
                     </MyMessage>
+
+                    <MySyncLoader loading={fetchLoading}/>
+
+                    <BooleanBlock bool={!fetchLoading && data.length > 0}>
+                        <MyGreyInput
+                            onChange={event => setSearchQuery(event.target.value)}
+                            placeholder="search communities..."
+                        />
+                    </BooleanBlock>
 
                     <div>
                         {
-                            data.map((c, index) =>
+                            searchedElements.map((c, index) =>
                                 <ListItemBlock
                                     key={index}
                                     image={getCommunityImage(c.image)}
@@ -78,8 +107,7 @@ function CommunityListPage() {
                         }
                     </div>
                 </OutlineDiv>
-            </div>
-        </div>
+        </MidSizeContent>
     );
 }
 
