@@ -1,0 +1,32 @@
+.roleCreator {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.titleDiv {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #949494;
+}
+
+.settings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.button {
+    height: 50px;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+

@@ -33,15 +33,6 @@ function FriendsListPage() {
             surname: ""
         }])
 
-    const [searchQuery, setSearchQuery] = useState('')
-    const searchedElements = useMemo(() => {
-        return data.filter(c =>
-            c.name.toLowerCase().includes(searchQuery.toLowerCase())
-            || c.surname.toLowerCase().includes(searchQuery.toLowerCase())
-            || c.nickname.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-    }, [data, searchQuery])
-
     const [fetchFriends, fetchLoading, fetchError] = useFetching(async () => {
         let response = await UserService.getFriends(params.nickname)
         setData(response)
@@ -50,6 +41,22 @@ function FriendsListPage() {
     useEffect(() => {
         fetchFriends()
     }, [])
+
+
+    const sortedFriends = useMemo(() => {
+        return data.filter(u => u.friendshipType === types[activeBtn])
+    }, [data, activeBtn])
+
+    const [searchQuery, setSearchQuery] = useState('')
+    const searchedAndSortedElements = useMemo(() => {
+        return sortedFriends.filter(u =>
+            u.name.toLowerCase().includes(searchQuery.toLowerCase())
+            || u.surname.toLowerCase().includes(searchQuery.toLowerCase())
+            || u.nickname.toLowerCase().includes(searchQuery.toLowerCase())
+            )
+    }, [data, searchQuery, activeBtn])
+
+
 
 
     async function manageFriend(nickname) {
@@ -78,9 +85,8 @@ function FriendsListPage() {
     }
 
     function content() {
-        let friends = searchedElements.filter(u => u.friendshipType === types[activeBtn])
-        if (friends.length > 0)
-            return friends.map( (user, index) =>
+        if (searchedAndSortedElements.length > 0)
+            return searchedAndSortedElements.map( (user, index) =>
                             <ListItemBlock
                                 key={index}
                                 image={getUserImage(user.image)}

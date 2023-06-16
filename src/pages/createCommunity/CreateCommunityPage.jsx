@@ -3,18 +3,17 @@ import {useDocumentTitle} from "usehooks-ts";
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import InfoDiv from "../../components/UI/blocks/InfoDiv";
 import style from "./CreateCommunityPage.module.css";
-import ChooseCommunityPage from "./ChooseCommunity/ChooseCommunityPage";
+import ChooseCommunityPage from "./chooseCommunity/ChooseCommunityPage";
 import CreateCommunityNextBtn from "./CreateCommunityNextBtn";
 import MessageModal from "../../components/UI/modal/MessageModal";
-import CommunitySettingsPage from "./CommunitySettings/CommunitySettingsPage";
-
+import CommunitySettingsPage from "./communitySettings/CommunitySettingsPage";
 import {isNotBannedSymbols} from "../../functions/stringFunctions";
 import {useFetching} from "../../hooks/useFetching";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
-import CommunityCitizenRolePage from "./CommunityCitizenRole/CommunityCitizenRolePage";
+import CommunityCitizenRolePage from "./communityCitizenRole/CommunityCitizenRolePage";
 import CommunityService from "../../API/CommunityService";
 import {useNavigate} from "react-router-dom";
-import CommunityDetailsPage from "./CommunityDetails/CommunityDetailsPage";
+import CommunityDetailsPage from "./communityDetails/CommunityDetailsPage";
 
 function CreateCommunityPage() {
 

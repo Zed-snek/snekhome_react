@@ -1,12 +1,11 @@
 import api from "./apiConfiguration"
 
-
 export async function getRequestWithAuth(link) {
     return (await api.get('/auth' + link)).data
 }
 
 export async function getRequest(link) {
-    return (await api.get(link) ).data
+    return (await api.get(link)).data
 }
 
 export async function putRequestWithAuth(link, data) {
@@ -14,10 +13,10 @@ export async function putRequestWithAuth(link, data) {
 }
 
 export async function postParamsRequest(link) {
-    return (await api.post(link) ).data
+    return (await api.post(link)).data
 }
 export async function postParamsRequestWithAuth(link) {
-    return (await api.post('/auth' + link) ).data
+    return await postParamsRequest('/auth' + link)
 }
 
 export async function postBodyRequest(link, data) {

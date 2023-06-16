@@ -41,9 +41,8 @@ function RegisterPage() {
     });
 
     useEffect( () => {
-        if (userData.email !== '' && userData.password !== '') {
+        if (userData.email !== '' && userData.password !== '')
             fetchRegister()
-        }
     }, [userData])
 
 
@@ -53,12 +52,10 @@ function RegisterPage() {
 
 
     function sendData(formValues){
-        if (isNotBannedSymbols(formValues.nickname)) {
+        if (isNotBannedSymbols(formValues.nickname))
             setUserData(formValues)
-        }
-        else {
+        else
             setErrorMessage("Nickname must contain only allowed symbols: a-z, A-Z, 0-9, -, _")
-        }
     }
 
 

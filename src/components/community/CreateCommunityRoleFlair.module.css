@@ -1,19 +1,8 @@
-.main {
-
-}
-
-.flairDiv {
-    display: flex;
-    justify-content: center;
-    padding-bottom: 15px;
-}
 
 .settingsDiv {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 15px;
     padding-bottom: 20px;
-    margin-bottom: 20px;
 }
 
 .rightDiv {

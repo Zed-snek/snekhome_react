@@ -1,9 +1,9 @@
 import React from 'react';
 import style from "./CommunityDetails.module.css"
-import MyInputOld from "../../../components/UI/inputs/MyInputOld";
+import MyInput from "../../../components/UI/inputs/MyInput";
 import MyTextArea from "../../../components/UI/inputs/MyTextArea";
 
-function CommunityDetailsPage({chosen, setSettings}) {
+function CommunityDetailsPage({setSettings}) {
 
     function handleId(e) {
         setSettings(prev => ({...prev, idName: e.target.value}))
@@ -22,7 +22,7 @@ function CommunityDetailsPage({chosen, setSettings}) {
 
                 <div>
                     <label htmlFor="communityId"> Community id: </label>
-                    <MyInputOld
+                    <MyInput
                         type="text"
                         placeholder="community id.."
                         maxLength={18}
@@ -33,7 +33,7 @@ function CommunityDetailsPage({chosen, setSettings}) {
 
                 <div>
                     <label htmlFor="name">Community name:</label>
-                    <MyInputOld
+                    <MyInput
                         type="text"
                         placeholder="community name.."
                         id="name"

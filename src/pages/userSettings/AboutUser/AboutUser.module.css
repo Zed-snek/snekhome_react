@@ -19,7 +19,7 @@
     border-radius: 5px;
     font-weight: bold;
     font-size: 18px;
-
+    background-color: rgba(0, 0, 0, 0.15);
 }
 
 .newTagDiv {

@@ -45,7 +45,6 @@ function CommunitySettingsPage() {
         setIsErrorModal(!!error)
     }, [error])
 
-
     const [isLoader, setIsLoader] = useState(false)
     useEffect(() => {
         setIsLoader(isCommunityLoading)
@@ -53,36 +52,43 @@ function CommunitySettingsPage() {
 
     const [page, setPage] = useState(1)
     function content() {
-        if (data) {
-            switch (page) {
-                case 1:
-                    return <CommunityDetailsSettings
-                        setError={setError}
-                        setIsLoader={setIsLoader}
-                        groupname={data.community.groupname}
-                        name={data.community.name}
-                        description={data.community.description}
-                        setData={setData}
-                        image={getCommunityImageByArray(data.community.images)}
+        switch (page) {
+            case 1:
+                return <CommunityDetailsSettings
+                    setError={setError}
+                    setIsLoader={setIsLoader}
+                    groupname={data.community.groupname}
+                    name={data.community.name}
+                    description={data.community.description}
+                    setData={setData}
+                    image={getCommunityImageByArray(data.community.images)}
+                />
+            case 2:
+                return <CommunityRoleManager
+                    setError={setError}
+                    setIsLoader={setIsLoader}
+                    groupname={params.groupname}
+                    communityType={data ? data.community.type : ''}
 
-                        data={data}
-                    />
-                case 2:
-                    return <CommunityRoleManager />
-                case 3:
-                    return <CommunityUsers />
-                case 4:
-                    return <CommunityRulesSettings />
-                case 5:
-                    return <CommunityDemocracySettings />
-            }
+                />
+            case 3:
+                return <CommunityUsers />
+            case 4:
+                return <CommunityRulesSettings />
+            case 5:
+                return <CommunityDemocracySettings />
         }
     }
 
+    if (data)
     return (
         <div className={style.main}>
 
-            <CommunitySettingsNavbar callback={setPage} role={"hehe"}/>
+            <CommunitySettingsNavbar
+                callback={setPage}
+                currentUserRole={data.currentUserRole}
+                communityType={data.community.type}
+            />
 
             <div className={style.content}>
                 <h2>
@@ -114,6 +120,8 @@ function CommunitySettingsPage() {
             </div>
         </div>
     );
+    else
+        return <MySyncLoader />
 }
 
 export default CommunitySettingsPage;

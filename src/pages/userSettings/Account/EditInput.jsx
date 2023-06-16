@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import style from "./Account.module.css";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
 import edit from "../../../images/icons/edit.svg";
-import MyInputOld from "../../../components/UI/inputs/MyInputOld";
+import MyInput from "../../../components/UI/inputs/MyInput";
 import MyTextArea from "../../../components/UI/inputs/MyTextArea";
 
 function EditInput({isTextArea, children, current, name, callback, ...props}) {
@@ -58,7 +58,7 @@ function EditInput({isTextArea, children, current, name, callback, ...props}) {
                                         {...props}
                                     >
                                     </MyTextArea>
-                                    : <MyInputOld
+                                    : <MyInput
                                         placeholder="new value..."
                                         className={style.input}
                                         onChange={event => setValue({...value, value: event.target.value})}

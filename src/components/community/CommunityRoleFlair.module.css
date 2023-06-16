@@ -1,5 +1,6 @@
 .main {
     min-width: 110px;
+    max-width: 165px;
     height: 20px;
     text-align: center;
     line-height: 17px;

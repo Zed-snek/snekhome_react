@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import style from './AboutUser.module.css';
-import MyInputOld from "../../../components/UI/inputs/MyInputOld";
 import MyTextArea from "../../../components/UI/inputs/MyTextArea";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
 import InfoTag from "../../userPage/InfoTag";
 import edit from "../../../images/icons/edit.svg";
+import MyInput from "../../../components/UI/inputs/MyInput";
 
 function AboutUserElement(props) {
 
@@ -51,7 +51,7 @@ function AboutUserElement(props) {
                     <div className={style.inputDiv}>
 
                         <div>
-                            <MyInputOld
+                            <MyInput
                                 placeholder="title"
                                 onChange={event => setTag(event.target.value)}
                                 value={tag}

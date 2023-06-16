@@ -91,6 +91,8 @@ function CommunityPage() {
     }
 
 
+
+
     if (data)
         if (!data.member && data.community.closed)
             return (
@@ -145,8 +147,11 @@ function CommunityPage() {
                             <UserInfo
                                 image={getUserImage(data.ownerImage)}
                                 nickname={data.ownerNickname}
-                                flair={{title: "president", textColor: "#E3E3E3", color: "#15151D"}}
+                                flair={data.community.roles.filter(role => role.creator).map(r => (
+                                    {title: r.title, textColor: r.textColor, color: r.bannerColor}
+                                    ))[0]}
                             />
+
                         </div>
 
                         <Link to={'/members/' + params.groupname} className={style.members}>

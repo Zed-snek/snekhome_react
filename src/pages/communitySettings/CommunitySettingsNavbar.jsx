@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import style from "../userSettings/SettingsNavBar.module.css";
+import BooleanBlock from "../../components/UI/blocks/BooleanBlock";
 
-function CommunitySettingsNavbar({callback, role}) {
+function CommunitySettingsNavbar({callback, currentUserRole, communityType}) {
     const [visited, setVisited] = useState({
         1: style.liVisited,
         2: '',
@@ -31,25 +32,40 @@ function CommunitySettingsNavbar({callback, role}) {
                     <span>Image, name, description</span>
                 </li>
 
-                <li className={visited[2]} onClick={() => changeVisited(2)}>
-                    <div>Role manager</div>
-                    <span>Create, edit roles</span>
-                </li>
 
-                <li className={visited[3]} onClick={() => changeVisited(3)}>
-                    <div>Users</div>
-                    <span>Grant roles, ban users</span>
-                </li>
+                {
+                    currentUserRole.creator && communityType !== 'ANARCHY' ?
+                        <li className={visited[2]} onClick={() => changeVisited(2)}>
+                            <div>Role manager</div>
+                            <span>Create, edit roles</span>
+                        </li>
+                        : <></>
+                }
+
+                {
+                    communityType !== 'ANARCHY' ?
+                        <li className={visited[3]} onClick={() => changeVisited(3)}>
+                            <div>Users</div>
+                            <span>Grant roles, ban users</span>
+                        </li>
+                        : <></>
+                }
+
 
                 <li className={visited[4]} onClick={() => changeVisited(4)}>
                     <div>Rules</div>
                     <span>Is closed, is anonymous</span>
                 </li>
 
-                <li className={visited[5]} onClick={() => changeVisited(5)}>
-                    <div>Democracy</div>
-                    <span>Change democracy rules</span>
-                </li>
+
+                {
+                    communityType === 'DEMOCRACY' ?
+                        <li className={visited[5]} onClick={() => changeVisited(5)}>
+                            <div>Democracy</div>
+                            <span>Change democracy rules</span>
+                        </li>
+                        : <></>
+                }
             </ul>
         </div>
     );

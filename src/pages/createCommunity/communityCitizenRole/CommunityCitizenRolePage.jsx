@@ -1,7 +1,8 @@
 import React from 'react';
 import style from "./CommunityCitizenRole.module.css"
 import CreateCommunityRoleFlair from "../../../components/community/CreateCommunityRoleFlair";
-import MyInputOld from "../../../components/UI/inputs/MyInputOld";
+import MyInput from "../../../components/UI/inputs/MyInput";
+import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 
 function CommunityCitizenRolePage({isClosed, settings, setSettings}) {
 
@@ -18,18 +19,20 @@ function CommunityCitizenRolePage({isClosed, settings, setSettings}) {
 
     return (
         <div>
-
-            <div className={style.description}>
+            <BorderBottomDiv className={style.description}>
                 Citizen role is a role for not moderators members. Allows to vote in president elections.
 
                 { isClosed ?
                     " If community is closed, citizen role allows to invite other users. "
-                    : ''}
+                    : ' '}
                 You have to set up citizen role flair: choose the title, color of the flair and its color of text.
 
-            </div>
+            </BorderBottomDiv>
 
-            <CreateCommunityRoleFlair flair={settings} setFlair={setSettings}/>
+
+            <BorderBottomDiv>
+                <CreateCommunityRoleFlair flair={settings} setFlair={setSettings}/>
+            </BorderBottomDiv>
 
 
             <div className={style.description}>
@@ -46,7 +49,7 @@ function CommunityCitizenRolePage({isClosed, settings, setSettings}) {
                             <div>
                                 Days after joining
                             </div>
-                            <MyInputOld
+                            <MyInput
                                 value={settings.citizenDays}
                                 type="number"
                                 onChange={changeDays}
@@ -58,7 +61,7 @@ function CommunityCitizenRolePage({isClosed, settings, setSettings}) {
                             <div>
                                 Rating needed
                             </div>
-                            <MyInputOld
+                            <MyInput
                                 value={settings.citizenRating}
                                 type="number"
                                 onChange={changeRating}
@@ -76,7 +79,7 @@ function CommunityCitizenRolePage({isClosed, settings, setSettings}) {
                         <div>
                             How often will elections be in days
                         </div>
-                        <MyInputOld
+                        <MyInput
                             value={settings.electionDays}
                             type="number"
                             onChange={changeElectionDays}

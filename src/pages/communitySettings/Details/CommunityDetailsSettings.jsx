@@ -10,7 +10,7 @@ import HomePageCardItem from "../../homePage/HomePageCardItem";
 import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 import buttonStyle from '../../../components/UI/buttons/MyButton.module.css';
 
-function CommunityDetailsSettings({groupname, name, description, setError, setIsLoader, setData, image, data}) {
+function CommunityDetailsSettings({groupname, name, description, setError, setIsLoader, setData, image}) {
 
     const [updateData, setUpdateData] = useState({})
 

@@ -1,7 +1,7 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from './SecurityPage.module.css'
 import InfoDiv from "../../../components/UI/blocks/InfoDiv";
-import MyInputOld from "../../../components/UI/inputs/MyInputOld";
+import MyInput from "../../../components/UI/inputs/MyInput";
 import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 import MyButton from "../../../components/UI/buttons/MyButton";
 import {useFetching} from "../../../hooks/useFetching";
@@ -84,7 +84,7 @@ function SecurityPage({loader, currentEmail}) {
                     }
                     <div>
                         <label htmlFor="oldPass">Your old password:</label>
-                        <MyInputOld
+                        <MyInput
                             type="password"
                             id="oldPass"
                             placeholder="old password..."
@@ -94,7 +94,7 @@ function SecurityPage({loader, currentEmail}) {
                     </div>
                     <div>
                         <label htmlFor="newPass">Your new password:</label>
-                        <MyInputOld
+                        <MyInput
                             type="password"
                             id="newPass"
                             placeholder="new password..."
@@ -128,7 +128,7 @@ function SecurityPage({loader, currentEmail}) {
 
                 <div>
                     <label htmlFor="newEmail">Your new email address:</label>
-                    <MyInputOld
+                    <MyInput
                         type="email"
                         id="newEmail"
                         placeholder="new email..."

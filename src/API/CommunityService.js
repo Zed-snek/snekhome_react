@@ -39,7 +39,6 @@ export default class CommunityService {
     static async newImage(file, groupname) {
         const formData = new FormData();
         formData.append('image', file);
-
         return await postBodyRequestWithAuth('/community/image/' + groupname, formData)
     }
 
@@ -49,6 +48,10 @@ export default class CommunityService {
 
     static async getMembers(groupname) {
         return await getRequest('/members/' + groupname )
+    }
+
+    static async newRole(data, groupname) {
+        return await postBodyRequestWithAuth('/community/role/' + groupname, data)
     }
 
 }
