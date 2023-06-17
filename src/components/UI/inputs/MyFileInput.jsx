@@ -21,17 +21,16 @@ function MyFileInput({className, children, maxSize, setIsShow, setImage, ...prop
 
     return (
         <div className={className}>
-            <label htmlFor="id" className={style.label}>
+            <label className={style.label}>
                 {children}
+                <input
+                    {...props}
+                    type="file"
+                    className={style.input}
+                    onChange={handleChange}
+                    onClick={ event => {event.target.value = null} }
+                />
             </label>
-            <input
-                {...props}
-                id="id"
-                type="file"
-                className={style.input}
-                onChange={handleChange}
-                onClick={ event => {event.target.value = null} }
-            />
         </div>
 
     );

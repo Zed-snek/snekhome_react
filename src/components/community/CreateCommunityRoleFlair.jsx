@@ -64,6 +64,7 @@ function CreateCommunityRoleFlair({flair, setFlair}) {
                 <MyInput
                     className={style.input}
                     placeholder="title.."
+                    value={flair.title}
                     onChange={e => setFlair(({...flair, title: e.target.value}))}
                     required={true}
                     maxLength="12"

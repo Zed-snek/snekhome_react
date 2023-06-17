@@ -132,20 +132,20 @@ function AccountPage(props) {
                                 max size allowed 5mb
                             </FadingMessage>
                         </OverImageDiv>
-                        <img src={userImage} className={style.img}/>
+                        <img src={userImage} className={style.img} alt=""/>
                     </div>
 
                     <div>
                         <div className={style.overImageDivText}>
                             Medium size
                         </div>
-                        <img src={userImage} className={"mediumUserImage " + style.userImg}/>
+                        <img src={userImage} className={"mediumUserImage " + style.userImg} alt=""/>
                     </div>
                     <div>
                         <div className={style.overImageDivText}>
                             Smaller size
                         </div>
-                        <img src={userImage} className={"userImage " + style.userImg}/>
+                        <img src={userImage} className={"userImage " + style.userImg}alt=""/>
                     </div>
 
                 </div>
