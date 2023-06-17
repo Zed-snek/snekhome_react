@@ -54,4 +54,8 @@ export default class CommunityService {
         return await postBodyRequestWithAuth('/community/role/' + groupname, data)
     }
 
+    static async getRoles(groupname) {
+        return await getRequest('/community/roles/' + groupname)
+    }
+
 }

@@ -6,18 +6,20 @@ import MyTransparentButton from "../../../components/UI/buttons/MyTransparentBut
 import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 import {useFetching} from "../../../hooks/useFetching";
 import CommunityService from "../../../API/CommunityService";
+import CommunityRoleItem from "./CommunityRoleItem";
 
 function CommunityRoleManager({communityType, groupname, setError, setIsLoader}) {
 
     const [flair, setFlair] = useState({title: 'new', textColor: '#E3E3E3', bannerColor: 'cadetblue'})
 
     const allowTypes = [
-        {title: "editDescription", value: "Allow to edit image, name and description", toShow: true},
-        {title: "editId", value: "Allow to edit groupname of community", toShow: true},
-        {title: "deletePosts", value:  "Allow to delete posts", toShow: true},
-        {title: "banUser", value: "Allow to ban users", toShow: true},
-        {title: "banCitizen", value: "Allow to ban citizens", toShow: communityType === 'DEMOCRACY'}
+        {title: "editDescription", title2: "edit description", value: "Allow to edit image, name and description", toShow: true},
+        {title: "editId", title2: "edit groupname", value: "Allow to edit groupname of community", toShow: true},
+        {title: "deletePosts", title2: "delete posts", value:  "Allow to delete posts", toShow: true},
+        {title: "banUser", title2: "ban users", value: "Allow to ban users", toShow: true},
+        {title: "banCitizen", title2: "ban citizens", value: "Allow to ban citizens", toShow: communityType === 'DEMOCRACY'}
     ]
+    const typesToMap = allowTypes.filter(t => t.toShow)
 
     const [isTypeAllowed, setIsTypeAllowed] = useState(
         {
@@ -29,24 +31,42 @@ function CommunityRoleManager({communityType, groupname, setError, setIsLoader})
         }
     )
 
-    const typesToMap = allowTypes.filter(t => t.toShow)
+    const [roles, setRoles] = useState([])
+
+    const [fetchRoles, isFetchRolesLoading, fetchRolesError] = useFetching(async () => {
+        let responseData = await CommunityService.getRoles(groupname)
+        console.log("CommunityRoleManager.jsx, fetchRoles responseData: ", responseData)
+        setRoles(responseData)
+    })
+
+    function setEdit(title) {
+        console.log("Role clicked edit: ", roles.find(r => r.title === title))
+    }
+
 
     const [fetchNewRole, isFetchLoading, fetchError] = useFetching(async () => {
         await CommunityService.newRole({...flair, ...isTypeAllowed}, groupname)
     })
 
-    useEffect(() => {
-        setIsLoader(isFetchLoading)
-    }, [isFetchLoading])
-    useEffect(() => {
-        if (fetchError)
-            setError(fetchError)
-    }, [fetchError])
-
     function createRole(e) {
         e.preventDefault()
         fetchNewRole()
     }
+
+    useEffect(() => {
+        setIsLoader(isFetchLoading || isFetchRolesLoading)
+    }, [isFetchLoading, isFetchRolesLoading])
+    useEffect(() => {
+        if (fetchError)
+            setError(fetchError)
+        else if (fetchRolesError)
+            setError(fetchRolesError)
+    }, [fetchError, fetchRolesError])
+
+    useEffect(() => {
+        fetchRoles()
+    }, [])
+
 
     return (
         <div>
@@ -66,15 +86,16 @@ function CommunityRoleManager({communityType, groupname, setError, setIsLoader})
                             </div>
                             {
                                 typesToMap.map( (t, index) =>
-                                    <MyCheckbox
-                                        key={index}
-                                        label={t.value}
-                                        onChange={e => setIsTypeAllowed(prev => {
-                                            let obj = {...prev}
-                                            obj[t.title] = e.target.checked
-                                            return obj
-                                        })}
-                                    />
+                                    <div key={index} className={style.checkBox}>
+                                        <MyCheckbox
+                                            label={t.value}
+                                            onChange={e => setIsTypeAllowed(prev => {
+                                                let obj = {...prev}
+                                                obj[t.title] = e.target.checked
+                                                return obj
+                                            })}
+                                        />
+                                    </div>
                                 )
                             }
                         </div>
@@ -90,6 +111,22 @@ function CommunityRoleManager({communityType, groupname, setError, setIsLoader})
             <div>
                 <div className={style.titleDiv}>
                     <h2>Edit roles</h2>
+                </div>
+                <div className={style.roleItemsDiv}>
+                    <div className={style.roleItems}>
+                        {
+                            roles.length > 0 ?
+                                roles.map((role, index) =>
+                                    <CommunityRoleItem
+                                        key={index}
+                                        role={role}
+                                        setEdit={setEdit}
+                                        types={typesToMap}
+                                    />
+                                )
+                                : <></>
+                        }
+                    </div>
                 </div>
             </div>
 

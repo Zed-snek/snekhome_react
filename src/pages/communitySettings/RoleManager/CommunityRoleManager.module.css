@@ -10,9 +10,13 @@
 }
 
 .title {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     color: #949494;
+}
+
+.checkBox {
+    margin-top: 5px;
 }
 
 .settings {
@@ -28,5 +32,62 @@
     font-weight: bold;
     font-size: 18px;
     background-color: rgba(0, 0, 0, 0.15);
+}
+
+.roleItemsDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.roleItems {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/*CommunityRoleItem styles: */
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.allowed {
+    color: #85B50E;
+}
+.disAllowed {
+    color: #ff1177;
+}
+.allowed, .disAllowed {
+    font-size: 16px;
+    font-weight: bold;
+    user-select: none;
+}
+.permissionTitle {
+    color: #939393;
+    font-weight: bold;
+    font-size: 15px;
+    word-break: normal;
+}
+
+.edit {
+    border-radius: 16px;
+    margin-right: 12px;
+    padding-bottom: 2px;
+    padding-top: 0;
+}
+
+.itemPermissions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.itemIsAllowed {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
 }
 
