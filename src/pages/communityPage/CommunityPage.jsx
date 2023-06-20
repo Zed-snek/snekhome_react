@@ -21,6 +21,7 @@ import MyTransparentButton from "../../components/UI/buttons/MyTransparentButton
 import {useDocumentTitle} from "usehooks-ts";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 import ClosedCommunityPage from "./ClosedCommunityPage";
+import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
 
 function CommunityPage() {
 
@@ -29,6 +30,7 @@ function CommunityPage() {
     useDocumentTitle(params.groupname.toLowerCase())
 
     const [data, setData] = useState()
+    const isCurrentUserCreator = useIsCurrentUser(data ? data.ownerNickname : '')
 
 
     const communityTypes = [
@@ -94,7 +96,7 @@ function CommunityPage() {
 
 
     if (data)
-        if (!data.member && data.community.closed)
+        if (!data.member && data.community.closed && !isCurrentUserCreator)
             return (
                 <ClosedCommunityPage
                     image={getCommunityImageByArray(data.community.images)}

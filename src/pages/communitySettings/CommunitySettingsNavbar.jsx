@@ -32,7 +32,6 @@ function CommunitySettingsNavbar({callback, currentUserRole, communityType}) {
                     <span>Image, name, description</span>
                 </li>
 
-
                 {
                     currentUserRole.creator && communityType !== 'ANARCHY' ?
                         <li className={visited[2]} onClick={() => changeVisited(2)}>
@@ -43,7 +42,7 @@ function CommunitySettingsNavbar({callback, currentUserRole, communityType}) {
                 }
 
                 {
-                    communityType !== 'ANARCHY' ?
+                    currentUserRole.creator && communityType !== 'ANARCHY' ?
                         <li className={visited[3]} onClick={() => changeVisited(3)}>
                             <div>Users</div>
                             <span>Grant roles, ban users</span>
@@ -52,14 +51,17 @@ function CommunitySettingsNavbar({callback, currentUserRole, communityType}) {
                 }
 
 
-                <li className={visited[4]} onClick={() => changeVisited(4)}>
-                    <div>Rules</div>
-                    <span>Is closed, is anonymous</span>
-                </li>
-
+                {
+                    currentUserRole.creator ?
+                        <li className={visited[4]} onClick={() => changeVisited(4)}>
+                            <div>Rules</div>
+                            <span>Is closed, is anonymous</span>
+                        </li>
+                        : <></>
+                }
 
                 {
-                    communityType === 'DEMOCRACY' ?
+                    currentUserRole.creator && communityType === 'DEMOCRACY' ?
                         <li className={visited[5]} onClick={() => changeVisited(5)}>
                             <div>Democracy</div>
                             <span>Change democracy rules</span>

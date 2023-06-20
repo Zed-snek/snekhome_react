@@ -20,3 +20,7 @@
     height: 10px;
     margin-left: 150px;
 }
+
+.membersListPage>div {
+    justify-content: flex-start;
+}

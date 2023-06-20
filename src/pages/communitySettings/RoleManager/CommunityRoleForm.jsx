@@ -33,7 +33,12 @@ function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError,
                 banCitizen: roleToEdit.banCitizen
             }
     )
-    
+
+    function end() {
+        setIsShow(false)
+        setIsLoader(false)
+    }
+
     const [fetchRole, isFetchLoading, fetchError] = useFetching(async () => {
         let role = {...flair, ...isTypeAllowed}
         if (isCreate) {
@@ -44,8 +49,7 @@ function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError,
             await CommunityService.updateRole(role, groupname, roleToEdit.title)
             setRoles(prev => prev.map(r => r.title === roleToEdit.title ? role : r))
         }
-        setIsShow(false)
-        setIsLoader(false)
+        end()
     })
 
     function manageRole(e) {
@@ -53,18 +57,28 @@ function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError,
         fetchRole()
     }
 
+    const [fetchDelete, isDeleteLoading, deleteError] = useFetching(async () => {
+        await CommunityService.deleteRole(groupname, roleToEdit.title)
+        end()
+        setRoles(prev => prev.filter(r => r.title !== roleToEdit.title))
+    })
+
+
+
     function deleteRole(e) {
         e.preventDefault()
-        setIsShow(false)
+        fetchDelete()
     }
 
     useEffect(() => {
-        setIsLoader(isFetchLoading)
-    }, [isFetchLoading])
+        setIsLoader(isFetchLoading || isDeleteLoading)
+    }, [isFetchLoading, isDeleteLoading])
     useEffect(() => {
         if (fetchError)
             setError(fetchError)
-    }, [fetchError])
+        else if (deleteError)
+            setError(deleteError)
+    }, [fetchError, deleteError])
     
     return (
         <form onSubmit={manageRole}>

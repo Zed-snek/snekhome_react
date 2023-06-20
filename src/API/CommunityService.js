@@ -58,6 +58,10 @@ export default class CommunityService {
         return await putRequestWithAuth(`/community/role/${groupname}/${oldRoleName}`, data)
     }
 
+    static async deleteRole(groupname, roleName) {
+        return await deleteRequestWithAuth(`/community/role/${groupname}/${roleName}`)
+    }
+
     static async getRoles(groupname, ) {
         return await getRequest(`/community/roles/${groupname}`)
     }

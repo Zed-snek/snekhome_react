@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import style from './CommunityRoleManager.module.css';
 import edit from "../../../images/icons/edit.svg";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";

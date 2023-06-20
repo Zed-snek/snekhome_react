@@ -23,7 +23,6 @@ function CommunityRoleManager({communityType, groupname, setError, setIsLoader})
     const [roles, setRoles] = useState([])
     const [fetchRoles, isFetchRolesLoading, fetchRolesError] = useFetching(async () => {
         let responseData = await CommunityService.getRoles(groupname)
-        console.log("CommunityRoleManager.jsx, fetchRoles responseData: ", responseData)
         setRoles(responseData)
     })
 

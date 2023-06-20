@@ -18,6 +18,7 @@ import CommunityUsers from "./Users/CommunityUsers";
 import CommunityDemocracySettings from "./Democracy/CommunityDemocracySettings";
 import CommunityRulesSettings from "./Rules/CommunityRulesSettings";
 import {getCommunityImageByArray} from "../../functions/linkFunctions";
+import MembersListPage from "../membersListPage/MembersListPage";
 
 
 function CommunitySettingsPage() {
@@ -71,8 +72,6 @@ function CommunitySettingsPage() {
                     communityType={data ? data.community.type : ''}
 
                 />
-            case 3:
-                return <CommunityUsers />
             case 4:
                 return <CommunityRulesSettings />
             case 5:
@@ -111,12 +110,18 @@ function CommunitySettingsPage() {
                     {error}
                 </MessageModal>
 
-                <OutlineDiv>
-                    <InfoDiv className={styleThis.content}>
-                        {content()}
-                    </InfoDiv>
-                </OutlineDiv>
+                {
+                    page === 3
+                        ? <div className={style.membersListPage}>
+                            <MembersListPage />
+                        </div>
+                        : <OutlineDiv>
+                            <InfoDiv className={styleThis.content}>
+                                {content()}
+                            </InfoDiv>
+                        </OutlineDiv>
 
+                }
             </div>
         </div>
     );
