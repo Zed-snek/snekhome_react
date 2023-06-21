@@ -1,11 +1,16 @@
 .main {
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
+}
+@media (max-width: 991px) {
+    .main {
+        flex-direction: column;
+    }
 }
 
 .content {
     flex: 1;
-    margin-left: 20px;
 }
 .content h2 {
     margin-top: 12px;

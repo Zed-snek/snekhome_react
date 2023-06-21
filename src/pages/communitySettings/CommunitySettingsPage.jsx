@@ -40,6 +40,12 @@ function CommunitySettingsPage() {
 
     useNotFoundNavigate(communityError)
 
+    async function banUser(nickname) {
+        let responseData = await CommunityService.banUser(params.groupname, nickname)
+            .catch(exception => setError(exception))
+        return responseData.code === 200;
+    }
+
     const [isErrorModal, setIsErrorModal] = useState(false)
     const [error, setError] = useState('')
     useEffect(() => {
@@ -50,6 +56,7 @@ function CommunitySettingsPage() {
     useEffect(() => {
         setIsLoader(isCommunityLoading)
     }, [isCommunityLoading])
+
 
     const [page, setPage] = useState(1)
     function content() {
@@ -98,7 +105,9 @@ function CommunitySettingsPage() {
                 </h2>
                 <div className={style.link}>
                     { data ?
-                        <MyTextLink to={"/c/" + data.community.groupname}>Go back</MyTextLink>
+                        <MyTextLink to={"/c/" + data.community.groupname}>
+                            Go back
+                        </MyTextLink>
                         : <></>
                     }
                 </div>
@@ -111,9 +120,13 @@ function CommunitySettingsPage() {
                 </MessageModal>
 
                 {
-                    page === 3
+                    page === 3 && !isLoader
                         ? <div className={style.membersListPage}>
-                            <MembersListPage />
+                            <MembersListPage
+                                permissions={data.currentUserRole}
+                                communityType={data.community.type}
+                                banUser={banUser}
+                            />
                         </div>
                         : <OutlineDiv>
                             <InfoDiv className={styleThis.content}>

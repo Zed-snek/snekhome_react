@@ -5,6 +5,7 @@ import MyTransparentButton from "../../../components/UI/buttons/MyTransparentBut
 import CommunityRoleFlair from "../../../components/community/CommunityRoleFlair";
 import CommunityRoleForm from "./CommunityRoleForm";
 import OverContentDiv from "../../../components/UI/blocks/OverContentDiv";
+import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 
 function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, setRoles}) {
 
@@ -14,7 +15,7 @@ function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, 
     const [isShowCreateForm, setIsShowCreateForm] = useState(false)
 
     return (
-        <div className={style.item}>
+        <BorderBottomDiv className={style.item}>
             <div>
                 <CommunityRoleFlair
                     title={role.title}
@@ -60,7 +61,7 @@ function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, 
                 />
             </OverContentDiv>
 
-        </div>
+        </BorderBottomDiv>
     );
 }
 

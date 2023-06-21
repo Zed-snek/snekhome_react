@@ -66,4 +66,8 @@ export default class CommunityService {
         return await getRequest(`/community/roles/${groupname}`)
     }
 
+    static async banUser(groupname, username) {
+        return await postParamsRequestWithAuth(`/community/${groupname}/ban/${username}`)
+    }
+
 }

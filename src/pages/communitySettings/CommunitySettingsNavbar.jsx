@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import style from "../userSettings/SettingsNavBar.module.css";
-import BooleanBlock from "../../components/UI/blocks/BooleanBlock";
 
 function CommunitySettingsNavbar({callback, currentUserRole, communityType}) {
     const [visited, setVisited] = useState({

@@ -38,53 +38,54 @@ function EditInput({isTextArea, children, current, name, callback, ...props}) {
                 {children}
             </div>
 
-                <div className={style.afterTitle}>
-                { isInput
-                    ?
-                    <div className={style.inputDiv}>
+            <div className={style.afterTitle}>
+            { isInput
+                ?
+                <div className={style.inputDiv}>
+                    <div>
+                        <MyTransparentButton className={style.cancel} onClick={cancel} tooltip="Cancel">
+                            ✗
+                        </MyTransparentButton>
+                    </div>
+                    <form onSubmit={accept} className={style.inputDiv}>
+
                         <div>
-                            <MyTransparentButton className={style.cancel} onClick={cancel} tooltip="Cancel">
-                                ✗
+                            { isTextArea
+                                ? <MyTextArea
+                                    onChange={event => setValue({...value, value: event.target.value})}
+                                    value={value.value}
+                                    {...props}
+                                >
+                                </MyTextArea>
+                                : <MyInput
+                                    placeholder="new value..."
+                                    className={style.input}
+                                    onChange={event => setValue({...value, value: event.target.value})}
+                                    value={value.value}
+                                    type="text"
+                                    {...props}
+                                />
+                            }
+
+                        </div>
+                        <div>
+                            <MyTransparentButton className={style.cancel + ' ' + style.accept} tooltip="Accept">
+                                ✓
                             </MyTransparentButton>
                         </div>
-                        <form onSubmit={accept} className={style.inputDiv}>
+                    </form>
+                </div>
 
-                            <div>
-                                { isTextArea
-                                    ? <MyTextArea
-                                        className={style.textArea}
-                                        onChange={event => setValue({...value, value: event.target.value})}
-                                        value={value.value}
-                                        {...props}
-                                    >
-                                    </MyTextArea>
-                                    : <MyInput
-                                        placeholder="new value..."
-                                        className={style.input}
-                                        onChange={event => setValue({...value, value: event.target.value})}
-                                        value={value.value}
-                                        type="text"
-                                        {...props}
-                                    />
-                                }
-
-                            </div>
-                            <div>
-                                <MyTransparentButton className={style.cancel + ' ' + style.accept} tooltip="Accept">
-                                    ✓
-                                </MyTransparentButton>
-                            </div>
-                        </form>
-                    </div>
-
-                    : <div>
-                        <MyTransparentButton className={style.edit} tooltip="Edit" onClick={() => setIsInput(true)}>
-                            <img src={edit} alt="edit"/>
-                        </MyTransparentButton>
+                : <div className={style.editBtnDiv}>
+                    <MyTransparentButton className={style.edit} tooltip="Edit" onClick={() => setIsInput(true)}>
+                        <img src={edit} alt="edit"/>
+                    </MyTransparentButton>
+                    <div>
                         {current}
                     </div>
-                }
                 </div>
+            }
+            </div>
 
         </div>
     );

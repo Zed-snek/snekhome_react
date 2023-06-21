@@ -13,8 +13,9 @@ import MyMessage from "../../components/UI/message/MyMessage";
 import ListItemBlock from "../../components/UI/blocks/ListItemBlock";
 import {getUserImage} from "../../functions/linkFunctions";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
+import CommunityRoleFlair from "../../components/community/CommunityRoleFlair";
 
-function MembersListPage() {
+function MembersListPage({permissions, communityType, banUser}) {
 
     const params = useParams()
     useDocumentTitle('Members - ' + params.groupname)
@@ -76,9 +77,22 @@ function MembersListPage() {
         return searchedElements.filter(u => isToShow(u))
     }, [activeBtn, data, searchQuery])
 
-    function manageUser(nickname) {
+    function buttonContent(userRole) {
+        if (permissions) {
+            if (communityType && communityType.type !== 'ANARCHY' && (permissions.creator || permissions.banCitizen || permissions.banUser)) {
+                if ((permissions.banUser && !userRole) ||
+                    (communityType.type === 'DEMOCRACY' && permissions.banCitizen && userRole.citizen)) {
+                    return 'Kick'
+                }
+            }
+        }
+        return ''
+    }
 
-    } //todo
+    function manageUser(username) {
+        if (banUser(username))
+            setData(prev => ({...prev, users: prev.users.filter(u => u.nickname !== username)}))
+    }
 
     if (fetchLoading)
         return (
@@ -117,8 +131,17 @@ function MembersListPage() {
                                 title={user.name + ' ' + user.surname}
                                 link={"/u/" + user.nickname}
                                 idName={user.nickname}
-                                buttonContent={'K1CK'}
+                                buttonContent={buttonContent(user.communityRole)}
                                 buttonClick={() => manageUser(user.nickname)}
+                                rightCornerContent={''}
+                                underIdContent={user.communityRole
+                                    ? <CommunityRoleFlair
+                                            title={user.communityRole.title}
+                                            color={user.communityRole.bannerColor}
+                                            textColor={user.communityRole.textColor}
+                                    />
+                                    : ''
+                                }
                             />
                             )
                         : <MyMessage> Users not found </MyMessage>

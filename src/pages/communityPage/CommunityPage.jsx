@@ -173,10 +173,16 @@ function CommunityPage() {
                                     </MyTransparentButton>
                                     : <></>
                             }
-                            <MyOutlineButton className={style.joinLeaveBtn} onClick={handleJoinLeaveBtn}>
+                            <MyOutlineButton
+                                disabled={data.banned}
+                                className={style.joinLeaveBtn}
+                                onClick={handleJoinLeaveBtn}
+                            >
                                 { isMembershipLoading
                                     ? <MyPulseLoader />
-                                    : data.member ? "Leave" : "Join"
+                                    : data.banned
+                                        ? "Banned"
+                                        : data.member ? "Leave" : "Join"
                                 }
                             </MyOutlineButton>
                         </div>

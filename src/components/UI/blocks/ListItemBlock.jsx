@@ -22,7 +22,9 @@ function ListItemBlock({children, image, title, link, idName, buttonContent, but
                     <div className={style.idName}>
                         @{idName}
                     </div>
-                    {underIdContent}
+                    <div>
+                        {underIdContent}
+                    </div>
                 </div>
                 <div className={style.rightDiv}>
                     <div>
