@@ -45,6 +45,14 @@ function CommunitySettingsPage() {
             .catch(exception => setError(exception))
         return responseData.code === 200;
     }
+    async function setRole(nickname, isDelete) {
+        if (isDelete) {
+            console.log("Removing role")
+        }
+        else {
+            console.log("Setting role")
+        }
+    }
 
     const [isErrorModal, setIsErrorModal] = useState(false)
     const [error, setError] = useState('')
@@ -77,7 +85,6 @@ function CommunitySettingsPage() {
                     setIsLoader={setIsLoader}
                     groupname={params.groupname}
                     communityType={data ? data.community.type : ''}
-
                 />
             case 4:
                 return <CommunityRulesSettings />
@@ -126,6 +133,7 @@ function CommunitySettingsPage() {
                                 permissions={data.currentUserRole}
                                 communityType={data.community.type}
                                 banUser={banUser}
+                                setRole={setRole}
                             />
                         </div>
                         : <OutlineDiv>

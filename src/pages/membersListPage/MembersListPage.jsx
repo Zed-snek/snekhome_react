@@ -14,8 +14,9 @@ import ListItemBlock from "../../components/UI/blocks/ListItemBlock";
 import {getUserImage} from "../../functions/linkFunctions";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import CommunityRoleFlair from "../../components/community/CommunityRoleFlair";
+import MoreOptionsButton from "../../components/UI/navigation/MoreOptionsButton";
 
-function MembersListPage({permissions, communityType, banUser}) {
+function MembersListPage({permissions, communityType, banUser, setRole}) {
 
     const params = useParams()
     useDocumentTitle('Members - ' + params.groupname)
@@ -78,13 +79,22 @@ function MembersListPage({permissions, communityType, banUser}) {
     }, [activeBtn, data, searchQuery])
 
     function buttonContent(userRole) {
-        if (permissions) {
-            if (communityType && communityType.type !== 'ANARCHY' && (permissions.creator || permissions.banCitizen || permissions.banUser)) {
-                if ((permissions.banUser && !userRole) ||
-                    (communityType.type === 'DEMOCRACY' && permissions.banCitizen && userRole.citizen)) {
-                    return 'Kick'
-                }
-            }
+        if (permissions && communityType && communityType.type !== 'ANARCHY'
+            && (permissions.creator || permissions.banCitizen || permissions.banUser)
+            && ((permissions.banUser && !userRole) || (communityType.type === 'DEMOCRACY' && permissions.banCitizen && userRole.citizen))
+        ) {
+            return 'Kick'
+        }
+        return ''
+    }
+    function moreOptionsContent(userRole, nickname) {
+        if (setRole && communityType !== "ANARCHY" && permissions.creator && !(userRole && userRole.creator)) {
+            let options = [{title: "Set role", onClick: () => setRole(nickname, false)}]
+            if (userRole)
+                options.push({title: "Revoke role", onClick: () => setRole(nickname, true)})
+            return <MoreOptionsButton
+                options={options}
+            />
         }
         return ''
     }
@@ -133,7 +143,7 @@ function MembersListPage({permissions, communityType, banUser}) {
                                 idName={user.nickname}
                                 buttonContent={buttonContent(user.communityRole)}
                                 buttonClick={() => manageUser(user.nickname)}
-                                rightCornerContent={''}
+                                rightCornerContent={moreOptionsContent(user.communityRole)}
                                 underIdContent={user.communityRole
                                     ? <CommunityRoleFlair
                                             title={user.communityRole.title}
