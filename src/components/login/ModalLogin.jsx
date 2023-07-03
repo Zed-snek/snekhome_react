@@ -25,62 +25,61 @@ function ModalLogin(props) {
     }
 
     return (
-        <>
-            <Modal
-                show={props.visible}
-                onHide={() => props.setVisible(false)}
-                centered
-                >
+        <Modal
+            show={props.visible}
+            onHide={() => props.setVisible(false)}
+            centered
+            >
 
-                <div className="own_modal own_bg_colorHeader">
-                    <Modal.Header className="bg-transparent">
-                        <Modal.Title>Login</Modal.Title>
-                        <CloseButton variant="white"
-                                     className="shadow-none"
-                                     onClick={() => props.setVisible(false)} />
-                    </Modal.Header>
+            <div className="own_modal own_bg_colorHeader">
+                <Modal.Header className="bg-transparent">
+                    <Modal.Title>Login</Modal.Title>
+                    <CloseButton variant="white"
+                                 className="shadow-none"
+                                 onClick={() => props.setVisible(false)}
+                    />
+                </Modal.Header>
 
-                    <Modal.Body className="bg-transparent">
+                <Modal.Body className="bg-transparent">
 
-                        <MyMessage>{props.message}</MyMessage>
+                    <MyMessage>{props.message}</MyMessage>
 
-                        <form onSubmit={handleSubmit(sendData)}>
+                    <form onSubmit={handleSubmit(sendData)}>
 
-                            <label htmlFor="email">Your e-mail address:</label>
-                            <MyInput
-                                type="email" id="email" placeholder="e-mail"
-                                register={register} name="email"
-                            />
+                        <label htmlFor="email">Your e-mail address:</label>
+                        <MyInput
+                            type="email" id="email" placeholder="e-mail"
+                            register={register} name="email"
+                        />
 
-                            <label htmlFor="password">Your password:</label>
-                            <MyInput
-                                type="password" id="password" placeholder="password"
-                                register={register} name="password"
-                                required={true}
-                            />
+                        <label htmlFor="password">Your password:</label>
+                        <MyInput
+                            type="password" id="password" placeholder="password"
+                            register={register} name="password"
+                            required={true}
+                        />
 
-                            <div className="loginButtonDiv">
-                                <div>
-                                    <span className="textAboveLink"> Don't have an account? </span> <br/>
-                                    <MyTextLink to="/register" onClick={() => props.setVisible(false)}>
-                                        Register
-                                    </MyTextLink>
-                                </div>
-                                <div>
-                                    <MyButton color={"blue"}>
-                                        Login
-                                    </MyButton>
-                                </div>
+                        <div className="loginButtonDiv">
+                            <div>
+                                <span className="textAboveLink"> Don't have an account? </span> <br/>
+                                <MyTextLink to="/register" onClick={() => props.setVisible(false)}>
+                                    Register
+                                </MyTextLink>
                             </div>
+                            <div>
+                                <MyButton color={"blue"}>
+                                    Login
+                                </MyButton>
+                            </div>
+                        </div>
 
-                        </form>
+                    </form>
 
-                    </Modal.Body>
+                </Modal.Body>
 
-                </div>
+            </div>
 
-            </Modal>
-        </>
+        </Modal>
     );
 }
 

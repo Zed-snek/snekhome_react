@@ -18,6 +18,7 @@
     justify-content: space-between;
     margin-bottom: 10px;
     font-weight: bold;
+    gap: 10px;
 }
 
 .title {

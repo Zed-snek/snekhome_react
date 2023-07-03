@@ -70,4 +70,12 @@ export default class CommunityService {
         return await postParamsRequestWithAuth(`/community/${groupname}/ban/${username}`)
     }
 
+    static async setRole(username, groupname, roleName) {
+        return await postParamsRequestWithAuth(`/community/${groupname}/role/${roleName}/set/${username}`)
+    }
+
+    static async revokeRole(groupname, username) {
+        return await deleteRequestWithAuth(`/community/${groupname}/role/revoke/${username}`)
+    }
+
 }

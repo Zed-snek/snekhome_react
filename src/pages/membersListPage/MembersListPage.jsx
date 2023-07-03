@@ -15,8 +15,9 @@ import {getUserImage} from "../../functions/linkFunctions";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import CommunityRoleFlair from "../../components/community/CommunityRoleFlair";
 import MoreOptionsButton from "../../components/UI/navigation/MoreOptionsButton";
+import CommunityRoleListToSet from "../communitySettings/Users/CommunityRoleListToSet";
 
-function MembersListPage({permissions, communityType, banUser, setRole}) {
+function MembersListPage({permissions, communityType, setError, setIsLoader}) {
 
     const params = useParams()
     useDocumentTitle('Members - ' + params.groupname)
@@ -46,6 +47,7 @@ function MembersListPage({permissions, communityType, banUser, setRole}) {
         else {
             navigate('/c/' + params.groupname)
         }
+        console.log("members: ", response)
     })
 
     useEffect(() => {
@@ -79,16 +81,20 @@ function MembersListPage({permissions, communityType, banUser, setRole}) {
     }, [activeBtn, data, searchQuery])
 
     function buttonContent(userRole) {
-        if (permissions && communityType && communityType.type !== 'ANARCHY'
+        if (permissions && communityType !== 'ANARCHY'
             && (permissions.creator || permissions.banCitizen || permissions.banUser)
-            && ((permissions.banUser && !userRole) || (communityType.type === 'DEMOCRACY' && permissions.banCitizen && userRole.citizen))
+            && (
+                (permissions.banUser && !userRole)
+                || (communityType.type === 'DEMOCRACY' && permissions.banCitizen && userRole.citizen)
+                || (permissions.creator && !userRole.creator)
+            )
         ) {
             return 'Kick'
         }
         return ''
     }
     function moreOptionsContent(userRole, nickname) {
-        if (setRole && communityType !== "ANARCHY" && permissions.creator && !(userRole && userRole.creator)) {
+        if (permissions && permissions.creator && communityType !== "ANARCHY"  && !(userRole && userRole.creator)) {
             let options = [{title: "Set role", onClick: () => setRole(nickname, false)}]
             if (userRole)
                 options.push({title: "Revoke role", onClick: () => setRole(nickname, true)})
@@ -99,10 +105,37 @@ function MembersListPage({permissions, communityType, banUser, setRole}) {
         return ''
     }
 
-    function manageUser(username) {
-        if (banUser(username))
-            setData(prev => ({...prev, users: prev.users.filter(u => u.nickname !== username)}))
+    async function banUser(nickname) {
+        let responseData = await CommunityService.banUser(params.groupname, nickname)
+            .catch(exception => setError(exception))
+        if (responseData.code === 200)
+            setData(prev => ({...prev, users: prev.users.filter(u => u.nickname !== nickname)}))
     }
+
+    const [isRoleShow, setRoleShow] = useState({isShow: false, nickname: ''})
+
+    async function revokeRole(nickname) {
+        await CommunityService.revokeRole(params.groupname, nickname)
+            .then(() =>
+                setData(prev => {
+                    let obj = {...prev}
+                    delete obj.users[obj.users.findIndex(u => u.nickname === nickname)].communityRole
+                    console.log("obj: ", obj)
+                    return obj
+                })
+            )
+            .catch(err => setError(err.message))
+    }
+
+    function setRole(nickname, isDelete) {
+        if (isDelete)
+            revokeRole(nickname)
+        else {
+            setRoleShow({isShow: true, nickname: nickname})
+        }
+
+    }
+
 
     if (fetchLoading)
         return (
@@ -142,8 +175,8 @@ function MembersListPage({permissions, communityType, banUser, setRole}) {
                                 link={"/u/" + user.nickname}
                                 idName={user.nickname}
                                 buttonContent={buttonContent(user.communityRole)}
-                                buttonClick={() => manageUser(user.nickname)}
-                                rightCornerContent={moreOptionsContent(user.communityRole)}
+                                buttonClick={() => banUser(user.nickname)}
+                                rightCornerContent={moreOptionsContent(user.communityRole, user.nickname)}
                                 underIdContent={user.communityRole
                                     ? <CommunityRoleFlair
                                             title={user.communityRole.title}
@@ -158,6 +191,20 @@ function MembersListPage({permissions, communityType, banUser, setRole}) {
                 }
 
             </OutlineDiv>
+
+            {
+                permissions ?
+                    <CommunityRoleListToSet
+                        visibleAndNickname={isRoleShow}
+                        setVisibleAndNickname={setRoleShow}
+                        setError={setError}
+                        setIsLoader={setIsLoader}
+                        groupname={params.groupname}
+                        communityType={communityType}
+                        setUsers={setData}
+                    />
+                    : ''
+            }
 
         </MidSizeContent>
     );

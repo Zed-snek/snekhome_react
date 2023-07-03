@@ -14,12 +14,10 @@ import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 import CommunityDetailsSettings from "./Details/CommunityDetailsSettings";
 import InfoDiv from "../../components/UI/blocks/InfoDiv";
 import CommunityRoleManager from "./RoleManager/CommunityRoleManager";
-import CommunityUsers from "./Users/CommunityUsers";
 import CommunityDemocracySettings from "./Democracy/CommunityDemocracySettings";
 import CommunityRulesSettings from "./Rules/CommunityRulesSettings";
 import {getCommunityImageByArray} from "../../functions/linkFunctions";
 import MembersListPage from "../membersListPage/MembersListPage";
-
 
 function CommunitySettingsPage() {
 
@@ -40,19 +38,6 @@ function CommunitySettingsPage() {
 
     useNotFoundNavigate(communityError)
 
-    async function banUser(nickname) {
-        let responseData = await CommunityService.banUser(params.groupname, nickname)
-            .catch(exception => setError(exception))
-        return responseData.code === 200;
-    }
-    async function setRole(nickname, isDelete) {
-        if (isDelete) {
-            console.log("Removing role")
-        }
-        else {
-            console.log("Setting role")
-        }
-    }
 
     const [isErrorModal, setIsErrorModal] = useState(false)
     const [error, setError] = useState('')
@@ -127,13 +112,13 @@ function CommunitySettingsPage() {
                 </MessageModal>
 
                 {
-                    page === 3 && !isLoader
+                    page === 3
                         ? <div className={style.membersListPage}>
                             <MembersListPage
                                 permissions={data.currentUserRole}
                                 communityType={data.community.type}
-                                banUser={banUser}
-                                setRole={setRole}
+                                setError={setError}
+                                setIsLoader={setIsLoader}
                             />
                         </div>
                         : <OutlineDiv>
