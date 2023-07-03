@@ -47,7 +47,6 @@ function MembersListPage({permissions, communityType, setError, setIsLoader}) {
         else {
             navigate('/c/' + params.groupname)
         }
-        console.log("members: ", response)
     })
 
     useEffect(() => {

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import style from "./CommunitySettings.module.css";
+import style from "./CreateCommunitySettings.module.css";
 import MyCheckbox from "../../../components/UI/inputs/MyCheckbox";
 import BooleanBlock from "../../../components/UI/blocks/BooleanBlock";
 
-function CommunitySettingsPage({chosen, setSettings}) {
+function CreateCommunitySettingsPage({chosen, settings, setSettings}) {
 
 
     function handleClosedCommunity(e) {
@@ -20,7 +20,7 @@ function CommunitySettingsPage({chosen, setSettings}) {
         setSettings(prev => ({...prev, inviteUsers: e.target.checked}))
     }
 
-    const [showInviteUsers, setShowInviteUsers] = useState(false)
+    const [showInviteUsers, setShowInviteUsers] = useState(settings.isClosed)
 
 
     return (
@@ -34,6 +34,7 @@ function CommunitySettingsPage({chosen, setSettings}) {
                     If you allow anonymous posts, that will be mean anyone can post anything and no one will know who has posted it.
                 </div>
                 <MyCheckbox
+                    checked={settings.anonAllowed}
                     onChange={handleAnonCommunity}
                     label="Allow"
                 />
@@ -48,6 +49,7 @@ function CommunitySettingsPage({chosen, setSettings}) {
                     Only members are allowed to see content and invite other users.
                 </div>
                 <MyCheckbox
+                    checked={settings.isClosed}
                     onChange={handleClosedCommunity}
                     label="Make community closed"
                 />
@@ -65,6 +67,7 @@ function CommunitySettingsPage({chosen, setSettings}) {
                         When community is closed, new users can be only invited to community. Can non ranked members invite other users?
                     </div>
                     <MyCheckbox
+                        checked={settings.inviteUsers}
                         onChange={handleInviteUsers}
                         label="Allow invite users"
                     />
@@ -76,4 +79,4 @@ function CommunitySettingsPage({chosen, setSettings}) {
     );
 }
 
-export default CommunitySettingsPage;
+export default CreateCommunitySettingsPage;

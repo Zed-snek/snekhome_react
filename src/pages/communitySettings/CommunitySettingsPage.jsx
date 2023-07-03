@@ -14,7 +14,7 @@ import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 import CommunityDetailsSettings from "./Details/CommunityDetailsSettings";
 import InfoDiv from "../../components/UI/blocks/InfoDiv";
 import CommunityRoleManager from "./RoleManager/CommunityRoleManager";
-import CommunityDemocracySettings from "./Democracy/CommunityDemocracySettings";
+import CommunityDemocracySettingsPage from "./Democracy/CommunityDemocracySettingsPage";
 import CommunityRulesSettings from "./Rules/CommunityRulesSettings";
 import {getCommunityImageByArray} from "../../functions/linkFunctions";
 import MembersListPage from "../membersListPage/MembersListPage";
@@ -69,12 +69,48 @@ function CommunitySettingsPage() {
                     setError={setError}
                     setIsLoader={setIsLoader}
                     groupname={params.groupname}
-                    communityType={data ? data.community.type : ''}
+                    communityType={data.community.type}
                 />
             case 4:
-                return <CommunityRulesSettings />
+                return <CommunityRulesSettings
+                    setError={setError}
+                    setIsLoader={setIsLoader}
+                    groupname={params.groupname}
+                    communityType={data.community.type}
+                    startSettings={{
+                        anonAllowed: data.community.anonAllowed,
+                        isClosed: data.community.closed,
+                        inviteUsers: data.community.inviteUsers
+                    }}
+                    setStartSettings={(anon, closed, invite) =>
+                        setData(prev => {
+                            let obj = {...prev}
+                            obj.community.anonAllowed = anon
+                            obj.community.closed = closed
+                            obj.community.inviteUsers = invite
+                            return obj
+                        })
+                    }
+                />
             case 5:
-                return <CommunityDemocracySettings />
+                return <CommunityDemocracySettingsPage
+                    setError={setError}
+                    setIsLoader={setIsLoader}
+                    groupname={params.groupname}
+                    startSettings={() => {
+                        let obj = data.community.citizenParameters
+                        return {citizenDays: obj.days, electionDays: obj.electionDays, citizenRating: obj.rating}
+                    }}
+                    setStartSettings={(citizen, election, rating) =>
+                        setData(prev => {
+                            let obj = {...prev}
+                            obj.community.citizenParameters.days = citizen
+                            obj.community.citizenParameters.electionDays = election
+                            obj.community.citizenParameters.rating = rating
+                            return obj
+                        })
+                    }
+                />
         }
     }
 

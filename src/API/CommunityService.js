@@ -78,4 +78,12 @@ export default class CommunityService {
         return await deleteRequestWithAuth(`/community/${groupname}/role/revoke/${username}`)
     }
 
+    static async updateCommunitySettings(groupname, newSettings) {
+        return await putRequestWithAuth(`/community/${groupname}/settings`, newSettings)
+    }
+
+    static async updateDemocracySettings(groupname, newSettings) {
+        return await putRequestWithAuth(`/community/${groupname}/democracy`, newSettings)
+    }
+
 }

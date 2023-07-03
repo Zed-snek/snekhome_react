@@ -51,7 +51,7 @@ function CommunitySettingsNavbar({callback, currentUserRole, communityType}) {
 
 
                 {
-                    currentUserRole.creator ?
+                    currentUserRole.creator && communityType !== 'ANARCHY' ?
                         <li className={visited[4]} onClick={() => changeVisited(4)}>
                             <div>Rules</div>
                             <span>Is closed, is anonymous</span>

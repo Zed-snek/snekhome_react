@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import CreateCommunitySettingsPage from "../../createCommunity/communitySettings/CreateCommunitySettingsPage";
-import style from "./CommunityRulesSettings.module.css";
+import React, {useState, useEffect} from 'react';
+import CommunityDemocracySettings from "../../createCommunity/communityCitizenRole/CommunityDemocracySettings";
 import MyButton from "../../../components/UI/buttons/MyButton";
+import style from "./CommunityDemocracySettingsPage.module.css";
 import {useFetching} from "../../../hooks/useFetching";
 import CommunityService from "../../../API/CommunityService";
 
-function CommunityRulesSettings({communityType, startSettings, setStartSettings, setError, setIsLoader, groupname}) {
+function CommunityDemocracySettingsPage({startSettings, setStartSettings, setError, setIsLoader, groupname}) {
 
     const [settings, setSettings] = useState(startSettings)
 
     const [fetchUpdate, isFetchUpdateLoading, fetchUpdateError] = useFetching(async () => {
-        await CommunityService.updateCommunitySettings(groupname, settings)
-        setStartSettings(settings.anonAllowed, settings.isClosed, settings.inviteUsers)
+        await CommunityService.updateDemocracySettings(groupname, settings)
+        setStartSettings(settings.citizenDays, settings.electionDays, settings.citizenRating)
     })
 
     useEffect(() => {
@@ -30,11 +30,10 @@ function CommunityRulesSettings({communityType, startSettings, setStartSettings,
     }
 
     return (
-        <div className={style.main}>
-            <CreateCommunitySettingsPage
+        <div>
+            <CommunityDemocracySettings
                 settings={settings}
                 setSettings={setSettings}
-                chosen={communityType === "ANARCHY" ? 1 : 0}
             />
             <div className={style.button}>
                 <MyButton onClick={acceptBtn}>
@@ -45,4 +44,4 @@ function CommunityRulesSettings({communityType, startSettings, setStartSettings,
     );
 }
 
-export default CommunityRulesSettings;
+export default CommunityDemocracySettingsPage;

@@ -6,7 +6,7 @@ import style from "./CreateCommunityPage.module.css";
 import ChooseCommunityPage from "./chooseCommunity/ChooseCommunityPage";
 import CreateCommunityNextBtn from "./CreateCommunityNextBtn";
 import MessageModal from "../../components/UI/modal/MessageModal";
-import CommunitySettingsPage from "./communitySettings/CommunitySettingsPage";
+import CreateCommunitySettingsPage from "./communitySettings/CreateCommunitySettingsPage";
 import {isNotBannedSymbols} from "../../functions/stringFunctions";
 import {useFetching} from "../../hooks/useFetching";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
@@ -143,12 +143,13 @@ function CreateCommunityPage() {
                     chosen={type}
                 />
             case 1:
-                return <CommunitySettingsPage
+                return <CreateCommunitySettingsPage
+                    settings={settings}
                     setSettings={setSettings}
                     chosen={type}
                 />
             case 2:
-                return<CommunityDetailsPage
+                return <CommunityDetailsPage
                     setSettings={setSettings}
                     chosen={type}
                 />
