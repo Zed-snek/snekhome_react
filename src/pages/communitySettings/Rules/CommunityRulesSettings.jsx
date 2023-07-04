@@ -4,9 +4,11 @@ import style from "./CommunityRulesSettings.module.css";
 import MyButton from "../../../components/UI/buttons/MyButton";
 import {useFetching} from "../../../hooks/useFetching";
 import CommunityService from "../../../API/CommunityService";
+import {useDocumentTitle} from "usehooks-ts";
 
 function CommunityRulesSettings({communityType, startSettings, setStartSettings, setError, setIsLoader, groupname}) {
 
+    useDocumentTitle("Community rules settings")
     const [settings, setSettings] = useState(startSettings)
 
     const [fetchUpdate, isFetchUpdateLoading, fetchUpdateError] = useFetching(async () => {

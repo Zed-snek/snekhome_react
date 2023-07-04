@@ -28,7 +28,6 @@ function CommunityRoleListToSet({visibleAndNickname, setVisibleAndNickname, setE
             show={visibleAndNickname.isShow}
             onHide={() => setVisibleAndNickname({isShow: false, nickname: ''})}
             centered
-            className={style.modalComponent}
         >
             <div className={"own_modal own_bg_colorHeader " + style.modal}>
                 <Modal.Header className="bg-transparent">
@@ -39,7 +38,7 @@ function CommunityRoleListToSet({visibleAndNickname, setVisibleAndNickname, setE
                     />
                 </Modal.Header>
                 <Modal.Body>
-                    <div className={style.rolesToSetDiv}>
+                    <div>
                         {
                             roles.length > 0 ?
                                 roles.filter(r => !r.creator).map((role, index) =>

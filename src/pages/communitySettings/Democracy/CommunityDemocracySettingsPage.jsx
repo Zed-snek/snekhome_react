@@ -4,9 +4,11 @@ import MyButton from "../../../components/UI/buttons/MyButton";
 import style from "./CommunityDemocracySettingsPage.module.css";
 import {useFetching} from "../../../hooks/useFetching";
 import CommunityService from "../../../API/CommunityService";
+import {useDocumentTitle} from "usehooks-ts";
 
 function CommunityDemocracySettingsPage({startSettings, setStartSettings, setError, setIsLoader, groupname}) {
 
+    useDocumentTitle("Democracy settings")
     const [settings, setSettings] = useState(startSettings)
 
     const [fetchUpdate, isFetchUpdateLoading, fetchUpdateError] = useFetching(async () => {

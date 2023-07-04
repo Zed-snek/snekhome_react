@@ -9,8 +9,11 @@ import FadingMessage from "../../../components/UI/message/FadingMessage";
 import HomePageCardItem from "../../homePage/HomePageCardItem";
 import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 import buttonStyle from '../../../components/UI/buttons/MyButton.module.css';
+import {useDocumentTitle} from "usehooks-ts";
 
 function CommunityDetailsSettings({groupname, name, description, setError, setIsLoader, setData, image}) {
+
+    useDocumentTitle("Details settings")
 
     const [updateData, setUpdateData] = useState({})
 
