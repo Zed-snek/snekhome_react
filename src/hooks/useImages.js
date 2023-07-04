@@ -4,29 +4,28 @@ import FileService from "../API/FileService";
 export function useImages(array, setArray) { //last image in array is newest
     const last = array.length - 1
     const [currentIndex, setCurrentIndex] = useState(last)
-    const currentImage = array[currentIndex]
+
+    const currentImage = last === -1 ? '' : array[currentIndex].name
 
     function turnRight() {
-        if (currentImage === last)
+        if (currentIndex === last)
             setCurrentIndex(0)
         else
             setCurrentIndex(prev => prev + 1)
     }
     function turnLeft() {
-        if (currentImage === 0)
+        if (currentIndex === 0)
             setCurrentIndex(last)
         else
             setCurrentIndex(prev => prev - 1)
     }
 
-    async function deleteImageRequest() {
+    async function deleteCurrentImageRequest() {
         await FileService.deleteImage(currentImage)
-            .then(setArray(() => {
-                let newArr = {...array}
-                delete newArr[currentIndex]
-                return newArr
-            }))
+            .then(() => {
+                setCurrentIndex(prev => prev - 1)
+                setArray(array.filter(f => f.name !== currentImage))
+            })
     }
-
-    return [turnLeft, turnRight, currentImage, deleteImageRequest]
+    return [turnLeft, turnRight, currentImage, deleteCurrentImageRequest]
 }

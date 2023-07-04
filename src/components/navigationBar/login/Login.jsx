@@ -1,8 +1,8 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {AuthContext} from "../context";
+import {AuthContext} from "../../context";
 import ModalLogin from "./ModalLogin";
-import {useFetching} from "../../hooks/useFetching";
-import AuthService from "../../API/AuthService";
+import {useFetching} from "../../../hooks/useFetching";
+import AuthService from "../../../API/AuthService";
 import {useLocation} from "react-router-dom";
 
 function Login(props) {

@@ -22,6 +22,7 @@ import {useDocumentTitle} from "usehooks-ts";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 import ClosedCommunityPage from "./ClosedCommunityPage";
 import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
+import ImageSelectorModal from "../../components/images/ImageSelectorModal";
 
 function CommunityPage() {
 
@@ -31,7 +32,7 @@ function CommunityPage() {
 
     const [data, setData] = useState()
     const isCurrentUserCreator = useIsCurrentUser(data ? data.ownerNickname : '')
-
+    const [isImageModal, setIsImageModal] = useState(false)
 
     const communityTypes = [
         {type: "ANARCHY", image: anarchyImage, color: '#ff1177'},
@@ -83,17 +84,12 @@ function CommunityPage() {
             setModalError(true)
     }, [error])
 
-
-
     function getNicknameColor() {
         return communityTypes.find(type => type.type === data.community.type).color
     }
     function getTypeImage() {
         return communityTypes.find(type => type.type === data.community.type).image
     }
-
-
-
 
     if (data)
         if (!data.member && data.community.closed && !isCurrentUserCreator)
@@ -115,7 +111,18 @@ function CommunityPage() {
                     <div className={style.leftDiv}>
                         <div className={style.imageDateDiv}>
                             <div className={style.imgDiv}>
-                                <img src={getCommunityImageByArray(data.community.images)} />
+                                <img
+                                    src={getCommunityImageByArray(data.community.images)}
+                                    onClick={data.community.images.length === 0 ? () => {} : () => setIsImageModal(true)}
+                                />
+                                <ImageSelectorModal
+                                    visible={isImageModal}
+                                    setVisible={setIsImageModal}
+                                    format="community"
+                                    isDeletePermission={data.currentUserRole && (data.currentUserRole.editDescription || data.currentUserRole.creator)}
+                                    array={data.community.images}
+                                    setArray={newArray => setData(prev => ({...prev, community: {...prev.community, images: newArray}}))}
+                                />
                             </div>
                             <div className={style.groupname}>
                                 @{data.community.groupname}

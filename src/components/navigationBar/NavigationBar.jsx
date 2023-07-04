@@ -8,7 +8,7 @@ import logo from "../../images/logo.png";
 import signIco from "../../images/icons/signpost.svg";
 import searchIco from "../../images/icons/search.svg";
 import notificationIco from "../../images/icons/directboxnotif.svg";
-import Login from "../login/Login";
+import Login from "./login/Login";
 
 
 function NavigationBar() {

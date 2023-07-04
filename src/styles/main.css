@@ -18,12 +18,22 @@
     width: 50px;
     border-radius: 24px;
 }
-
 .mediumUserImage {
     width: 100px;
     height: 100px;
     border-radius: 50px;
 }
+.bigUserImage {
+    height: 356px;
+    width: 317px;
+    border-radius: 10px;
+}
+.communityImageCard {
+    width: 110px;
+    height: 117px;
+    border-radius: 12px;
+}
+
 
 
 

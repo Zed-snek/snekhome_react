@@ -2,15 +2,9 @@
 
 }
 .imageDiv {
-    width: 317px;
     position: relative;
 }
-.image {
-    height: 356px;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-}
+
 
 .overImage {
     border-top-left-radius: 10px;

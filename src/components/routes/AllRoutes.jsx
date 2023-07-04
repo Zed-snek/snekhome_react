@@ -5,7 +5,7 @@ import InfoPage from "../../pages/InfoPage";
 import PrivateRoute from "./PrivateRoute";
 import RegisterPage from "../../pages/registerPage/RegisterPage";
 import UnauthorizedOnlyRoute from "./UnauthorizedOnlyRoute";
-import VerifyPage from "../login/VerifyPage";
+import VerifyPage from "../navigationBar/login/VerifyPage";
 import UserPage from "../../pages/userPage/UserPage";
 import NotFound from "../../pages/notFound/NotFound";
 import SettingsPage from "../../pages/userSettings/SettingsPage";

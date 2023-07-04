@@ -15,7 +15,7 @@ function TransparentModal({visible, setVisible, children}) {
                 <div className={style.cancel} onClick={() => setVisible(false)}>
                     ✗
                 </div>
-                <div>
+                <div className={style.content}>
                     {children}
                 </div>
             </div>

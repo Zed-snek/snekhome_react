@@ -57,7 +57,7 @@ function UserPage() {
                     <OverImageDiv className={style.overImage} style={{color: user.nicknameColor}} sizeByLength={true}>
                         {user.nickname}
                     </OverImageDiv>
-                    <img src={user.image} className={style.image}/>
+                    <img src={user.image} className="bigUserImage"/>
                 </div>
 
                 <div className={style.userInfoDiv}>

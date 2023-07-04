@@ -12,7 +12,7 @@ function HomePageCardItem({title, image, isHover, className, ...props}) {
             <OverImageDiv className={style.cardItemOverImageDiv}>
                 @{title}
             </OverImageDiv>
-            <img src={image}/>
+            <img src={image} className="communityImageCard"/>
         </div>
     );
 }

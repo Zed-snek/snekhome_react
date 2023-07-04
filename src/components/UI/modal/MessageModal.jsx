@@ -4,25 +4,24 @@ import style from "./MessageModal.module.css"
 import MyButton from "../buttons/MyButton";
 import {useNavigate} from "react-router-dom";
 
-function MessageModal(props) {
+function MessageModal({visible, setVisible, children, acceptCallback, isAcceptButton, navigate}) {
 
-    const navigate = useNavigate()
+    const doNavigate = useNavigate()
 
     function onHide() {
-        props.setVisible(false)
-
-        if (props.navigate)
-            navigate(props.navigate)
+        setVisible(false)
+        if (navigate)
+            doNavigate(navigate)
     }
 
     function onAccept() {
-        props.acceptCallback()
+        acceptCallback()
+        setVisible(false)
     }
 
     return (
-
         <Modal
-            show={props.visible}
+            show={visible}
             onHide={onHide}
         >
 
@@ -30,10 +29,10 @@ function MessageModal(props) {
 
                 <Modal.Body className="bg-transparent">
                     <span className={style.span}>
-                        {props.children}
+                        {children}
                     </span>
 
-                    {props.isAcceptButton
+                    {isAcceptButton
                         ? <>
                             <MyButton
                                 className={style.closeBtn}
