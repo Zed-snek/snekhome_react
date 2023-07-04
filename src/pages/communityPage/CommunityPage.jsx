@@ -114,6 +114,7 @@ function CommunityPage() {
                                 <img
                                     src={getCommunityImageByArray(data.community.images)}
                                     onClick={data.community.images.length === 0 ? () => {} : () => setIsImageModal(true)}
+                                    alt=""
                                 />
                                 <ImageSelectorModal
                                     visible={isImageModal}

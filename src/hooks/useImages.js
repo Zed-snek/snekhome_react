@@ -5,7 +5,7 @@ export function useImages(array, setArray) { //last image in array is newest
     const last = array.length - 1
     const [currentIndex, setCurrentIndex] = useState(last)
 
-    const currentImage = last === -1 ? '' : array[currentIndex].name
+    const currentImage = (last === -1 ? '' : array[currentIndex].name)
 
     function turnRight() {
         if (currentIndex === last)

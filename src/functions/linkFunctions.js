@@ -5,23 +5,31 @@ export function getImageApiLink(name) {
     return process.env.REACT_APP_API_LINK + '/image/' + name
 }
 
-export function getUserImage(image) {
+function getImage(defaultImage, image) {
     if (!image)
-        return defaultUserImage
+        return defaultImage
     else
         return getImageApiLink(image)
+}
+function getImageByArray(defaultImage, array) {
+    if (array.length === 0)
+        return defaultImage
+    else
+        return getImageApiLink(array[array.length - 1].name)
 }
 
-export function getCommunityImageByArray(images) {
-    if (images.length === 0)
-        return defaultCommunityImage
-    else
-        return getImageApiLink(images[images.length - 1].name)
+export function getUserImage(image) {
+    return getImage(defaultUserImage, image)
 }
+export function getUserImageByArray(images) {
+    return getImageByArray(defaultUserImage, images)
+}
+
 export function getCommunityImage(image) {
-    if (!image)
-        return defaultCommunityImage
-    else
-        return getImageApiLink(image)
+    return getImage(defaultCommunityImage, image)
 }
+export function getCommunityImageByArray(images) {
+    return getImageByArray(defaultCommunityImage, images)
+}
+
 

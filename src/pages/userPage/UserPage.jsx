@@ -1,38 +1,46 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Link, useParams} from "react-router-dom";
 import style from './UserPage.module.css';
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import InfoDiv from "../../components/UI/blocks/InfoDiv";
 import OverImageDiv from "../../components/UI/blocks/OverImageDiv";
 import UserService from "../../API/UserService";
-import {getUserImage} from "../../functions/linkFunctions";
+import {getUserImageByArray} from "../../functions/linkFunctions";
 import InfoTag from "./InfoTag";
 import {useFetching} from "../../hooks/useFetching";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import {useDocumentTitle} from "usehooks-ts";
 import UserNicknameButtons from "./UserNicknameButtons";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
+import MyBlurredButton from "../../components/UI/buttons/MyBlurredButton";
+import ImageSelectorModal from "../../components/images/ImageSelectorModal";
+import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
+import {UserContext} from "../../components/context";
 
 function UserPage() {
 
     const params = useParams()
+    const {setUserImage} = useContext(UserContext)
 
     const [user, setUser] = useState({
         communities: '',
         friends: '',
         friendshipType: '',
-        image: '',
         name: '',
         nickname: '',
         nicknameColor: '',
         surname: '',
+        images: [],
         tags: []
     })
     useDocumentTitle(user.nickname)
 
+    const isCurrentUser = useIsCurrentUser(user.nickname)
+
+    const [isImageModal, setIsImageModal] = useState(false)
+
     const [fetchUser, isUserLoading, userError] = useFetching(async () => {
         const data = await UserService.userInfo(params.nickname)
-        data.image = getUserImage(data.image)
         setUser(data)
         console.log(data)
     })
@@ -57,7 +65,30 @@ function UserPage() {
                     <OverImageDiv className={style.overImage} style={{color: user.nicknameColor}} sizeByLength={true}>
                         {user.nickname}
                     </OverImageDiv>
-                    <img src={user.image} className="bigUserImage"/>
+                    <img src={getUserImageByArray(user.images)} className="bigUserImage" alt=""/>
+                    <div className={style.seeOtherImages}>
+                        <MyBlurredButton
+                            className={style.seeOtherImagesBtn}
+                            onClick={() => setIsImageModal(true)}
+                        >
+                            see more...
+                        </MyBlurredButton>
+                        {
+                            isImageModal ?
+                                <ImageSelectorModal
+                                    visible={isImageModal}
+                                    setVisible={setIsImageModal}
+                                    format="user"
+                                    isDeletePermission={isCurrentUser}
+                                    array={user.images}
+                                    setArray={newArray => {
+                                        setUser(prev => ({...prev, images: newArray}))
+                                        setUserImage(getUserImageByArray(newArray))
+                                    }}
+                                />
+                                : <></>
+                        }
+                    </div>
                 </div>
 
                 <div className={style.userInfoDiv}>
@@ -107,8 +138,6 @@ function UserPage() {
 
             </OutlineDiv>
         </div>
-
-
     );
 }
 
