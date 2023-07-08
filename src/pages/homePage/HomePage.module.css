@@ -1,10 +1,10 @@
 .main {
     display: flex;
+    gap: 22px;
 }
 
 .postList {
     flex: 1;
-    margin-right: 22px;
 }
 .createCommunityLinkDiv {
     display: flex;
@@ -27,6 +27,13 @@
     width: 137px;
     display: flex;
 }
+
+@media (max-width: 970px) {
+    .cards {
+        display: none;
+    }
+}
+
 .cardItem {
     font-size: 11px;
     font-weight: bold;

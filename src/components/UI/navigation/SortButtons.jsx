@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './SortButtons.module.css';
-import MySortButton from "../buttons/MySortButton";
+import MySortButton from "./MySortButton";
 
 function SortButtons({buttons, activeBtn, setActiveBtn}) {
 
@@ -11,7 +11,6 @@ function SortButtons({buttons, activeBtn, setActiveBtn}) {
                     <MySortButton
                         isActive={activeBtn === index}
                         onClick={() => setActiveBtn(index)}
-                        key={index}
                     >
                         {btn}
                     </MySortButton>
