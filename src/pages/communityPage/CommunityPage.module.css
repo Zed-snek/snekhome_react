@@ -106,3 +106,53 @@
     margin-right: 10px;
     border-radius: 12px;
 }
+
+
+.page {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.content {
+    max-width: 968px;
+    flex: 1;
+}
+
+.additionalInfoBlock {
+    width: 220px;
+}
+
+@media (max-width: 973px) {
+    .additionalInfoBlock {
+        display: none;
+    }
+}
+
+.newPostAndSortBanner {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px 15px 5px 15px !important;
+}
+
+.newPostDiv {
+    flex: 1;
+}
+
+.newPostTextArea {
+    border-width: 2px;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.newPostTextArea:hover {
+    border-color: #2c57a5;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.sortButtons {
+    display: flex;
+    padding-bottom: 6px;
+}
+

@@ -1,28 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
 import CommunityService from "../../API/CommunityService";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import style from "./CommunityPage.module.css";
-import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
-import InfoDiv from "../../components/UI/blocks/InfoDiv";
 import anarchyImage from "../../images/communityTypes/anarchy.png";
 import corporateImage from "../../images/communityTypes/corporate.png";
 import demImage from "../../images/communityTypes/democracy.png";
 import newsImage from "../../images/communityTypes/news.png";
-import {getCommunityImageByArray, getUserImage} from "../../functions/linkFunctions";
-import {formatCommunityCreationDate} from "../../functions/stringFunctions";
-import MyOutlineButton from "../../components/UI/buttons/MyOutlineButton";
-import UserInfo from "../../components/post/userInfo";
-import MyPulseLoader from "../../components/UI/loaders/MyPulseLoader";
+import {getCommunityImageByArray} from "../../functions/linkFunctions";
 import MessageModal from "../../components/UI/modal/MessageModal";
-import settingIco from "../../images/icons/settingIco.svg";
-import MyTransparentButton from "../../components/UI/buttons/MyTransparentButton";
 import {useDocumentTitle} from "usehooks-ts";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 import ClosedCommunityPage from "./ClosedCommunityPage";
 import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
-import ImageSelectorModal from "../../components/images/ImageSelectorModal";
+import CommunityBanner from "./CommunityBanner";
+import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
+import MyTextArea from "../../components/UI/inputs/MyTextArea";
+import SortOutlineButtons from "../../components/UI/navigation/SortOutlineButtons";
 
 function CommunityPage() {
 
@@ -32,7 +27,8 @@ function CommunityPage() {
 
     const [data, setData] = useState()
     const isCurrentUserCreator = useIsCurrentUser(data ? data.ownerNickname : '')
-    const [isImageModal, setIsImageModal] = useState(false)
+
+    const [activeSortBtn, setActiveSortBtn] = useState(0)
 
     const communityTypes = [
         {type: "ANARCHY", image: anarchyImage, color: '#ff1177'},
@@ -57,34 +53,13 @@ function CommunityPage() {
     const [error, setError] = useState("")
     const [isModalError, setModalError] = useState(false)
 
-    const [fetchMembership, isMembershipLoading, membershipError] = useFetching(async () => {
-        let n
-        if (data.member) {
-            await CommunityService.leaveCommunity(data.community.groupname)
-            n = -1
-        }
-        else {
-            await CommunityService.joinCommunity(data.community.groupname)
-            n = 1
-        }
-        setData(prev => ({...prev, member: !prev.member, members: prev.members + n}))
-    })
-
-    function handleJoinLeaveBtn() {
-        fetchMembership()
-    }
-
-    useEffect(() => {
-        if (membershipError)
-            setError(membershipError)
-    }, [membershipError])
 
     useEffect(() => {
         if (error)
             setModalError(true)
     }, [error])
 
-    function getNicknameColor() {
+    function getGroupnameColor() {
         return communityTypes.find(type => type.type === data.community.type).color
     }
     function getTypeImage() {
@@ -98,110 +73,65 @@ function CommunityPage() {
                     image={getCommunityImageByArray(data.community.images)}
                     groupname={data.community.groupname}
                     name={data.community.name}
-                    nameColor={getNicknameColor()}
+                    nameColor={getGroupnameColor()}
                     typeImage={getTypeImage()}
                 />
             );
         else
             return (
         <div>
-            <OutlineDiv>
-                <InfoDiv className={style.bannerDiv}>
-
-                    <div className={style.leftDiv}>
-                        <div className={style.imageDateDiv}>
-                            <div className={style.imgDiv}>
-                                <img
-                                    src={getCommunityImageByArray(data.community.images)}
-                                    onClick={data.community.images.length === 0 ? () => {} : () => setIsImageModal(true)}
-                                    alt=""
-                                />
-                                <ImageSelectorModal
-                                    visible={isImageModal}
-                                    setVisible={setIsImageModal}
-                                    format="community"
-                                    isDeletePermission={data.currentUserRole && (data.currentUserRole.editDescription || data.currentUserRole.creator)}
-                                    array={data.community.images}
-                                    setArray={newArray => setData(prev => ({...prev, community: {...prev.community, images: newArray}}))}
-                                />
-                            </div>
-                            <div className={style.groupname}>
-                                @{data.community.groupname}
-                            </div>
-                            <div className={style.date}>
-                                created {formatCommunityCreationDate(data.community.creation)}
-                            </div>
-                        </div>
-
-                        <div>
-                            <div className={style.titleDiv}>
-                                <span style={{color: getNicknameColor()}}>
-                                    {data.community.name}
-                                </span>
-                                <img
-                                    src={getTypeImage()}
-                                    className={style.typeIcon}
-                                    alt=""
-                                />
-                            </div>
-                            <div className={style.descriptionDiv}>
-                                {data.community.description}
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div className={style.rightDiv}>
-
-                        <div className={style.owner}>
-                            <UserInfo
-                                image={getUserImage(data.ownerImage)}
-                                nickname={data.ownerNickname}
-                                flair={data.community.roles.filter(role => role.creator).map(r => (
-                                    {title: r.title, textColor: r.textColor, color: r.bannerColor}
-                                    ))[0]}
-                            />
-
-                        </div>
-
-                        <Link to={'/members/' + params.groupname} className={style.members}>
-                            members ({data.members})
-                        </Link>
-
-
-                        <div className={style.buttonsDiv}>
-                            {
-                                data.currentUserRole && (data.currentUserRole.editDescription || data.currentUserRole.creator || data.currentUserRole.editId)
-                                    ?
-                                    <MyTransparentButton
-                                        className={style.settingsBtn}
-                                        tooltip="Settings Page"
-                                        onClick={() => navigate('/community_settings/' + data.community.groupname)}>
-                                        <img src={settingIco} alt="settings"/>
-                                    </MyTransparentButton>
-                                    : <></>
-                            }
-                            <MyOutlineButton
-                                disabled={data.banned}
-                                className={style.joinLeaveBtn}
-                                onClick={handleJoinLeaveBtn}
-                            >
-                                { isMembershipLoading
-                                    ? <MyPulseLoader />
-                                    : data.banned
-                                        ? "Banned"
-                                        : data.member ? "Leave" : "Join"
-                                }
-                            </MyOutlineButton>
-                        </div>
-                    </div>
-
-                </InfoDiv>
-            </OutlineDiv>
 
             <MessageModal visible={isModalError} setVisible={setModalError}>
                 {error}
             </MessageModal>
+
+            <CommunityBanner
+                    data={data}
+                    setData={setData}
+                    groupnameColor={getGroupnameColor()}
+                    typeImage={getTypeImage()}
+                    groupname={params.groupname}
+                    setError={setError}
+            />
+
+            <div className={style.page}>
+
+                <div className={style.content}>
+                    <OutlineFilledDiv
+                        className={style.newPostAndSortBanner}
+                    >
+                        <div className={style.newPostDiv}>
+                            <MyTextArea
+                                onClick={() => navigate("/new_post")}
+                                placeholder="New post..."
+                                rows={1}
+                                className={style.newPostTextArea}
+                            >
+                            </MyTextArea>
+                        </div>
+                        <div className={style.sortButtons}>
+                            <SortOutlineButtons
+                                buttons={["Hot", "New"]}
+                                activeBtn={activeSortBtn}
+                                setActiveBtn={setActiveSortBtn}
+                            />
+                        </div>
+                    </OutlineFilledDiv>
+
+
+
+                </div>
+
+                <div className={style.additionalInfoBlock}>
+                    <OutlineFilledDiv>
+                        Anarchy
+                    </OutlineFilledDiv>
+                </div>
+
+            </div>
+
+
+
         </div>
         );
     else /*if content is loading*/

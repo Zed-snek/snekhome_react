@@ -1,7 +1,7 @@
 import React, {useMemo, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import style from "./FriendsListPage.module.css";
-import MySortButton from "../../components/UI/buttons/MySortButton";
+import MySortButton from "../../components/UI/navigation/MySortButton";
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import ListItemBlock from "../../components/UI/blocks/ListItemBlock";
 import {useFetching} from "../../hooks/useFetching";
