@@ -8,7 +8,7 @@ import anarchyImage from "../../images/communityTypes/anarchy.png";
 import corporateImage from "../../images/communityTypes/corporate.png";
 import demImage from "../../images/communityTypes/democracy.png";
 import newsImage from "../../images/communityTypes/news.png";
-import {getCommunityImageByArray} from "../../functions/linkFunctions";
+import {getCommunityImage} from "../../functions/linkFunctions";
 import MessageModal from "../../components/UI/modal/MessageModal";
 import {useDocumentTitle} from "usehooks-ts";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
@@ -18,6 +18,9 @@ import CommunityBanner from "./CommunityBanner";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 import MyTextArea from "../../components/UI/inputs/MyTextArea";
 import SortOutlineButtons from "../../components/UI/navigation/SortOutlineButtons";
+import {toOnlyFirstLetterUpperCase} from "../../functions/stringFunctions";
+import CommunityTypeBlock from "./CommunityTypeBlock";
+import {useFetchCommunity} from "./useFetchCommunity";
 
 function CommunityPage() {
 
@@ -25,8 +28,6 @@ function CommunityPage() {
     const navigate = useNavigate()
     useDocumentTitle(params.groupname.toLowerCase())
 
-    const [data, setData] = useState()
-    const isCurrentUserCreator = useIsCurrentUser(data ? data.ownerNickname : '')
 
     const [activeSortBtn, setActiveSortBtn] = useState(0)
 
@@ -37,16 +38,7 @@ function CommunityPage() {
         {type: "NEWSPAPER", image: newsImage, color: '#ff9900'},
     ]
 
-    const [fetchCommunity, isCommunityLoading, communityError] = useFetching(async () => {
-        let responseData = await CommunityService.getCommunity(params.groupname)
-        setData(responseData)
-        console.log(responseData)
-    })
-
-
-    useEffect(() => {
-        fetchCommunity()
-    }, [])
+    const [data, setData, isCommunityLoading, communityError] = useFetchCommunity(params.groupname)
 
     useNotFoundNavigate(communityError)
 
@@ -59,20 +51,24 @@ function CommunityPage() {
             setModalError(true)
     }, [error])
 
+    function getType() {
+        return data.community ? data.community.type : data.type
+    }
+
     function getGroupnameColor() {
-        return communityTypes.find(type => type.type === data.community.type).color
+        return communityTypes.find(type => type.type === getType()).color
     }
     function getTypeImage() {
-        return communityTypes.find(type => type.type === data.community.type).image
+        return communityTypes.find(type => type.type === getType()).image
     }
 
     if (data)
-        if (!data.member && data.community.closed && !isCurrentUserCreator)
+        if (!data.access)
             return (
                 <ClosedCommunityPage
-                    image={getCommunityImageByArray(data.community.images)}
-                    groupname={data.community.groupname}
-                    name={data.community.name}
+                    image={getCommunityImage(data.image)}
+                    groupname={data.groupname}
+                    name={data.name}
                     nameColor={getGroupnameColor()}
                     typeImage={getTypeImage()}
                 />
@@ -102,7 +98,7 @@ function CommunityPage() {
                     >
                         <div className={style.newPostDiv}>
                             <MyTextArea
-                                onClick={() => navigate("/new_post")}
+                                onClick={() => navigate("/new_post/" + params.groupname)}
                                 placeholder="New post..."
                                 rows={1}
                                 className={style.newPostTextArea}
@@ -118,14 +114,16 @@ function CommunityPage() {
                         </div>
                     </OutlineFilledDiv>
 
-
-
                 </div>
 
                 <div className={style.additionalInfoBlock}>
-                    <OutlineFilledDiv>
-                        Anarchy
-                    </OutlineFilledDiv>
+                    <CommunityTypeBlock
+                        image={getTypeImage()}
+                        title={toOnlyFirstLetterUpperCase(data.community.type)}
+                        color={getGroupnameColor()}
+                        isClosed={data.community.closed}
+                        isAnonymous={data.community.anonAllowed}
+                    />
                 </div>
 
             </div>

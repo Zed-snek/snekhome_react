@@ -39,7 +39,7 @@ function AllRoutes() {
                 </Route>
                 <Route path='community_settings/:groupname' element={<CommunitySettingsPage />}/>
                 <Route path='/settings' element={<SettingsPage />} />
-                <Route path='/new_post' element={<NewPostPage />} />
+                <Route path='/new_post/:groupname' element={<NewPostPage />} />
                 <Route path='/logout' element={<Logout />} />
                 <Route path='/new_community' element={<CreateCommunityPage />} />
             </Route>

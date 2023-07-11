@@ -15,8 +15,6 @@ function ImageSelectorModal({array, setArray, visible, setVisible, isDeletePermi
     const [isDeleteModal, setIsDeleteModal] = useState(false)
 
     function showImage() {
-        if (array.length === 0)
-            setVisible(false)
         if (format === "user")
             return <img src={getUserImage(currentImage)} className={"bigUserImage"}/>
         if (format === "community")

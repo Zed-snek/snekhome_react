@@ -18,26 +18,16 @@ import CommunityDemocracySettingsPage from "./Democracy/CommunityDemocracySettin
 import CommunityRulesSettings from "./Rules/CommunityRulesSettings";
 import {getCommunityImageByArray} from "../../functions/linkFunctions";
 import MembersListPage from "../membersListPage/MembersListPage";
+import {useFetchCommunity} from "../communityPage/useFetchCommunity";
 
 function CommunitySettingsPage() {
 
     useDocumentTitle("Settings")
     const params = useParams()
 
-    const [data, setData] = useState()
-
-
-    const [fetchCommunity, isCommunityLoading, communityError] = useFetching(async () => {
-        let responseData = await CommunityService.getCommunity(params.groupname)
-        setData(responseData)
-        console.log(responseData)
-    })
-    useEffect(() => {
-        fetchCommunity()
-    }, [])
+    const [data, setData, isCommunityLoading, communityError] = useFetchCommunity(params.groupname)
 
     useNotFoundNavigate(communityError)
-
 
     const [isErrorModal, setIsErrorModal] = useState(false)
     const [error, setError] = useState('')

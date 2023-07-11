@@ -1,3 +1,10 @@
 .main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 
+.form {
+    max-width: 968px;
+    width: 100%;
 }
