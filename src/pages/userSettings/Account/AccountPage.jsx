@@ -117,8 +117,7 @@ function AccountPage(props) {
                             <MyFileInput
                                 className={style.fileBtn + " " + myButtonStyle.main}
                                 maxSize={5}
-                                accept="image/png, image/jpeg, image/gif"
-                                setIsShow={setShowError}
+                                setIsShowError={setShowError}
                                 setImage={updateValue}
                             >
                                 <img src={edit} alt="edit" className={style.editBtn}/>

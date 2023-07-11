@@ -23,3 +23,7 @@
     bottom: 13px;
     right: 13px;
 }
+
+.modal > div {
+    width: 450px;
+}

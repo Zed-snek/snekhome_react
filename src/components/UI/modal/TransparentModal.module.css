@@ -4,10 +4,6 @@
     background-image: linear-gradient(280deg, #d0368a70 0%, #708ad470 99%);
 }
 
-.main > div {
-    width: 450px;
-}
-
 .modal {
     border-radius: 8px;
     padding: 10px;

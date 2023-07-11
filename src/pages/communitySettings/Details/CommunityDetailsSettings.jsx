@@ -88,8 +88,7 @@ function CommunityDetailsSettings({groupname, name, description, setError, setIs
                     <MyFileInput
                         className={buttonStyle.button + ' ' + buttonStyle.blue + ' ' + style.fileBtn}
                         maxSize={5}
-                        accept="image/png, image/jpeg, image/gif"
-                        setIsShow={setShowError}
+                        setIsShowError={setShowError}
                         setImage={updateValue}
                     >
                         Change image

@@ -5,6 +5,56 @@
 }
 
 .form {
-    max-width: 968px;
+    max-width: 750px;
     width: 100%;
+}
+
+.textArea {
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.subTitle {
+    margin-top: -5px;
+    color: #939393;
+}
+
+.imagesTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chosenImages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btnDiv {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.fadingMessageDiv {
+    position: relative;
+}
+.fadingMessage {
+    padding: 10px;
+}
+
+.moreImagesBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    width: 75px;
+    border: 2px solid #2c57a5;
+    border-radius: 10px;
 }

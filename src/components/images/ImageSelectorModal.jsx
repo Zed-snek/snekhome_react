@@ -25,6 +25,7 @@ function ImageSelectorModal({array, setArray, visible, setVisible, isDeletePermi
         <TransparentModal
             visible={visible}
             setVisible={setVisible}
+            className={style.modal}
         >
             <div className={style.main}>
                 <div>
