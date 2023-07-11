@@ -2,6 +2,7 @@ import React from 'react';
 import style from "./TransparentModal.module.css";
 import {Modal} from "react-bootstrap";
 import {useClasses} from "../../../hooks/useClasses";
+import MyCloseButton from "../symbolButtons/MyCloseButton";
 
 function TransparentModal({visible, setVisible, children, className}) {
 
@@ -15,9 +16,10 @@ function TransparentModal({visible, setVisible, children, className}) {
             className={classes.join(' ')}
         >
             <div className={style.modal}>
-                <div className={style.cancel} onClick={() => setVisible(false)}>
-                    ✗
-                </div>
+                <MyCloseButton
+                    className={style.cancel}
+                    onClick={() => setVisible(false)}
+                />
                 <div className={style.content}>
                     {children}
                 </div>

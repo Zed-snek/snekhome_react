@@ -16,7 +16,6 @@
 
 .title {
     font-size: 20px;
-    margin-bottom: 10px;
 }
 
 .subTitle {
@@ -24,10 +23,11 @@
     color: #939393;
 }
 
-.imagesTitle {
+.titleDiv {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
+    margin-bottom: 10px;
 }
 
 .chosenImages {
@@ -37,9 +37,11 @@
 }
 
 .btnDiv {
-    margin-top: 20px;
+    margin-top: 10px;
+    gap: 30px;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .fadingMessageDiv {
@@ -53,8 +55,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 75px;
-    width: 75px;
+    height: 45px;
+    width: 45px;
     border: 2px solid #2c57a5;
     border-radius: 10px;
+    padding-bottom: 3px;
+    font-size: 30px;
+}
+.moreImagesBtn:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.moreImagesBtn:active {
+    background-color: rgba(0, 0, 0, 0.4);
 }

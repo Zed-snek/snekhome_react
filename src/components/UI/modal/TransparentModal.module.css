@@ -10,26 +10,11 @@
 }
 
 .cancel {
-    user-select: none;
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    line-height: 0;
-    padding: 10px 4px 13px 4px;
-    font-size: 20px;
-    background-color: rgba(255, 255, 255, 0.12);
-    border-radius: 8px;
-}
-.cancel:hover {
-    cursor: pointer;
-    background-color: #708ad450;
-}
-.cancel:active {
-    background-image: linear-gradient(280deg, #d0368a70 0%, #708ad470 99%);
+    right: 15px;
+    top: 15px;
 }
 
 .content {
     display: flex;
     justify-content: center;
-    margin: 15px 0;
 }

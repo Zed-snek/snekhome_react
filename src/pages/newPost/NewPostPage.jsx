@@ -10,7 +10,10 @@ import MyButton from "../../components/UI/buttons/MyButton";
 import ImageToOpen from "../../components/images/ImageToOpen";
 import MyFileInput from "../../components/UI/inputs/MyFileInput";
 import FadingMessage from "../../components/UI/message/FadingMessage";
-import input from "mdb-ui-kit/src/js/free/input";
+import MyMessage from "../../components/UI/message/MyMessage";
+import {useFetching} from "../../hooks/useFetching";
+import PostService from "../../API/PostService";
+import MyCheckbox from "../../components/UI/inputs/MyCheckbox";
 
 function NewPostPage() {
 
@@ -26,8 +29,10 @@ function NewPostPage() {
 
     const [text, setText] = useState('')
     const [images, setImages] = useState([])
+    const [isAnon, setIsAnon] = useState(false)
 
     const [showImgError, setShowImgError] = useState(false)
+    const [error, setError] = useState('')
 
     const srcImages = useMemo(() => {
         let arr = []
@@ -37,17 +42,45 @@ function NewPostPage() {
         return arr
     }, [images])
 
-    if (isCommunityLoading)
-        return <MySyncLoader />
+    function removeFile(id) {
+        setImages(prev => prev.filter((file, index) => id !== index))
+    }
+
+    const [fetchPost, isPostLoading, postError] = useFetching(async () => {
+        const responseData = await PostService.newPost(images, text, params.groupname, isAnon)
+        navigate("/post/" + responseData.message)
+    })
+    useEffect(() => {
+        if (postError)
+            setError(postError)
+    }, [postError])
+
+    function newPost() {
+        if (images.length === 0 && text === '')
+            setError("Post can't be empty")
+        else
+            fetchPost()
+    }
+
+    if (data)
     return (
         <div className={style.main}>
             <h3>
                 New post in community <i>{params.groupname}</i>
             </h3>
 
+            <MyMessage>
+                {error}
+            </MyMessage>
+
             <OutlineFilledDiv className={style.form}>
-                <div className={style.title}>
-                    Text:
+                <div className={style.titleDiv}>
+                    <div className={style.title}>
+                        Text:
+                    </div>
+                    <div className={style.subTitle}>
+                        {text.length}/2048
+                    </div>
                 </div>
                 <MyTextArea
                     className={style.textArea}
@@ -55,9 +88,10 @@ function NewPostPage() {
                     placeholder="Type some text... (optional)"
                     value={text}
                     rows={4}
+                    maxLength={2048}
                 />
 
-                <div className={style.imagesTitle}>
+                <div className={style.titleDiv}>
                     <div className={style.title}>
                         Images:
                     </div>
@@ -98,6 +132,7 @@ function NewPostPage() {
                                 maxWidth={130}
                                 maxHeight={130}
                                 image={element}
+                                toRemove={() => removeFile(index)}
                             />
                         )
                     }
@@ -105,7 +140,17 @@ function NewPostPage() {
                 </div>
 
                 <div className={style.btnDiv}>
-                    <MyButton>
+                    <MySyncLoader loading={isPostLoading}/>
+
+                    { data.community.anonAllowed ?
+                        <MyCheckbox
+                            label="is post anonymous"
+                            onChange={event => setIsAnon(event.target.checked)}
+                        />
+                        : <></>
+                    }
+
+                    <MyButton onClick={newPost}>
                         Submit
                     </MyButton>
                 </div>
@@ -114,6 +159,8 @@ function NewPostPage() {
 
         </div>
     );
+    else
+        return <MySyncLoader />
 }
 
 export default NewPostPage;
