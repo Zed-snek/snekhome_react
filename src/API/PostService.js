@@ -1,4 +1,4 @@
-import {postBodyRequestWithAuth} from "./requestFunctions";
+import {getRequest, postBodyRequestWithAuth} from "./requestFunctions";
 
 export default class PostService {
 
@@ -13,6 +13,10 @@ export default class PostService {
             }
         }
         return await postBodyRequestWithAuth("/post", formData)
+    }
+
+    static async getPostPage(id) {
+        return await getRequest("/post/" + id)
     }
 
 }

@@ -20,6 +20,7 @@ import CommunitySettingsPage from "../../pages/communitySettings/CommunitySettin
 import FriendsListPage from "../../pages/friendsList/FriendsListPage";
 import MembersListPage from "../../pages/membersListPage/MembersListPage";
 import NewPostPage from "../../pages/newPost/NewPostPage";
+import PostPage from "../../pages/postPage/PostPage";
 
 
 function AllRoutes() {
@@ -56,6 +57,7 @@ function AllRoutes() {
 
 
             {/*Public*/}
+            <Route path='/p/:id' element={<PostPage />} />
             <Route path='/c/:groupname' element={<CommunityPage />} />
             <Route path='/u/:nickname' element={<UserPage />}/>
             <Route path='/communities/:nickname' element={<CommunityListPage />} />

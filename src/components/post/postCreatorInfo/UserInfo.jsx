@@ -1,6 +1,6 @@
 import React from 'react';
-import style from "./userInfo.module.css";
-import CommunityRoleFlair from "../community/CommunityRoleFlair";
+import style from "./PostCreatorInfo.module.css";
+import CommunityRoleFlair from "../../community/CommunityRoleFlair";
 import {useNavigate} from "react-router-dom";
 
 function UserInfo({image, nickname, flair}) {

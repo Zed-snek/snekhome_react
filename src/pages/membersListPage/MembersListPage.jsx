@@ -64,15 +64,7 @@ function MembersListPage({permissions, communityType, setError, setIsLoader}) {
 
     function isToShow(user) {
         let type = buttons[activeBtn]
-        if (type === "All")
-            return true
-        if (user.communityRole) {
-            if (type === "With flair")
-                return true
-            if (type === user.communityRole.title)
-                return true
-        }
-        return false
+        return type === "All" || (user.communityRole && (type === "With flair" || type === user.communityRole.title))
     }
 
     const searchedAndSorted = useMemo(() => {
@@ -105,9 +97,9 @@ function MembersListPage({permissions, communityType, setError, setIsLoader}) {
     }
 
     async function banUser(nickname) {
-        let responseData = await CommunityService.banUser(params.groupname, nickname)
+        const responseData = await CommunityService.banUser(params.groupname, nickname)
             .catch(exception => setError(exception))
-        if (responseData.code === 200)
+        if (responseData.status === 200)
             setData(prev => ({...prev, users: prev.users.filter(u => u.nickname !== nickname)}))
     }
 
