@@ -1,0 +1,12 @@
+
+
+
+.ratingValueNegative, .ratingValueNeutral, .ratingValuePositive {
+    font-weight: bold;
+}
+.ratingValuePositive {
+    color: #85B50E;
+}
+.ratingValueNegative {
+    color: #e9105e;
+}

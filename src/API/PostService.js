@@ -1,4 +1,4 @@
-import {getRequest, postBodyRequestWithAuth} from "./requestFunctions";
+import {getRequest, postBodyRequestWithAuth, postParamsRequestWithAuth} from "./requestFunctions";
 
 export default class PostService {
 
@@ -17,6 +17,14 @@ export default class PostService {
 
     static async getPostPage(id) {
         return await getRequest("/post/" + id)
+    }
+
+    static async changePostRating(id, newStatus) { //status = UPVOTE/DOWNVOTE/NULL
+        return await postParamsRequestWithAuth(`/post/${id}/rate/${newStatus}`)
+    }
+
+    static async changeCommentaryRating(id, newStatus) {
+        return await postParamsRequestWithAuth(`/commentary/${id}/rate/${newStatus}`)
     }
 
 }
