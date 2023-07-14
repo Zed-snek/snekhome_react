@@ -1,8 +1,6 @@
-
-
-
 .ratingValueNegative, .ratingValueNeutral, .ratingValuePositive {
     font-weight: bold;
+    user-select: none;
 }
 .ratingValuePositive {
     color: #85B50E;
@@ -10,3 +8,47 @@
 .ratingValueNegative {
     color: #e9105e;
 }
+
+
+/*Post rating: */
+.postRatingValue {
+    line-height: 15px;
+}
+.postRatingMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.postRatingBtn {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    margin-bottom: 3px;
+}
+
+.postSvgDiv {
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 4px 5px 5px;
+}
+.postSvgDivActive {
+    background-image: linear-gradient(280deg, #228dff90 0%, #e9105e90 99%);
+}
+.postRatingBtn:hover .postSvgDiv{
+    background-image: linear-gradient(280deg, #228dff 0%, #e9105e 99%);
+}
+.postRatingBtn:active .postSvgDiv{
+    background-image: linear-gradient(280deg, #228dff70 0%, #e9105e70 99%);
+}
+
+.postBtnTitle {
+    user-select: none;
+}
+
+
+/*Commentary rating: */

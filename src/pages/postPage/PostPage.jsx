@@ -20,6 +20,10 @@ function PostPage() {
     })
     useNotFoundNavigate(postError)
 
+    useEffect(() => {
+        console.log(data)
+    }, [data])
+
 
     useEffect(() => {
         if (params.id > 0) {
@@ -34,9 +38,11 @@ function PostPage() {
     return (
         <div>
             <PostRating
-                rating={data.rating - 2}
+                rating={data.rating}
+                addRating={value => setData(prev => ({...prev, rating: prev.rating + value}))}
                 rateStatus={data.ratedType}
-                setData={setData}
+                setRatingStatus={value => setData(prev => ({...prev, ratedType: value}))}
+                idPost={params.id}
             />
         </div>
     );
