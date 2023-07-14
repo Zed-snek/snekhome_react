@@ -30,7 +30,7 @@ function ImageSelectorModal({array, setArray, visible, setVisible, isDeletePermi
             <div className={style.main}>
                 <div>
                     <MyTransparentButton onClick={turnLeft} className={style.arrowBtn}>
-                        <ArrowLeft width={16} height={32} color="#E3E3E3"/>
+                        <ArrowLeft />
                     </MyTransparentButton>
                 </div>
                 <div className={style.imageDiv}>
@@ -55,7 +55,7 @@ function ImageSelectorModal({array, setArray, visible, setVisible, isDeletePermi
                 </div>
                 <div>
                     <MyTransparentButton onClick={turnRight} className={style.arrowBtn}>
-                        <ArrowRight width={16} height={32} color="#E3E3E3"/>
+                        <ArrowRight />
                     </MyTransparentButton>
                 </div>
             </div>

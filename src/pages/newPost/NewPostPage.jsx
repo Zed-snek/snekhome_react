@@ -54,6 +54,9 @@ function NewPostPage() {
         if (postError)
             setError(postError)
     }, [postError])
+    useEffect(() => {
+        console.log("isAnon: ", isAnon)
+    }, [isAnon])
 
     function newPost() {
         if (images.length === 0 && text === '')

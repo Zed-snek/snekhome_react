@@ -57,7 +57,7 @@ function AllRoutes() {
 
 
             {/*Public*/}
-            <Route path='/p/:id' element={<PostPage />} />
+            <Route path='/post/:id' element={<PostPage />} />
             <Route path='/c/:groupname' element={<CommunityPage />} />
             <Route path='/u/:nickname' element={<UserPage />}/>
             <Route path='/communities/:nickname' element={<CommunityListPage />} />
