@@ -9,7 +9,7 @@ function MySortButton({children, className, isActive, ...props}) {
         classes.push(style.btn_current)
 
     return (
-        <div className={classes.join(' ')} {...props}>
+        <div className={classes} {...props}>
             {children}
         </div>
     );

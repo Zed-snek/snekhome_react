@@ -8,7 +8,7 @@ function MyTextArea({className, onChange, children, ...props}) {
 
     return (
         <textarea
-            className={classes.join(' ')}
+            className={classes}
             {...props}
             onChange={event => onChange(event)}
         >

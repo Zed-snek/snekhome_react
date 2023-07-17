@@ -5,11 +5,10 @@ import {useClasses} from "../../../hooks/useClasses";
 
 function MyTransparentButton({children, className, tooltip, ...props}) {
 
-    const classes = useClasses(style.main, className)
-    classes.push(tooltipStyle.main)
+    const classes = useClasses(style.main, className) + ' ' + tooltipStyle.main
 
     return (
-        <button className={classes.join(' ')} {...props}>
+        <button className={classes} {...props}>
             {children}
             {tooltip
                 ? <div className={tooltipStyle.tooltip}>{tooltip}</div>

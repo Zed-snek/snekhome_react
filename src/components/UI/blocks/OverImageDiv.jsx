@@ -5,17 +5,17 @@ import {useClasses} from "../../../hooks/useClasses";
 /*to work properly, parent's div must have position: relative; property*/
 function OverImageDiv({children, className, sizeByLength, ...props}) {
 
-    const classes = useClasses(style.main, className)
+    let classes = useClasses(style.main, className)
 
     if (sizeByLength) {
         if (children.length > 14)
-            classes.push(style.px16)
+            classes += " " + style.px16
         else
-            classes.push(style.px20)
+            classes += " " + style.px20
     }
 
     return (
-        <div className={classes.join(' ')} {...props}>
+        <div className={classes} {...props}>
             {children}
         </div>
     );

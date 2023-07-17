@@ -8,6 +8,7 @@ import PostRating from "../../components/post/postCommentaryRating/PostRating";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import PostImagesSelector from "../../components/images/PostImagesSelector";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
+import {formatDate} from "../../functions/timeDateFunctions";
 
 function PostPage() {
     const params = useParams()
@@ -34,7 +35,7 @@ function PostPage() {
     if (data)
     return (
         <div className={style.main}>
-            <div>
+            <div className={style.ratingDiv}>
                 <PostRating
                     rating={data.rating}
                     addRating={value => setData(prev => ({...prev, rating: prev.rating + value}))}
@@ -44,18 +45,50 @@ function PostPage() {
                 />
             </div>
             <div className={style.content}>
+                <OutlineFilledDiv className={style.imgAndTextDiv}>
+                    {
+                        data.post.images.length > 0
+                        ? <PostImagesSelector
+                                images={data.post.images}
+                                isImageForm={true}
+                                width={686}
+                                height={450}
+                                className={style.postImageSelector}
+                                imgClassName={style.postImg}
+                            />
+                        : <></>
+                    }
 
-                <OutlineFilledDiv>
-                    <PostImagesSelector
-                        images={data.post.images}
-                        isImageForm={true}
-                        width={686}
-                        height={450}
-                        className={style.postImageSelector}
-                        imgClassName={style.postImg}
-                    />
+                    <div className={style.postText}>
+                        {data.post.text}
+                    </div>
                 </OutlineFilledDiv>
 
+            </div>
+
+            <div>
+                <div className={style.date}>
+                    <div style={{fontSize: "14px"}}>
+                        created
+                    </div>
+                    <div>
+                        {formatDate(data.post.date)}
+                    </div>
+                </div>
+
+                <div className={style.infoBannersDiv}>
+                    <OutlineFilledDiv
+                        className={style.infoBanner}
+                    >
+                        BLABLABLA
+                    </OutlineFilledDiv>
+
+                    <OutlineFilledDiv
+                        className={style.infoBanner}
+                    >
+                        BLABLABLA
+                    </OutlineFilledDiv>
+                </div>
             </div>
 
         </div>

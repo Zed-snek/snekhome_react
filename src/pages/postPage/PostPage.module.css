@@ -1,10 +1,38 @@
 .main {
     display: flex;
     justify-content: center;
+    gap: 15px;
 }
 
 .content {
     width: 716px;
+}
+
+@media (max-width: 993px) {
+    .main {
+        flex-direction: column;
+    }
+    .ratingDiv > div {
+        flex-direction: row;
+        gap: 6px;
+    }
+    .ratingDiv > div > div {
+        gap: 6px;
+        display: flex;
+    }
+    .content {
+        width: 100%;
+    }
+}
+
+.imgAndTextDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.postText {
+    font-size: 15px;
 }
 
 .postImageSelector {
@@ -16,3 +44,21 @@
     border-radius: 10px;
 }
 
+
+.date {
+    line-height: 20px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    justify-content: right;
+}
+
+.infoBannersDiv {
+    margin-top: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.infoBanner {
+    width: 220px;
+}

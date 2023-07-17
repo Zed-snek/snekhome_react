@@ -8,7 +8,7 @@ function MyTextLink({children, className, ...props}) {
     const classes = useClasses(style.link, className)
 
     return (
-        <Link className={classes.join(' ')} {...props}>
+        <Link className={classes} {...props}>
             {children}
         </Link>
     );

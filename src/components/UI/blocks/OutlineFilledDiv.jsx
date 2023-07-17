@@ -8,7 +8,7 @@ function OutlineFilledDiv({className, children, ...props}) {
 
     return (
         <div
-            className={classes.join(' ')}
+            className={classes}
             {...props}
         >
             {children}

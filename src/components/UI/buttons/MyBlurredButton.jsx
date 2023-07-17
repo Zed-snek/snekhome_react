@@ -8,7 +8,7 @@ function MyBlurredButton({className, children, ...props}) {
 
     return (
         <button
-            className={classes.join(' ')}
+            className={classes}
             {...props}
         >
             {children}

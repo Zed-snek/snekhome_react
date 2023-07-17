@@ -9,7 +9,7 @@ function MyGreyInput({className, onChange, ...props}) { //without useForm()
 
     return (
         <MyInput
-            className={classes.join(' ')}
+            className={classes}
             onChange={event => onChange(event)}
             {...props}
         />

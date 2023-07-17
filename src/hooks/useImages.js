@@ -1,9 +1,9 @@
 import {useState} from "react";
 import FileService from "../API/FileService";
 
-export function useImages(array, setArray) { //last image in array is newest
+export function useImages(array, setArray, isFromFirst) { //last image in array is newest
     const last = array.length - 1
-    const [currentIndex, setCurrentIndex] = useState(last)
+    const [currentIndex, setCurrentIndex] = useState(isFromFirst ? 0 : last)
 
     const currentImage = (last === -1 ? '' : array[currentIndex].name)
 

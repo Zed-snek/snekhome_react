@@ -7,7 +7,7 @@ function MyCloseButton({className, ...props}) {
 
     return (
         <div
-            className={classes.join(' ')}
+            className={classes}
             {...props}
         >
             ✗

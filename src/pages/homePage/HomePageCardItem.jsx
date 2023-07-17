@@ -8,7 +8,7 @@ function HomePageCardItem({title, image, isHover, className, ...props}) {
     const classes = useClasses(style.cardItem, className)
 
     return (
-        <div className={classes.join(' ')} {...props}>
+        <div className={classes} {...props}>
             <OverImageDiv className={style.cardItemOverImageDiv}>
                 @{title}
             </OverImageDiv>

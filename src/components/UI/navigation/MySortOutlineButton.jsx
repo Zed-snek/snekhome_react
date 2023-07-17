@@ -4,12 +4,12 @@ import {useClasses} from "../../../hooks/useClasses";
 
 function MySortOutlineButton({children, className, isActive, ...props}) {
 
-    const classes = useClasses(style.outlineBtn, className)
+    let classes = useClasses(style.outlineBtn, className)
     if (isActive)
-        classes.push(style.outlineBtn_current)
+        classes += ' ' + style.outlineBtn_current
 
     return (
-        <div className={classes.join(' ')} {...props}>
+        <div className={classes} {...props}>
             {children}
         </div>
     );

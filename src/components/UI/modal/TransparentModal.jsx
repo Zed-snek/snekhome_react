@@ -13,7 +13,7 @@ function TransparentModal({visible, setVisible, children, className}) {
             show={visible}
             onHide={() => setVisible(false)}
             centered
-            className={classes.join(' ')}
+            className={classes}
         >
             <div className={style.modal}>
                 <MyCloseButton

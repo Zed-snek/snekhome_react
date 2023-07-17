@@ -9,7 +9,7 @@ function OverContentDiv({children, className, title, isShow, setIsShow, ...props
     return (
         <>
             { isShow ?
-                <div className={classes.join(' ')} {...props}>
+                <div className={classes} {...props}>
 
                     <div className={style.header}>
                         <div className={style.title}>

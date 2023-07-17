@@ -10,9 +10,9 @@ import {useClasses} from "../../hooks/useClasses";
 
 function PostImagesSelector({images, isImageForm, width, height, className, imgClassName}) {
 
-    const [turnLeft, turnRight, currentImage] = useImages(images)
+    const [turnLeft, turnRight, currentImage] = useImages(images, null, true)
 
-    const [classes, joined] = useClasses(style.main, className)
+    const classes = useClasses(style.main, className)
 
     function getImageStyle() {
         if (isImageForm)
@@ -21,7 +21,7 @@ function PostImagesSelector({images, isImageForm, width, height, className, imgC
     }
 
     return (
-        <div className={joined}>
+        <div className={classes}>
             <div>
                 <img
                     src={getImage("", currentImage)} alt=""

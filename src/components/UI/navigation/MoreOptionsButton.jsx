@@ -8,7 +8,7 @@ function MoreOptionsButton({options, className}) {
 
     return (
         <div className={style.mainDiv}>
-            <div className={classes.join(' ')}>
+            <div className={classes}>
                 <span className={style.dots}>···</span>
                 <div className={style.options}>
                     {

@@ -24,7 +24,7 @@ function FadingMessage({className, children, isShow, setIsShow, ...props}) {
         <>
             { isShow
                 ? <div
-                    className={classes.join(' ')}
+                    className={classes}
                     style={{opacity: transparent}}
                     {...props}
                 >

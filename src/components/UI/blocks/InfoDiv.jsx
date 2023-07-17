@@ -7,7 +7,7 @@ function InfoDiv({children, className, ...props}) {
     const classes = useClasses(style.main, className)
 
     return (
-        <div className={classes.join(' ')} {...props}>
+        <div className={classes} {...props}>
             {children}
         </div>
     );
