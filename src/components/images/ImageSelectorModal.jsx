@@ -16,9 +16,9 @@ function ImageSelectorModal({array, setArray, visible, setVisible, isDeletePermi
 
     function showImage() {
         if (format === "user")
-            return <img src={getUserImage(currentImage)} className={"bigUserImage"}/>
+            return <img src={getUserImage(currentImage)} className={"bigUserImage"} alt=""/>
         if (format === "community")
-            return <img src={getCommunityImage(currentImage)} className="bigUserImage"/>
+            return <img src={getCommunityImage(currentImage)} className="bigUserImage" alt=""/>
     }
 
     return (

@@ -20,7 +20,7 @@
     height: 174px;
     min-width: 480px;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 

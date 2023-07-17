@@ -6,6 +6,8 @@ import PostService from "../../API/PostService";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 import PostRating from "../../components/post/postCommentaryRating/PostRating";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
+import PostImagesSelector from "../../components/images/PostImagesSelector";
+import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 
 function PostPage() {
     const params = useParams()
@@ -19,12 +21,7 @@ function PostPage() {
         setData(responseData)
     })
     useNotFoundNavigate(postError)
-
-    useEffect(() => {
-        console.log(data)
-    }, [data])
-
-
+    
     useEffect(() => {
         if (params.id > 0) {
             fetchPost()
@@ -36,14 +33,31 @@ function PostPage() {
 
     if (data)
     return (
-        <div>
-            <PostRating
-                rating={data.rating}
-                addRating={value => setData(prev => ({...prev, rating: prev.rating + value}))}
-                rateStatus={data.ratedType}
-                setRatingStatus={value => setData(prev => ({...prev, ratedType: value}))}
-                idPost={params.id}
-            />
+        <div className={style.main}>
+            <div>
+                <PostRating
+                    rating={data.rating}
+                    addRating={value => setData(prev => ({...prev, rating: prev.rating + value}))}
+                    rateStatus={data.ratedType}
+                    setRatingStatus={value => setData(prev => ({...prev, ratedType: value}))}
+                    idPost={params.id}
+                />
+            </div>
+            <div className={style.content}>
+
+                <OutlineFilledDiv>
+                    <PostImagesSelector
+                        images={data.post.images}
+                        isImageForm={true}
+                        width={686}
+                        height={450}
+                        className={style.postImageSelector}
+                        imgClassName={style.postImg}
+                    />
+                </OutlineFilledDiv>
+
+            </div>
+
         </div>
     );
     else

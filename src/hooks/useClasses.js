@@ -4,6 +4,5 @@ export function useClasses(mainClass, addClass) {
     if (addClass)
         classes.push(addClass)
 
-
-    return classes
+    return [classes.join(' ')]
 }

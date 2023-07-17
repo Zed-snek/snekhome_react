@@ -5,13 +5,13 @@ export function getImageApiLink(name) {
     return process.env.REACT_APP_API_LINK + '/image/' + name
 }
 
-function getImage(defaultImage, image) {
+export function getImage(defaultImage, image) {
     if (!image)
         return defaultImage
     else
         return getImageApiLink(image)
 }
-function getImageByArray(defaultImage, array) {
+export function getImageByArray(defaultImage, array) {
     if (array.length === 0)
         return defaultImage
     else

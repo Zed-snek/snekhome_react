@@ -1,0 +1,18 @@
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    width: 716px;
+}
+
+.postImageSelector {
+    min-height: 450px;
+}
+
+
+.postImg {
+    border-radius: 10px;
+}
+

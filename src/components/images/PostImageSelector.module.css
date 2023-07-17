@@ -1,0 +1,17 @@
+.main {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnDiv {
+    position: absolute;
+}
+
+.leftBtn {
+    left: 0;
+}
+.rightBtn {
+    right: 0;
+}
