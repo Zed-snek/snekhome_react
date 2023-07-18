@@ -66,31 +66,46 @@ function PostPage() {
 
             </div>
 
-            <div>
+            <div className={style.infoBannersDiv}>
                 <div className={style.date}>
-                    <div style={{fontSize: "14px"}}>
-                        created
+                    created {formatDate(data.post.date)}
+                </div>
+
+                {data.post.isAnonymous ? <></>
+                    :
+                <OutlineFilledDiv
+                    className={style.infoBanner}
+                >
+                    <div className={style.infoBannerName}>
+                        {data.userName + ' ' + data.userSurname}
                     </div>
                     <div>
-                        {formatDate(data.post.date)}
+
                     </div>
-                </div>
+                    <div>
 
-                <div className={style.infoBannersDiv}>
-                    <OutlineFilledDiv
-                        className={style.infoBanner}
-                    >
-                        BLABLABLA
-                    </OutlineFilledDiv>
+                    </div>
+                </OutlineFilledDiv>
+                }
 
-                    <OutlineFilledDiv
-                        className={style.infoBanner}
-                    >
-                        BLABLABLA
-                    </OutlineFilledDiv>
-                </div>
+                <OutlineFilledDiv
+                    className={style.infoBanner}
+                >
+                    <div className={style.infoBannerName}>
+                        {data.groupTitle}{data.groupTitle}{data.groupTitle}
+                    </div>
+                    <div>
+
+                    </div>
+                    <div>
+
+                    </div>
+                    <div>
+
+                    </div>
+                </OutlineFilledDiv>
+
             </div>
-
         </div>
     );
     else
