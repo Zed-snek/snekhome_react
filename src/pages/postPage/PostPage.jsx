@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import style from "./PostPage.module.css";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
 import PostService from "../../API/PostService";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
@@ -8,7 +8,8 @@ import PostRating from "../../components/post/postCommentaryRating/PostRating";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import PostImagesSelector from "../../components/images/PostImagesSelector";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
-import {formatDate} from "../../functions/timeDateFunctions";
+import {formatDate, formatLocalDate} from "../../functions/timeDateFunctions";
+import {getCommunityImage, getUserImage} from "../../functions/linkFunctions";
 
 function PostPage() {
     const params = useParams()
@@ -64,14 +65,14 @@ function PostPage() {
                     </div>
                 </OutlineFilledDiv>
 
-            </div>
-
-            <div className={style.infoBannersDiv}>
                 <div className={style.date}>
                     created {formatDate(data.post.date)}
                 </div>
 
-                {data.post.isAnonymous ? <></>
+            </div>
+
+            <div className={style.infoBannersDiv}>
+                {data.post.anonymous ? <></>
                     :
                 <OutlineFilledDiv
                     className={style.infoBanner}
@@ -79,12 +80,12 @@ function PostPage() {
                     <div className={style.infoBannerName}>
                         {data.userName + ' ' + data.userSurname}
                     </div>
-                    <div>
-
-                    </div>
-                    <div>
-
-                    </div>
+                    <Link to={"/u/" + data.userNickname}>
+                        <img src={getUserImage(data.userImage)} alt=""/>
+                    </Link>
+                    <Link to={"/u/" + data.userNickname} className={style.infoBannerId}>
+                        @{data.userNickname}
+                    </Link>
                 </OutlineFilledDiv>
                 }
 
@@ -92,16 +93,16 @@ function PostPage() {
                     className={style.infoBanner}
                 >
                     <div className={style.infoBannerName}>
-                        {data.groupTitle}{data.groupTitle}{data.groupTitle}
+                        {data.groupTitle}
                     </div>
-                    <div>
-
-                    </div>
-                    <div>
-
-                    </div>
-                    <div>
-
+                    <Link to={"/c/" + data.groupname}>
+                        <img src={getCommunityImage(data.groupImage)} alt=""/>
+                    </Link>
+                    <Link to={"/c/" + data.groupname} className={style.infoBannerId}>
+                        @{data.groupname}
+                    </Link>
+                    <div className={style.communityDate}>
+                        created {formatLocalDate(data.communityDate)}
                     </div>
                 </OutlineFilledDiv>
 

@@ -33,3 +33,8 @@ export function formatDate(date) {
 
     return getTimeString(formatted) + ' ' + getDateString(formatted)
 }
+
+
+export function formatLocalDate(date) {
+    return date.substring(8) + '.' + date.substring(5, 7) + '.' + date.substring(0, 4)
+}

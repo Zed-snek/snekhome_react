@@ -16,7 +16,7 @@ function PostImagesSelector({images, isImageForm, width, height, className, imgC
 
     function getImageStyle() {
         if (isImageForm)
-            return {maxWidth: width + "px", maxHeight: height + "px", objectFit: "contain"}
+            return {maxWidth: width + "px", height: height + "px", objectFit: "contain"}
         return {width: width + "px", height: height + "px", objectFit: "cover"}
     }
 
@@ -29,16 +29,22 @@ function PostImagesSelector({images, isImageForm, width, height, className, imgC
                     className={imgClassName}
                 />
             </div>
-            <div className={style.btnDiv + " " + style.leftBtn}>
-                <MyTransparentButton onClick={turnLeft} className={btnStyle.arrowBtn}>
-                    <ArrowLeft />
-                </MyTransparentButton>
-            </div>
-            <div className={style.btnDiv + " " + style.rightBtn}>
-                <MyTransparentButton onClick={turnRight} className={btnStyle.arrowBtn}>
-                    <ArrowRight />
-                </MyTransparentButton>
-            </div>
+            {
+                images.length > 1 ?
+                    <>
+                        <div className={style.btnDiv + " " + style.leftBtn}>
+                            <MyTransparentButton onClick={turnLeft} className={btnStyle.arrowBtn}>
+                                <ArrowLeft/>
+                            </MyTransparentButton>
+                        </div>
+                        <div className={style.btnDiv + " " + style.rightBtn}>
+                            <MyTransparentButton onClick={turnRight} className={btnStyle.arrowBtn}>
+                                <ArrowRight/>
+                            </MyTransparentButton>
+                        </div>
+                    </>
+                : <></>
+            }
         </div>
     );
 }
