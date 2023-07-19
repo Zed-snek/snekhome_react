@@ -1,0 +1,24 @@
+.commentaryInputDiv {
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+}
+.textarea {
+    background-color: rgba(219, 219, 219, 0.1);
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 14px;
+}
+
+.sendBtnDiv {
+    white-space: nowrap;
+    width: 40px;
+}
+.sendBtn {
+    border-radius: 16px;
+    padding: 2px 3px 3px 2px;
+    background-color: rgba(219, 219, 219, 0.1);
+}
+.sendBtn:hover {
+    background-color: rgba(219, 219, 219, 0.15);
+}

@@ -27,6 +27,10 @@ export default class PostService {
         return await postParamsRequestWithAuth(`/commentary/${id}/rate/${newStatus}`)
     }
 
+    static async newComment(idPost, comment) {
+        return await postBodyRequestWithAuth(`/post/${idPost}/commentary`, comment)
+    }
+
 }
 
 

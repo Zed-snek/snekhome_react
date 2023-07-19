@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import style from "./PostPage.module.css";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
@@ -10,12 +10,15 @@ import PostImagesSelector from "../../components/images/PostImagesSelector";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 import {formatDate, formatLocalDate} from "../../functions/timeDateFunctions";
 import {getCommunityImage, getUserImage} from "../../functions/linkFunctions";
+import {AuthContext} from "../../components/context";
+import NewCommentaryForm from "./commentary/NewCommentaryForm";
 
 function PostPage() {
     const params = useParams()
     const navigate = useNavigate()
-
+    const {isAuth} = useContext(AuthContext)
     const [data, setData] = useState()
+
 
     const [fetchPost, isFetchLoading, postError] = useFetching(async () => {
         const responseData = await PostService.getPostPage(params.id)
@@ -32,6 +35,8 @@ function PostPage() {
             navigate("/not_found")
         }
     }, [])
+
+
 
     if (data)
     return (
@@ -68,6 +73,15 @@ function PostPage() {
                 <div className={style.date}>
                     created {formatDate(data.post.date)}
                 </div>
+
+                {
+                    isAuth
+                        ? <NewCommentaryForm
+                            reference={-1} /*-1 = reference to the post, not to the other comment*/
+                            postId={params.id}
+                        />
+                        : <></>
+                }
 
             </div>
 

@@ -1,7 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {useFetching} from "../../hooks/useFetching";
-import CommunityService from "../../API/CommunityService";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import style from "./CommunityPage.module.css";
 import anarchyImage from "../../images/communityTypes/anarchy.png";
@@ -13,7 +11,6 @@ import MessageModal from "../../components/UI/modal/MessageModal";
 import {useDocumentTitle} from "usehooks-ts";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 import ClosedCommunityPage from "./ClosedCommunityPage";
-import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
 import CommunityBanner from "./CommunityBanner";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 import MyTextArea from "../../components/UI/inputs/MyTextArea";
@@ -21,11 +18,13 @@ import SortOutlineButtons from "../../components/UI/navigation/SortOutlineButton
 import {toOnlyFirstLetterUpperCase} from "../../functions/stringFunctions";
 import CommunityTypeBlock from "./CommunityTypeBlock";
 import {useFetchCommunity} from "./useFetchCommunity";
+import {AuthContext} from "../../components/context";
 
 function CommunityPage() {
 
     const params = useParams()
     const navigate = useNavigate()
+    const {isAuth} = useContext(AuthContext)
     useDocumentTitle(params.groupname.toLowerCase())
 
 
@@ -97,13 +96,17 @@ function CommunityPage() {
                         className={style.newPostAndSortBanner}
                     >
                         <div className={style.newPostDiv}>
-                            <MyTextArea
-                                onClick={() => navigate("/new_post/" + params.groupname)}
-                                placeholder="New post..."
-                                rows={1}
-                                className={style.newPostTextArea}
-                            >
-                            </MyTextArea>
+                            {
+                                isAuth ?
+                                    <MyTextArea
+                                        onClick={() => navigate("/new_post/" + params.groupname)}
+                                        placeholder="New post..."
+                                        rows={1}
+                                        className={style.newPostTextArea}
+                                    >
+                                    </MyTextArea>
+                                    : <></>
+                            }
                         </div>
                         <div className={style.sortButtons}>
                             <SortOutlineButtons
@@ -113,7 +116,6 @@ function CommunityPage() {
                             />
                         </div>
                     </OutlineFilledDiv>
-
                 </div>
 
                 <div className={style.additionalInfoBlock}>
