@@ -1,7 +1,14 @@
+/*Input: */
 .commentaryInputDiv {
     margin-top: 10px;
     display: flex;
     gap: 5px;
+    position: relative; /*to error message worked properly*/
+}
+.fadingMessage {
+    top: 15px;
+    right: 60px;
+    padding: 5px;
 }
 .textarea {
     background-color: rgba(219, 219, 219, 0.1);
@@ -22,3 +29,57 @@
 .sendBtn:hover {
     background-color: rgba(219, 219, 219, 0.15);
 }
+
+/*Comments List Component: */
+.commentsListMain {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.commentDiv {
+    padding: 4px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-bottom: 1px solid #939393;
+}
+.commentDiv:last-child {
+    border: none;
+}
+.commentInside {
+    margin-top: 7px;
+    margin-bottom: 2px;
+}
+.higherLevel {
+    background-color: #292930;
+}
+.lowerLevel {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.orangeLeft {
+    border-left: #ff9900 1px solid;
+}
+.blueLeft {
+    border-left: #2D5DB2 1px solid;
+}
+
+.userInfo {
+    display: flex;
+    gap: 5px;
+}
+.nickname {
+    font-family: PressStart, serif;
+    font-size: 11px;
+    padding-top: 4px !important;
+}
+
+.text {
+    font-size: 15px;
+}
+
+
+
+
+

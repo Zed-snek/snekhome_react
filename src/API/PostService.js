@@ -31,6 +31,10 @@ export default class PostService {
         return await postBodyRequestWithAuth(`/post/${idPost}/commentary`, comment)
     }
 
+    static async getCommentsByPostId(idPost) {
+        return await getRequest(`/post/${idPost}/commentaries`)
+    }
+
 }
 
 

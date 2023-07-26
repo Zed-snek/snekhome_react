@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useFetching} from "../../../hooks/useFetching";
 import PostService from "../../../API/PostService";
 import style from "./Commentary.module.css";
@@ -6,15 +6,25 @@ import MyTextArea from "../../../components/UI/inputs/MyTextArea";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
 import SendSvg from "../../../components/UI/svg/SendSvg";
 import MyPulseLoader from "../../../components/UI/loaders/MyPulseLoader";
+import FadingMessage from "../../../components/UI/message/FadingMessage";
 
-function NewCommentaryForm({postId, reference}) {
+function NewCommentForm({postId, reference, callbackOnSuccess}) {
 
     const [comment, setComment] = useState("")
 
+    const [isErrorShow, setIsErrorShow] = useState(false)
+
     const [fetchNewComment, isNewCommentLoading, newCommentError] = useFetching(async () => {
-        const responseData = await PostService.newComment(postId, {text: comment, referenceId: reference})
-        console.log(responseData)
+        await PostService.newComment(postId, {text: comment, referenceId: reference})
+        setComment("")
+        if (callbackOnSuccess)
+            callbackOnSuccess()
     })
+
+    useEffect(() => {
+        if (newCommentError)
+            setIsErrorShow(true)
+    }, [newCommentError])
 
     function postComment() {
         if (comment !== "")
@@ -28,6 +38,7 @@ function NewCommentaryForm({postId, reference}) {
                 placeholder="leave your commentary.."
                 onChange={e => setComment(e.target.value)}
                 rows={2}
+                value={comment}
             />
             <div className={style.sendBtnDiv}>
                 {
@@ -42,8 +53,15 @@ function NewCommentaryForm({postId, reference}) {
                         </MyTransparentButton>
                 }
             </div>
+            <FadingMessage
+                isShow={isErrorShow}
+                setIsShow={setIsErrorShow}
+                className={style.fadingMessage}
+            >
+                {newCommentError}
+            </FadingMessage>
         </div>
     );
 }
 
-export default NewCommentaryForm;
+export default NewCommentForm;

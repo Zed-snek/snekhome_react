@@ -12,7 +12,7 @@ function FadingMessage({className, children, isShow, setIsShow, ...props}) {
 
     useInterval(() => {
         if (transparent > 0)
-            setTransparent(transparent-0.02)
+            setTransparent(transparent - 0.02)
         else {
             setIsShow(false)
             setTransparent(1)

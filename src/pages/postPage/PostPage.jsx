@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from "./PostPage.module.css";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
@@ -10,13 +10,12 @@ import PostImagesSelector from "../../components/images/PostImagesSelector";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 import {formatDate, formatLocalDate} from "../../functions/timeDateFunctions";
 import {getCommunityImage, getUserImage} from "../../functions/linkFunctions";
-import {AuthContext} from "../../components/context";
-import NewCommentaryForm from "./commentary/NewCommentaryForm";
+import CommentsListComponent from "./commentary/CommentsListComponent";
+import MyBoxedTextLink from "../../components/UI/links/MyBoxedTextLink";
 
 function PostPage() {
     const params = useParams()
     const navigate = useNavigate()
-    const {isAuth} = useContext(AuthContext)
     const [data, setData] = useState()
 
 
@@ -74,14 +73,8 @@ function PostPage() {
                     created {formatDate(data.post.date)}
                 </div>
 
-                {
-                    isAuth
-                        ? <NewCommentaryForm
-                            reference={-1} /*-1 = reference to the post, not to the other comment*/
-                            postId={params.id}
-                        />
-                        : <></>
-                }
+                <CommentsListComponent />
+
 
             </div>
 
@@ -97,9 +90,9 @@ function PostPage() {
                     <Link to={"/u/" + data.userNickname}>
                         <img src={getUserImage(data.userImage)} alt=""/>
                     </Link>
-                    <Link to={"/u/" + data.userNickname} className={style.infoBannerId}>
+                    <MyBoxedTextLink to={"/u/" + data.userNickname}>
                         @{data.userNickname}
-                    </Link>
+                    </MyBoxedTextLink>
                 </OutlineFilledDiv>
                 }
 
@@ -112,9 +105,9 @@ function PostPage() {
                     <Link to={"/c/" + data.groupname}>
                         <img src={getCommunityImage(data.groupImage)} alt=""/>
                     </Link>
-                    <Link to={"/c/" + data.groupname} className={style.infoBannerId}>
+                    <MyBoxedTextLink to={"/c/" + data.groupname}>
                         @{data.groupname}
-                    </Link>
+                    </MyBoxedTextLink>
                     <div className={style.communityDate}>
                         created {formatLocalDate(data.communityDate)}
                     </div>
