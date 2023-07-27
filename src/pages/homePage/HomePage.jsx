@@ -1,9 +1,9 @@
 import React from 'react';
 import style from "./HomePage.module.css";
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
-import MyTextLink from "../../components/UI/links/MyTextLink";
 import HomePageCards from "./HomePageCards";
 import {useDocumentTitle} from "usehooks-ts";
+import MyBoxedTextLink from "../../components/UI/links/MyBoxedTextLink";
 
 function HomePage() {
     useDocumentTitle("Home")
@@ -12,9 +12,9 @@ function HomePage() {
 
             <div className={style.postList}>
                 <div className={style.createCommunityLinkDiv}>
-                    <MyTextLink to="/new_community" className={style.createCommunityLink}>
+                    <MyBoxedTextLink to="/new_community" className={style.createCommunityLink}>
                         Create Community
-                    </MyTextLink>
+                    </MyBoxedTextLink>
                 </div>
                 <div className={style.content}>
                     <OutlineDiv>

@@ -1,8 +1,8 @@
 import {useContext, useState} from 'react';
-import {AuthContext} from "../../context";
+import {AuthContext} from "../../../components/context";
 import PostService from "../../../API/PostService";
 
-export function useRating(rating, addRating, status, type, setData, id) { //type = commentary/post | status = UPVOTE/DOWNVOTE/NONE
+export function useRating(rating, addRating, status, type, setData, id) { //type = comment/post | status = UPVOTE/DOWNVOTE/NONE
 
     const {isAuth} = useContext(AuthContext)
     const [ratingStatus, setRatingStatus] = useState(status)

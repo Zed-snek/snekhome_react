@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import style from './Commentary.module.css';
 import NewCommentForm from "./NewCommentForm";
 import {getUserImage} from "../../../functions/linkFunctions";
-import MyTextLink from "../../../components/UI/links/MyTextLink";
 import MyBoxedTextLink from "../../../components/UI/links/MyBoxedTextLink";
+import MyGreyOutlineButton from "../../../components/UI/buttons/MyGreyOutlineButton";
+import CommentaryRating from "../rating/CommentaryRating";
 
-function Commentary({postId, comment, depthLevel, data, isAuth}) {
+function Commentary({postId, comment, depthLevel, data, setData, isAuth}) {
 
     const [isReply, setIsReply] = useState(false)
 
@@ -32,19 +33,20 @@ function Commentary({postId, comment, depthLevel, data, isAuth}) {
                 {comment.text}
             </div>
 
-            <div>
-                <div>
+            <div className={style.ratingDiv}>
+                <CommentaryRating
+                    rating={comment.rating}
+                    rateStatus={comment.ratedType}
+                    idComment={comment.id}
+                    addRating={value => setData(prev => ({...prev, rating: prev.rating + value}))}
+                    setRatingStatus={value => setData(prev => ({...prev, ratedType: value}))}
+                />
 
-                </div>
-                <div>
-
-                </div>
-                <div>
-
-                </div>
                 {isAuth ?
                     <div>
-
+                        <MyGreyOutlineButton onClick={() => setIsReply(prev => !prev)}>
+                            Reply
+                        </MyGreyOutlineButton>
                     </div>
                 : <></>}
             </div>

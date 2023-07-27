@@ -4,7 +4,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
 import PostService from "../../API/PostService";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
-import PostRating from "../../components/post/postCommentaryRating/PostRating";
+import PostRating from "./rating/PostRating";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import PostImagesSelector from "../../components/images/PostImagesSelector";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";

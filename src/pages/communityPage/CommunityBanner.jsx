@@ -3,7 +3,7 @@ import style from "./CommunityPage.module.css";
 import {getCommunityImageByArray, getUserImage} from "../../functions/linkFunctions";
 import ImageSelectorModal from "../../components/images/ImageSelectorModal";
 import {formatCommunityCreationDate} from "../../functions/stringFunctions";
-import UserInfo from "../../components/post/postCreatorInfo/UserInfo";
+import UserInfo from "../postPage/post/postCreatorInfo/UserInfo";
 import {Link, useNavigate} from "react-router-dom";
 import MyTransparentButton from "../../components/UI/buttons/MyTransparentButton";
 import settingIco from "../../images/icons/settingIco.svg";

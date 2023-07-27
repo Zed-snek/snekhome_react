@@ -49,6 +49,7 @@ function CommentsListComponent() {
                                 comment={comment}
                                 depthLevel={0}
                                 data={data}
+                                setData={setData}
                                 postId={params.id}
                                 isAuth={isAuth}
                             />

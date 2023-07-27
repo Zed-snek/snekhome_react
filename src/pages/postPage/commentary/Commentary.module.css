@@ -37,7 +37,7 @@
     gap: 15px;
 }
 
-
+/*Commentary item component*/
 .commentDiv {
     padding: 4px 10px;
     display: flex;
@@ -45,9 +45,16 @@
     gap: 4px;
     border-bottom: 1px solid #939393;
 }
+.commentDiv:first-child {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
 .commentDiv:last-child {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     border: none;
 }
+
 .commentInside {
     margin-top: 7px;
     margin-bottom: 2px;
@@ -79,6 +86,11 @@
     font-size: 15px;
 }
 
+.ratingDiv {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+}
 
 
 

@@ -1,6 +1,7 @@
 .ratingValueNegative, .ratingValueNeutral, .ratingValuePositive {
     font-weight: bold;
     user-select: none;
+    line-height: 23px;
 }
 .ratingValuePositive {
     color: #85B50E;
@@ -24,7 +25,7 @@
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
     cursor: pointer;
     margin-bottom: 3px;
 }
@@ -37,13 +38,13 @@
     padding: 4px 4px 5px 5px;
 }
 .postSvgDivActive {
-    background-image: linear-gradient(280deg, #228dff90 0%, #e9105e90 99%);
+    background-image: linear-gradient(240deg, #228dff90 0%, #e9105e90 99%);
 }
-.postRatingBtn:hover .postSvgDiv{
-    background-image: linear-gradient(280deg, #228dff 0%, #e9105e 99%);
+.postRatingBtn:hover .postSvgDiv {
+    background-image: linear-gradient(240deg, #228dff 0%, #e9105e 99%);
 }
-.postRatingBtn:active .postSvgDiv{
-    background-image: linear-gradient(280deg, #228dff70 0%, #e9105e70 99%);
+.postRatingBtn:active .postSvgDiv {
+    background-image: linear-gradient(240deg, #228dff70 0%, #e9105e70 99%);
 }
 
 .postBtnTitle {
@@ -53,3 +54,19 @@
 
 
 /*Commentary rating: */
+.commentaryMain {
+    display: flex;
+    gap: 5px;
+    align-items: flex-end;
+}
+
+.commentArrowBtn {
+    padding: 1px 3px 0 3px;
+}
+.ratingValueDiv {
+    min-width: 20px;
+}
+
+.ratingActive {
+    border-color: #E3E3E3 !important;
+}
