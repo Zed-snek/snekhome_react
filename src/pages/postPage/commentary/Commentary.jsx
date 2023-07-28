@@ -1,14 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import style from './Commentary.module.css';
 import NewCommentForm from "./NewCommentForm";
 import {getUserImage} from "../../../functions/linkFunctions";
 import MyBoxedTextLink from "../../../components/UI/links/MyBoxedTextLink";
 import MyGreyOutlineButton from "../../../components/UI/buttons/MyGreyOutlineButton";
 import CommentaryRating from "../rating/CommentaryRating";
+import {AuthContext} from "../../../components/context";
 
-function Commentary({postId, comment, depthLevel, data, setData, isAuth}) {
+function Commentary({postId, comment, depthLevel, data, setData, addComment}) {
 
     const [isReply, setIsReply] = useState(false)
+    const {isAuth} = useContext(AuthContext)
 
     function getClass() {
         if (depthLevel === 0)
@@ -17,6 +19,21 @@ function Commentary({postId, comment, depthLevel, data, setData, isAuth}) {
             return  style.higherLevel + ' ' + style.orangeLeft + ' ' + style.commentInside
         else
             return  style.lowerLevel + ' ' + style.blueLeft + ' ' + style.commentInside
+    }
+
+    function setRatingStatus(value) {
+        setData(prev => prev.map(c =>
+            c.id === comment.id
+                ? {...c, ratedType: value}
+                : c
+        ))
+    }
+    function addRating(value) { /*({...prev, rating: prev.rating + value})*/
+        setData(prev => prev.map(c =>
+            c.id === comment.id
+            ? {...c, rating: c.rating + value}
+            : c
+        ))
     }
 
     return (
@@ -38,13 +55,16 @@ function Commentary({postId, comment, depthLevel, data, setData, isAuth}) {
                     rating={comment.rating}
                     rateStatus={comment.ratedType}
                     idComment={comment.id}
-                    addRating={value => setData(prev => ({...prev, rating: prev.rating + value}))}
-                    setRatingStatus={value => setData(prev => ({...prev, ratedType: value}))}
+                    addRating={addRating}
+                    setRatingStatus={setRatingStatus}
                 />
 
                 {isAuth ?
                     <div>
-                        <MyGreyOutlineButton onClick={() => setIsReply(prev => !prev)}>
+                        <MyGreyOutlineButton
+                            onClick={() => setIsReply(prev => !prev)}
+                            className={isReply ? style.replyBtnActive : ''}
+                        >
                             Reply
                         </MyGreyOutlineButton>
                     </div>
@@ -56,6 +76,7 @@ function Commentary({postId, comment, depthLevel, data, setData, isAuth}) {
                     reference={comment.id}
                     postId={postId}
                     callbackOnSuccess={() => setIsReply(false)}
+                    addComment={addComment}
                 />
             : <></>}
 

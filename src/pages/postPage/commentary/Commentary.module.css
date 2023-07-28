@@ -72,6 +72,11 @@
     border-left: #2D5DB2 1px solid;
 }
 
+.replyBtnActive {
+    border-color: #E3E3E3 !important;
+    color: #E3E3E3 !important;
+}
+
 .userInfo {
     display: flex;
     gap: 5px;

@@ -144,7 +144,7 @@ function AccountPage(props) {
                         <div className={style.overImageDivText}>
                             Smaller size
                         </div>
-                        <img src={userImage} className={"userImage " + style.userImg}alt=""/>
+                        <img src={userImage} className={"userImage " + style.userImg} alt=""/>
                     </div>
 
                 </div>

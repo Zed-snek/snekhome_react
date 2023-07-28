@@ -9,13 +9,14 @@ function ContextUser({children}) {
     const {isAuth} = useContext(AuthContext)
 
     const [userImage, setUserImage] = useState('')
+    const [userImageName, setUserImageName] = useState('')
     const [userNickname, setUserNickname] = useState('')
     const [nicknameColor, setNicknameColor] = useState('#E3E3E3')
 
     const [fetchUser, isUserLoading, userError] = useFetching(async () => {
         const data = await UserService.navbarInfo()
         setUserImage( getUserImage(data['image']) )
-
+        setUserImageName(data['image'])
         setUserNickname(data['nickname'])
         setNicknameColor(data['nicknameColor'])
     })
@@ -33,6 +34,7 @@ function ContextUser({children}) {
         <UserContext.Provider value={{
             userImage,
             setUserImage,
+            userImageName,
             userNickname,
             setUserNickname,
             nicknameColor,

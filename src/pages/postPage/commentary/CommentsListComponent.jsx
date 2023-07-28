@@ -23,6 +23,9 @@ function CommentsListComponent() {
         fetchComments()
     }, [])
 
+    function addComment(comment) {
+        setData(prev => [comment, ...prev])
+    }
 
     return (
         <div className={style.commentsListMain}>
@@ -30,6 +33,7 @@ function CommentsListComponent() {
                 <NewCommentForm
                     reference={-1} /*-1 = reference to the post, not to the other comment*/
                     postId={params.id}
+                    addComment={addComment}
                 />
             : <></>}
 
@@ -50,8 +54,8 @@ function CommentsListComponent() {
                                 depthLevel={0}
                                 data={data}
                                 setData={setData}
+                                addComment={addComment}
                                 postId={params.id}
-                                isAuth={isAuth}
                             />
                     )}
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {useFetching} from "../../../hooks/useFetching";
 import PostService from "../../../API/PostService";
 import style from "./Commentary.module.css";
@@ -7,15 +7,27 @@ import MyTransparentButton from "../../../components/UI/buttons/MyTransparentBut
 import SendSvg from "../../../components/UI/svg/SendSvg";
 import MyPulseLoader from "../../../components/UI/loaders/MyPulseLoader";
 import FadingMessage from "../../../components/UI/message/FadingMessage";
+import {UserContext} from "../../../components/context";
 
-function NewCommentForm({postId, reference, callbackOnSuccess}) {
+function NewCommentForm({postId, reference, callbackOnSuccess, addComment}) {
+
+    const {userImageName, userNickname} = useContext(UserContext)
 
     const [comment, setComment] = useState("")
 
     const [isErrorShow, setIsErrorShow] = useState(false)
 
     const [fetchNewComment, isNewCommentLoading, newCommentError] = useFetching(async () => {
-        await PostService.newComment(postId, {text: comment, referenceId: reference})
+        const responseData = await PostService.newComment(postId, {text: comment, referenceId: reference})
+        addComment({
+            id: responseData.message,
+            ratedType: "NONE",
+            rating: 1,
+            reference: reference,
+            text: comment,
+            nickname: userNickname,
+            image: userImageName
+        })
         setComment("")
         if (callbackOnSuccess)
             callbackOnSuccess()

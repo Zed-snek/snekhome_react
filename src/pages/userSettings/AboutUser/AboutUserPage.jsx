@@ -9,7 +9,7 @@ import UserService from "../../../API/UserService";
 import MessageModal from "../../../components/UI/modal/MessageModal";
 
 
-function AboutUserPage({tags, fetchUser, setError, setLoader, setUser, ...props}) {
+function AboutUserPage({tags, fetchUser, setError, setLoader, setUser}) {
 
     const [isForm, setIsForm] = useState(false)
 
@@ -33,7 +33,6 @@ function AboutUserPage({tags, fetchUser, setError, setLoader, setUser, ...props}
     function refresh() {
         fetchUser()
     }
-
 
     const [fetchNew, isNewLoading, newError] = useFetching(async () => {
         await UserService.newTag({
