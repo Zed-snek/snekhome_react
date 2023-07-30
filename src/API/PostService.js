@@ -1,4 +1,9 @@
-import {getRequest, postBodyRequestWithAuth, postParamsRequestWithAuth} from "./requestFunctions";
+import {
+    deleteRequestWithAuth,
+    getRequest,
+    postBodyRequestWithAuth,
+    postParamsRequestWithAuth
+} from "./requestFunctions";
 
 export default class PostService {
 
@@ -23,6 +28,10 @@ export default class PostService {
         return await postParamsRequestWithAuth(`/post/${id}/rate/${newStatus}`)
     }
 
+    static async deletePost(id) {
+        return await deleteRequestWithAuth(`/post/${id}`)
+    }
+
     static async changeCommentaryRating(id, newStatus) {
         return await postParamsRequestWithAuth(`/commentary/${id}/rate/${newStatus}`)
     }
@@ -33,6 +42,10 @@ export default class PostService {
 
     static async getCommentsByPostId(idPost) {
         return await getRequest(`/post/${idPost}/commentaries`)
+    }
+
+    static async deleteComment(id) {
+        return await deleteRequestWithAuth(`/commentary/${id}`)
     }
 
 }

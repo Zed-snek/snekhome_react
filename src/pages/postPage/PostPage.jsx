@@ -14,12 +14,19 @@ import CommentsListComponent from "./commentary/CommentsListComponent";
 import MyBoxedTextLink from "../../components/UI/links/MyBoxedTextLink";
 import MoreOptionsButton from "../../components/UI/navigation/MoreOptionsButton";
 import {UserContext} from "../../components/context";
+import MessageModal from "../../components/UI/modal/MessageModal";
 
 function PostPage() {
     const params = useParams()
     const navigate = useNavigate()
     const [data, setData] = useState()
+
+    const [isDeletePostModal, setIsDeletePostModal] = useState(false)
+    const [isErrorModal, setIsErrorModal] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
+
     const isPermitToDel = data && (data.role && data.role.deletePosts === true)
+
 
     const {userNickname} = useContext(UserContext)
 
@@ -37,9 +44,24 @@ function PostPage() {
             navigate("/not_found")
     }, [])
 
+
+    const [fetchDelete, isDeleteLoading, deleteError] = useFetching(async () => {
+        await PostService.deletePost(params.id)
+        navigate("/c/" + data.groupname)
+    })
+
+    useEffect(() => {
+        if (deleteError) {
+            setErrorMessage(deleteError)
+            setIsErrorModal(true)
+        }
+        else
+            setErrorMessage("")
+    }, [deleteError])
+
     function moreOptionsButton() {
         if (isPermitToDel || data.userNickname === userNickname) {
-            let options = [{title: "Delete", onClick: () => console.log("Delete")}]
+            let options = [{title: "Delete", onClick: () => setIsDeletePostModal(true)}]
             if (data.userNickname === userNickname)
                 options.push({title: "Edit", onClick: () => console.log("Edit")})
             return <MoreOptionsButton
@@ -64,6 +86,20 @@ function PostPage() {
                 <div className={style.moreOptionsDiv}>
                     {moreOptionsButton()}
                 </div>
+                <MessageModal
+                    visible={isDeletePostModal}
+                    setVisible={setIsDeletePostModal}
+                    isAcceptButton={true}
+                    acceptCallback={fetchDelete}
+                >
+                    Are you sure you want to delete this post?
+                </MessageModal>
+                <MessageModal
+                    visible={isErrorModal}
+                    setVisible={setIsErrorModal}
+                >
+                    {errorMessage}
+                </MessageModal>
                 <OutlineFilledDiv className={style.imgAndTextDiv}>
                     {
                         data.post.images.length > 0

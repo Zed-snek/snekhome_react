@@ -39,9 +39,9 @@ function Commentary({postId, comment, depthLevel, data, setData, isPermitToDelet
     }
 
     function moreOptionsButton() {
-        if (isPermitToDelete || comment.userNickname === userNickname) {
+        if (isPermitToDelete || comment.nickname === userNickname) {
             let options = [{title: "Delete", onClick: () => console.log("Delete")}]
-            if (data.userNickname === userNickname)
+            if (comment.nickname === userNickname)
                 options.push({title: "Edit", onClick: () => console.log("Edit")})
             return <MoreOptionsButton
                 options={options}
