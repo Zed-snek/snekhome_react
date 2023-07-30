@@ -5,6 +5,9 @@
     color: #D9D9D9;
     line-height: 0;
     word-break: keep-all;
+    position: absolute;
+    right: 4px;
+    top: 10px;
 }
 
 .mainDiv {
@@ -17,6 +20,8 @@
     padding: 3px 3px 0 7px;
     margin-bottom: 10px;
     border-radius: 5px;
+    width: 40px;
+    height: 25px;
 }
 
 .mainDiv:hover .main {
@@ -39,7 +44,7 @@
     top: 28px;
 }
 
-.mainDiv:hover .options{
+.mainDiv:hover .options {
     display: block;
 }
 

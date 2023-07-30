@@ -5,12 +5,14 @@ import {getUserImage} from "../../../functions/linkFunctions";
 import MyBoxedTextLink from "../../../components/UI/links/MyBoxedTextLink";
 import MyGreyOutlineButton from "../../../components/UI/buttons/MyGreyOutlineButton";
 import CommentaryRating from "../rating/CommentaryRating";
-import {AuthContext} from "../../../components/context";
+import {AuthContext, UserContext} from "../../../components/context";
+import MoreOptionsButton from "../../../components/UI/navigation/MoreOptionsButton";
 
-function Commentary({postId, comment, depthLevel, data, setData, addComment}) {
+function Commentary({postId, comment, depthLevel, data, setData, isPermitToDelete, addComment}) {
 
     const [isReply, setIsReply] = useState(false)
     const {isAuth} = useContext(AuthContext)
+    const {userNickname} = useContext(UserContext)
 
     function getClass() {
         if (depthLevel === 0)
@@ -36,14 +38,29 @@ function Commentary({postId, comment, depthLevel, data, setData, addComment}) {
         ))
     }
 
+    function moreOptionsButton() {
+        if (isPermitToDelete || comment.userNickname === userNickname) {
+            let options = [{title: "Delete", onClick: () => console.log("Delete")}]
+            if (data.userNickname === userNickname)
+                options.push({title: "Edit", onClick: () => console.log("Edit")})
+            return <MoreOptionsButton
+                options={options}
+                className={style.moreOptions}
+            />
+        }
+    }
+
     return (
         <div className={style.commentDiv + ' ' + getClass()}>
 
-            <div className={style.userInfo}>
+            <div className={style.userInfoDiv}>
                 <img src={getUserImage(comment.image)} className="smallestUserImage"  alt=""/>
                 <MyBoxedTextLink to={"/u/" + comment.nickname} className={style.nickname}>
                     {comment.nickname}
                 </MyBoxedTextLink>
+                <div className={style.moreOptionsDiv}>
+                    {moreOptionsButton()}
+                </div>
             </div>
 
             <div className={style.text}>

@@ -93,7 +93,6 @@ function MembersListPage({permissions, communityType, setError, setIsLoader}) {
                 options={options}
             />
         }
-        return ''
     }
 
     async function banUser(nickname) {
@@ -111,7 +110,6 @@ function MembersListPage({permissions, communityType, setError, setIsLoader}) {
                 setData(prev => {
                     let obj = {...prev}
                     delete obj.users[obj.users.findIndex(u => u.nickname === nickname)].communityRole
-                    console.log("obj: ", obj)
                     return obj
                 })
             )
@@ -121,10 +119,8 @@ function MembersListPage({permissions, communityType, setError, setIsLoader}) {
     function setRole(nickname, isDelete) {
         if (isDelete)
             revokeRole(nickname)
-        else {
+        else
             setRoleShow({isShow: true, nickname: nickname})
-        }
-
     }
 
 

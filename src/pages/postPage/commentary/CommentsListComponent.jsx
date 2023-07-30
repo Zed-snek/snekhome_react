@@ -8,7 +8,7 @@ import Commentary from "./Commentary";
 import PostService from "../../../API/PostService";
 import MyMessage from "../../../components/UI/message/MyMessage";
 
-function CommentsListComponent() {
+function CommentsListComponent({isPermitToDel}) {
     const {isAuth} = useContext(AuthContext)
     const params = useParams()
 
@@ -54,6 +54,7 @@ function CommentsListComponent() {
                                 depthLevel={0}
                                 data={data}
                                 setData={setData}
+                                isPermitToDelete={isPermitToDel}
                                 addComment={addComment}
                                 postId={params.id}
                             />

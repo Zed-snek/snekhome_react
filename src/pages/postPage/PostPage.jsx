@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import style from "./PostPage.module.css";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
@@ -12,12 +12,16 @@ import {formatDate, formatLocalDate} from "../../functions/timeDateFunctions";
 import {getCommunityImage, getUserImage} from "../../functions/linkFunctions";
 import CommentsListComponent from "./commentary/CommentsListComponent";
 import MyBoxedTextLink from "../../components/UI/links/MyBoxedTextLink";
+import MoreOptionsButton from "../../components/UI/navigation/MoreOptionsButton";
+import {UserContext} from "../../components/context";
 
 function PostPage() {
     const params = useParams()
     const navigate = useNavigate()
     const [data, setData] = useState()
+    const isPermitToDel = data && (data.role && data.role.deletePosts === true)
 
+    const {userNickname} = useContext(UserContext)
 
     const [fetchPost, isFetchLoading, postError] = useFetching(async () => {
         const responseData = await PostService.getPostPage(params.id)
@@ -27,15 +31,22 @@ function PostPage() {
     useNotFoundNavigate(postError)
     
     useEffect(() => {
-        if (params.id > 0) {
+        if (params.id > 0)
             fetchPost()
-        }
-        else {
+        else
             navigate("/not_found")
-        }
     }, [])
 
-
+    function moreOptionsButton() {
+        if (isPermitToDel || data.userNickname === userNickname) {
+            let options = [{title: "Delete", onClick: () => console.log("Delete")}]
+            if (data.userNickname === userNickname)
+                options.push({title: "Edit", onClick: () => console.log("Edit")})
+            return <MoreOptionsButton
+                options={options}
+            />
+        }
+    }
 
     if (data)
     return (
@@ -50,6 +61,9 @@ function PostPage() {
                 />
             </div>
             <div className={style.content}>
+                <div className={style.moreOptionsDiv}>
+                    {moreOptionsButton()}
+                </div>
                 <OutlineFilledDiv className={style.imgAndTextDiv}>
                     {
                         data.post.images.length > 0
@@ -73,7 +87,9 @@ function PostPage() {
                     created {formatDate(data.post.date)}
                 </div>
 
-                <CommentsListComponent />
+                <CommentsListComponent
+                    isPermitToDel={isPermitToDel}
+                />
 
 
             </div>

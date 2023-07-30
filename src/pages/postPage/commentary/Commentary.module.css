@@ -77,14 +77,29 @@
     color: #E3E3E3 !important;
 }
 
-.userInfo {
+.userInfoDiv {
+    position: relative;
     display: flex;
     gap: 5px;
 }
+
 .nickname {
     font-family: PressStart, serif;
     font-size: 11px;
     padding-top: 4px !important;
+}
+
+
+.moreOptionsDiv {
+    position: absolute;
+    right: 0;
+}
+.moreOptions {
+    height: 25px;
+}
+.moreOptions span {
+    top: 10px;
+    color: #bdbdbd;
 }
 
 .text {
