@@ -21,7 +21,7 @@ function NewCommentForm({postId, reference, callbackOnSuccess, addComment}) {
         const responseData = await PostService.newComment(postId, {text: comment, referenceId: reference})
         addComment({
             id: responseData.message,
-            ratedType: "NONE",
+            ratedType: "UPVOTE",
             rating: 1,
             reference: reference,
             text: comment,

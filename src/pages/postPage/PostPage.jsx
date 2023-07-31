@@ -89,7 +89,6 @@ function PostPage() {
                 <MessageModal
                     visible={isDeletePostModal}
                     setVisible={setIsDeletePostModal}
-                    isAcceptButton={true}
                     acceptCallback={fetchDelete}
                 >
                     Are you sure you want to delete this post?
@@ -125,6 +124,8 @@ function PostPage() {
 
                 <CommentsListComponent
                     isPermitToDel={isPermitToDel}
+                    setErrorMessage={setErrorMessage}
+                    setIsErrorModal={setIsErrorModal}
                 />
 
 

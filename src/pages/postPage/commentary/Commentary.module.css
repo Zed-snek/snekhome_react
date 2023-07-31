@@ -38,39 +38,60 @@
 }
 
 /*Commentary item component*/
-.commentDiv {
-    padding: 4px 10px;
+
+.commentMain {
+    background-color: #292930;
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-    border-bottom: 1px solid #939393;
 }
-.commentDiv:first-child {
+.highestLevel {
+    padding-left: 8px;
+}
+.highestLevel:first-child {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
-.commentDiv:last-child {
+.highestLevel:last-child {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    border: none;
 }
 
-.commentInside {
+.commentDiv {
+    padding-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.commentInside:first-child {
     margin-top: 7px;
-    margin-bottom: 2px;
 }
-.higherLevel {
-    background-color: #292930;
+.commentInside:last-child {
+    margin-bottom: 1px;
 }
-.lowerLevel {
-    background-color: rgba(0, 0, 0, 0.2);
+
+
+.lineDiv {
+    cursor: pointer;
+    width: 15px;
+    transition: all 0s;
+    display: flex;
+    padding-left: 4px;
+    margin-left: -4px;
 }
-.orangeLeft {
+.orangeLine > div {
+    border-left: #ff990080 1px solid;
+}
+.orangeLine:hover > div {
     border-left: #ff9900 1px solid;
 }
-.blueLeft {
+.blueLine > div {
+    border-left: #2D5DB280 1px solid;
+}
+.blueLine:hover > div {
     border-left: #2D5DB2 1px solid;
 }
+
 
 .replyBtnActive {
     border-color: #E3E3E3 !important;
@@ -92,7 +113,7 @@
 
 .moreOptionsDiv {
     position: absolute;
-    right: 0;
+    right: 5px;
 }
 .moreOptions {
     height: 25px;
@@ -110,6 +131,7 @@
     display: flex;
     gap: 15px;
     align-items: flex-end;
+    margin-bottom: 10px;
 }
 
 

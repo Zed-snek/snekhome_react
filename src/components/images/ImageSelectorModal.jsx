@@ -44,7 +44,6 @@ function ImageSelectorModal({array, setArray, visible, setVisible, isDeletePermi
                                 <MessageModal
                                     visible={isDeleteModal}
                                     setVisible={setIsDeleteModal}
-                                    isAcceptButton={true}
                                     acceptCallback={deleteCurrentImage}
                                 >
                                     Are you sure you want to delete the image?

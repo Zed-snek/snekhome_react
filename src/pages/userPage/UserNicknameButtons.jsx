@@ -72,7 +72,6 @@ function UserNicknameButtons({friendshipType, setFriendshipType}) {
                 <MessageModal
                     visible={isLogoutModal}
                     setVisible={setLogoutModal}
-                    isAcceptButton={true}
                     acceptCallback={logout}
                 > {/*Logout Modal*/}
                     Are you sure you want to logout?

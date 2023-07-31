@@ -105,7 +105,6 @@ function AboutUserPage({tags, fetchUser, setError, setLoader, setUser}) {
             <MessageModal
                 visible={isDeleteModal}
                 setVisible={setDeleteModal}
-                isAcceptButton={true}
                 acceptCallback={deleteTag}
             > {/*Delete Modal*/}
                 Are you sure you want to delete this information tag?

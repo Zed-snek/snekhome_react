@@ -4,7 +4,7 @@ import style from "./MessageModal.module.css"
 import MyButton from "../buttons/MyButton";
 import {useNavigate} from "react-router-dom";
 
-function MessageModal({visible, setVisible, children, acceptCallback, isAcceptButton, navigate}) {
+function MessageModal({visible, setVisible, children, acceptCallback, navigate}) {
 
     const doNavigate = useNavigate()
 
@@ -32,7 +32,7 @@ function MessageModal({visible, setVisible, children, acceptCallback, isAcceptBu
                         {children}
                     </span>
 
-                    {isAcceptButton
+                    {acceptCallback
                         ? <>
                             <MyButton
                                 className={style.closeBtn}
