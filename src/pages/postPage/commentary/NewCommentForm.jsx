@@ -9,28 +9,36 @@ import MyPulseLoader from "../../../components/UI/loaders/MyPulseLoader";
 import FadingMessage from "../../../components/UI/message/FadingMessage";
 import {UserContext} from "../../../components/context";
 
-function NewCommentForm({postId, reference, callbackOnSuccess, addComment}) {
+function NewCommentForm({postId, reference, callbackOnSuccess, addComment, idComment, editComment, editValue}) {
 
     const {userImageName, userNickname} = useContext(UserContext)
 
-    const [comment, setComment] = useState("")
+    const [comment, setComment] = useState(editValue ? editValue : "")
 
     const [isErrorShow, setIsErrorShow] = useState(false)
 
     const [fetchNewComment, isNewCommentLoading, newCommentError] = useFetching(async () => {
-        const responseData = await PostService.newComment(postId, {text: comment, referenceId: reference})
-        addComment({
-            id: responseData.message,
-            ratedType: "UPVOTE",
-            rating: 1,
-            reference: reference,
-            text: comment,
-            nickname: userNickname,
-            image: userImageName
-        })
-        setComment("")
+        if (editValue) {
+            await PostService.updateComment(idComment, comment)
+            editComment(idComment, comment)
+        }
+        else {
+            const responseData = await PostService.newComment(postId, {text: comment, referenceId: reference})
+            addComment({
+                id: responseData.message,
+                ratedType: "UPVOTE",
+                rating: 1,
+                reference: reference,
+                text: comment,
+                nickname: userNickname,
+                image: userImageName
+            })
+        }
+
         if (callbackOnSuccess)
             callbackOnSuccess()
+        else
+            setComment("")
     })
 
     useEffect(() => {

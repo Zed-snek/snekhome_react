@@ -2,7 +2,7 @@ import {
     deleteRequestWithAuth,
     getRequest,
     postBodyRequestWithAuth,
-    postParamsRequestWithAuth
+    postParamsRequestWithAuth, putRequestWithAuth
 } from "./requestFunctions";
 
 export default class PostService {
@@ -42,6 +42,10 @@ export default class PostService {
 
     static async getCommentsByPostId(idPost) {
         return await getRequest(`/post/${idPost}/commentaries`)
+    }
+
+    static async updateComment(id, newText) {
+        return await putRequestWithAuth(`/commentary/${id}`, {text: newText})
     }
 
     static async deleteComment(id) {

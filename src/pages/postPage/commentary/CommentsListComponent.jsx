@@ -26,6 +26,15 @@ function CommentsListComponent({isPermitToDel, setIsErrorModal, setErrorMessage}
     function addComment(comment) {
         setData(prev => [comment, ...prev])
     }
+    function editComment(id, text) {
+        setData(prev => {
+            return prev.map(c => {
+                if (c.id === id)
+                    return {...c, text: text}
+                return c
+            })
+        })
+    }
 
     async function deleteComment(id) {
         await PostService.deleteComment(id)
@@ -69,6 +78,7 @@ function CommentsListComponent({isPermitToDel, setIsErrorModal, setErrorMessage}
                                 addComment={addComment}
                                 postId={params.id}
                                 deleteComment={deleteComment}
+                                editComment={editComment}
                             />
                     )}
 

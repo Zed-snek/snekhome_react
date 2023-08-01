@@ -9,12 +9,15 @@ import {AuthContext, UserContext} from "../../../components/context";
 import MoreOptionsButton from "../../../components/UI/navigation/MoreOptionsButton";
 import MessageModal from "../../../components/UI/modal/MessageModal";
 
-function Commentary({postId, comment, depthLevel, data, setData, isPermitToDelete, addComment, deleteComment}) {
+function Commentary({
+    postId, comment, depthLevel, data, setData, isPermitToDelete, addComment, deleteComment, editComment
+}) {
 
     const {isAuth} = useContext(AuthContext)
     const {userNickname} = useContext(UserContext)
 
     const [isReply, setIsReply] = useState(false)
+    const [isEdit, setIsEdit] = useState(false)
     const [isDeleteModal, setIsDeleteModal] = useState(false)
 
     function setRatingStatus(value) {
@@ -36,7 +39,7 @@ function Commentary({postId, comment, depthLevel, data, setData, isPermitToDelet
         if (isPermitToDelete || comment.nickname === userNickname) {
             let options = [{title: "Delete", onClick: () => setIsDeleteModal(true)}]
             if (comment.nickname === userNickname)
-                options.push({title: "Edit", onClick: () => console.log("Edit")})
+                options.push({title: "Edit", onClick: () => setIsEdit(true)})
             return <MoreOptionsButton
                 options={options}
                 className={style.moreOptions}
@@ -80,9 +83,19 @@ function Commentary({postId, comment, depthLevel, data, setData, isPermitToDelet
                     </MessageModal>
                 </div>
 
-                <div className={style.text}>
-                    {comment.text}
-                </div>
+                {isEdit ?
+                    <NewCommentForm
+                        callbackOnSuccess={() => setIsEdit(false)}
+                        idComment={comment.id}
+                        editValue={comment.text}
+                        editComment={editComment}
+                    />
+                    :
+                    <div className={style.text}>
+                        {comment.text}
+                    </div>
+                }
+
 
                 <div className={style.ratingDiv}>
                     <CommentaryRating
@@ -128,6 +141,7 @@ function Commentary({postId, comment, depthLevel, data, setData, isPermitToDelet
                                 addComment={addComment}
                                 postId={postId}
                                 deleteComment={deleteComment}
+                                editComment={editComment}
                             />
                         )}
                 </div>
