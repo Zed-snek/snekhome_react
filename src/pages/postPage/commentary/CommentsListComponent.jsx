@@ -27,8 +27,15 @@ function CommentsListComponent({isPermitToDel, setIsErrorModal, setErrorMessage}
         setData(prev => [comment, ...prev])
     }
 
-    function deleteComment(id) {
-
+    async function deleteComment(id) {
+        await PostService.deleteComment(id)
+            .then(() => {
+                setData(prev => prev.filter(comment => comment.id !== id))
+            })
+            .catch(exception => {
+                setErrorMessage(exception)
+                setIsErrorModal(true)
+            })
     }
 
     return (
