@@ -1,6 +1,7 @@
 import {useFetching} from "../../hooks/useFetching";
 import CommunityService from "../../API/CommunityService";
 import {useState, useEffect} from "react";
+import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 
 export function useFetchCommunity(groupname) {
 
@@ -15,6 +16,8 @@ export function useFetchCommunity(groupname) {
     useEffect(() => {
         fetchCommunity()
     }, [])
+
+    useNotFoundNavigate(communityError)
 
     return [data, setData, isCommunityLoading, communityError]
 }

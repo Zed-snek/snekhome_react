@@ -37,9 +37,7 @@ function CommunityPage() {
         {type: "NEWSPAPER", image: newsImage, color: '#ff9900'},
     ]
 
-    const [data, setData, isCommunityLoading, communityError] = useFetchCommunity(params.groupname)
-
-    useNotFoundNavigate(communityError)
+    const [data, setData, isCommunityLoading] = useFetchCommunity(params.groupname)
 
     const [error, setError] = useState("")
     const [isModalError, setModalError] = useState(false)
@@ -101,7 +99,6 @@ function CommunityPage() {
                                     <MyTextArea
                                         onClick={() => navigate("/new_post/" + params.groupname)}
                                         placeholder="New post..."
-                                        rows={1}
                                         className={style.newPostTextArea}
                                     >
                                     </MyTextArea>

@@ -15,34 +15,21 @@ import MyBoxedTextLink from "../../components/UI/links/MyBoxedTextLink";
 import MoreOptionsButton from "../../components/UI/navigation/MoreOptionsButton";
 import {UserContext} from "../../components/context";
 import MessageModal from "../../components/UI/modal/MessageModal";
+import {useFetchPost} from "./useFetchPost";
 
 function PostPage() {
+
     const params = useParams()
     const navigate = useNavigate()
-    const [data, setData] = useState()
+    const {userNickname} = useContext(UserContext)
+
+    const [data, setData] = useFetchPost(params.id)
 
     const [isDeletePostModal, setIsDeletePostModal] = useState(false)
     const [isErrorModal, setIsErrorModal] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
 
     const isPermitToDel = data && (data.role && data.role.deletePosts === true)
-
-
-    const {userNickname} = useContext(UserContext)
-
-    const [fetchPost, isFetchLoading, postError] = useFetching(async () => {
-        const responseData = await PostService.getPostPage(params.id)
-        console.log(responseData)
-        setData(responseData)
-    })
-    useNotFoundNavigate(postError)
-    
-    useEffect(() => {
-        if (params.id > 0)
-            fetchPost()
-        else
-            navigate("/not_found")
-    }, [])
 
 
     const [fetchDelete, isDeleteLoading, deleteError] = useFetching(async () => {
@@ -63,7 +50,7 @@ function PostPage() {
         if (isPermitToDel || data.userNickname === userNickname) {
             let options = [{title: "Delete", onClick: () => setIsDeletePostModal(true)}]
             if (data.userNickname === userNickname)
-                options.push({title: "Edit", onClick: () => console.log("Edit")})
+                options.push({title: "Edit", onClick: () => navigate("/post/" + params.id + "/edit")})
             return <MoreOptionsButton
                 options={options}
             />

@@ -29,6 +29,11 @@
 .sendBtn:hover {
     background-color: rgba(219, 219, 219, 0.15);
 }
+.cancelBtn {
+    padding: 0 5px;
+    text-align: center;
+    margin-top: 3px;
+}
 
 /*Comments List Component: */
 .commentsListMain {

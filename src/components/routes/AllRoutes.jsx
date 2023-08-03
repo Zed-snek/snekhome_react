@@ -21,6 +21,7 @@ import FriendsListPage from "../../pages/friendsList/FriendsListPage";
 import MembersListPage from "../../pages/membersListPage/MembersListPage";
 import NewPostPage from "../../pages/newPost/NewPostPage";
 import PostPage from "../../pages/postPage/PostPage";
+import EditPostPage from "../../pages/newPost/EditPostPage";
 
 
 function AllRoutes() {
@@ -41,6 +42,7 @@ function AllRoutes() {
                 <Route path='community_settings/:groupname' element={<CommunitySettingsPage />}/>
                 <Route path='/settings' element={<SettingsPage />} />
                 <Route path='/new_post/:groupname' element={<NewPostPage />} />
+                <Route path='/post/:id/edit' element={<EditPostPage />} />
                 <Route path='/logout' element={<Logout />} />
                 <Route path='/new_community' element={<CreateCommunityPage />} />
             </Route>

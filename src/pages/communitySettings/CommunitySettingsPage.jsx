@@ -25,9 +25,7 @@ function CommunitySettingsPage() {
     useDocumentTitle("Settings")
     const params = useParams()
 
-    const [data, setData, isCommunityLoading, communityError] = useFetchCommunity(params.groupname)
-
-    useNotFoundNavigate(communityError)
+    const [data, setData, isCommunityLoading] = useFetchCommunity(params.groupname)
 
     const [isErrorModal, setIsErrorModal] = useState(false)
     const [error, setError] = useState('')

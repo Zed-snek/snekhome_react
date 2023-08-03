@@ -61,16 +61,28 @@ function NewCommentForm({postId, reference, callbackOnSuccess, addComment, idCom
                 value={comment}
             />
             <div className={style.sendBtnDiv}>
-                {
-                    isNewCommentLoading
-                        ? <MyPulseLoader size={8}/>
-                        :
-                        <MyTransparentButton
-                            className={style.sendBtn}
-                            onClick={postComment}
-                        >
-                            <SendSvg/>
-                        </MyTransparentButton>
+                { isNewCommentLoading
+                    ? <MyPulseLoader size={8}/>
+                    :
+                    <div>
+                        <div>
+                            <MyTransparentButton
+                                className={style.sendBtn}
+                                onClick={postComment}
+                            >
+                                <SendSvg/>
+                            </MyTransparentButton>
+                        </div>
+                        { editValue ?
+                            <MyTransparentButton
+                                className={style.sendBtn + ' ' + style.cancelBtn}
+                                onClick={callbackOnSuccess}
+                                tooltip="Cancel"
+                            >
+                                ✗
+                            </MyTransparentButton>
+                        : <></>}
+                    </div>
                 }
             </div>
             <FadingMessage

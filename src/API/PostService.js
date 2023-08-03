@@ -12,12 +12,22 @@ export default class PostService {
         formData.append("groupname", groupname)
         formData.append("text", text)
         formData.append("isAnonymous", isAnonymous)
-        if (images.length > 0) {
-            for (let i = 0; i < images.length; i++) {
-                formData.append("images", images[i])
-            }
+        for (let i = 0; i < images.length; i++) {
+            formData.append("images", images[i])
         }
         return await postBodyRequestWithAuth("/post", formData)
+    }
+
+    static async editPost(oldImageNames, newImages, text, id) {
+        let formData = new FormData()
+        formData.append("text", text)
+        for (let i = 0; i < newImages.length; i++) {
+            formData.append("newImages", newImages[i])
+        }
+        for (let i = 0; i < oldImageNames.length; i++) {
+            formData.append("oldImages", oldImageNames[i].name)
+        }
+        return await putRequestWithAuth("/post/" + id, formData)
     }
 
     static async getPostPage(id) {
