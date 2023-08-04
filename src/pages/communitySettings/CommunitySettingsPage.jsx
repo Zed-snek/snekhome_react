@@ -58,6 +58,7 @@ function CommunitySettingsPage() {
                     setIsLoader={setIsLoader}
                     groupname={params.groupname}
                     communityType={data.community.type}
+                    isCommunityClosed={data.community.closed}
                 />
             case 4:
                 return <CommunityRulesSettings
@@ -143,6 +144,7 @@ function CommunitySettingsPage() {
                                 communityType={data.community.type}
                                 setError={setError}
                                 setIsLoader={setIsLoader}
+                                isCommunityClosed={data.community.closed}
                             />
                         </div>
                         : <OutlineDiv>

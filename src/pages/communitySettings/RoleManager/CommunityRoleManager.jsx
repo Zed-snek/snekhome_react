@@ -7,11 +7,12 @@ import OverContentDiv from "../../../components/UI/blocks/OverContentDiv";
 import {useGetRoles} from "../useGetRoles";
 import {useDocumentTitle} from "usehooks-ts";
 
-function CommunityRoleManager({communityType, groupname, setError, setIsLoader}) {
+function CommunityRoleManager({communityType, groupname, isCommunityClosed, setError, setIsLoader}) {
 
     useDocumentTitle("Role manager")
 
-    const [typesToMap, roles, setRoles] = useGetRoles(setError, setIsLoader, groupname, communityType)
+    const [typesToMap, roles, setRoles] =
+        useGetRoles(setError, setIsLoader, groupname, communityType, isCommunityClosed)
 
     const [isShowCreateForm, setIsShowCreateForm] = useState(false)
 

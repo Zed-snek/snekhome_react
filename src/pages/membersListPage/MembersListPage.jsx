@@ -17,7 +17,7 @@ import CommunityRoleFlair from "../../components/community/CommunityRoleFlair";
 import MoreOptionsButton from "../../components/UI/navigation/MoreOptionsButton";
 import CommunityRoleListToSet from "../communitySettings/Users/CommunityRoleListToSet";
 
-function MembersListPage({permissions, communityType, setError, setIsLoader}) {
+function MembersListPage({permissions, communityType, isCommunityClosed, setError, setIsLoader}) {
 
     const params = useParams()
     useDocumentTitle('Members - ' + params.groupname)
@@ -189,6 +189,7 @@ function MembersListPage({permissions, communityType, setError, setIsLoader}) {
                         groupname={params.groupname}
                         communityType={communityType}
                         setUsers={setData}
+                        isCommunityClosed={isCommunityClosed}
                     />
                     : ''
             }

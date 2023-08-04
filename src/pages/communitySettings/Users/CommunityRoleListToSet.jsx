@@ -6,9 +6,11 @@ import style from "./CommunityRoleListToSet.module.css";
 import CommunityRoleItem from "../RoleManager/CommunityRoleItem";
 import CommunityService from "../../../API/CommunityService";
 
-function CommunityRoleListToSet({visibleAndNickname, setVisibleAndNickname, setError, setIsLoader, groupname, communityType, setUsers}) {
+function CommunityRoleListToSet({visibleAndNickname, setVisibleAndNickname, isCommunityClosed, setError, setIsLoader,
+                                    groupname, communityType, setUsers}) {
 
-    const [typesToMap, roles, setRoles] = useGetRoles(setError, setIsLoader, groupname, communityType)
+    const [typesToMap, roles, setRoles]
+        = useGetRoles(setError, setIsLoader, groupname, communityType, isCommunityClosed)
 
     async function setRole(role) {
         await CommunityService.setRole(visibleAndNickname.nickname, groupname, role.title)
