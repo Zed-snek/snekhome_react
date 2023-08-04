@@ -12,9 +12,9 @@ import MyButton from "../../components/UI/buttons/MyButton";
 import {useParams} from "react-router-dom";
 
 function PostForm({
-      setImages, text, setText, error, onSubmit, isSomethingLoading, srcImages, removeFileByIndex, isAnon /*common*/,
+      setImages, text, setText, error, onSubmit, isSomethingLoading, srcImages, removeFileByIndex /*common*/,
     isAnonAllowed, setIsAnon, /*new post*/
-    isEdit, initialText /*edit post*/
+    isEdit /*edit post*/
 }) {
 
     const params = useParams()
@@ -106,11 +106,10 @@ function PostForm({
                     { isAnonAllowed ?
                         <MyCheckbox
                             label="is post anonymous"
-                            checked={isAnon}
                             onChange={event => setIsAnon(event.target.checked)}
                         />
                         : <></>
-                    }{/*todo: disable checkbox if post is editing*/}
+                    }
 
                     <MyButton onClick={onSubmit}>
                         Submit

@@ -52,7 +52,7 @@ function EditPostPage() {
     }, [oldImages, newImages])
 
     const [fetchEdit, isEditLoading, editError] = useFetching(async () => {
-        await PostService.editPost(oldImages, newImages, text, params.id)
+        await PostService.updatePost(oldImages, newImages, text, params.id)
         navigate("/post/" + params.id)
     })
     useEffect(() => {
@@ -79,8 +79,6 @@ function EditPostPage() {
                 isSomethingLoading={isEditLoading}
                 srcImages={srcImages}
                 removeFileByIndex={removeFile}
-                isAnon={data.post.anonymous}
-                initialText={data.post.text}
             />
         );
     else

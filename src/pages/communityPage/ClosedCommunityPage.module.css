@@ -34,4 +34,6 @@
 
 .button {
     margin-top: 10px;
+    height: 42px;
+    min-width: 130px;
 }

@@ -68,6 +68,7 @@ function CommunityPage() {
                     name={data.name}
                     nameColor={getGroupnameColor()}
                     typeImage={getTypeImage()}
+                    isRequestSent={data.requestSent}
                 />
             );
         else

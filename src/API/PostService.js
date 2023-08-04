@@ -18,7 +18,7 @@ export default class PostService {
         return await postBodyRequestWithAuth("/post", formData)
     }
 
-    static async editPost(oldImageNames, newImages, text, id) {
+    static async updatePost(oldImageNames, newImages, text, id) {
         let formData = new FormData()
         formData.append("text", text)
         for (let i = 0; i < newImages.length; i++) {
@@ -41,6 +41,8 @@ export default class PostService {
     static async deletePost(id) {
         return await deleteRequestWithAuth(`/post/${id}`)
     }
+
+
 
     static async changeCommentaryRating(id, newStatus) {
         return await postParamsRequestWithAuth(`/commentary/${id}/rate/${newStatus}`)

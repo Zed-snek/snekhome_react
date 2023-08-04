@@ -63,7 +63,6 @@ function NewPostPage() {
             isSomethingLoading={isPostLoading}
             srcImages={srcImages}
             removeFileByIndex={removeFile}
-            isAnon={isAnon}
             setIsAnon={setIsAnon}
             isAnonAllowed={data.community.anonAllowed}
         />

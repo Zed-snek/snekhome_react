@@ -1,10 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import style from "./ClosedCommunityPage.module.css";
 import communityPage from "./CommunityPage.module.css";
 import MyButton from "../../components/UI/buttons/MyButton";
 import InfoDiv from "../../components/UI/blocks/InfoDiv";
+import {useFetching} from "../../hooks/useFetching";
+import MyMessage from "../../components/UI/message/MyMessage";
+import MyPulseLoader from "../../components/UI/loaders/MyPulseLoader";
+import CommunityService from "../../API/CommunityService";
 
-function ClosedCommunityPage({image, groupname, name, nameColor, typeImage}) {
+function ClosedCommunityPage({image, groupname, name, nameColor, typeImage, isRequestSent}) {
+
+    const [buttonStatus, setButtonStatus] = useState(isRequestSent)
+
+    const [fetchRequest, isRequestLoading, requestError] = useFetching(async () => {
+        await CommunityService.manageJoinRequest(groupname)
+        setButtonStatus(prev => !prev)
+    })
 
     return (
         <div className={style.main}>
@@ -15,7 +26,7 @@ function ClosedCommunityPage({image, groupname, name, nameColor, typeImage}) {
                 <InfoDiv className={style.community}>
                     <div>
                         <div className={communityPage.imgDiv}>
-                            <img src={image} />
+                            <img src={image} alt=""/>
                         </div>
                         <div className={communityPage.groupname}>
                             @{groupname}
@@ -37,8 +48,18 @@ function ClosedCommunityPage({image, groupname, name, nameColor, typeImage}) {
                 <div className={style.text}>
                     To send request to join the community, click the button below
                 </div>
-                <MyButton className={style.button}>
-                    Send request
+                <MyMessage>
+                    {requestError}
+                </MyMessage>
+
+                <MyButton
+                    className={style.button}
+                    onClick={() => fetchRequest()}
+                >
+                    { isRequestLoading
+                        ? <MyPulseLoader color="#E3E3E3" size={7}/>
+                        : buttonStatus ? "Cancel request" : "Send request"
+                    }
                 </MyButton>
             </div>
         </div>

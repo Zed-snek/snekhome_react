@@ -86,4 +86,8 @@ export default class CommunityService {
         return await putRequestWithAuth(`/community/${groupname}/democracy`, newSettings)
     }
 
+    static async manageJoinRequest(groupname) {
+        return await postParamsRequestWithAuth(`/community/${groupname}/request`)
+    }
+
 }
