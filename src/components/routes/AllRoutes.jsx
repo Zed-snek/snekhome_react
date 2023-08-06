@@ -65,6 +65,7 @@ function AllRoutes() {
             <Route path='/communities/:nickname' element={<CommunityListPage />} />
             <Route path='/friends/:nickname' element={<FriendsListPage />} />
             <Route path='/members/:groupname' element={<MembersListPage />} />
+            <Route path='/join_requests/:groupname' element={<h2>Join requests</h2>} />
             <Route path='/not_found' element={<NotFound />} />
             <Route path='/info' element={<InfoPage />} />
 
