@@ -105,6 +105,12 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
 
                 </div>
 
+                { (data.currentUserRole.inviteUsers || data.community.type === "ANARCHY")  && data.joinRequests > 0 ?
+                    <Link to={'/join_requests/' + groupname} className={style.members}>
+                        join requests ({data.joinRequests})
+                    </Link>
+                : <></>}
+
                 <Link to={'/members/' + groupname} className={style.members}>
                     members ({data.members})
                 </Link>

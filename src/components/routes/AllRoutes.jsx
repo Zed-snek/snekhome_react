@@ -22,6 +22,7 @@ import MembersListPage from "../../pages/membersListPage/MembersListPage";
 import NewPostPage from "../../pages/newPost/NewPostPage";
 import PostPage from "../../pages/postPage/PostPage";
 import EditPostPage from "../../pages/newPost/EditPostPage";
+import JoinRequestsPage from "../../pages/joinRequests/JoinRequestsPage";
 
 
 function AllRoutes() {
@@ -65,6 +66,7 @@ function AllRoutes() {
             <Route path='/communities/:nickname' element={<CommunityListPage />} />
             <Route path='/friends/:nickname' element={<FriendsListPage />} />
             <Route path='/members/:groupname' element={<MembersListPage />} />
+            <Route path='/join_requests/:groupname' element={<JoinRequestsPage />} />
             <Route path='/not_found' element={<NotFound />} />
             <Route path='/info' element={<InfoPage />} />
 

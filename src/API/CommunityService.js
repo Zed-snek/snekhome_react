@@ -90,4 +90,8 @@ export default class CommunityService {
         return await postParamsRequestWithAuth(`/community/${groupname}/request`)
     }
 
+    static async getJoinRequests(groupname) {
+        return await getRequestWithAuth(`/community/${groupname}/request`)
+    }
+
 }
