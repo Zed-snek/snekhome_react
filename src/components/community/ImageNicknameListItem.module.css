@@ -1,0 +1,16 @@
+.main {
+    display: flex;
+    background-color: rgba(219, 219, 219, 0.1);
+    padding: 5px 15px;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.leftDiv {
+    display: flex;
+    gap: 10px;
+}
+
+.link {
+    font-size: 18px;
+}

@@ -94,4 +94,12 @@ export default class CommunityService {
         return await getRequestWithAuth(`/community/${groupname}/request`)
     }
 
+    static async acceptJoinRequest(groupname, nickname) {
+        return await postParamsRequestWithAuth(`/community/${groupname}/request/${nickname}`)
+    }
+
+    static async cancelJoinRequest(groupname, nickname) {
+        return await deleteRequestWithAuth(`/community/${groupname}/request/${nickname}`)
+    }
+
 }
