@@ -1,4 +1,5 @@
 import {postBodyRequest, postParamsRequest, putRequestWithAuth} from "./requestFunctions";
+import api from "./apiConfiguration";
 
 export default class AuthService {
 
@@ -20,6 +21,17 @@ export default class AuthService {
 
     static async changeEmail(address) {
         return await putRequestWithAuth("/user/email", { email: address } )
+    }
+
+    static async refreshToken() {
+        const token = localStorage.getItem('refreshToken')
+        return (await api.post("/user/refresh-token", null,
+            {
+                headers: {
+                    Authorization: token
+                }
+            }
+            )).data
     }
 
 }

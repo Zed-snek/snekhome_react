@@ -17,10 +17,10 @@ function Login(props) {
     const [fetchLogin, isLoginLoading, loginError] = useFetching(async () => {
         const data = await AuthService.loginUser(userData)
         localStorage.setItem('authToken', 'Bearer ' + data.token)
+        localStorage.setItem('refreshToken', 'Bearer ' + data.refreshToken)
         localStorage.setItem('auth', 'true')
         props.setVisible(false)
         setIsAuth(true)
-
     })
 
     function login(login, pass) {

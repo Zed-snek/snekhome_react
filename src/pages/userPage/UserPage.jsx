@@ -22,20 +22,10 @@ function UserPage() {
     const params = useParams()
     const {setUserImage} = useContext(UserContext)
 
-    const [user, setUser] = useState({
-        communities: '',
-        friends: '',
-        friendshipType: '',
-        name: '',
-        nickname: '',
-        nicknameColor: '',
-        surname: '',
-        images: [],
-        tags: []
-    })
-    useDocumentTitle(user.nickname)
+    const [user, setUser] = useState()
+    useDocumentTitle(params.nickname)
 
-    const isCurrentUser = useIsCurrentUser(user.nickname)
+    const isCurrentUser = useIsCurrentUser(params.nickname)
 
     const [isImageModal, setIsImageModal] = useState(false)
 
@@ -44,12 +34,12 @@ function UserPage() {
         setUser(data)
         console.log(data)
     })
+    useNotFoundNavigate(userError)
 
     useEffect(() => {
         fetchUser()
     }, [params.nickname])
 
-    useNotFoundNavigate(userError)
 
     function setFriendshipType(type) {
         setUser({...user, friendshipType: type})
@@ -57,9 +47,10 @@ function UserPage() {
 
     return (
         <div className={style.main}>
-            <MySyncLoader loading={isUserLoading} />
+            <MySyncLoader loading={isUserLoading || !user} />
 
-            <OutlineDiv className="flexDiv"> {/*User div*/}
+            { user ?
+                <OutlineDiv className="flexDiv"> {/*User div*/}
 
                 <div className={style.imageDiv}>
                     <OverImageDiv className={style.overImage} style={{color: user.nicknameColor}} sizeByLength={true}>
@@ -95,7 +86,7 @@ function UserPage() {
 
                     <InfoDiv className={style.nicknameDiv}>
                         <div className={style.name}>
-                            <div className={style.nickname} >
+                            <div className={style.nickname}>
                                 {user.name + " " + user.surname}
                             </div>
                         </div>
@@ -111,7 +102,7 @@ function UserPage() {
 
                         <div className={style.communitiesFriendsDiv}>
                             <Link to={"/communities/" + user.nickname} className={style.friendsBtn}>
-                                <div>joined communities ({user.communities}) </div>
+                                <div>joined communities ({user.communities})</div>
                             </Link>
                             <Link to={"/friends/" + user.nickname} className={style.friendsBtn}>
                                 <div>friends ({user.friends})</div>
@@ -122,21 +113,21 @@ function UserPage() {
                             <h5>About</h5>
 
                             <div className={style.tagsMap}>
-                            {user.tags.map(tag =>
-                                <InfoTag
-                                    key={tag.idTag}
-                                    title={tag.title}
-                                    text={tag.text}
-                                />
-                            )}
+                                {user.tags.map(tag =>
+                                    <InfoTag
+                                        key={tag.idTag}
+                                        title={tag.title}
+                                        text={tag.text}
+                                    />
+                                )}
                             </div>
 
                         </div>
 
                     </InfoDiv>
                 </div>
-
             </OutlineDiv>
+            : <></>}
         </div>
     );
 }
