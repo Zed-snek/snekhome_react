@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import CloseButton from "react-bootstrap/CloseButton";
 import {useForm} from "react-hook-form";
 import './ModalLogin.css';
-import MyButton from "../../UI/buttons/MyButton";
-import MyInput from "../../UI/inputs/MyInput";
-import MyTextLink from "../../UI/links/MyTextLink";
-import MyMessage from "../../UI/message/MyMessage";
+import MyButton from "../UI/buttons/MyButton";
+import MyInput from "../UI/inputs/MyInput";
+import MyTextLink from "../UI/links/MyTextLink";
+import MyMessage from "../UI/message/MyMessage";
 
 
 function ModalLogin(props) {

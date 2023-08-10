@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
-import {useFetching} from "../../../hooks/useFetching";
-import AuthService from "../../../API/AuthService";
+import {useEffect} from 'react';
+import {useFetching} from "../../hooks/useFetching";
+import AuthService from "../../API/AuthService";
 import {useNavigate, useParams} from "react-router-dom";
-import MySyncLoader from "../../UI/loaders/MySyncLoader";
-import MyMessage from "../../UI/message/MyMessage";
+import MySyncLoader from "../UI/loaders/MySyncLoader";
+import MyMessage from "../UI/message/MyMessage";
 
 function VerifyPage() {
 

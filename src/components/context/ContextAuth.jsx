@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {AuthContext} from "./index";
 
 
@@ -12,7 +12,7 @@ function ContextAuth({children}) {
             setIsAuth(true)
         }
         setIsLoading(false)
-    }, [] )
+    }, [])
 
 
     return (
