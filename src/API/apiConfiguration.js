@@ -27,9 +27,16 @@ api.interceptors.response.use((response) => {
     const originalRequest = error.config;
     if (error.response.status === 403 && !originalRequest._retry) {
         originalRequest._retry = true;
-        const access_token = await AuthService.refreshToken();
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
-        return api(originalRequest);
+        try {
+            const access_token = await AuthService.refreshToken()
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
+            return api(originalRequest);
+        } catch (e) {
+            if (e.response.status === 403) {
+                window.location.replace("/logout")
+            }
+            return Promise.reject(error);
+        }
     }
     return Promise.reject(error);
 });

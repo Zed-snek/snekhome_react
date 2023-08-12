@@ -8,8 +8,8 @@ import NavigationBar from "./components/navigationBar/NavigationBar";
 import Container from "react-bootstrap/Container";
 import MyContextProvider from "./components/context/MyContextProvider";
 
-
 function App() {
+
     return (
         <div className="App">
 
