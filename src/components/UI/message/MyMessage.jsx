@@ -1,15 +1,15 @@
 import React from 'react';
 import style from './MyMessage.module.css'
+import {useClasses} from "../../../hooks/useClasses";
 
-function MyMessage({children, ...props}) {
+function MyMessage({children, className, ...props}) {
 
-    const classes = [style.message]
-    if (!children) {
-        classes.push(style.displayNone)
-    }
+    let classes = useClasses(style.message, className)
+    if (!children)
+        classes += ' ' + style.displayNone
 
     return (
-        <div className={classes.join(' ')} {...props}>
+        <div className={classes} {...props}>
             {children}
         </div>
     );

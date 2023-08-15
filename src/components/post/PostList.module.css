@@ -1,0 +1,14 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.error {
+    max-width: 600px;
+}
+
+.loaderDiv {
+    display: flex;
+    justify-content: center;
+}

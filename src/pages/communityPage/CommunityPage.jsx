@@ -19,6 +19,7 @@ import {toOnlyFirstLetterUpperCase} from "../../functions/stringFunctions";
 import CommunityTypeBlock from "./CommunityTypeBlock";
 import {useFetchCommunity} from "./useFetchCommunity";
 import {AuthContext} from "../../components/context";
+import PostList from "../../components/post/PostList";
 
 function CommunityPage() {
 
@@ -114,6 +115,12 @@ function CommunityPage() {
                             />
                         </div>
                     </OutlineFilledDiv>
+
+                    <PostList
+                        loadType="COMMUNITY"
+                        entityName={params.groupname}
+                    />
+
                 </div>
 
                 <div className={style.additionalInfoBlock}>

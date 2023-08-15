@@ -1,6 +1,6 @@
 import {
     deleteRequestWithAuth,
-    getRequest,
+    getRequest, getRequestWithAuth,
     postBodyRequestWithAuth,
     postParamsRequestWithAuth, putRequestWithAuth
 } from "./requestFunctions";
@@ -62,6 +62,18 @@ export default class PostService {
 
     static async deleteComment(id) {
         return await deleteRequestWithAuth(`/commentary/${id}`)
+    }
+
+    static async getPostsForUserPage(nickname, page) {
+        return await getRequest(`/user/posts/${nickname}?page=${page}`)
+    }
+
+    static async getPostsForCommunityPage(groupname, page) {
+        return await getRequest(`/community/posts/${groupname}?page=${page}`)
+    }
+
+    static async getPostsForHomePage(page) {
+        return await getRequestWithAuth(`/user/posts/home?page=${page}`)
     }
 
 }
