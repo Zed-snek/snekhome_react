@@ -163,7 +163,7 @@ function CreateCommunityPage() {
     }
 
     return (
-        <OutlineDiv>
+        <OutlineDiv className={style.outlineDiv}>
             <InfoDiv className={style.main}>
 
                 <h2>
@@ -187,7 +187,6 @@ function CreateCommunityPage() {
             >
                 {messageModal}
             </MessageModal>
-
         </OutlineDiv>
     );
 }

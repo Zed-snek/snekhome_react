@@ -127,7 +127,7 @@ function UserPage() {
                     </InfoDiv>
                 </div>
             </OutlineDiv>
-            : <></>}
+            : <></> }
         </div>
     );
 }

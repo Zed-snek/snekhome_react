@@ -130,6 +130,7 @@ function FriendsListPage() {
                         {content()}
                     </div>
                 </OutlineDiv>
+                <br/>
         </MidSizeContent>
     );
 }

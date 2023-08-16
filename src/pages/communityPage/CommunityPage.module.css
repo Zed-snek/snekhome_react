@@ -8,11 +8,8 @@
 
 @media (max-width: 1400px) {
     .bannerDiv {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    .rightDiv {
-        align-items: flex-start;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
     }
 }
 
@@ -68,11 +65,12 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    height: 158px;
+
+    flex: 1;
 }
 
 .owner {
-    margin-top: 10px;
+    margin-top: 5px;
     flex: 1;
 }
 

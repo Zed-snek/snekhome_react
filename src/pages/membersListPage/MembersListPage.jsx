@@ -167,7 +167,7 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
                                 underIdContent={user.communityRole
                                     ? <CommunityRoleFlair
                                             title={user.communityRole.title}
-                                            color={user.communityRole.bannerColor}
+                                            bannerColor={user.communityRole.bannerColor}
                                             textColor={user.communityRole.textColor}
                                     />
                                     : ''
@@ -178,7 +178,7 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
                 }
 
             </OutlineDiv>
-
+            <br/>
             {
                 permissions ?
                     <CommunityRoleListToSet

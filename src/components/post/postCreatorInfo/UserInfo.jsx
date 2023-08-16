@@ -22,7 +22,7 @@ function UserInfo({image, nickname, flair}) {
                             <CommunityRoleFlair
                                 title={flair.title}
                                 textColor={flair.textColor}
-                                color={flair.color}
+                                bannerColor={flair.color}
                             />
                         </div>
                         : <></>

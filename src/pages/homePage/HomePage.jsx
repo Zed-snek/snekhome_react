@@ -21,6 +21,7 @@ function HomePage() {
                         Post
                     </OutlineDiv>
                 </div>
+                <br/>
             </div>
             <OutlineDiv className={style.cards}>
                 <HomePageCards />

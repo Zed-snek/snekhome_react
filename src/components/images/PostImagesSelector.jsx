@@ -7,10 +7,12 @@ import MyTransparentButton from "../UI/buttons/MyTransparentButton";
 import ArrowLeft from "../UI/svg/ArrowLeft";
 import ArrowRight from "../UI/svg/ArrowRight";
 import {useClasses} from "../../hooks/useClasses";
+import MyBlurredDiv from "../UI/blocks/MyBlurredDiv";
 
 function PostImagesSelector({images, isImageForm, width, height, className, imgClassName}) {
 
-    const [turnLeft, turnRight, currentImage] = useImages(images, null, true)
+    const [turnLeft, turnRight, currentImage, currentIndex, isShowArrows]
+        = useImages(images, null, true)
 
     const classes = useClasses(style.main, className)
 
@@ -29,22 +31,24 @@ function PostImagesSelector({images, isImageForm, width, height, className, imgC
                     className={imgClassName}
                 />
             </div>
-            {
-                images.length > 1 ?
-                    <>
-                        <div className={style.btnDiv + " " + style.leftBtn}>
-                            <MyTransparentButton onClick={turnLeft} className={btnStyle.arrowBtn}>
-                                <ArrowLeft/>
-                            </MyTransparentButton>
-                        </div>
-                        <div className={style.btnDiv + " " + style.rightBtn}>
-                            <MyTransparentButton onClick={turnRight} className={btnStyle.arrowBtn}>
-                                <ArrowRight/>
-                            </MyTransparentButton>
-                        </div>
-                    </>
-                : <></>
-            }
+            { isShowArrows ?
+                <>
+                    <div className={style.btnDiv + " " + style.leftBtn}>
+                        <MyTransparentButton onClick={turnLeft} className={btnStyle.arrowBtn}>
+                            <ArrowLeft/>
+                        </MyTransparentButton>
+
+                    </div>
+                    <div className={style.btnDiv + " " + style.rightBtn}>
+                        <MyTransparentButton onClick={turnRight} className={btnStyle.arrowBtn}>
+                            <ArrowRight/>
+                        </MyTransparentButton>
+                    </div>
+                    <MyBlurredDiv className={style.btnDiv + " " + style.imageCount}>
+                        {currentIndex + 1 + '/' + images.length}
+                    </MyBlurredDiv>
+                </>
+                : <></> }
         </div>
     );
 }

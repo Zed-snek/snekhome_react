@@ -77,6 +77,7 @@ function JoinRequestsPage() {
                             )
                         }
                     </OutlineDiv>
+                    <br/>
                 </div>
             </div>
         );

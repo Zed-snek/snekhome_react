@@ -76,7 +76,7 @@ function CreateCommunityRoleFlair({flair, setFlair}) {
                 </div>
                 <CommunityRoleFlair
                     title={flair.title}
-                    color={color}
+                    bannerColor={color}
                     textColor={flair.textColor}
                 />
             </div>

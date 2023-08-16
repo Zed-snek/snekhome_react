@@ -8,10 +8,12 @@ import ArrowLeft from "../UI/svg/ArrowLeft";
 import ArrowRight from "../UI/svg/ArrowRight";
 import MyBlurredButton from "../UI/buttons/MyBlurredButton";
 import MessageModal from "../UI/modal/MessageModal";
+import MyBlurredDiv from "../UI/blocks/MyBlurredDiv";
 
 function ImageSelectorModal({array, setArray, visible, setVisible, isDeletePermission, format}) { //formats: "user", "community"
 
-    const [turnLeft, turnRight, currentImage, deleteCurrentImage] = useImages(array, setArray)
+    const [turnLeft, turnRight, currentImage, currentIndex, isShowArrows, deleteCurrentImage]
+        = useImages(array, setArray)
     const [isDeleteModal, setIsDeleteModal] = useState(false)
 
     function showImage() {
@@ -29,12 +31,17 @@ function ImageSelectorModal({array, setArray, visible, setVisible, isDeletePermi
         >
             <div className={style.main}>
                 <div>
-                    <MyTransparentButton onClick={turnLeft} className={style.arrowBtn}>
-                        <ArrowLeft />
-                    </MyTransparentButton>
+                    { isShowArrows ?
+                        <MyTransparentButton onClick={turnLeft} className={style.arrowBtn}>
+                            <ArrowLeft />
+                        </MyTransparentButton>
+                    : <></> }
                 </div>
                 <div className={style.imageDiv}>
                     {showImage()}
+                    <MyBlurredDiv className={style.imagesCount}>
+                        { (currentIndex + 1) + '/' + array.length }
+                    </MyBlurredDiv>
                     {
                         isDeletePermission ?
                             <div className={style.deleteBtn}>
@@ -53,9 +60,11 @@ function ImageSelectorModal({array, setArray, visible, setVisible, isDeletePermi
                     }
                 </div>
                 <div>
-                    <MyTransparentButton onClick={turnRight} className={style.arrowBtn}>
-                        <ArrowRight />
-                    </MyTransparentButton>
+                    { isShowArrows ?
+                        <MyTransparentButton onClick={turnRight} className={style.arrowBtn}>
+                            <ArrowRight />
+                        </MyTransparentButton>
+                    : <></> }
                 </div>
             </div>
         </TransparentModal>

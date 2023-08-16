@@ -136,8 +136,7 @@ function CommunitySettingsPage() {
                     {error}
                 </MessageModal>
 
-                {
-                    page === 3
+                { page === 3
                         ? <div className={style.membersListPage}>
                             <MembersListPage
                                 permissions={data.currentUserRole}
@@ -152,8 +151,8 @@ function CommunitySettingsPage() {
                                 {content()}
                             </InfoDiv>
                         </OutlineDiv>
-
                 }
+                <br/>
             </div>
         </div>
     );

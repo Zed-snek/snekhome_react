@@ -19,9 +19,17 @@
 .imageDiv {
     position: relative;
 }
-.deleteBtn {
+
+.deleteBtn, .imagesCount {
     position: absolute;
     bottom: 13px;
+}
+
+.imagesCount {
+    left: 13px;
+}
+
+.deleteBtn {
     right: 13px;
 }
 

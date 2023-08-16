@@ -20,7 +20,7 @@ function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, 
                 <CommunityRoleFlair
                     title={role.title}
                     textColor={role.textColor}
-                    color={role.bannerColor}
+                    bannerColor={role.bannerColor}
                 />
             </div>
 

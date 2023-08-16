@@ -111,7 +111,7 @@ function SettingsPage() {
                 <OutlineDiv>
                     {content()}
                 </OutlineDiv>
-
+                <br/>
             </div>
         </div>
     );

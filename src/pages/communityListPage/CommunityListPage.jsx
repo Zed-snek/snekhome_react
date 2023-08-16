@@ -64,49 +64,50 @@ function CommunityListPage() {
 
     return (
         <MidSizeContent>
-                <h4 className={style.title}>
-                    {isCurrent ? 'Communities you have joined' : `Communities ${params.nickname} has joined`}
-                </h4>
-                <OutlineDiv>
-                    <MyMessage>
-                        {message}
-                    </MyMessage>
+            <h4 className={style.title}>
+                {isCurrent ? 'Communities you have joined' : `Communities ${params.nickname} has joined`}
+            </h4>
+            <OutlineDiv>
+                <MyMessage>
+                    {message}
+                </MyMessage>
 
-                    <MySyncLoader loading={fetchLoading}/>
+                <MySyncLoader loading={fetchLoading}/>
 
-                    <BooleanBlock bool={!fetchLoading && data.length > 0}>
-                        <MyGreyInput
-                            onChange={event => setSearchQuery(event.target.value)}
-                            placeholder="search communities..."
-                        />
-                    </BooleanBlock>
+                <BooleanBlock bool={!fetchLoading && data.length > 0}>
+                    <MyGreyInput
+                        onChange={event => setSearchQuery(event.target.value)}
+                        placeholder="search communities..."
+                    />
+                </BooleanBlock>
 
-                    <div>
-                        {
-                            searchedElements.map((c, index) =>
-                                <ListItemBlock
-                                    key={index}
-                                    image={getCommunityImage(c.image)}
-                                    title={c.name}
-                                    link={"/c/" + c.groupname}
-                                    idName={c.groupname}
-                                    buttonContent={isCurrent ? 'Leave' : ''}
-                                    buttonClick={() => manageCommunity(index)}
-                                    rightCornerContent={
-                                        <span className={style.members}>
-                                            members ({c.members})
-                                        </span>
-                                    }
-                                    underIdContent={
-                                        <div className={style.description}>
-                                            {limitTextByLength(c.description + c.description, 220)}
-                                        </div>
-                                    }
-                                />
-                            )
-                        }
-                    </div>
-                </OutlineDiv>
+                <div>
+                    {
+                        searchedElements.map((c, index) =>
+                            <ListItemBlock
+                                key={index}
+                                image={getCommunityImage(c.image)}
+                                title={c.name}
+                                link={"/c/" + c.groupname}
+                                idName={c.groupname}
+                                buttonContent={isCurrent ? 'Leave' : ''}
+                                buttonClick={() => manageCommunity(index)}
+                                rightCornerContent={
+                                    <span className={style.members}>
+                                        members ({c.members})
+                                    </span>
+                                }
+                                underIdContent={
+                                    <div className={style.description}>
+                                        {limitTextByLength(c.description + c.description, 220)}
+                                    </div>
+                                }
+                            />
+                        )
+                    }
+                </div>
+            </OutlineDiv>
+            <br/>
         </MidSizeContent>
     );
 }

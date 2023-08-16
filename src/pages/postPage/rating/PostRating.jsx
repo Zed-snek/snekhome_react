@@ -17,9 +17,9 @@ function PostRating({rating, addRating, rateStatus, setRatingStatus, idPost}) { 
 
             <div>
                 <div className={style.postRatingBtn} onClick={() => upvote()}>
-                    <div
-                        className={status === "UPVOTE" ? style.postSvgDiv + " " + style.postSvgDivActive : style.postSvgDiv}
-                    >
+                    <div className={
+                            status === "UPVOTE" ? style.postSvgDiv + " " + style.postSvgDivActive : style.postSvgDiv
+                    }>
                         <ArrowUp />
                     </div>
                     <div className={style.postBtnTitle}>
@@ -28,9 +28,9 @@ function PostRating({rating, addRating, rateStatus, setRatingStatus, idPost}) { 
                 </div>
 
                 <div className={style.postRatingBtn} onClick={() => downvote()}>
-                    <div
-                        className={status === "DOWNVOTE" ? style.postSvgDiv + " " + style.postSvgDivActive : style.postSvgDiv}
-                    >
+                    <div className={
+                        status === "DOWNVOTE" ? style.postSvgDiv + " " + style.postSvgDivActive : style.postSvgDiv
+                    }>
                         <ArrowDown />
                     </div>
                     <div className={style.postBtnTitle}>

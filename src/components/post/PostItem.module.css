@@ -1,3 +1,4 @@
 .main {
     max-width: 968px;
+    display: flex;
 }
