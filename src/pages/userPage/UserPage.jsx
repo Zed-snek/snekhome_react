@@ -16,6 +16,7 @@ import MyBlurredButton from "../../components/UI/buttons/MyBlurredButton";
 import ImageSelectorModal from "../../components/images/ImageSelectorModal";
 import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
 import {UserContext} from "../../components/context";
+import PostList from "../../components/post/PostList";
 
 function UserPage() {
 
@@ -42,7 +43,7 @@ function UserPage() {
 
 
     function setFriendshipType(type) {
-        setUser({...user, friendshipType: type})
+        setUser(prev => ({...prev, friendshipType: type}))
     }
 
     return (
@@ -128,6 +129,13 @@ function UserPage() {
                 </div>
             </OutlineDiv>
             : <></> }
+
+            <div className={style.postList}>
+                <PostList
+                    loadType="USER"
+                    entityName={params.nickname}
+                />
+            </div>
         </div>
     );
 }

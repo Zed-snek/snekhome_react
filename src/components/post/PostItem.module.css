@@ -1,4 +1,28 @@
 .main {
     max-width: 968px;
     display: flex;
+    gap: 12px;
+}
+
+.imageTextDiv {
+    max-width: 454px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.imageSelector {
+    width: 454px;
+}
+.image {
+    border-radius: 4px;
+}
+
+.text {
+    padding: 4px 7px;
+    border-radius: 4px;
+}
+
+.verticalLine {
+    border-left: 1px #949494 solid;
 }

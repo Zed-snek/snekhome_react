@@ -25,7 +25,7 @@ function RegisterPage() {
     const [errorMessage, setErrorMessage] = useState('')
     const [messageModal, setMessageModalVisible] = useState(false)
 
-    const [fetchRegister, isRegisterLoading, registerError] = useFetching( async () => {
+    const [fetchRegister, isRegisterLoading, registerError] = useFetching(async () => {
         await AuthService.registerUser(userData)
         setMessageModalVisible(true)
     })

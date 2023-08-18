@@ -46,6 +46,9 @@ function PostList({loadType, entityName}) { //loadType: HOME / COMMUNITY / USER
                         rating={item.rating}
                         ratedType={item.ratedType}
                         date={item.post.date}
+                        isAnon={item.post.anonymous}
+                        commentaries={item.commentaries}
+                        commentsAmount={item.comments}
                         image={ loadType === "COMMUNITY" && !item.post.anonymous
                             ? item.userImage
                             : item.groupImage
@@ -55,9 +58,9 @@ function PostList({loadType, entityName}) { //loadType: HOME / COMMUNITY / USER
                             textColor: item.roleTextColor,
                             bannerColor: item.roleBannerColor
                         } : null }
-                        isAnon={item.post.anonymous}
-                        commentaries={item.commentaries}
-                        commentsAmount={item.comments}
+                        userNickname={item.userNickname}
+                        groupname={item.groupname}
+                        groupTitle={item.groupTitle}
                     />
                 )
                 : <></>

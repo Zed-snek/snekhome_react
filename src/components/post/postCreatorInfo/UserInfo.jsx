@@ -1,4 +1,3 @@
-import React from 'react';
 import style from "./PostCreatorInfo.module.css";
 import CommunityRoleFlair from "../../community/CommunityRoleFlair";
 import {useNavigate} from "react-router-dom";
@@ -22,7 +21,7 @@ function UserInfo({image, nickname, flair}) {
                             <CommunityRoleFlair
                                 title={flair.title}
                                 textColor={flair.textColor}
-                                bannerColor={flair.color}
+                                bannerColor={flair.bannerColor}
                             />
                         </div>
                         : <></>

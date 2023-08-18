@@ -40,7 +40,7 @@ function AllRoutes() {
                 <Route path='/home'>
                     <Route index element={<HomePage />} />
                 </Route>
-                <Route path='community_settings/:groupname' element={<CommunitySettingsPage />}/>
+                <Route path='/community_settings/:groupname' element={<CommunitySettingsPage />}/>
                 <Route path='/settings' element={<SettingsPage />} />
                 <Route path='/new_post/:groupname' element={<NewPostPage />} />
                 <Route path='/post/:id/edit' element={<EditPostPage />} />

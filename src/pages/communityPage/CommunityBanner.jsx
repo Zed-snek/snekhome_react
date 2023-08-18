@@ -99,7 +99,7 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                         image={getUserImage(data.ownerImage)}
                         nickname={data.ownerNickname}
                         flair={data.community.roles.filter(role => role.creator).map(r => (
-                            {title: r.title, textColor: r.textColor, color: r.bannerColor}
+                            {title: r.title, textColor: r.textColor, bannerColor: r.bannerColor}
                         ))[0]}
                     />
                 </div>
