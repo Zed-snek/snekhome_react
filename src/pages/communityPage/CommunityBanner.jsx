@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import style from "./CommunityPage.module.css";
 import {getCommunityImageByArray, getUserImage} from "../../functions/linkFunctions";
 import ImageSelectorModal from "../../components/images/ImageSelectorModal";
-import {formatCommunityCreationDate} from "../../functions/stringFunctions";
 import UserInfo from "../../components/post/postCreatorInfo/UserInfo";
 import {Link, useNavigate} from "react-router-dom";
 import MyTransparentButton from "../../components/UI/buttons/MyTransparentButton";
@@ -12,6 +11,7 @@ import MyPulseLoader from "../../components/UI/loaders/MyPulseLoader";
 import {useFetching} from "../../hooks/useFetching";
 import CommunityService from "../../API/CommunityService";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
+import {formatDateWithMonthName} from "../../functions/timeDateFunctions";
 
 
 function CommunityBanner({data, setData, groupname, setError, groupnameColor, typeImage}) {
@@ -70,7 +70,7 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                         @{data.community.groupname}
                     </div>
                     <div className={style.date}>
-                        created {formatCommunityCreationDate(data.community.creation)}
+                        created {formatDateWithMonthName(data.community.creation)}
                     </div>
                 </div>
 

@@ -15,7 +15,7 @@ function PostRating({rating, addRating, rateStatus, setRatingStatus, idPost}) { 
                 <RatingValue value={rating}/>
             </div>
 
-            <div>
+            <div className={style.postRatingButtons}>
                 <div className={style.postRatingBtn} onClick={() => upvote()}>
                     <div className={
                             status === "UPVOTE" ? style.postSvgDiv + " " + style.postSvgDivActive : style.postSvgDiv

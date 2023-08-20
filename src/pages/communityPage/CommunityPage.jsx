@@ -17,7 +17,7 @@ import MyTextArea from "../../components/UI/inputs/MyTextArea";
 import SortOutlineButtons from "../../components/UI/navigation/SortOutlineButtons";
 import {toOnlyFirstLetterUpperCase} from "../../functions/stringFunctions";
 import CommunityTypeBlock from "./CommunityTypeBlock";
-import {useFetchCommunity} from "./useFetchCommunity";
+import {useFetchCommunity} from "../../hooks/useFetchCommunity";
 import {AuthContext} from "../../components/context";
 import PostList from "../../components/post/PostList";
 
@@ -134,8 +134,6 @@ function CommunityPage() {
                 </div>
 
             </div>
-
-
 
         </div>
         );

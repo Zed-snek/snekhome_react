@@ -9,9 +9,9 @@ function UserInfo({image, nickname, flair}) {
     return (
         <div className={style.main} onClick={() => {navigate('/u/' + nickname)}}>
             <div>
-                <img src={image} className={"userImage " + style.image} alt=""/>
+                <img src={image} className={"userImage "} alt=""/>
             </div>
-            <div className={style.nicknameAndFlairDiv}>
+            <div>
                 <div className={style.nickname}>
                     {nickname}
                 </div>

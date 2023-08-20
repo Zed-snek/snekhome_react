@@ -1,15 +1,15 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {useFetching} from "../../../hooks/useFetching";
 import PostService from "../../../API/PostService";
-import style from "./Commentary.module.css";
-import MyTextArea from "../../../components/UI/inputs/MyTextArea";
-import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
-import SendSvg from "../../../components/UI/svg/SendSvg";
-import MyPulseLoader from "../../../components/UI/loaders/MyPulseLoader";
-import FadingMessage from "../../../components/UI/message/FadingMessage";
-import {UserContext} from "../../../components/context";
+import style from "./commentary.module.css";
+import MyTextArea from "../../UI/inputs/MyTextArea";
+import MyTransparentButton from "../../UI/buttons/MyTransparentButton";
+import SendSvg from "../../UI/svg/SendSvg";
+import MyPulseLoader from "../../UI/loaders/MyPulseLoader";
+import FadingMessage from "../../UI/message/FadingMessage";
+import {UserContext} from "../../context";
 
-function NewCommentForm({postId, reference, callbackOnSuccess, addComment, idComment, editComment, editValue}) {
+function NewCommentForm({postId, reference, callbackOnSuccess, addComment, idComment, editComment, editValue, rows}) {
 
     const {userImageName, userNickname} = useContext(UserContext)
 
@@ -57,7 +57,7 @@ function NewCommentForm({postId, reference, callbackOnSuccess, addComment, idCom
                 className={style.textarea}
                 placeholder="leave your commentary.."
                 onChange={e => setComment(e.target.value)}
-                rows={2}
+                rows={rows ?? 2}
                 value={comment}
             />
             <div className={style.sendBtnDiv}>

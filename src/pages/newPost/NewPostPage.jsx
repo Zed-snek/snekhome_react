@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {useFetchCommunity} from "../communityPage/useFetchCommunity";
+import {useFetchCommunity} from "../../hooks/useFetchCommunity";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import {useFetching} from "../../hooks/useFetching";
 import PostService from "../../API/PostService";

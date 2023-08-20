@@ -1,8 +1,8 @@
 .main {
     display: flex;
-    justify-content: center;
     padding: 3px 6px;
     border-radius: 8px;
+    gap: 8px;
 }
 
 .main:hover {
@@ -11,10 +11,6 @@
 }
 .main:active {
     background-image: linear-gradient(280deg, #E9105E50 0%, #2D5DB250 99%);
-}
-
-.nicknameAndFlairDiv {
-    margin-left: 8px;
 }
 
 .nickname {
@@ -31,7 +27,7 @@
     line-height: 16px;
 }
 .groupname {
-    font-size: 14px;
+    font-size: 15px;
     color: #949494;
     margin-top: 5px;
 }

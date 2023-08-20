@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import style from "./Commentary.module.css";
-import NewCommentForm from "./NewCommentForm";
+import NewCommentForm from "../../../components/post/commentary/NewCommentForm";
 import {AuthContext} from "../../../components/context";
 import {useParams} from "react-router-dom";
 import {useFetching} from "../../../hooks/useFetching";
@@ -50,11 +50,13 @@ function CommentsListComponent({isPermitToDel, setIsErrorModal, setErrorMessage}
     return (
         <div className={style.commentsListMain}>
             {isAuth ?
-                <NewCommentForm
-                    reference={-1} /*-1 = reference to the post, not to the other comment*/
-                    postId={params.id}
-                    addComment={addComment}
-                />
+                <div className={style.basicCommentForm}>
+                    <NewCommentForm
+                        reference={-1} /*-1 = reference to the post, not to the other comment*/
+                        postId={params.id}
+                        addComment={addComment}
+                    />
+                </div>
             : <></>}
 
             {commentsError ?

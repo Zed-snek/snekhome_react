@@ -1,7 +1,7 @@
-import {useFetching} from "../../hooks/useFetching";
-import CommunityService from "../../API/CommunityService";
+import {useFetching} from "./useFetching";
+import CommunityService from "../API/CommunityService";
 import {useState, useEffect} from "react";
-import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
+import {useNotFoundNavigate} from "./useNotFoundNavigate";
 
 export function useFetchCommunity(groupname) {
 

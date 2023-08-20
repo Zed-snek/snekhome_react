@@ -1,0 +1,41 @@
+/*Input: */
+.commentaryInputDiv {
+    display: flex;
+    gap: 5px;
+    position: relative; /*to error message worked properly*/
+    margin-bottom: 5px;
+}
+.fadingMessage {
+    top: 15px;
+    right: 60px;
+    padding: 5px;
+}
+.textarea {
+    background-color: rgba(219, 219, 219, 0.1) !important;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 14px;
+}
+
+.sendBtnDiv {
+    white-space: nowrap;
+    width: 40px;
+}
+.sendBtn {
+    border-radius: 16px;
+    padding: 2px 3px 3px 2px;
+    background-color: rgba(219, 219, 219, 0.1);
+}
+.sendBtn:hover {
+    background-color: rgba(219, 219, 219, 0.15);
+}
+.cancelBtn {
+    padding: 0 5px;
+    text-align: center;
+    margin-top: 3px;
+}
+
+.replyBtnActive {
+    border-color: #E3E3E3 !important;
+    color: #E3E3E3 !important;
+}

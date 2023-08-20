@@ -1,5 +1,14 @@
 const dayInMilliseconds = 86400000;
 
+export function formatDateWithMonthName(date) {
+    let options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    }
+    return new Date(date).toLocaleString('en-US', options)
+}
+
 function isSameDay(date1, date2) {
     return date1.getDate() === date2.getDate()
         && date1.getMonth() === date2.getMonth()
@@ -18,7 +27,10 @@ function getDateString(date) {
 }
 
 function changeFormat(date) {
-    return date.toLocaleString("pl")
+    let newDate = date.toLocaleString("pl")
+    if (newDate[2] !== '.')
+        return 0 + newDate
+    return newDate
 }
 
 export function formatDate(date) {
@@ -27,7 +39,7 @@ export function formatDate(date) {
     const now = new Date()
 
     if (isSameDay(d, now))
-        return getTimeString(formatted)
+        return getTimeString(formatted) + ", today"
     else if (isDifferenceOneDay(d, now))
         return getTimeString(formatted) + ", yesterday"
 

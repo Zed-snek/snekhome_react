@@ -1,6 +1,13 @@
-.main {
-
+.widthLimit {
+    display: flex;
+    justify-content: center;
 }
+
+.userBanner {
+    display: flex;
+    max-width: 1050px;
+}
+
 .imageDiv {
     position: relative;
 }
@@ -135,4 +142,5 @@
     justify-content: center;
     margin-top: 20px;
 }
+
 

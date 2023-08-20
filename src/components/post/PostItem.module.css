@@ -2,17 +2,35 @@
     max-width: 968px;
     display: flex;
     gap: 12px;
+    padding: 10px 10px;
+}
+
+@media (max-width: 1139px) {
+    .main {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+    #order_rating {
+        order: 2;
+    }
+    #order_imageAndText {
+        order: 1;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    #order_rightDiv {
+        order: 3;
+    }
 }
 
 .imageTextDiv {
-    max-width: 454px;
     display: flex;
     flex-direction: column;
     gap: 9px;
 }
 
 .imageSelector {
-    width: 454px;
+    min-width: 454px;
 }
 .image {
     border-radius: 4px;
@@ -20,9 +38,65 @@
 
 .text {
     padding: 4px 7px;
-    border-radius: 4px;
+    min-width: 454px;
 }
 
 .verticalLine {
     border-left: 1px #949494 solid;
 }
+
+.flexColumn10px, .rightDiv {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.rightDiv {
+    flex: 1;
+    min-width: 380px;
+    justify-content: space-between;
+}
+
+.date {
+    padding-left: 6px;
+    line-height: 18px;
+    font-size: 15px;
+}
+
+.homeNicknameAndDate {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.homeNickname {
+    font-family: PressStart, "sans-serif";
+    font-size: 12px;
+    padding: 2px 6px !important;
+}
+
+.homeDate {
+    padding-right: 6px;
+}
+
+.comment {
+    padding: 5px 8px 3px 8px;
+}
+.commentNickname {
+    font-family: PressStart, "sans-serif";
+    font-size: 10px;
+}
+.commentText {
+    font-size: 14px;
+}
+
+.commentsAmount {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.newCommentForm {
+    margin-top: 5px;
+}
+

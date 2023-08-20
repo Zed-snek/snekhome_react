@@ -47,87 +47,89 @@ function UserPage() {
     }
 
     return (
-        <div className={style.main}>
+        <div>
             <MySyncLoader loading={isUserLoading || !user} />
 
             { user ?
-                <OutlineDiv className="flexDiv"> {/*User div*/}
-
-                <div className={style.imageDiv}>
-                    <OverImageDiv className={style.overImage} style={{color: user.nicknameColor}} sizeByLength={true}>
-                        {user.nickname}
-                    </OverImageDiv>
-                    <img src={getUserImageByArray(user.images)} className="bigUserImage" alt=""/>
-                    <div className={style.seeOtherImages}>
-                        <MyBlurredButton
-                            className={style.seeOtherImagesBtn}
-                            onClick={() => setIsImageModal(true)}
-                        >
-                            see more...
-                        </MyBlurredButton>
-                        {
-                            isImageModal ?
-                                <ImageSelectorModal
-                                    visible={isImageModal}
-                                    setVisible={setIsImageModal}
-                                    format="user"
-                                    isDeletePermission={isCurrentUser}
-                                    array={user.images}
-                                    setArray={newArray => {
-                                        setUser(prev => ({...prev, images: newArray}))
-                                        setUserImage(getUserImageByArray(newArray))
-                                    }}
-                                />
-                                : <></>
-                        }
-                    </div>
-                </div>
-
-                <div className={style.userInfoDiv}>
-
-                    <InfoDiv className={style.nicknameDiv}>
-                        <div className={style.name}>
-                            <div className={style.nickname}>
-                                {user.name + " " + user.surname}
-                            </div>
-                        </div>
-
-                        <UserNicknameButtons
-                            friendshipType={user.friendshipType}
-                            setFriendshipType={setFriendshipType}
-                        />
-
-                    </InfoDiv>
-
-                    <InfoDiv>
-
-                        <div className={style.communitiesFriendsDiv}>
-                            <Link to={"/communities/" + user.nickname} className={style.friendsBtn}>
-                                <div>joined communities ({user.communities})</div>
-                            </Link>
-                            <Link to={"/friends/" + user.nickname} className={style.friendsBtn}>
-                                <div>friends ({user.friends})</div>
-                            </Link>
-                        </div>
-
-                        <div className={style.tagsDiv}>
-                            <h5>About</h5>
-
-                            <div className={style.tagsMap}>
-                                {user.tags.map(tag =>
-                                    <InfoTag
-                                        key={tag.idTag}
-                                        title={tag.title}
-                                        text={tag.text}
+            <div className={style.widthLimit}>
+                <OutlineDiv className={style.userBanner}>
+                    <div className={style.imageDiv}>
+                        <OverImageDiv className={style.overImage} style={{color: user.nicknameColor}}
+                                      sizeByLength={true}>
+                            {user.nickname}
+                        </OverImageDiv>
+                        <img src={getUserImageByArray(user.images)} className="bigUserImage" alt=""/>
+                        <div className={style.seeOtherImages}>
+                            <MyBlurredButton
+                                className={style.seeOtherImagesBtn}
+                                onClick={() => setIsImageModal(true)}
+                            >
+                                see more...
+                            </MyBlurredButton>
+                            {
+                                isImageModal ?
+                                    <ImageSelectorModal
+                                        visible={isImageModal}
+                                        setVisible={setIsImageModal}
+                                        format="user"
+                                        isDeletePermission={isCurrentUser}
+                                        array={user.images}
+                                        setArray={newArray => {
+                                            setUser(prev => ({...prev, images: newArray}))
+                                            setUserImage(getUserImageByArray(newArray))
+                                        }}
                                     />
-                                )}
+                                    : <></>
+                            }
+                        </div>
+                    </div>
+
+                    <div className={style.userInfoDiv}>
+
+                        <InfoDiv className={style.nicknameDiv}>
+                            <div className={style.name}>
+                                <div className={style.nickname}>
+                                    {user.name + " " + user.surname}
+                                </div>
                             </div>
 
-                        </div>
+                            <UserNicknameButtons
+                                friendshipType={user.friendshipType}
+                                setFriendshipType={setFriendshipType}
+                            />
 
-                    </InfoDiv>
-                </div>
-            </OutlineDiv>
+                        </InfoDiv>
+
+                        <InfoDiv>
+
+                            <div className={style.communitiesFriendsDiv}>
+                                <Link to={"/communities/" + user.nickname} className={style.friendsBtn}>
+                                    <div>joined communities ({user.communities})</div>
+                                </Link>
+                                <Link to={"/friends/" + user.nickname} className={style.friendsBtn}>
+                                    <div>friends ({user.friends})</div>
+                                </Link>
+                            </div>
+
+                            <div className={style.tagsDiv}>
+                                <h5>About</h5>
+
+                                <div className={style.tagsMap}>
+                                    {user.tags.map(tag =>
+                                        <InfoTag
+                                            key={tag.idTag}
+                                            title={tag.title}
+                                            text={tag.text}
+                                        />
+                                    )}
+                                </div>
+
+                            </div>
+
+                        </InfoDiv>
+                    </div>
+                </OutlineDiv>
+            </div>
             : <></> }
 
             <div className={style.postList}>

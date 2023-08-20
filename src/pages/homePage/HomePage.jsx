@@ -4,28 +4,32 @@ import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import HomePageCards from "./HomePageCards";
 import {useDocumentTitle} from "usehooks-ts";
 import MyBoxedTextLink from "../../components/UI/links/MyBoxedTextLink";
+import PostList from "../../components/post/PostList";
 
 function HomePage() {
     useDocumentTitle("Home")
+
     return (
         <div className={style.main}>
 
-            <div className={style.postList}>
-                <div className={style.createCommunityLinkDiv}>
-                    <MyBoxedTextLink to="/new_community" className={style.createCommunityLink}>
-                        Create Community
-                    </MyBoxedTextLink>
+            <div className={style.widthLimit}>
+                <div className={style.page}>
+                    <div className={style.createCommunityLinkDiv}>
+                        <MyBoxedTextLink to="/new_community" className={style.createCommunityLink}>
+                            Create Community
+                        </MyBoxedTextLink>
+                    </div>
+
+                    <PostList loadType="HOME"/>
+
+                    <br/>
                 </div>
-                <div className={style.content}>
-                    <OutlineDiv>
-                        Post
+                <div>
+                    <OutlineDiv className={style.cards}>
+                        <HomePageCards/>
                     </OutlineDiv>
                 </div>
-                <br/>
             </div>
-            <OutlineDiv className={style.cards}>
-                <HomePageCards />
-            </OutlineDiv>
         </div>
     );
 }

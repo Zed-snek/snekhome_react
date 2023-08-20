@@ -9,15 +9,6 @@ export function isNotBannedSymbols(s) {
     return true
 }
 
-export function formatCommunityCreationDate(date) {
-    let options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    }
-    return new Date(date).toLocaleString('en-US', options)
-}
-
 export function toOnlyFirstLetterUpperCase(string) {
     return string[0].toUpperCase() + string.toLowerCase().substring(1)
 }

@@ -1,13 +1,13 @@
-import React, {useState, useContext} from 'react';
+import {useState, useContext} from 'react';
 import style from './Commentary.module.css';
-import NewCommentForm from "./NewCommentForm";
+import NewCommentForm from "../../../components/post/commentary/NewCommentForm";
 import {getUserImage} from "../../../functions/linkFunctions";
 import MyBoxedTextLink from "../../../components/UI/links/MyBoxedTextLink";
-import MyGreyOutlineButton from "../../../components/UI/buttons/MyGreyOutlineButton";
 import CommentaryRating from "../rating/CommentaryRating";
 import {AuthContext, UserContext} from "../../../components/context";
 import MoreOptionsButton from "../../../components/UI/navigation/MoreOptionsButton";
 import MessageModal from "../../../components/UI/modal/MessageModal";
+import ReplyButton from "../../../components/post/commentary/ReplyButton";
 
 function Commentary({
     postId, comment, depthLevel, data, setData, isPermitToDelete, addComment, deleteComment, editComment
@@ -83,7 +83,7 @@ function Commentary({
                     </MessageModal>
                 </div>
 
-                {isEdit ?
+                { isEdit ?
                     <NewCommentForm
                         callbackOnSuccess={() => setIsEdit(false)}
                         idComment={comment.id}
@@ -106,26 +106,22 @@ function Commentary({
                         setRatingStatus={setRatingStatus}
                     />
 
-                    {isAuth ?
-                        <div>
-                            <MyGreyOutlineButton
-                                onClick={() => setIsReply(prev => !prev)}
-                                className={isReply ? style.replyBtnActive : ''}
-                            >
-                                Reply
-                            </MyGreyOutlineButton>
-                        </div>
-                        : <></>}
+                    <ReplyButton
+                        isShow={isAuth}
+                        isReply={isReply}
+                        setIsReply={setIsReply}
+                    />
+
                 </div>
 
-                {isReply ?
+                { isReply ?
                     <NewCommentForm
                         reference={comment.id}
                         postId={postId}
                         callbackOnSuccess={() => setIsReply(false)}
                         addComment={addComment}
                     />
-                    : <></>}
+                    : <></> }
 
                 <div>
                     { data

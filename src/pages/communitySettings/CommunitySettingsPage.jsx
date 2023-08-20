@@ -18,7 +18,7 @@ import CommunityDemocracySettingsPage from "./Democracy/CommunityDemocracySettin
 import CommunityRulesSettings from "./Rules/CommunityRulesSettings";
 import {getCommunityImageByArray} from "../../functions/linkFunctions";
 import MembersListPage from "../membersListPage/MembersListPage";
-import {useFetchCommunity} from "../communityPage/useFetchCommunity";
+import {useFetchCommunity} from "../../hooks/useFetchCommunity";
 
 function CommunitySettingsPage() {
 

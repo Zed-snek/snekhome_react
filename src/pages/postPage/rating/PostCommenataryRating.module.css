@@ -21,6 +21,11 @@
     align-items: center;
 }
 
+.postRatingButtons {
+    display: flex;
+    flex-direction: column;
+}
+
 .postRatingBtn {
     font-weight: bold;
     display: flex;
