@@ -16,17 +16,6 @@
     box-shadow: 0 0 25px #2c57a5;
 }
 
-.modal > div {
-    width: fit-content;
-    max-width: 1200px;
-}
-
-.image {
-    max-width: 1150px;
-    max-height: 1080px;
-    object-fit: contain;
-}
-
 .removeBtn {
     background: linear-gradient(40deg, #e9105e70 20%, #2c57a5 99%);
     top: 7px;

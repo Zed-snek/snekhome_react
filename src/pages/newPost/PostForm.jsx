@@ -93,6 +93,7 @@ function PostForm({
                                 maxWidth={130}
                                 maxHeight={130}
                                 image={element}
+                                toOpenClassname={style.imageIco}
                                 toRemove={() => removeFileByIndex(index)}
                             />
                         )

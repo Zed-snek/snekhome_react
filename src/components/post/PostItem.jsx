@@ -104,18 +104,18 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                             : <></>}
                     </div>
 
-                    <div className={style.flexColumn10px}> {/*comments list*/}
+                    <Link to={postLink} className={style.flexColumn10px + " " + style.link}> {/*comments list*/}
                         {commentaries?.map((value, index) =>
                             <InfoDiv className={style.comment} key={index}>
                                 <div className={style.commentNickname}>
                                     {value.nickname}
                                 </div>
                                 <div className={style.commentText}>
-                                    {value.text}
+                                    {value.text}{value.text}{value.text}
                                 </div>
                             </InfoDiv>
                         )}
-                    </div>
+                    </Link>
                 </div>
 
                 <div className={style.commentFormDiv}>

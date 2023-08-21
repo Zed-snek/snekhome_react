@@ -8,6 +8,7 @@ import ArrowLeft from "../UI/svg/ArrowLeft";
 import ArrowRight from "../UI/svg/ArrowRight";
 import {useClasses} from "../../hooks/useClasses";
 import MyBlurredDiv from "../UI/blocks/MyBlurredDiv";
+import ImageModal from "./ImageModal";
 
 function PostImagesSelector({images, isImageForm, isFlexForm, width, height, className, imgClassName}) {
 
@@ -15,13 +16,15 @@ function PostImagesSelector({images, isImageForm, isFlexForm, width, height, cla
         = useImages(images, null, true)
 
     const classes = useClasses(style.main, className)
+    const imageClasses = useClasses(style.image, imgClassName)
 
+    const [isImageModal, setIsImageModal] = useState(false)
     const [imgRatio, setImgRatio] = useState(0.0)
 
     const link = getImage("", currentImage)
     const img = document.createElement("img")
     img.src = link
-    img.onload = function () {
+    img.onload = () => {
         setImgRatio(img.naturalHeight / img.naturalWidth)
     }
 
@@ -37,7 +40,8 @@ function PostImagesSelector({images, isImageForm, isFlexForm, width, height, cla
                 <img
                     src={link} alt=""
                     style={getImageStyle()}
-                    className={imgClassName}
+                    className={imageClasses}
+                    onClick={() => setIsImageModal(true)}
                 />
             </div>
             { isShowArrows ?
@@ -58,6 +62,11 @@ function PostImagesSelector({images, isImageForm, isFlexForm, width, height, cla
                     </MyBlurredDiv>
                 </>
                 : <></> }
+            <ImageModal
+                isOpened={isImageModal}
+                setIsOpened={setIsImageModal}
+                src={link}
+            />
         </div>
     );
 }

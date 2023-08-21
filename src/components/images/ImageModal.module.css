@@ -1,0 +1,10 @@
+.modal > div {
+    width: fit-content;
+    max-width: 1200px;
+}
+
+.image {
+    max-width: 1150px;
+    max-height: 870px;
+    object-fit: contain;
+}

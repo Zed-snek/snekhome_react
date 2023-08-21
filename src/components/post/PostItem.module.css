@@ -85,6 +85,7 @@
 
 .comment {
     padding: 5px 8px 3px 8px;
+    overflow: hidden;
 }
 .commentNickname {
     font-family: PressStart, "sans-serif";
@@ -92,6 +93,10 @@
 }
 .commentText {
     font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: pre-wrap;
 }
 
 .commentsAmount {

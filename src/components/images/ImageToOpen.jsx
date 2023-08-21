@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import style from "./ImageToOpen.module.css";
-import TransparentModal from "../UI/modal/TransparentModal";
 import MyCloseButton from "../UI/symbolButtons/MyCloseButton";
+import ImageModal from "./ImageModal";
 
 function ImageToOpen({maxHeight, maxWidth, image, toRemove}) {
 
@@ -17,25 +17,19 @@ function ImageToOpen({maxHeight, maxWidth, image, toRemove}) {
                     onClick={() => setIsOpened(true)}
                     alt=""
                 />
-                { toRemove
-                    ? <MyCloseButton
+                { toRemove ?
+                    <MyCloseButton
                         className={style.removeBtn}
                         onClick={toRemove}
                     />
-                    : <></>}
+                    : <></> }
             </div>
 
-            <TransparentModal
-                visible={isOpened}
-                setVisible={setIsOpened}
-                className={style.modal}
-            >
-                <img
-                    className={style.image}
-                    src={image}
-                    alt=""
-                />
-            </TransparentModal>
+            <ImageModal
+                isOpened={isOpened}
+                setIsOpened={setIsOpened}
+                src={image}
+            />
 
         </div>
     );

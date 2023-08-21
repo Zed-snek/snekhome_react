@@ -5,6 +5,11 @@
     justify-content: center;
 }
 
+.image {
+    cursor: pointer;
+
+}
+
 .btnDiv {
     position: absolute;
 }
