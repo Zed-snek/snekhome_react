@@ -12,6 +12,7 @@ import {useFetching} from "../../hooks/useFetching";
 import CommunityService from "../../API/CommunityService";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 import {formatDateWithMonthName} from "../../functions/timeDateFunctions";
+import GreyLink from "../../components/UI/links/GreyLink";
 
 
 function CommunityBanner({data, setData, groupname, setError, groupnameColor, typeImage}) {
@@ -105,14 +106,14 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                 </div>
 
                 { ((data.currentUserRole && data.currentUserRole.inviteUsers) || data.community.type === "ANARCHY") && data.joinRequests > 0 ?
-                    <Link to={'/join_requests/' + groupname} className={style.members}>
+                    <GreyLink to={'/join_requests/' + groupname}>
                         join requests ({data.joinRequests})
-                    </Link>
+                    </GreyLink>
                 : <></> }
 
-                <Link to={'/members/' + groupname} className={style.members}>
+                <GreyLink to={'/members/' + groupname} className={style.members}>
                     members ({data.members})
-                </Link>
+                </GreyLink>
 
 
                 <div className={style.buttonsDiv}>

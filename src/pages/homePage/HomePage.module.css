@@ -4,8 +4,9 @@
 }
 .widthLimit {
     display: flex;
+    justify-content: space-between;
     gap: 22px;
-    max-width: 1127px;
+
 }
 .page {
     flex: 1;
@@ -28,9 +29,12 @@
     display: flex;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 1140px) {
     .cards {
         display: none;
+    }
+    .widthLimit {
+        gap: 0;
     }
 }
 

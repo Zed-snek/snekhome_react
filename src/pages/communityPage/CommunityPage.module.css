@@ -74,20 +74,6 @@
     flex: 1;
 }
 
-.members {
-    font-weight: 600;
-    font-size: 16px;
-    color: rgba(217, 217, 217, 0.65);
-    text-decoration: none;
-}
-.members:hover {
-    color: rgba(217, 217, 217, 0.5);
-}
-.members:active {
-    color: rgba(217, 217, 217, 0.3);
-}
-
-
 .buttonsDiv {
     margin-top: 8px;
     display: flex;
