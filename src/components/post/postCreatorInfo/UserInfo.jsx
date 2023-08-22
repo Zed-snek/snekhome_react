@@ -1,15 +1,21 @@
 import style from "./PostCreatorInfo.module.css";
 import CommunityRoleFlair from "../../community/CommunityRoleFlair";
 import {useNavigate} from "react-router-dom";
+import anonImage from "../../../images/defaultUserImage.png";
 
-function UserInfo({image, nickname, flair}) {
+function UserInfo({image, nickname, flair, isAnon}) {
 
     const navigate = useNavigate()
 
+    function goNav() {
+        if (!isAnon)
+            navigate("/u/" + nickname)
+    }
+
     return (
-        <div className={style.main} onClick={() => {navigate('/u/' + nickname)}}>
+        <div className={style.main + " " + (isAnon ? style.disabled : style.active)} onClick={goNav}>
             <div>
-                <img src={image} className={"userImage "} alt=""/>
+                <img src={isAnon ? anonImage : image} className={"userImage"} alt=""/>
             </div>
             <div>
                 <div className={style.nickname}>

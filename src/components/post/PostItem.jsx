@@ -64,9 +64,13 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                 <div className={style.flexColumn10px}>
                     <div>
                         <div>
-                            {type === "HOME" ?
+                            { type === "HOME" ?
                                 <InfoDiv className={style.homeNicknameAndDate}>
-                                    {isAnon ? <div/> :
+                                    { isAnon ?
+                                        <div className={style.anonName}>
+                                            Anonymous author
+                                        </div>
+                                        :
                                         <MyBoxedTextLink
                                             className={style.homeNickname}
                                             to={"/u/" + userNickname}
@@ -79,27 +83,35 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                                         {formatDate(date)}
                                     </div>
                                 </InfoDiv>
-                                : <></>}
+                                : <></> }
 
-                            {type === "COMMUNITY" && !isAnon ?
-                                <UserInfo
-                                    nickname={userNickname}
-                                    image={getUserImage(image)}
-                                    flair={userFlair}
-                                />
-                                : <></>}
-                            {type !== "COMMUNITY" ?
+                            { type === "COMMUNITY" ?
+                                isAnon ?
+                                    <UserInfo
+                                        nickname="Anonymous author"
+                                        isAnon
+                                    />
+                                    :
+                                    <UserInfo
+                                        nickname={userNickname}
+                                        image={getUserImage(image)}
+                                        flair={userFlair}
+                                    />
+                                : <></> }
+                            { type !== "COMMUNITY" ?
                                 <CommunityInfo
                                     image={getUserImage(image)}
                                     title={groupTitle}
                                     groupname={groupname}
                                 />
-                                : <></>}
+                                : <></> }
                         </div>
 
                         {type !== "HOME" ?
                             <div className={style.date}>
-                                {formatDate(date)}
+                                { formatDate(date) + " "
+                                    + (isAnon && type === "USER" ? "- post is anonymous" : "" )
+                                }
                             </div>
                             : <></>}
                     </div>
@@ -111,7 +123,7 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                                     {value.nickname}
                                 </div>
                                 <div className={style.commentText}>
-                                    {value.text}{value.text}{value.text}
+                                    {value.text}
                                 </div>
                             </InfoDiv>
                         )}

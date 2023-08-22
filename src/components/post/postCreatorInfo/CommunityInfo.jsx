@@ -5,7 +5,10 @@ function CommunityInfo({image, groupname, title}) {
     const navigate = useNavigate()
 
     return (
-        <div className={style.main} onClick={() => {navigate('/c/' + groupname)}}>
+        <div
+            className={style.main + " " + style.active}
+            onClick={() => {navigate('/c/' + groupname)}}
+        >
             <div>
                 <img src={image} className={"userImage "} alt=""/>
             </div>
