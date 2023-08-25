@@ -1,4 +1,3 @@
-import React from 'react';
 import Modal from "react-bootstrap/Modal";
 import style from "./MessageModal.module.css"
 import MyButton from "../buttons/MyButton";
@@ -20,43 +19,33 @@ function MessageModal({visible, setVisible, children, acceptCallback, navigate})
     }
 
     return (
-        <Modal
-            show={visible}
-            onHide={onHide}
-        >
-
+        <Modal show={visible} onHide={onHide}>
             <div className={style.modalBody + " own_bg_colorHeader"}>
-
                 <Modal.Body className="bg-transparent">
+
                     <span className={style.span}>
                         {children}
                     </span>
 
-                    {acceptCallback
-                        ? <>
-                            <MyButton
-                                className={style.closeBtn}
-                                onClick={onHide}
-                                float={'right'}
-                                color={'red'}
-                            >
-                                Close
-                            </MyButton>
-                            <MyButton
-                                onClick={onAccept}
-                                float={'right'}
-                            >
-                                Accept
-                            </MyButton>
-                        </>
-                        : <MyButton onClick={onHide} float={'right'}>Close</MyButton>
-                    }
+                    <MyButton
+                        className={style.closeBtn}
+                        onClick={onHide}
+                        float={'right'}
+                        color={acceptCallback ? "red" : "blue"}
+                    >
+                        Close
+                    </MyButton>
+                    { acceptCallback ?
+                        <MyButton
+                            onClick={onAccept}
+                            float={'right'}
+                        >
+                            Accept
+                        </MyButton>
+                    : <></> }
 
                 </Modal.Body>
-
-
             </div>
-
         </Modal>
     );
 }

@@ -20,7 +20,7 @@ function HomePage() {
                         </MyBoxedTextLink>
                     </div>
 
-                    <PostList loadType="HOME"/>
+                    <PostList loadType="HOME" />
 
                     <br/>
                 </div>

@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState, useContext} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import style from "./PostList.module.css";
 import MySyncLoader from "../UI/loaders/MySyncLoader";
@@ -7,7 +7,7 @@ import MyMessage from "../UI/message/MyMessage";
 import PostItem from "./PostItem";
 import {useObserver} from "../../hooks/useObserver";
 
-function PostList({loadType, entityName}) { //loadType: HOME / COMMUNITY / USER
+function PostList({loadType, entityName, isDeletePermission}) { //loadType: HOME / COMMUNITY / USER
 
     const [pageNumber, setPageNumber] = useState(0)
     const [data, setData] = useState([])
@@ -40,7 +40,6 @@ function PostList({loadType, entityName}) { //loadType: HOME / COMMUNITY / USER
         fetchPosts()
     }, [pageNumber])
 
-
     return (
         <div className={style.main}>
 
@@ -68,6 +67,8 @@ function PostList({loadType, entityName}) { //loadType: HOME / COMMUNITY / USER
                             bannerColor: item.roleBannerColor
                         } : null }
                         userNickname={item.userNickname}
+                        isCurrentUserAuthor={item.currentUserAuthor}
+                        isDeletePermission={isDeletePermission}
                         groupname={item.groupname}
                         groupTitle={item.groupTitle}
                     />

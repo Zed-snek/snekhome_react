@@ -75,7 +75,6 @@ function CommunityPage() {
         else
             return (
         <div>
-
             <MessageModal visible={isModalError} setVisible={setModalError}>
                 {error}
             </MessageModal>
@@ -96,16 +95,14 @@ function CommunityPage() {
                         className={style.newPostAndSortBanner}
                     >
                         <div className={style.newPostDiv}>
-                            {
-                                isAuth ?
-                                    <MyTextArea
-                                        onClick={() => navigate("/new_post/" + params.groupname)}
-                                        placeholder="New post..."
-                                        className={style.newPostTextArea}
-                                    >
-                                    </MyTextArea>
-                                    : <></>
-                            }
+                            { isAuth ?
+                                <MyTextArea
+                                    onClick={() => navigate("/new_post/" + params.groupname)}
+                                    placeholder="New post..."
+                                    className={style.newPostTextArea}
+                                >
+                                </MyTextArea>
+                            : <></> }
                         </div>
                         <div className={style.sortButtons}>
                             <SortOutlineButtons
@@ -119,6 +116,7 @@ function CommunityPage() {
                     <PostList
                         loadType="COMMUNITY"
                         entityName={params.groupname}
+                        isDeletePermission={data.currentUserRole?.editDescription || data.currentUserRole?.creator}
                     />
 
                 </div>

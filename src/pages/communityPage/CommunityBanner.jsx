@@ -62,7 +62,7 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                             visible={isImageModal}
                             setVisible={setIsImageModal}
                             format="community"
-                            isDeletePermission={data.currentUserRole && (data.currentUserRole.editDescription || data.currentUserRole.creator)}
+                            isDeletePermission={data.currentUserRole?.editDescription || data.currentUserRole?.creator}
                             array={data.community.images}
                             setArray={newArray => setData(prev => ({...prev, community: {...prev.community, images: newArray}}))}
                         />

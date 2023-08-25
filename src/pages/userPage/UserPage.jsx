@@ -33,7 +33,6 @@ function UserPage() {
     const [fetchUser, isUserLoading, userError] = useFetching(async () => {
         const data = await UserService.userInfo(params.nickname)
         setUser(data)
-        console.log(data)
     })
     useNotFoundNavigate(userError)
 
@@ -133,10 +132,12 @@ function UserPage() {
             : <></> }
 
             <div className={style.postList}>
-                <PostList
-                    loadType="USER"
-                    entityName={params.nickname}
-                />
+                { isUserLoading ? <></> :
+                    <PostList
+                        loadType="USER"
+                        entityName={params.nickname}
+                    />
+                }
             </div>
         </div>
     );

@@ -1,6 +1,7 @@
-import {useState, useContext} from 'react';
+import {useState, useContext, useEffect} from 'react';
 import style from "./PostItem.module.css";
-import {Link} from "react-router-dom";
+import ellipsis from "../../styles/ellipsis.module.css";
+import {Link, useNavigate} from "react-router-dom";
 import OutlineDiv from "../UI/blocks/OutlineDiv";
 import PostRating from "../../pages/postPage/rating/PostRating";
 import PostImagesSelector from "../images/PostImagesSelector";
@@ -13,12 +14,20 @@ import MyBoxedTextLink from "../UI/links/MyBoxedTextLink";
 import NewCommentForm from "./commentary/NewCommentForm";
 import {AuthContext} from "../context";
 import GreyLink from "../UI/links/GreyLink";
+import MoreOptionsButton from "../UI/navigation/MoreOptionsButton";
+import MessageModal from "../UI/modal/MessageModal";
+import {useFetching} from "../../hooks/useFetching";
+import PostService from "../../API/PostService";
+import MySyncLoader from "../UI/loaders/MySyncLoader";
 
-function PostItem({type, postId, text, postImages, rating, ratedType, date, image, isAnon, userNickname, userFlair,
-                      groupname, groupTitle, commentaries, commentsAmount}
-) { //type: HOME / COMMUNITY / USER | image: user or community image | ratedType: UPVOTE/DOWNVOTE/NONE
+function PostItem({type, postId, text, postImages, rating, ratedType, date, image, isAnon, userNickname,
+            isCurrentUserAuthor, userFlair, groupname, groupTitle, commentaries, commentsAmount, isDeletePermission
+}) { //type: HOME / COMMUNITY / USER | image: user or community image | ratedType: UPVOTE/DOWNVOTE/NONE
 
     const {isAuth} = useContext(AuthContext)
+    const navigate = useNavigate()
+    const [isDeletePostModal, setIsDeletePostModal] = useState(false)
+    const [isErrorModal, setIsErrorModal] = useState(false)
 
     const [rateObj, setRateObj] = useState({
         rating: rating,
@@ -26,6 +35,30 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
     })
 
     const postLink = "/post/" + postId
+
+    const [fetchDelete, isDeleteLoading, deleteError] = useFetching(async () => {
+        await PostService.deletePost(postId)
+    })
+
+    useEffect(() => {
+        if (deleteError)
+            setIsErrorModal(true)
+    }, [deleteError])
+
+    function moreOptionsButton() {
+        if (type === "COMMUNITY" || type === "USER") {
+            let options = []
+            if (isCurrentUserAuthor || (type === "COMMUNITY" && isDeleteLoading))
+                options.push({title: "Delete", onClick: () => setIsDeletePostModal(true)})
+            if (isCurrentUserAuthor)
+                options.push({title: "Edit", onClick: () => navigate(postLink + "/edit")})
+
+            if (options.length > 0)
+                return <MoreOptionsButton
+                    options={options}
+                />
+        }
+    }
 
     return (
         <OutlineDiv className={style.main}>
@@ -38,10 +71,27 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                     idPost={postId}
                     onClick={e => e.preventDefault()}
                 />
+                <div className={style.moreOptionsDiv}>
+                    {moreOptionsButton()}
+                </div>
+                <MySyncLoader loading={isDeleteLoading}/>
+                <MessageModal
+                    visible={isDeletePostModal}
+                    setVisible={setIsDeletePostModal}
+                    acceptCallback={fetchDelete}
+                >
+                    Are you sure you want to delete this post?
+                </MessageModal>
+                <MessageModal
+                    visible={isErrorModal}
+                    setVisible={setIsErrorModal}
+                >
+                    {deleteError}
+                </MessageModal>
                 <Link to={postLink} className={style.link}/>
             </div>
             <div className={style.imageTextDiv} id={style["order_imageAndText"]}>
-                {postImages.length > 0 ?
+                { postImages.length > 0 ?
                     <PostImagesSelector
                         images={postImages}
                         isFlexForm={true}
@@ -50,7 +100,7 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                         className={style.imageSelector}
                         imgClassName={style.image}
                     />
-                    : <></>}
+                    : <></> }
                 <Link className={style.link} to={postLink}>
                     <InfoDiv className={style.text}>
                         {text}
@@ -113,16 +163,16 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                                     + (isAnon && type === "USER" ? "- post is anonymous" : "" )
                                 }
                             </div>
-                            : <></>}
+                            : <></> }
                     </div>
 
                     <Link to={postLink} className={style.flexColumn10px + " " + style.link}> {/*comments list*/}
-                        {commentaries?.map((value, index) =>
-                            <InfoDiv className={style.comment} key={index}>
+                        { commentaries?.map((value, index) =>
+                            <InfoDiv className={style.comment + " " + ellipsis.main} key={index}>
                                 <div className={style.commentNickname}>
                                     {value.nickname}
                                 </div>
-                                <div className={style.commentText}>
+                                <div className={style.commentText + " " + ellipsis.children}>
                                     {value.text}
                                 </div>
                             </InfoDiv>
@@ -143,7 +193,7 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                                 addComment={() => console.log("addComment")}
                                 rows={1}
                             />
-                            : <></>}
+                            : <></> }
                     </div>
                 </div>
 
