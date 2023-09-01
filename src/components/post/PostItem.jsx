@@ -21,23 +21,42 @@ import PostService from "../../API/PostService";
 import MySyncLoader from "../UI/loaders/MySyncLoader";
 
 function PostItem({type, postId, text, postImages, rating, ratedType, date, image, isAnon, userNickname,
-            isCurrentUserAuthor, userFlair, groupname, groupTitle, commentaries, commentsAmount, isDeletePermission
+            isCurrentUserAuthor, userFlair, groupname, groupTitle, commentaries, commentsAmount,
+            isDeletePermission, deleteSuccessCallback
 }) { //type: HOME / COMMUNITY / USER | image: user or community image | ratedType: UPVOTE/DOWNVOTE/NONE
 
     const {isAuth} = useContext(AuthContext)
     const navigate = useNavigate()
     const [isDeletePostModal, setIsDeletePostModal] = useState(false)
     const [isErrorModal, setIsErrorModal] = useState(false)
+    const postLink = "/post/" + postId
+
+    const [comments, setComments] = useState(commentaries?.length > 0 ? commentaries : [])
+    const [commentsNumber, setCommentsNumber] = useState(commentsAmount)
+
+    function addNewComment(comment) {
+        setCommentsNumber(prev => prev + 1)
+        if (comments.length === 2) {
+            setComments(prev => {
+                let arr = []
+                arr.push(prev[1])
+                arr.push(comment)
+                return arr
+            })
+        }
+        else {
+            setComments(prev => [...prev, comment])
+        }
+    }
 
     const [rateObj, setRateObj] = useState({
         rating: rating,
         ratedType: ratedType
     })
 
-    const postLink = "/post/" + postId
-
     const [fetchDelete, isDeleteLoading, deleteError] = useFetching(async () => {
         await PostService.deletePost(postId)
+        deleteSuccessCallback(postId)
     })
 
     useEffect(() => {
@@ -48,7 +67,7 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
     function moreOptionsButton() {
         if (type === "COMMUNITY" || type === "USER") {
             let options = []
-            if (isCurrentUserAuthor || (type === "COMMUNITY" && isDeleteLoading))
+            if (isCurrentUserAuthor || (type === "COMMUNITY" && isDeletePermission))
                 options.push({title: "Delete", onClick: () => setIsDeletePostModal(true)})
             if (isCurrentUserAuthor)
                 options.push({title: "Edit", onClick: () => navigate(postLink + "/edit")})
@@ -167,7 +186,7 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                     </div>
 
                     <Link to={postLink} className={style.flexColumn10px + " " + style.link}> {/*comments list*/}
-                        { commentaries?.map((value, index) =>
+                        { comments?.map((value, index) =>
                             <InfoDiv className={style.comment + " " + ellipsis.main} key={index}>
                                 <div className={style.commentNickname}>
                                     {value.nickname}
@@ -184,13 +203,13 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                     <Link to={postLink} className={style.link} />
                     <div className={style.flexColumn10px}>
                         <GreyLink className={style.commentsAmount} to={"/post/" + postId}>
-                            {commentsAmount} comments...
+                            {commentsNumber} comments...
                         </GreyLink>
-                        {isAuth ?
+                        { isAuth ?
                             <NewCommentForm
                                 reference={-1}
                                 postId={postId}
-                                addComment={() => console.log("addComment")}
+                                addComment={addNewComment}
                                 rows={1}
                             />
                             : <></> }

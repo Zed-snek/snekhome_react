@@ -2,13 +2,15 @@
     display: flex;
     justify-content: center;
 }
+
 .widthLimit {
     display: flex;
-    justify-content: space-between;
+    flex: 1;
     gap: 22px;
-
+    max-width: 1127px;
 }
-.page {
+
+.content {
     flex: 1;
 }
 
@@ -26,14 +28,13 @@
 .cards {
     padding-top: 13px;
     width: 137px;
-    display: flex;
 }
 
 @media (max-width: 1140px) {
     .cards {
         display: none;
     }
-    .widthLimit {
+    .main {
         gap: 0;
     }
 }

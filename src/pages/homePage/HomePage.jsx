@@ -11,9 +11,9 @@ function HomePage() {
 
     return (
         <div className={style.main}>
-
             <div className={style.widthLimit}>
-                <div className={style.page}>
+
+                <div className={style.content}>
                     <div className={style.createCommunityLinkDiv}>
                         <MyBoxedTextLink to="/new_community" className={style.createCommunityLink}>
                             Create Community
@@ -24,11 +24,13 @@ function HomePage() {
 
                     <br/>
                 </div>
+
                 <div>
                     <OutlineDiv className={style.cards}>
                         <HomePageCards/>
                     </OutlineDiv>
                 </div>
+
             </div>
         </div>
     );

@@ -5,7 +5,7 @@ import MyCheckbox from "../../../components/UI/inputs/MyCheckbox";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
 import {useFetching} from "../../../hooks/useFetching";
 import CommunityService from "../../../API/CommunityService";
-import BooleanBlock from "../../../components/UI/blocks/BooleanBlock";
+import BooleanBlock from "../../../components/structureComponents/BooleanBlock";
 import MyButton from "../../../components/UI/buttons/MyButton";
 
 function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError, setIsLoader, setIsShow, roleToEdit}) {
@@ -15,24 +15,25 @@ function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError,
         : {title: roleToEdit.title, textColor: roleToEdit.textColor, bannerColor: roleToEdit.bannerColor}
     )
 
+    function typeAllowedInitialState() {
+        let obj = {
+            editDescription: false,
+            editId: false,
+            deletePosts: false,
+            banUser: false,
+            banCitizen: false,
+            inviteUsers: false
+        }
+        if (!isCreate) {
+            for (const key in obj) {
+                console.log(roleToEdit[key])
+                obj[key] = roleToEdit[key]
+            }
+        }
+        return obj
+    }
 
-    const [isTypeAllowed, setIsTypeAllowed] = useState(
-        isCreate
-            ? {
-                editDescription: false,
-                editId: false,
-                deletePosts: false,
-                banUser: false,
-                banCitizen: false
-            }
-            : {
-                editDescription: roleToEdit.editDescription,
-                editId: roleToEdit.editId,
-                deletePosts: roleToEdit.deletePosts,
-                banUser: roleToEdit.banUser,
-                banCitizen: roleToEdit.banCitizen
-            }
-    )
+    const [isTypeAllowed, setIsTypeAllowed] = useState(typeAllowedInitialState())
 
     function end() {
         setIsShow(false)

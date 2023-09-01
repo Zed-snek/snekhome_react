@@ -1,18 +1,15 @@
-import {useEffect, useRef, useState, useContext} from 'react';
+import {useRef, useState} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import style from "./PostList.module.css";
 import MySyncLoader from "../UI/loaders/MySyncLoader";
 import PostService from "../../API/PostService";
 import MyMessage from "../UI/message/MyMessage";
 import PostItem from "./PostItem";
-import {useObserver} from "../../hooks/useObserver";
+import {usePaginateLoad} from "../../hooks/usePaginateLoad";
 
 function PostList({loadType, entityName, isDeletePermission}) { //loadType: HOME / COMMUNITY / USER
 
-    const [pageNumber, setPageNumber] = useState(0)
     const [data, setData] = useState([])
-    const [canLoad, setCanLoad] = useState(true)
-    const lastElement = useRef()
 
     const [fetchPosts, isFetchLoading, fetchError] = useFetching(async () => {
         let responseData
@@ -32,13 +29,11 @@ function PostList({loadType, entityName, isDeletePermission}) { //loadType: HOME
         setData(prev => [...prev, ...responseData])
     })
 
-    useObserver(lastElement, canLoad, isFetchLoading, () => {
-        setPageNumber(prev => prev + 1)
-    })
+    const [pageNumber, lastElementRef, setCanLoad] = usePaginateLoad(fetchPosts, isFetchLoading)
 
-    useEffect(() => {
-        fetchPosts()
-    }, [pageNumber])
+    function onSuccessDelete(id) {
+        setData(prev => prev.filter(obj => obj.post.idPost !== id))
+    }
 
     return (
         <div className={style.main}>
@@ -69,15 +64,16 @@ function PostList({loadType, entityName, isDeletePermission}) { //loadType: HOME
                         userNickname={item.userNickname}
                         isCurrentUserAuthor={item.currentUserAuthor}
                         isDeletePermission={isDeletePermission}
+                        deleteSuccessCallback={onSuccessDelete}
                         groupname={item.groupname}
                         groupTitle={item.groupTitle}
                     />
                 )
                 : <></>
             }
-            <div ref={lastElement} style={{height: 20}}>
 
-            </div>
+            <div ref={lastElementRef} style={{height: 20}}> </div> {/*trigger to load next posts*/}
+
             <div className={style.loaderDiv}>
                 <MyMessage className={style.error}>{fetchError}</MyMessage>
                 <MySyncLoader loading={isFetchLoading} />

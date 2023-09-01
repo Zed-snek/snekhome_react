@@ -10,11 +10,7 @@ function ImageModal({isOpened, setIsOpened, src}) {
             setVisible={setIsOpened}
             className={style.modal}
         >
-            <img
-                className={style.image}
-                src={src}
-                alt=""
-            />
+            <img className={style.image} src={src} alt="" />
         </TransparentModal>
     );
 }

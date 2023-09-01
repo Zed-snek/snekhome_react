@@ -102,4 +102,8 @@ export default class CommunityService {
         return await deleteRequestWithAuth(`/community/${groupname}/request/${nickname}`)
     }
 
+    static async getLogs(groupname, page) {
+        return await getRequestWithAuth(`/community/${groupname}/logs?page=${page}`)
+    }
+
 }

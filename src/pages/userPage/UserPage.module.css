@@ -5,6 +5,8 @@
 
 .userBanner {
     display: flex;
+    gap: 13px;
+    flex-wrap: wrap;
     max-width: 1050px;
     flex: 1;
 }
@@ -33,7 +35,6 @@
 }
 
 .userInfoDiv {
-    margin-left: 13px;
     flex: 1;
 }
 

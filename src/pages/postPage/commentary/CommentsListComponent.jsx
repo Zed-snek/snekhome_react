@@ -16,7 +16,6 @@ function CommentsListComponent({isPermitToDel, setIsErrorModal, setErrorMessage}
 
     const [fetchComments, isCommentsLoading, commentsError] = useFetching(async () => {
         const responseData = await PostService.getCommentsByPostId(params.id)
-        console.log(responseData)
         setData(responseData)
     })
     useEffect(() => {

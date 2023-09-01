@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import style from "./CreateCommunitySettings.module.css";
 import MyCheckbox from "../../../components/UI/inputs/MyCheckbox";
-import BooleanBlock from "../../../components/UI/blocks/BooleanBlock";
+import BooleanBlock from "../../../components/structureComponents/BooleanBlock";
 
 function CreateCommunitySettingsPage({chosen, settings, setSettings}) {
 

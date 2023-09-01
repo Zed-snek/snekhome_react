@@ -10,10 +10,11 @@ function MyTransparentButton({children, className, tooltip, ...props}) {
     return (
         <button className={classes} {...props}>
             {children}
-            {tooltip
-                ? <div className={tooltipStyle.tooltip}>{tooltip}</div>
-                : <></>
-            }
+            { tooltip ?
+                <div className={tooltipStyle.tooltip}>
+                    {tooltip}
+                </div>
+            : <></> }
         </button>
     );
 }

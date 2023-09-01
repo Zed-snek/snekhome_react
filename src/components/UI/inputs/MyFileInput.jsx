@@ -19,7 +19,7 @@ function MyFileInput({className, children, maxSize, maxFiles, setIsShowError, se
     function handleChangeMany(e) { //required: maxFiles, maxSize
         const files = e.target.files
         let filesToSet = []
-        let isError = false
+        let isError
         for (let i = 0; i < files.length; i++) {
             if (maxSize * 1000000 < files[i].size)
                 isError = true

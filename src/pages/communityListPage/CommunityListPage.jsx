@@ -11,9 +11,9 @@ import {useDocumentTitle} from "usehooks-ts";
 import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
 import {getCommunityImage} from "../../functions/linkFunctions";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
-import BooleanBlock from "../../components/UI/blocks/BooleanBlock";
+import BooleanBlock from "../../components/structureComponents/BooleanBlock";
 import MyGreyInput from "../../components/UI/inputs/MyGreyInput";
-import MidSizeContent from "../../components/UI/blocks/MidSizeContent";
+import MidSizeContent from "../../components/structureComponents/MidSizeContent";
 
 function CommunityListPage() {
 

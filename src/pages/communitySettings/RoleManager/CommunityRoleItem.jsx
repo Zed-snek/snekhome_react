@@ -24,15 +24,13 @@ function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, 
                 />
             </div>
 
-            {
-                isEdit
-                    ? <div>
-                        <MyTransparentButton className={style.edit} tooltip="Edit" onClick={() => setIsShowCreateForm(true)}>
-                            <img src={edit} alt="edit"/>
-                        </MyTransparentButton>
-                    </div>
-                    : <></>
-            }
+            { isEdit ?
+                <div>
+                    <MyTransparentButton className={style.edit} tooltip="Edit" onClick={() => setIsShowCreateForm(true)}>
+                        <img src={edit} alt="edit"/>
+                    </MyTransparentButton>
+                </div>
+            : <></> }
 
 
 
@@ -49,27 +47,25 @@ function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, 
                 ) }
             </div>
 
-            {
-                isEdit ?
-                    <OverContentDiv
-                        className={style.formWindow}
-                        isShow={isShowCreateForm}
+            { isEdit ?
+                <OverContentDiv
+                    className={style.formWindow}
+                    isShow={isShowCreateForm}
+                    setIsShow={setIsShowCreateForm}
+                    title="Edit a role:"
+                >
+                    <CommunityRoleForm
+                        groupname={groupname}
+                        isCreate={false}
+                        typesToMap={typesToMap}
+                        setIsLoader={setIsLoader}
+                        setError={setError}
+                        setRoles={setRoles}
                         setIsShow={setIsShowCreateForm}
-                        title="Edit a role:"
-                    >
-                        <CommunityRoleForm
-                            groupname={groupname}
-                            isCreate={false}
-                            typesToMap={typesToMap}
-                            setIsLoader={setIsLoader}
-                            setError={setError}
-                            setRoles={setRoles}
-                            setIsShow={setIsShowCreateForm}
-                            roleToEdit={role}
-                        />
-                    </OverContentDiv>
-                    : <></>
-            }
+                        roleToEdit={role}
+                    />
+                </OverContentDiv>
+            : <></> }
 
         </BorderBottomDiv>
     );

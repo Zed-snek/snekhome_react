@@ -57,7 +57,10 @@ function UserPage() {
                                       sizeByLength={true}>
                             {user.nickname}
                         </OverImageDiv>
-                        <img src={getUserImageByArray(user.images)} className="bigUserImage" alt=""/>
+                        <img alt=""
+                            src={getUserImageByArray(user.images)}
+                            className={"bigUserImage " + style.userImage}
+                        />
                         <div className={style.seeOtherImages}>
                             <MyBlurredButton
                                 className={style.seeOtherImagesBtn}

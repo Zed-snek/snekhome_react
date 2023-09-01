@@ -116,7 +116,7 @@ function CommunityPage() {
                     <PostList
                         loadType="COMMUNITY"
                         entityName={params.groupname}
-                        isDeletePermission={data.currentUserRole?.editDescription || data.currentUserRole?.creator}
+                        isDeletePermission={data.currentUserRole?.deletePosts}
                     />
 
                 </div>

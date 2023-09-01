@@ -9,9 +9,9 @@ import UserService from "../../API/UserService";
 import {getUserImage} from "../../functions/linkFunctions";
 import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
 import {useDocumentTitle} from "usehooks-ts";
-import BooleanBlock from "../../components/UI/blocks/BooleanBlock";
+import BooleanBlock from "../../components/structureComponents/BooleanBlock";
 import MyGreyInput from "../../components/UI/inputs/MyGreyInput";
-import MidSizeContent from "../../components/UI/blocks/MidSizeContent";
+import MidSizeContent from "../../components/structureComponents/MidSizeContent";
 import SortButtons from "../../components/UI/navigation/SortButtons";
 
 function FriendsListPage() {

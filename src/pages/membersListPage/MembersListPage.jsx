@@ -1,6 +1,6 @@
 import React, {useMemo, useState, useEffect} from 'react';
 import style from "./MembersListPage.module.css";
-import MidSizeContent from "../../components/UI/blocks/MidSizeContent";
+import MidSizeContent from "../../components/structureComponents/MidSizeContent";
 import {useNavigate, useParams} from "react-router-dom";
 import {useDocumentTitle} from "usehooks-ts";
 import SortButtons from "../../components/UI/navigation/SortButtons";
@@ -8,7 +8,7 @@ import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import {useFetching} from "../../hooks/useFetching";
 import CommunityService from "../../API/CommunityService";
 import MyGreyInput from "../../components/UI/inputs/MyGreyInput";
-import BooleanBlock from "../../components/UI/blocks/BooleanBlock";
+import BooleanBlock from "../../components/structureComponents/BooleanBlock";
 import MyMessage from "../../components/UI/message/MyMessage";
 import ListItemBlock from "../../components/UI/blocks/ListItemBlock";
 import {getUserImage} from "../../functions/linkFunctions";

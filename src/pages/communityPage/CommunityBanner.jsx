@@ -3,7 +3,7 @@ import style from "./CommunityPage.module.css";
 import {getCommunityImageByArray, getUserImage} from "../../functions/linkFunctions";
 import ImageSelectorModal from "../../components/images/ImageSelectorModal";
 import UserInfo from "../../components/post/postCreatorInfo/UserInfo";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import MyTransparentButton from "../../components/UI/buttons/MyTransparentButton";
 import settingIco from "../../images/icons/settingIco.svg";
 import MyOutlineButton from "../../components/UI/buttons/MyOutlineButton";
@@ -13,21 +13,26 @@ import CommunityService from "../../API/CommunityService";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 import {formatDateWithMonthName} from "../../functions/timeDateFunctions";
 import GreyLink from "../../components/UI/links/GreyLink";
+import CommunityLogsModal from "./CommunityLogsModal";
 
 
 function CommunityBanner({data, setData, groupname, setError, groupnameColor, typeImage}) {
 
     const navigate = useNavigate()
     const [isImageModal, setIsImageModal] = useState(false)
+    const [isLogsOpen, setIsLogsOpen] = useState(false)
+
+    const communityType = data.community.type
+    const role = data.currentUserRole
 
     const [fetchMembership, isMembershipLoading, membershipError] = useFetching(async () => {
         let n
         if (data.member) {
-            await CommunityService.leaveCommunity(data.community.groupname)
+            await CommunityService.leaveCommunity(groupname)
             n = -1
         }
         else {
-            await CommunityService.joinCommunity(data.community.groupname)
+            await CommunityService.joinCommunity(groupname)
             n = 1
         }
         setData(prev => ({...prev, member: !prev.member, members: prev.members + n}))
@@ -62,9 +67,11 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                             visible={isImageModal}
                             setVisible={setIsImageModal}
                             format="community"
-                            isDeletePermission={data.currentUserRole?.editDescription || data.currentUserRole?.creator}
+                            isDeletePermission={role?.editDescription || role?.creator}
                             array={data.community.images}
-                            setArray={newArray => setData(prev => ({...prev, community: {...prev.community, images: newArray}}))}
+                            setArray={newArray => setData(prev => (
+                                {...prev, community: {...prev.community, images: newArray}}
+                            ))}
                         />
                     </div>
                     <div className={style.groupname}>
@@ -105,7 +112,7 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                     />
                 </div>
 
-                { ((data.currentUserRole && data.currentUserRole.inviteUsers) || data.community.type === "ANARCHY") && data.joinRequests > 0 ?
+                { (role?.inviteUsers || communityType === "ANARCHY") && data.joinRequests > 0 ?
                     <GreyLink to={'/join_requests/' + groupname}>
                         join requests ({data.joinRequests})
                     </GreyLink>
@@ -117,17 +124,27 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
 
 
                 <div className={style.buttonsDiv}>
-                    {
-                        data.currentUserRole && (data.currentUserRole.editDescription || data.currentUserRole.creator || data.currentUserRole.editId)
-                            ?
-                            <MyTransparentButton
-                                className={style.settingsBtn}
-                                tooltip="Settings Page"
-                                onClick={() => navigate('/community_settings/' + data.community.groupname)}>
-                                <img src={settingIco} alt="settings"/>
-                            </MyTransparentButton>
-                            : <></>
-                    }
+                    { communityType === "DEMOCRACY" || (communityType !== "ANARCHY" && role) ?
+                        <MyTransparentButton
+                            className={style.logsBtn}
+                            tooltip="Open logs"
+                            onClick={() => setIsLogsOpen(true)}
+                            centered={false}
+                        >
+                            Logs
+                        </MyTransparentButton>
+                        : <></> }
+
+                    { role?.editDescription || role?.creator || role?.editId ?
+                        <MyTransparentButton
+                            className={style.settingsBtn}
+                            tooltip="Settings Page"
+                            onClick={() => navigate('/community_settings/' + groupname)}
+                        >
+                            <img src={settingIco} alt="settings"/>
+                        </MyTransparentButton>
+                    : <></> }
+
                     <MyOutlineButton
                         disabled={data.banned}
                         className={style.joinLeaveBtn}
@@ -142,7 +159,10 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                     </MyOutlineButton>
                 </div>
             </div>
-
+            <CommunityLogsModal
+                isOpen={isLogsOpen}
+                setIsOpen={setIsLogsOpen}
+            />
         </OutlineFilledDiv>
     );
 }

@@ -10,7 +10,7 @@ import MessageModal from "../../components/UI/modal/MessageModal";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import {isNotBannedSymbols} from "../../functions/stringFunctions";
 import {useDocumentTitle} from "usehooks-ts";
-import BooleanBlock from "../../components/UI/blocks/BooleanBlock";
+import BooleanBlock from "../../components/structureComponents/BooleanBlock";
 
 
 function RegisterPage() {
