@@ -5,11 +5,4 @@
     max-width: 968px;
 }
 
-.error {
-    max-width: 600px;
-}
 
-.loaderDiv {
-    display: flex;
-    justify-content: center;
-}

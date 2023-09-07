@@ -15,7 +15,6 @@ import {formatDateWithMonthName} from "../../functions/timeDateFunctions";
 import GreyLink from "../../components/UI/links/GreyLink";
 import CommunityLogsModal from "./CommunityLogsModal";
 
-
 function CommunityBanner({data, setData, groupname, setError, groupnameColor, typeImage}) {
 
     const navigate = useNavigate()
@@ -129,7 +128,6 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                             className={style.logsBtn}
                             tooltip="Open logs"
                             onClick={() => setIsLogsOpen(true)}
-                            centered={false}
                         >
                             Logs
                         </MyTransparentButton>
@@ -159,10 +157,14 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                     </MyOutlineButton>
                 </div>
             </div>
-            <CommunityLogsModal
-                isOpen={isLogsOpen}
-                setIsOpen={setIsLogsOpen}
-            />
+
+            { isLogsOpen ?
+                <CommunityLogsModal
+                    setIsOpen={setIsLogsOpen}
+                    groupname={groupname}
+                />
+            : <></> }
+
         </OutlineFilledDiv>
     );
 }

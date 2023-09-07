@@ -1,11 +1,10 @@
-import {useRef, useState} from 'react';
+import {useState} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import style from "./PostList.module.css";
-import MySyncLoader from "../UI/loaders/MySyncLoader";
 import PostService from "../../API/PostService";
-import MyMessage from "../UI/message/MyMessage";
 import PostItem from "./PostItem";
 import {usePaginateLoad} from "../../hooks/usePaginateLoad";
+import LoaderAndErrorDiv from "../structureComponents/LoaderAndErrorDiv";
 
 function PostList({loadType, entityName, isDeletePermission}) { //loadType: HOME / COMMUNITY / USER
 
@@ -29,7 +28,7 @@ function PostList({loadType, entityName, isDeletePermission}) { //loadType: HOME
         setData(prev => [...prev, ...responseData])
     })
 
-    const [pageNumber, lastElementRef, setCanLoad] = usePaginateLoad(fetchPosts, isFetchLoading)
+    const [pageNumber, lastElement, setCanLoad] = usePaginateLoad(fetchPosts, isFetchLoading)
 
     function onSuccessDelete(id) {
         setData(prev => prev.filter(obj => obj.post.idPost !== id))
@@ -72,12 +71,8 @@ function PostList({loadType, entityName, isDeletePermission}) { //loadType: HOME
                 : <></>
             }
 
-            <div ref={lastElementRef} style={{height: 20}}> </div> {/*trigger to load next posts*/}
-
-            <div className={style.loaderDiv}>
-                <MyMessage className={style.error}>{fetchError}</MyMessage>
-                <MySyncLoader loading={isFetchLoading} />
-            </div>
+            <LoaderAndErrorDiv error={fetchError} isLoading={isFetchLoading}/>
+            {lastElement} {/*trigger to load next posts*/}
 
         </div>
     );
