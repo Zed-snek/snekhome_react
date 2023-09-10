@@ -73,6 +73,9 @@ export default class CommunityService {
     static async banUser(groupname, username) {
         return await postParamsRequestWithAuth(`/community/${groupname}/ban/${username}`)
     }
+    static async unbanUser(groupname, username) {
+        return await deleteRequestWithAuth(`/community/${groupname}/unban/${username}`)
+    }
 
     static async setRole(username, groupname, roleName) {
         return await postParamsRequestWithAuth(`/community/${groupname}/role/${roleName}/set/${username}`)

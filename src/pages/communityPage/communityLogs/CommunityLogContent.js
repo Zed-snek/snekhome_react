@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import style from "./CommunityLogsModal.module.css";
-import {formatDate} from "../../functions/timeDateFunctions";
+import {formatDate} from "../../../functions/timeDateFunctions";
 
 function linkToUser(nickname) {
     return <Link to={"/u/" + nickname} className={style.linkToUser}>{nickname}</Link>
@@ -23,6 +23,10 @@ export function getLogContent(log) {
         case "BAN_USER":
             return <div>
                 {actor} banned user {linkToUser(log.secondNickname)}
+            </div>
+        case "UNBAN_USER":
+            return <div>
+                {actor} unbanned user {linkToUser(log.secondNickname)}
             </div>
         case "GRANT_ROLE":
             return <div>

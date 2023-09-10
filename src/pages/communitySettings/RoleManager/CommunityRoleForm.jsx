@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import style from "./CommunityRoleManager.module.css";
 import CreateCommunityRoleFlair from "../../../components/community/CreateCommunityRoleFlair";
 import MyCheckbox from "../../../components/UI/inputs/MyCheckbox";
@@ -26,7 +26,6 @@ function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError,
         }
         if (!isCreate) {
             for (const key in obj) {
-                console.log(roleToEdit[key])
                 obj[key] = roleToEdit[key]
             }
         }

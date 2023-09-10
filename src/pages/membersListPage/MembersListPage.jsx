@@ -1,4 +1,4 @@
-import React, {useMemo, useState, useEffect} from 'react';
+import {useMemo, useState, useEffect} from 'react';
 import style from "./MembersListPage.module.css";
 import MidSizeContent from "../../components/structureComponents/MidSizeContent";
 import {useNavigate, useParams} from "react-router-dom";
@@ -8,7 +8,6 @@ import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import {useFetching} from "../../hooks/useFetching";
 import CommunityService from "../../API/CommunityService";
 import MyGreyInput from "../../components/UI/inputs/MyGreyInput";
-import BooleanBlock from "../../components/structureComponents/BooleanBlock";
 import MyMessage from "../../components/UI/message/MyMessage";
 import ListItemBlock from "../../components/UI/blocks/ListItemBlock";
 import {getUserImage} from "../../functions/linkFunctions";
@@ -17,6 +16,7 @@ import CommunityRoleFlair from "../../components/community/CommunityRoleFlair";
 import MoreOptionsButton from "../../components/UI/navigation/MoreOptionsButton";
 import CommunityRoleListToSet from "../communitySettings/Users/CommunityRoleListToSet";
 import {useMemoSearch} from "../../hooks/useMemoSearch";
+import MembersItemListMap from "./MembersItemListMap";
 
 function MembersListPage({permissions, communityType, isCommunityClosed, setError, setIsLoader}) {
 
@@ -59,7 +59,9 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
         let type = buttons[activeBtn]
         return type === "All" || (user.communityRole && (type === "With flair" || type === user.communityRole.title))
     }
+
     const [searchedElements, setSearchQuery] = useMemoSearch(data.users, ["name", "surname", "nickname"])
+
     const searchedAndSorted = useMemo(() => {
         return searchedElements.filter(u => isToShow(u))
     }, [activeBtn, searchedElements])
@@ -71,7 +73,7 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
                 || (communityType.type === 'DEMOCRACY' && permissions.banCitizen && userRole.citizen)
                 || (permissions.creator && !userRole.creator))
         ) {
-            return 'Kick'
+            return 'Ban'
         }
         return ''
     }
@@ -87,10 +89,9 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
     }
 
     async function banUser(nickname) {
-        const responseData = await CommunityService.banUser(params.groupname, nickname)
+        await CommunityService.banUser(params.groupname, nickname)
+            .then(() => setData(prev => ({...prev, users: prev.users.filter(u => u.nickname !== nickname)})))
             .catch(exception => setError(exception))
-        if (responseData.status === 200)
-            setData(prev => ({...prev, users: prev.users.filter(u => u.nickname !== nickname)}))
     }
 
     const [isRoleShow, setRoleShow] = useState({isShow: false, nickname: ''})
@@ -136,37 +137,19 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
                     {fetchError}
                 </MyMessage>
 
-                <BooleanBlock bool={!fetchLoading && data.users.length }>
+                { !fetchLoading && data.users.length ?
                     <MyGreyInput
                         onChange={event => setSearchQuery(event.target.value)}
                         placeholder="search members..."
                     />
-                </BooleanBlock>
+                : <></> }
 
-                {
-                    searchedAndSorted.length > 0
-                        ? searchedAndSorted.map( (user, index) =>
-                            <ListItemBlock
-                                key={index}
-                                image={getUserImage(user.image)}
-                                title={user.name + ' ' + user.surname}
-                                link={"/u/" + user.nickname}
-                                idName={user.nickname}
-                                buttonContent={buttonContent(user.communityRole)}
-                                buttonClick={() => banUser(user.nickname)}
-                                rightCornerContent={moreOptionsContent(user.communityRole, user.nickname)}
-                                underIdContent={user.communityRole
-                                    ? <CommunityRoleFlair
-                                            title={user.communityRole.title}
-                                            bannerColor={user.communityRole.bannerColor}
-                                            textColor={user.communityRole.textColor}
-                                    />
-                                    : ''
-                                }
-                            />
-                            )
-                        : <MyMessage> Users not found </MyMessage>
-                }
+                <MembersItemListMap
+                    array={searchedAndSorted}
+                    buttonContent={buttonContent}
+                    onClickCallback={banUser}
+                    moreOptionsFunction={moreOptionsContent}
+                />
 
             </OutlineDiv>
             <br/>

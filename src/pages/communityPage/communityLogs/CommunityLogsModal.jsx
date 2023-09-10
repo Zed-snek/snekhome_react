@@ -1,10 +1,10 @@
 import {Fragment, useState} from "react";
 import style from "./CommunityLogsModal.module.css";
-import TransparentModal from "../../components/UI/modal/TransparentModal";
-import {useFetching} from "../../hooks/useFetching";
-import {usePaginateLoad} from "../../hooks/usePaginateLoad";
-import LoaderAndErrorDiv from "../../components/structureComponents/LoaderAndErrorDiv";
-import CommunityService from "../../API/CommunityService";
+import TransparentModal from "../../../components/UI/modal/TransparentModal";
+import {useFetching} from "../../../hooks/useFetching";
+import {usePaginateLoad} from "../../../hooks/usePaginateLoad";
+import LoaderAndErrorDiv from "../../../components/structureComponents/LoaderAndErrorDiv";
+import CommunityService from "../../../API/CommunityService";
 import {getLogContent} from "./CommunityLogContent";
 
 function CommunityLogsModal({setIsOpen, groupname}) {

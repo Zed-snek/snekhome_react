@@ -13,7 +13,7 @@ import CommunityService from "../../API/CommunityService";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 import {formatDateWithMonthName} from "../../functions/timeDateFunctions";
 import GreyLink from "../../components/UI/links/GreyLink";
-import CommunityLogsModal from "./CommunityLogsModal";
+import CommunityLogsModal from "./communityLogs/CommunityLogsModal";
 
 function CommunityBanner({data, setData, groupname, setError, groupnameColor, typeImage}) {
 
