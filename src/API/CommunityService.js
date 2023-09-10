@@ -50,6 +50,10 @@ export default class CommunityService {
         return await getRequest('/members/' + groupname )
     }
 
+    static async getBannedUsers(groupname) {
+        return await getRequest('/banned_users/' + groupname)
+    }
+
     static async newRole(data, groupname) {
         return await postBodyRequestWithAuth('/community/role/' + groupname, data)
     }

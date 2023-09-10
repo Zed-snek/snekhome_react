@@ -1,4 +1,4 @@
-import React, {useMemo, useEffect, useState} from 'react';
+import {useMemo, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import style from "./FriendsListPage.module.css";
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
@@ -9,10 +9,10 @@ import UserService from "../../API/UserService";
 import {getUserImage} from "../../functions/linkFunctions";
 import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
 import {useDocumentTitle} from "usehooks-ts";
-import BooleanBlock from "../../components/structureComponents/BooleanBlock";
 import MyGreyInput from "../../components/UI/inputs/MyGreyInput";
 import MidSizeContent from "../../components/structureComponents/MidSizeContent";
 import SortButtons from "../../components/UI/navigation/SortButtons";
+import {useMemoSearch} from "../../hooks/useMemoSearch";
 
 function FriendsListPage() {
 
@@ -42,20 +42,10 @@ function FriendsListPage() {
     }, [])
 
 
-    const sortedFriends = useMemo(() => {
-        return data.filter(u => u.friendshipType === types[activeBtn])
-    }, [data, activeBtn])
-
-    const [searchQuery, setSearchQuery] = useState('')
-    const searchedAndSortedElements = useMemo(() => {
-        return sortedFriends.filter(u =>
-            u.name.toLowerCase().includes(searchQuery.toLowerCase())
-            || u.surname.toLowerCase().includes(searchQuery.toLowerCase())
-            || u.nickname.toLowerCase().includes(searchQuery.toLowerCase())
-            )
-    }, [data, searchQuery, activeBtn])
-
-
+    const [searchedElements, setSearchQuery] = useMemoSearch(data, ["name", "surname", "nickname"])
+    const sortedAndSearchedFriends = useMemo(() => {
+        return searchedElements.filter(u => u.friendshipType === types[activeBtn])
+    }, [activeBtn, searchedElements])
 
 
     async function manageFriend(nickname) {
@@ -84,17 +74,17 @@ function FriendsListPage() {
     }
 
     function content() {
-        if (searchedAndSortedElements.length > 0)
-            return searchedAndSortedElements.map( (user, index) =>
-                            <ListItemBlock
-                                key={index}
-                                image={getUserImage(user.image)}
-                                title={user.name + ' ' + user.surname}
-                                link={"/u/" + user.nickname}
-                                idName={user.nickname}
-                                buttonContent={isCurrent ? btnContent[activeBtn] : ''}
-                                buttonClick={() => manageFriend(user.nickname)}
-                            />
+        if (sortedAndSearchedFriends.length > 0)
+            return sortedAndSearchedFriends.map( (user, index) =>
+                    <ListItemBlock
+                        key={index}
+                        image={getUserImage(user.image)}
+                        title={user.name + ' ' + user.surname}
+                        link={"/u/" + user.nickname}
+                        idName={user.nickname}
+                        buttonContent={isCurrent ? btnContent[activeBtn] : ''}
+                        buttonClick={() => manageFriend(user.nickname)}
+                    />
             )
         else
             return <MyMessage>
@@ -113,18 +103,17 @@ function FriendsListPage() {
                     />
                 </div>
 
-
                 <OutlineDiv>
                     <MyMessage>
                         {fetchError}
                     </MyMessage>
 
-                    <BooleanBlock bool={!fetchLoading && data.length > 0}>
+                    { !fetchLoading && data.length > 0 ?
                         <MyGreyInput
                             onChange={event => setSearchQuery(event.target.value)}
                             placeholder="search friends..."
                         />
-                    </BooleanBlock>
+                    : <></> }
 
                     <div>
                         {content()}

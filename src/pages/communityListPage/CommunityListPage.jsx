@@ -14,6 +14,7 @@ import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import BooleanBlock from "../../components/structureComponents/BooleanBlock";
 import MyGreyInput from "../../components/UI/inputs/MyGreyInput";
 import MidSizeContent from "../../components/structureComponents/MidSizeContent";
+import {useMemoSearch} from "../../hooks/useMemoSearch";
 
 function CommunityListPage() {
 
@@ -21,7 +22,6 @@ function CommunityListPage() {
     useDocumentTitle('Communities')
     const isCurrent = useIsCurrentUser(params.nickname)
 
-    const [searchQuery, setSearchQuery] = useState('')
     const [data, setData] = useState([{
         groupname: '',
         image: '',
@@ -51,16 +51,13 @@ function CommunityListPage() {
         fetchCommunities()
     }, [])
 
-    const searchedElements = useMemo(() => {
-        return data.filter(c => c.name.toLowerCase().includes(searchQuery.toLowerCase()) || c.groupname.toLowerCase().includes(searchQuery.toLowerCase()))
-    }, [data, searchQuery])
+    const [searchedElements, setSearchQuery] = useMemoSearch(data, ["name", "groupname"])
 
     async function manageCommunity(arrayIndex) {
         let name = data[arrayIndex].groupname
         await CommunityService.leaveCommunity(name)
             .then(() => setData(data.filter(o => o.groupname !== name)))
     }
-
 
     return (
         <MidSizeContent>

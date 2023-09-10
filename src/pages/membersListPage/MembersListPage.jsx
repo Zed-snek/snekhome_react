@@ -16,6 +16,7 @@ import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import CommunityRoleFlair from "../../components/community/CommunityRoleFlair";
 import MoreOptionsButton from "../../components/UI/navigation/MoreOptionsButton";
 import CommunityRoleListToSet from "../communitySettings/Users/CommunityRoleListToSet";
+import {useMemoSearch} from "../../hooks/useMemoSearch";
 
 function MembersListPage({permissions, communityType, isCommunityClosed, setError, setIsLoader}) {
 
@@ -53,32 +54,22 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
         fetchMembers()
     }, [])
 
-    const [searchQuery, setSearchQuery] = useState('')
-    const searchedElements = useMemo(() => {
-        return data.users.filter(c =>
-            c.name.toLowerCase().includes(searchQuery.toLowerCase())
-            || c.surname.toLowerCase().includes(searchQuery.toLowerCase())
-            || c.nickname.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-    }, [data, searchQuery])
 
     function isToShow(user) {
         let type = buttons[activeBtn]
         return type === "All" || (user.communityRole && (type === "With flair" || type === user.communityRole.title))
     }
-
+    const [searchedElements, setSearchQuery] = useMemoSearch(data.users, ["name", "surname", "nickname"])
     const searchedAndSorted = useMemo(() => {
         return searchedElements.filter(u => isToShow(u))
-    }, [activeBtn, data, searchQuery])
+    }, [activeBtn, searchedElements])
 
     function buttonContent(userRole) {
         if (permissions && communityType !== 'ANARCHY'
             && (permissions.creator || permissions.banCitizen || permissions.banUser)
-            && (
-                (permissions.banUser && !userRole)
+            && ((permissions.banUser && !userRole)
                 || (communityType.type === 'DEMOCRACY' && permissions.banCitizen && userRole.citizen)
-                || (permissions.creator && !userRole.creator)
-            )
+                || (permissions.creator && !userRole.creator))
         ) {
             return 'Kick'
         }
@@ -179,20 +170,18 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
 
             </OutlineDiv>
             <br/>
-            {
-                permissions ?
-                    <CommunityRoleListToSet
-                        visibleAndNickname={isRoleShow}
-                        setVisibleAndNickname={setRoleShow}
-                        setError={setError}
-                        setIsLoader={setIsLoader}
-                        groupname={params.groupname}
-                        communityType={communityType}
-                        setUsers={setData}
-                        isCommunityClosed={isCommunityClosed}
-                    />
-                    : ''
-            }
+            { permissions ?
+                <CommunityRoleListToSet
+                    visibleAndNickname={isRoleShow}
+                    setVisibleAndNickname={setRoleShow}
+                    setError={setError}
+                    setIsLoader={setIsLoader}
+                    groupname={params.groupname}
+                    communityType={communityType}
+                    setUsers={setData}
+                    isCommunityClosed={isCommunityClosed}
+                />
+            : '' }
 
         </MidSizeContent>
     );
