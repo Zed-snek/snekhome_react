@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import style from "../userSettings/Settings.module.css";
 import styleThis from "./CommunitySettingsPage.module.css";
 import {useDocumentTitle} from "usehooks-ts";
@@ -8,9 +8,6 @@ import MyTextLink from "../../components/UI/links/MyTextLink";
 import MessageModal from "../../components/UI/modal/MessageModal";
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import CommunitySettingsNavbar from "./CommunitySettingsNavbar";
-import {useFetching} from "../../hooks/useFetching";
-import CommunityService from "../../API/CommunityService";
-import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 import CommunityDetailsSettings from "./Details/CommunityDetailsSettings";
 import InfoDiv from "../../components/UI/blocks/InfoDiv";
 import CommunityRoleManager from "./RoleManager/CommunityRoleManager";
@@ -19,6 +16,7 @@ import CommunityRulesSettings from "./Rules/CommunityRulesSettings";
 import {getCommunityImageByArray} from "../../functions/linkFunctions";
 import MembersListPage from "../membersListPage/MembersListPage";
 import {useFetchCommunity} from "../../hooks/useFetchCommunity";
+import BannedUsersList from "./BannedUsers/BannedUsersList";
 
 function CommunitySettingsPage() {
 
@@ -103,6 +101,29 @@ function CommunitySettingsPage() {
         }
     }
 
+    function contentWithRawBackground() {
+        switch (page) {
+            case 3:
+                return <div className={style.membersListPage}>
+                    <MembersListPage
+                        permissions={data.currentUserRole}
+                        communityType={data.community.type}
+                        setError={setError}
+                        setIsLoader={setIsLoader}
+                        isCommunityClosed={data.community.closed}
+                    />
+                </div>
+            case 6:
+                return <div className={style.membersListPage}>
+                    <BannedUsersList
+                        setError={setError}
+                        setIsLoader={setIsLoader}
+                        groupname={params.groupname}
+                    />
+                </div>
+        }
+    }
+
     if (data)
     return (
         <div className={style.main}>
@@ -136,16 +157,8 @@ function CommunitySettingsPage() {
                     {error}
                 </MessageModal>
 
-                { page === 3
-                        ? <div className={style.membersListPage}>
-                            <MembersListPage
-                                permissions={data.currentUserRole}
-                                communityType={data.community.type}
-                                setError={setError}
-                                setIsLoader={setIsLoader}
-                                isCommunityClosed={data.community.closed}
-                            />
-                        </div>
+                { page === 3 || page === 6
+                        ? contentWithRawBackground()
                         : <OutlineDiv>
                             <InfoDiv className={styleThis.content}>
                                 {content()}
