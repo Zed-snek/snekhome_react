@@ -11,7 +11,8 @@ import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 import buttonStyle from '../../../components/UI/buttons/MyButton.module.css';
 import {useDocumentTitle} from "usehooks-ts";
 
-function CommunityDetailsSettings({groupname, name, description, setError, setIsLoader, setData, image}) {
+function CommunityDetailsSettings({groupname, name, description, setError, setIsLoader, setData, image,
+                                  isEditDescription, isEditGroupname}) {
 
     useDocumentTitle("Details settings")
 
@@ -59,6 +60,7 @@ function CommunityDetailsSettings({groupname, name, description, setError, setIs
                     name="name"
                     maxLength={25}
                     callback={updateValue}
+                    isEdit={isEditDescription}
                 >
                     name:
                 </EditInput>
@@ -67,6 +69,7 @@ function CommunityDetailsSettings({groupname, name, description, setError, setIs
                     name="groupname"
                     maxLength={18}
                     callback={updateValue}
+                    isEdit={isEditGroupname}
                 >
                     groupname:
                 </EditInput>
@@ -77,6 +80,7 @@ function CommunityDetailsSettings({groupname, name, description, setError, setIs
                     maxLength={512}
                     isTextArea={true}
                     callback={updateValue}
+                    isEdit={isEditDescription}
                 >
                     description:
                 </EditInput>
@@ -85,14 +89,16 @@ function CommunityDetailsSettings({groupname, name, description, setError, setIs
 
             <div>
                 <div className="flexDiv">
-                    <MyFileInput
-                        className={buttonStyle.button + ' ' + buttonStyle.blue + ' ' + style.fileBtn}
-                        maxSize={5}
-                        setIsShowError={setShowError}
-                        setImage={updateValue}
-                    >
-                        Change image
-                    </MyFileInput>
+                    { isEditDescription ?
+                        <MyFileInput
+                            className={buttonStyle.button + ' ' + buttonStyle.blue + ' ' + style.fileBtn}
+                            maxSize={5}
+                            setIsShowError={setShowError}
+                            setImage={updateValue}
+                        >
+                            Change image
+                        </MyFileInput>
+                    : <></> }
                 </div>
                 <div className={style.fadingMessageDiv}>
                     <FadingMessage
@@ -104,7 +110,6 @@ function CommunityDetailsSettings({groupname, name, description, setError, setIs
                         max size allowed 5mb
                     </FadingMessage>
                 </div>
-
 
 
                 <div className={style.sizeExamples}>

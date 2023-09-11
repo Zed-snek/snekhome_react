@@ -10,7 +10,6 @@ export function useFetchCommunity(groupname) {
     const [fetchCommunity, isCommunityLoading, communityError] = useFetching(async () => {
         let responseData = await CommunityService.getCommunity(groupname)
         setData(responseData)
-        console.log(responseData)
     })
 
     useEffect(() => {

@@ -5,8 +5,7 @@ import edit from "../../../images/icons/edit.svg";
 import MyInput from "../../../components/UI/inputs/MyInput";
 import MyTextArea from "../../../components/UI/inputs/MyTextArea";
 
-function EditInput({isTextArea, children, current, name, callback, ...props}) {
-
+function EditInput({isTextArea, children, current, name, callback, isEdit, ...props}) {
 
     const [isInput, setIsInput] = useState(false)
 
@@ -66,20 +65,27 @@ function EditInput({isTextArea, children, current, name, callback, ...props}) {
                                     {...props}
                                 />
                             }
-
                         </div>
+
                         <div>
                             <MyTransparentButton className={style.cancel + ' ' + style.accept} tooltip="Accept">
                                 ✓
                             </MyTransparentButton>
                         </div>
+
                     </form>
                 </div>
 
                 : <div className={style.editBtnDiv}>
-                    <MyTransparentButton className={style.edit} tooltip="Edit" onClick={() => setIsInput(true)}>
-                        <img src={edit} alt="edit"/>
-                    </MyTransparentButton>
+                    { isEdit ?
+                        <MyTransparentButton
+                            className={style.edit}
+                            tooltip="Edit"
+                            onClick={() => setIsInput(true)}
+                        >
+                            <img src={edit} alt="edit"/>
+                        </MyTransparentButton>
+                    : <></> }
                     <div>
                         {current}
                     </div>

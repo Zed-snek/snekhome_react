@@ -21,19 +21,15 @@ function CommunitySettingsNavbar({callback, currentUserRole, communityType}) {
                     <div>Details</div>
                     <span>Image, name, description</span>
                 </li>
-
+                <li className={visitedStyle(2)} onClick={() => changeVisited(2)}>
+                    <div>Role manager</div>
+                    <span>Create, edit roles</span>
+                </li>
                 { currentUserRole.creator && communityType !== 'ANARCHY' ?
-                    <>
-                        <li className={visitedStyle(2)} onClick={() => changeVisited(2)}>
-                            <div>Role manager</div>
-                            <span>Create, edit roles</span>
-                        </li>
-                        <li className={visitedStyle(4)} onClick={() => changeVisited(4)}>
-                            <div>Rules</div>
-                            <span>Is closed, is anonymous</span>
-                        </li>
-
-                    </>
+                    <li className={visitedStyle(4)} onClick={() => changeVisited(4)}>
+                        <div>Rules</div>
+                        <span>Is closed, is anonymous</span>
+                    </li>
                 : <></> }
 
                 { currentUserRole.banUser && communityType !== 'ANARCHY' ?

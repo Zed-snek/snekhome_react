@@ -81,13 +81,13 @@ function AccountPage(props) {
 
             <div className={style.main}>
 
-                <EditInput current={props.name} callback={updateValue} name="name" maxLength={18}>
+                <EditInput current={props.name} callback={updateValue} name="name" maxLength={18} isEdit={true}>
                     name:
                 </EditInput>
-                <EditInput current={props.surname} callback={updateValue} name="surname" maxLength={20}>
+                <EditInput current={props.surname} callback={updateValue} name="surname" maxLength={20} isEdit={true}>
                     surname:
                 </EditInput>
-                <EditInput current={userNickname} callback={updateValue} name="nickname" required maxLength={18}>
+                <EditInput current={userNickname} callback={updateValue} name="nickname" required maxLength={18} isEdit={true}>
                     nickname:
                 </EditInput>
 

@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import style from "../userSettings/Settings.module.css";
 import styleThis from "./CommunitySettingsPage.module.css";
 import {useDocumentTitle} from "usehooks-ts";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import MyTextLink from "../../components/UI/links/MyTextLink";
 import MessageModal from "../../components/UI/modal/MessageModal";
@@ -22,6 +22,7 @@ function CommunitySettingsPage() {
 
     useDocumentTitle("Settings")
     const params = useParams()
+    const navigate = useNavigate()
 
     const [data, setData, isCommunityLoading] = useFetchCommunity(params.groupname)
 
@@ -36,6 +37,10 @@ function CommunitySettingsPage() {
         setIsLoader(isCommunityLoading)
     }, [isCommunityLoading])
 
+    useEffect(() => {
+        if (!data?.currentUserRole)
+            navigate('/c/' + params.groupname)
+    }, [data])
 
     const [page, setPage] = useState(1)
     function content() {
@@ -49,6 +54,8 @@ function CommunitySettingsPage() {
                     description={data.community.description}
                     setData={setData}
                     image={getCommunityImageByArray(data.community.images)}
+                    isEditDescription={data.currentUserRole.editDescription}
+                    isEditGroupname={data.currentUserRole.editId}
                 />
             case 2:
                 return <CommunityRoleManager
@@ -57,6 +64,7 @@ function CommunitySettingsPage() {
                     groupname={params.groupname}
                     communityType={data.community.type}
                     isCommunityClosed={data.community.closed}
+                    isEditPermission={data.currentUserRole.creator}
                 />
             case 4:
                 return <CommunityRulesSettings
@@ -124,7 +132,7 @@ function CommunitySettingsPage() {
         }
     }
 
-    if (data)
+    if (data && data.currentUserRole)
     return (
         <div className={style.main}>
 

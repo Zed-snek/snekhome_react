@@ -133,7 +133,7 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                         </MyTransparentButton>
                         : <></> }
 
-                    { role?.editDescription || role?.creator || role?.editId ?
+                    { role?.editDescription || role?.creator || role?.editId || role ?
                         <MyTransparentButton
                             className={style.settingsBtn}
                             tooltip="Settings Page"

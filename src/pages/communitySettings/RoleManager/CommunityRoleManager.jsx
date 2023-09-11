@@ -7,7 +7,7 @@ import OverContentDiv from "../../../components/UI/blocks/OverContentDiv";
 import {useGetRoles} from "../useGetRoles";
 import {useDocumentTitle} from "usehooks-ts";
 
-function CommunityRoleManager({communityType, groupname, isCommunityClosed, setError, setIsLoader}) {
+function CommunityRoleManager({communityType, groupname, isCommunityClosed, setError, setIsLoader, isEditPermission}) {
 
     useDocumentTitle("Role manager")
 
@@ -25,22 +25,20 @@ function CommunityRoleManager({communityType, groupname, isCommunityClosed, setE
 
             <div className={style.roleItemsDiv}>
                 <div className={style.roleItems}>
-                    {
-                        roles.length > 0 ?
-                            roles.map((role, index) =>
-                                <CommunityRoleItem
-                                    key={index}
-                                    role={role}
-                                    groupname={groupname}
-                                    typesToMap={typesToMap}
-                                    setIsLoader={setIsLoader}
-                                    setError={setError}
-                                    setRoles={setRoles}
-                                    isEdit={true}
-                                />
-                            )
-                            : <></>
-                    }
+                    { roles.length > 0 ?
+                        roles.map((role, index) =>
+                            <CommunityRoleItem
+                                key={index}
+                                role={role}
+                                groupname={groupname}
+                                typesToMap={typesToMap}
+                                setIsLoader={setIsLoader}
+                                setError={setError}
+                                setRoles={setRoles}
+                                isEdit={isEditPermission}
+                            />
+                        )
+                    : <></> }
                 </div>
             </div>
 
@@ -61,12 +59,14 @@ function CommunityRoleManager({communityType, groupname, isCommunityClosed, setE
                         setIsShow={setIsShowCreateForm}
                     />
                 </OverContentDiv>
-                <MyTransparentButton
-                    className={style.button}
-                    onClick={() => setIsShowCreateForm(prev => !prev)}
-                >
-                    Create new role
-                </MyTransparentButton>
+                { isEditPermission ?
+                    <MyTransparentButton
+                        className={style.button}
+                        onClick={() => setIsShowCreateForm(prev => !prev)}
+                    >
+                        Create new role
+                    </MyTransparentButton>
+                : <></> }
             </div>
 
         </div>
