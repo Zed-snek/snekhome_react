@@ -54,4 +54,14 @@
     background: linear-gradient(291deg, rgba(255, 153, 0, 0.8) 28%, rgba(249, 193, 42, 0.8) 100%);
 }
 
+.grey {
+    background-color: #949494;
+    border-color: #949494;
+}
+.grey:hover {
+    background-color: #949494C8;
+}
+.grey:active {
+    background-color: #94949480;
+}
 

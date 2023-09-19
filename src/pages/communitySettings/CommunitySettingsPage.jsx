@@ -38,7 +38,7 @@ function CommunitySettingsPage() {
     }, [isCommunityLoading])
 
     useEffect(() => {
-        if (!data?.currentUserRole)
+        if (data && !data.currentUserRole)
             navigate('/c/' + params.groupname)
     }, [data])
 

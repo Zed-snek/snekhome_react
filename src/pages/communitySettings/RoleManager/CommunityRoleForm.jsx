@@ -5,11 +5,11 @@ import MyCheckbox from "../../../components/UI/inputs/MyCheckbox";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
 import {useFetching} from "../../../hooks/useFetching";
 import CommunityService from "../../../API/CommunityService";
-import BooleanBlock from "../../../components/structureComponents/BooleanBlock";
 import MyButton from "../../../components/UI/buttons/MyButton";
 
 function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError, setIsLoader, setIsShow, roleToEdit}) {
 
+    const isCreatorOrCitizen = isCreate ? false : (roleToEdit.creator || roleToEdit.citizen)
     const [flair, setFlair] = useState(isCreate
         ? {title: 'new', textColor: '#E3E3E3', bannerColor: 'cadetblue'}
         : {title: roleToEdit.title, textColor: roleToEdit.textColor, bannerColor: roleToEdit.bannerColor}
@@ -24,11 +24,8 @@ function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError,
             banCitizen: false,
             inviteUsers: false
         }
-        if (!isCreate) {
-            for (const key in obj) {
-                obj[key] = roleToEdit[key]
-            }
-        }
+        if (!isCreate)
+            obj = roleToEdit
         return obj
     }
 
@@ -64,7 +61,6 @@ function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError,
     })
 
 
-
     function deleteRole(e) {
         e.preventDefault()
         fetchDelete()
@@ -94,29 +90,33 @@ function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError,
                         <div className={style.title}>
                             Role permissions
                         </div>
-                        {
-                            typesToMap.map( (t, index) =>
-                                <div key={index} className={style.checkBox}>
-                                    <MyCheckbox
-                                        disabled={roleToEdit ? roleToEdit.creator : false}
-                                        label={t.value}
-                                        checked={isTypeAllowed[t.title]}
-                                        onChange={e => setIsTypeAllowed(prev => {
-                                            let obj = {...prev}
-                                            obj[t.title] = e.target.checked
-                                            return obj
-                                        })}
-                                    />
-                                </div>
-                            )
-                        }
+                        { typesToMap.map( (t, index) =>
+                            <div key={index} className={style.checkBox}>
+                                <MyCheckbox
+                                    disabled={roleToEdit ? isCreatorOrCitizen : false}
+                                    label={t.value}
+                                    checked={isTypeAllowed[t.title]}
+                                    onChange={e => setIsTypeAllowed(prev => {
+                                        let obj = {...prev}
+                                        obj[t.title] = e.target.checked
+                                        return obj
+                                    })}
+                                />
+                            </div>
+                        )}
                     </div>
 
-                    <BooleanBlock bool={!isCreate} className={style.formDeleteBtn}>
-                        <MyButton color='red' onClick={deleteRole}>
-                            Delete role
-                        </MyButton>
-                    </BooleanBlock>
+                    { !isCreate ?
+                        <div className={style.formDeleteBtn}>
+                            <MyButton
+                                color='red'
+                                onClick={deleteRole}
+                                disabled={isCreatorOrCitizen}
+                            >
+                                Delete role
+                            </MyButton>
+                        </div>
+                    : <> </> }
 
                 </div>
 

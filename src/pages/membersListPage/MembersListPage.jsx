@@ -9,10 +9,7 @@ import {useFetching} from "../../hooks/useFetching";
 import CommunityService from "../../API/CommunityService";
 import MyGreyInput from "../../components/UI/inputs/MyGreyInput";
 import MyMessage from "../../components/UI/message/MyMessage";
-import ListItemBlock from "../../components/UI/blocks/ListItemBlock";
-import {getUserImage} from "../../functions/linkFunctions";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
-import CommunityRoleFlair from "../../components/community/CommunityRoleFlair";
 import MoreOptionsButton from "../../components/UI/navigation/MoreOptionsButton";
 import CommunityRoleListToSet from "../communitySettings/Users/CommunityRoleListToSet";
 import {useMemoSearch} from "../../hooks/useMemoSearch";
@@ -80,7 +77,7 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
     function moreOptionsContent(userRole, nickname) {
         if (permissions && permissions.creator && communityType !== "ANARCHY"  && !(userRole && userRole.creator)) {
             let options = [{title: "Set role", onClick: () => setRole(nickname, false)}]
-            if (userRole)
+            if (userRole && !userRole.citizen)
                 options.push({title: "Revoke role", onClick: () => setRole(nickname, true)})
             return <MoreOptionsButton
                 options={options}

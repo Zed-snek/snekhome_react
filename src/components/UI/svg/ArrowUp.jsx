@@ -3,7 +3,7 @@ import {useSVG} from "../../../hooks/useSVG";
 
 function ArrowUp({width, height, color}) {
 
-    const [w, h, c] = useSVG( 12, 15, "#E3E3E3", width, height, color)
+    const [w, h, c] = useSVG(12, 15, "#E3E3E3", width, height, color)
 
     return (
         <svg width={w} height={h} viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">

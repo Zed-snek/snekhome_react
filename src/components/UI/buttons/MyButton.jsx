@@ -2,7 +2,7 @@ import React from 'react';
 import buttonStyle from './MyButton.module.css';
 import {useClasses} from "../../../hooks/useClasses";
 
-function MyButton({children, className, color, ...props}) {
+function MyButton({children, className, color, disabled, ...props}) {
 
     let classes = useClasses(buttonStyle.button, className)
 
@@ -19,11 +19,19 @@ function MyButton({children, className, color, ...props}) {
         red: buttonStyle.red,
         orange: buttonStyle.orange,
     }
-    classes += ' ' + (colors[color] ?? colors.blue) /* Nullish coalescing operator "??" */
+    if (disabled)
+        classes += ' ' + buttonStyle.grey
+    else
+        classes += ' ' + (colors[color] ?? colors.blue) /* Nullish coalescing operator "??" */
 
 
     return (
-        <button {...props} className={classes} style={styleObject}>
+        <button
+            className={classes}
+            style={styleObject}
+            disabled={disabled}
+            {...props}
+        >
             {children}
         </button>
     );

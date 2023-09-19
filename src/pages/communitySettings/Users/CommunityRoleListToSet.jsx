@@ -1,4 +1,3 @@
-import React from 'react';
 import {Modal} from "react-bootstrap";
 import CloseButton from "react-bootstrap/CloseButton";
 import {useGetRoles} from "../useGetRoles";
@@ -41,27 +40,25 @@ function CommunityRoleListToSet({visibleAndNickname, setVisibleAndNickname, isCo
                 </Modal.Header>
                 <Modal.Body>
                     <div>
-                        {
-                            roles.length > 0 ?
-                                roles.filter(r => !r.creator).map((role, index) =>
-                                    <div
-                                        key={index}
-                                        className={style.item}
-                                        onClick={() => setRole(role)}
-                                    >
-                                        <CommunityRoleItem
-                                            role={role}
-                                            groupname={groupname}
-                                            typesToMap={typesToMap}
-                                            setIsLoader={setIsLoader}
-                                            setError={setError}
-                                            setRoles={setRoles}
-                                            isEdit={false}
-                                        />
-                                    </div>
-                                )
-                                : <></>
-                        }
+                        { roles.length > 0 ?
+                            roles.filter(r => !r.creator && !r.citizen).map((role, index) =>
+                                <div
+                                    key={index}
+                                    className={style.item}
+                                    onClick={() => setRole(role)}
+                                >
+                                    <CommunityRoleItem
+                                        role={role}
+                                        groupname={groupname}
+                                        typesToMap={typesToMap}
+                                        setIsLoader={setIsLoader}
+                                        setError={setError}
+                                        setRoles={setRoles}
+                                        isEdit={false}
+                                    />
+                                </div>
+                            )
+                        : <></> }
                     </div>
                 </Modal.Body>
             </div>
