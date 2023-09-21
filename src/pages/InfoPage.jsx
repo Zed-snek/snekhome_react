@@ -1,5 +1,6 @@
 import React from 'react';
 import {useDocumentTitle} from "usehooks-ts";
+import MyButton from "../components/UI/buttons/MyButton";
 
 function InfoPage() {
 
@@ -8,6 +9,9 @@ function InfoPage() {
     return (
         <div>
             <h1> Some Info </h1>
+            <MyButton>
+                Click
+            </MyButton>
         </div>
     );
 }

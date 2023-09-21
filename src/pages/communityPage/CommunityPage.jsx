@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import {useEffect, useState, useContext} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import style from "./CommunityPage.module.css";
@@ -9,7 +9,6 @@ import newsImage from "../../images/communityTypes/news.png";
 import {getCommunityImage} from "../../functions/linkFunctions";
 import MessageModal from "../../components/UI/modal/MessageModal";
 import {useDocumentTitle} from "usehooks-ts";
-import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 import ClosedCommunityPage from "./ClosedCommunityPage";
 import CommunityBanner from "./CommunityBanner";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
@@ -70,6 +69,7 @@ function CommunityPage() {
                     nameColor={getGroupnameColor()}
                     typeImage={getTypeImage()}
                     isRequestSent={data.requestSent}
+                    isBanned={data.banned}
                 />
             );
         else

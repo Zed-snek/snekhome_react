@@ -8,6 +8,7 @@ import {AuthContext, UserContext} from "../../../components/context";
 import MoreOptionsButton from "../../../components/UI/navigation/MoreOptionsButton";
 import MessageModal from "../../../components/UI/modal/MessageModal";
 import ReplyButton from "../../../components/post/commentary/ReplyButton";
+import {formatDate} from "../../../functions/timeDateFunctions";
 
 function Commentary({
     postId, comment, depthLevel, data, setData, isPermitToDelete, addComment, deleteComment, editComment
@@ -96,22 +97,26 @@ function Commentary({
                     </div>
                 }
 
+                <div className={style.bottomDiv}>
+                    <div className={style.ratingDiv}>
+                        <CommentaryRating
+                            rating={comment.rating}
+                            rateStatus={comment.ratedType}
+                            idComment={comment.id}
+                            addRating={addRating}
+                            setRatingStatus={setRatingStatus}
+                        />
 
-                <div className={style.ratingDiv}>
-                    <CommentaryRating
-                        rating={comment.rating}
-                        rateStatus={comment.ratedType}
-                        idComment={comment.id}
-                        addRating={addRating}
-                        setRatingStatus={setRatingStatus}
-                    />
+                        <ReplyButton
+                            isShow={isAuth}
+                            isReply={isReply}
+                            setIsReply={setIsReply}
+                        />
+                    </div>
 
-                    <ReplyButton
-                        isShow={isAuth}
-                        isReply={isReply}
-                        setIsReply={setIsReply}
-                    />
-
+                    <div className={style.dateDiv}>
+                        {formatDate(comment.date)}
+                    </div>
                 </div>
 
                 { isReply ?
@@ -121,7 +126,7 @@ function Commentary({
                         callbackOnSuccess={() => setIsReply(false)}
                         addComment={addComment}
                     />
-                    : <></> }
+                : <></> }
 
                 <div>
                     { data

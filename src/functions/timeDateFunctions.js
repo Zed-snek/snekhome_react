@@ -34,7 +34,14 @@ function changeFormat(date) {
 }
 
 export function formatDate(date) {
-    const d = new Date(date + 'Z')
+    let d
+    if (date) {
+        d = new Date(date + 'Z')
+    }
+    else {
+        d = new Date()
+    }
+
     const formatted = changeFormat(d)
     const now = new Date()
 

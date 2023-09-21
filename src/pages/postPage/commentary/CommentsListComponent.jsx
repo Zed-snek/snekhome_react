@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import style from "./Commentary.module.css";
 import NewCommentForm from "../../../components/post/commentary/NewCommentForm";
 import {AuthContext} from "../../../components/context";

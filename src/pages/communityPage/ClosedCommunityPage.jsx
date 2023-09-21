@@ -8,7 +8,7 @@ import MyMessage from "../../components/UI/message/MyMessage";
 import MyPulseLoader from "../../components/UI/loaders/MyPulseLoader";
 import CommunityService from "../../API/CommunityService";
 
-function ClosedCommunityPage({image, groupname, name, nameColor, typeImage, isRequestSent}) {
+function ClosedCommunityPage({image, groupname, name, nameColor, typeImage, isRequestSent, isBanned}) {
 
     const [buttonStatus, setButtonStatus] = useState(isRequestSent)
 
@@ -21,7 +21,7 @@ function ClosedCommunityPage({image, groupname, name, nameColor, typeImage, isRe
         <div className={style.main}>
             <div className={style.content}>
                 <h2 className={style.h2}>
-                    Oopps... Community is closed
+                    Oopps... {isBanned ? "You are banned" : "Community is closed"}
                 </h2>
                 <InfoDiv className={style.community}>
                     <div>
@@ -46,7 +46,10 @@ function ClosedCommunityPage({image, groupname, name, nameColor, typeImage, isRe
                     </div>
                 </InfoDiv>
                 <div className={style.text}>
-                    To send request to join the community, click the button below
+                    { isBanned
+                        ? "No access to the community"
+                        : "To send request to join the community, click the button below"
+                    }
                 </div>
                 <MyMessage>
                     {requestError}
@@ -55,10 +58,12 @@ function ClosedCommunityPage({image, groupname, name, nameColor, typeImage, isRe
                 <MyButton
                     className={style.button}
                     onClick={() => fetchRequest()}
+                    disabled={isBanned}
                 >
-                    { isRequestLoading
-                        ? <MyPulseLoader color="#E3E3E3" size={7}/>
-                        : buttonStatus ? "Cancel request" : "Send request"
+                    { isBanned ? "Banned"
+                        : isRequestLoading
+                            ? <MyPulseLoader color="#E3E3E3" size={7}/>
+                            : buttonStatus ? "Cancel request" : "Send request"
                     }
                 </MyButton>
             </div>

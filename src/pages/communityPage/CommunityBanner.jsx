@@ -144,15 +144,12 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                     : <></> }
 
                     <MyOutlineButton
-                        disabled={data.banned}
                         className={style.joinLeaveBtn}
                         onClick={handleJoinLeaveBtn}
                     >
                         { isMembershipLoading
                             ? <MyPulseLoader />
-                            : data.banned
-                                ? "Banned"
-                                : data.member ? "Leave" : "Join"
+                            : data.member ? "Leave" : "Join"
                         }
                     </MyOutlineButton>
                 </div>
