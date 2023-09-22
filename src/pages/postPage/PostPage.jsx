@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import style from "./PostPage.module.css";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
@@ -68,6 +68,7 @@ function PostPage() {
                     idPost={params.id}
                 />
             </div>
+
             <div className={style.content}>
                 <div className={style.moreOptionsDiv}>
                     {moreOptionsButton()}
@@ -85,9 +86,9 @@ function PostPage() {
                 >
                     {errorMessage}
                 </MessageModal>
+
                 <OutlineFilledDiv className={style.imgAndTextDiv}>
-                    {
-                        data.post.images.length > 0
+                    { data.post.images.length > 0
                         ? <PostImagesSelector
                                 images={data.post.images}
                                 isImageForm={true}
@@ -96,8 +97,7 @@ function PostPage() {
                                 className={style.postImageSelector}
                                 imgClassName={style.postImg}
                             />
-                        : <></>
-                    }
+                    : <></> }
 
                     <div className={style.postText}>
                         {data.post.text}

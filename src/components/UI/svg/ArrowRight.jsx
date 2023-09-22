@@ -1,4 +1,3 @@
-import React from 'react';
 import {useSVG} from "../../../hooks/useSVG";
 
 function ArrowRight({width, height, color}) {

@@ -12,7 +12,6 @@ export function useFetchPost(id) {
 
     const [fetchPost, isFetchLoading, postError] = useFetching(async () => {
         const responseData = await PostService.getPostPage(id)
-        console.log(responseData)
         setData(responseData)
     })
     useNotFoundNavigate(postError)

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import {useContext, useState} from 'react';
 import {Link} from "react-router-dom";
 import {AuthContext, UserContext} from "../context";
 import Nav from 'react-bootstrap/Nav';
@@ -6,9 +6,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import style from "./NavigationBar.module.css"
 import logo from "../../images/logo.png";
 import signIco from "../../images/icons/signpost.svg";
-import searchIco from "../../images/icons/search.svg";
 import notificationIco from "../../images/icons/directboxnotif.svg";
 import Login from "../login/Login";
+import Search from "./Search";
 
 
 function NavigationBar() {
@@ -20,64 +20,60 @@ function NavigationBar() {
 
 
     return (
-        <header>
-            <Navbar className={style.own_navbar} fixed="top" expand="lg">
+    <header>
+        <Navbar className={style.own_navbar} fixed="top" expand="lg">
 
-                <Nav.Link as={Link} to="/">
-                    <img className={style.own_logo} id="own_logo" alt="Main Page" src={logo}/>
+            <Nav.Link as={Link} to="/">
+                <img className={style.own_logo} id="own_logo" alt="Main Page" src={logo}/>
+            </Nav.Link>
+
+            <Navbar.Toggle
+                className={style.own_toggler + " shadow-none"}
+                id="own_toggler"
+                aria-controls="basic-navbar-nav"
+            /> {/*Hamburger-menu*/}
+
+            <Navbar.Collapse id="basic-navbar-nav" className={style.collapsedDiv}>
+                <Nav.Link as={Link} to="/home" className={style.communitiesDiv}  id={style["order_nav_Communities"]}>
+                        <img className={style.communitiesIco + " bg-transparent"} src={signIco} />
+                        Home
                 </Nav.Link>
 
-                <Navbar.Toggle className={style.own_toggler + " shadow-none"} id="own_toggler" aria-controls="basic-navbar-nav"/> {/*Hamburger-menu*/}
+                <div className={style.searchDiv} id={style["order_nav_Search"]}>
+                    <Search />
+                </div>
 
-                <Navbar.Collapse id="basic-navbar-nav" className={style.collapsedDiv}>
-
-                        <Nav.Link as={Link} to="/home" className={style.communitiesDiv}  id={style["order_nav_Communities"]}>
-                                <img className={style.communitiesIco + " bg-transparent"} src={signIco} />
-                                Home
-                        </Nav.Link>
-
-                        <div className={style.searchDiv} id={style["order_nav_Search"]}>
-                            <input className={style.searchInput + " bg-transparent"} placeholder="search..."/>
-                            <button className={style.searchButton}>
-                                <img className={style.searchIco + " bg-transparent"} src={searchIco} />
+                <div className={style.accountDiv} id={style["order_nav_Account"]}>
+                    { isAuth
+                        ? <>
+                            <button className={style.notificationButton}>
+                                <img className={style.communitiesIco + " bg-transparent"} src={notificationIco}/>
                             </button>
-                        </div>
 
-                        <div className={style.accountDiv} id={style["order_nav_Account"]}>
-                            {isAuth
-                                ?
-                                <>
-                                    <button className={style.notificationButton}>
-                                        <img className={style.communitiesIco + " bg-transparent"} src={notificationIco}/>
-                                    </button>
+                            <Nav.Link as={Link} to={'/u/' + userNickname} className={style.accountInfoDiv}>
+                                <img className={"userImage " + style.userImg} src={userImage} />
+                                <div className={style.nicknameNavBarDiv}>
+                                    {isUserLoading
+                                        ? <span>loading...</span>
+                                        : <span>{userNickname}</span>
+                                    }
+                                </div>
+                            </Nav.Link>
+                        </>
+                        : <button
+                            className={style.loginButton} id="loginButton"
+                            onClick={() => setLoginModal(true)}
+                        >
+                            Login
+                        </button>
+                    }
+                </div>
+            </Navbar.Collapse>
 
-                                    <Nav.Link as={Link} to={'/u/' + userNickname} className={style.accountInfoDiv}>
-                                        <img className={"userImage " + style.userImg} src={userImage} />
-                                        <div className={style.nicknameNavBarDiv}>
-                                            {isUserLoading
-                                                ? <span>loading...</span>
-                                                : <span>{userNickname}</span>
-                                            }
-                                        </div>
-                                    </Nav.Link>
-                                </>
-                                :
-                                <button
-                                    className={style.loginButton} id="loginButton"
-                                    onClick={() => setLoginModal(true)}
-                                >
-                                    Login
-                                </button>
-                            }
-                        </div>
+        </Navbar>
 
-                </Navbar.Collapse>
-
-            </Navbar>
-
-            <Login visible={loginModal} setVisible={setLoginModal}/>
-        </header>
-
+        <Login visible={loginModal} setVisible={setLoginModal}/>
+    </header>
     );
 }
 
