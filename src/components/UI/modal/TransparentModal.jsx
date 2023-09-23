@@ -1,4 +1,3 @@
-import React from 'react';
 import style from "./TransparentModal.module.css";
 import {Modal} from "react-bootstrap";
 import {useClasses} from "../../../hooks/useClasses";

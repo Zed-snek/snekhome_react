@@ -6,8 +6,11 @@ import MyTransparentButton from "../../../components/UI/buttons/MyTransparentBut
 import {useFetching} from "../../../hooks/useFetching";
 import CommunityService from "../../../API/CommunityService";
 import MyButton from "../../../components/UI/buttons/MyButton";
+import OverContentDiv from "../../../components/UI/blocks/OverContentDiv";
 
-function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError, setIsLoader, setIsShow, roleToEdit}) {
+function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError, setIsLoader, roleToEdit,
+                               setIsShow, isShow, formTitle}
+) {
 
     const isCreatorOrCitizen = isCreate ? false : (roleToEdit.creator || roleToEdit.citizen)
     const [flair, setFlair] = useState(isCreate
@@ -29,7 +32,7 @@ function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError,
         return obj
     }
 
-    const [isTypeAllowed, setIsTypeAllowed] = useState(typeAllowedInitialState())
+    const [typeAllowed, setTypeAllowed] = useState(typeAllowedInitialState())
 
     function end() {
         setIsShow(false)
@@ -37,7 +40,8 @@ function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError,
     }
 
     const [fetchRole, isFetchLoading, fetchError] = useFetching(async () => {
-        let role = {...flair, ...isTypeAllowed}
+        let role = {...typeAllowed, ...flair}
+
         if (isCreate) {
             await CommunityService.newRole(role, groupname)
             setRoles(prev => [...prev, role])
@@ -77,58 +81,65 @@ function CommunityRoleForm({isCreate, typesToMap, groupname, setRoles, setError,
     }, [fetchError, deleteError])
     
     return (
-        <form onSubmit={manageRole}>
+        <OverContentDiv
+            className={style.formWindow}
+            isShow={isShow}
+            setIsShow={setIsShow}
+            title={formTitle}
+        >
+            <form onSubmit={manageRole}>
 
-            <div className={style.settings}>
-                <div>
-                    <CreateCommunityRoleFlair flair={flair} setFlair={setFlair} />
-                </div>
-
-                <div className={style.formRightDiv}>
-
+                <div className={style.settings}>
                     <div>
-                        <div className={style.title}>
-                            Role permissions
-                        </div>
-                        { typesToMap.map( (t, index) =>
-                            <div key={index} className={style.checkBox}>
-                                <MyCheckbox
-                                    disabled={roleToEdit ? isCreatorOrCitizen : false}
-                                    label={t.value}
-                                    checked={isTypeAllowed[t.title]}
-                                    onChange={e => setIsTypeAllowed(prev => {
-                                        let obj = {...prev}
-                                        obj[t.title] = e.target.checked
-                                        return obj
-                                    })}
-                                />
-                            </div>
-                        )}
+                        <CreateCommunityRoleFlair flair={flair} setFlair={setFlair}/>
                     </div>
 
-                    { !isCreate ?
-                        <div className={style.formDeleteBtn}>
-                            <MyButton
-                                color='red'
-                                onClick={deleteRole}
-                                disabled={isCreatorOrCitizen}
-                            >
-                                Delete role
-                            </MyButton>
+                    <div className={style.formRightDiv}>
+
+                        <div>
+                            <div className={style.title}>
+                                Role permissions
+                            </div>
+                            {typesToMap.map((t, index) =>
+                                <div key={index} className={style.checkBox}>
+                                    <MyCheckbox
+                                        disabled={roleToEdit ? isCreatorOrCitizen : false}
+                                        label={t.value}
+                                        checked={typeAllowed[t.title]}
+                                        onChange={e => setTypeAllowed(prev => {
+                                            let obj = {...prev}
+                                            obj[t.title] = e.target.checked
+                                            return obj
+                                        })}
+                                    />
+                                </div>
+                            )}
                         </div>
-                    : <> </> }
+
+                        {!isCreate ?
+                            <div className={style.formDeleteBtn}>
+                                <MyButton
+                                    color='red'
+                                    onClick={deleteRole}
+                                    disabled={isCreatorOrCitizen}
+                                >
+                                    Delete role
+                                </MyButton>
+                            </div>
+                            : <> </>}
+
+                    </div>
 
                 </div>
 
-            </div>
+                <div>
+                    <MyTransparentButton className={style.button + ' ' + style.buttonLighter}>
+                        {isCreate ? "Create role" : "Update role"}
+                    </MyTransparentButton>
+                </div>
 
-            <div>
-                <MyTransparentButton className={style.button + ' ' + style.buttonLighter}>
-                    {isCreate ? "Create role" : "Update role"}
-                </MyTransparentButton>
-            </div>
-
-        </form>
+            </form>
+        </OverContentDiv>
     );
 }
 

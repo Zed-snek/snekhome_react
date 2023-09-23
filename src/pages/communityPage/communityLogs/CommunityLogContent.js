@@ -70,7 +70,7 @@ export function getLogContent(log) {
             </div>
         case "RULE_CLOSED_COMMUNITY":
             return <div>
-                {actor} made community {log.message === "true" ? "closed" : "opened"}
+                {actor} made community {log.message === "true" ? "closed" : "open"}
             </div>
         case "RULE_INVITE_USERS":
             return <div>

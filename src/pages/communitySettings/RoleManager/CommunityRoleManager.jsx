@@ -43,22 +43,17 @@ function CommunityRoleManager({communityType, groupname, isCommunityClosed, setE
             </div>
 
             <div className={style.createRoleDiv}>
-                <OverContentDiv
-                    className={style.formWindow}
-                    isShow={isShowCreateForm}
+                <CommunityRoleForm
+                    groupname={groupname}
+                    isCreate={true}
+                    typesToMap={typesToMap}
+                    setIsLoader={setIsLoader}
+                    setError={setError}
+                    setRoles={setRoles}
                     setIsShow={setIsShowCreateForm}
-                    title="Create a new role:"
-                >
-                    <CommunityRoleForm
-                        groupname={groupname}
-                        isCreate={true}
-                        typesToMap={typesToMap}
-                        setIsLoader={setIsLoader}
-                        setError={setError}
-                        setRoles={setRoles}
-                        setIsShow={setIsShowCreateForm}
-                    />
-                </OverContentDiv>
+                    isShow={isShowCreateForm}
+                    formTitle="Create a new role:"
+                />
                 { isEditPermission ?
                     <MyTransparentButton
                         className={style.button}

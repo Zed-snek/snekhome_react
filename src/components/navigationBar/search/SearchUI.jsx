@@ -1,25 +1,26 @@
 import style from "./Search.module.css";
-import MyGreyInput from "../UI/inputs/MyGreyInput";
-import SearchSvg from "../UI/svg/SearchSvg";
-import {useState} from "react";
+import MyGreyInput from "../../UI/inputs/MyGreyInput";
+import SearchSvg from "../../UI/svg/SearchSvg";
 
-function Search() {
 
-    const [value, setValue] = useState("")
-
+function SearchUI({value, setValue, onClick}) {
     return (
         <div className={style.main}>
             <MyGreyInput
                 className={style.searchInput}
                 placeholder="search..."
                 onChange={event => setValue(event.target.value)}
+                value={value}
             />
 
-            <button className={style.searchButton}>
+            <button
+                className={style.searchButton}
+                onClick={onClick}
+            >
                 <SearchSvg color="#939393"/>
             </button>
         </div>
     );
 }
 
-export default Search;
+export default SearchUI;

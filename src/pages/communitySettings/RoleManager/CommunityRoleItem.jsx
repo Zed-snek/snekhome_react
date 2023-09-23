@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import {useEffect, useState} from 'react';
 import style from './CommunityRoleManager.module.css';
 import edit from "../../../images/icons/edit.svg";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
 import CommunityRoleFlair from "../../../components/community/CommunityRoleFlair";
 import CommunityRoleForm from "./CommunityRoleForm";
-import OverContentDiv from "../../../components/UI/blocks/OverContentDiv";
 import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 
 function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, setRoles, isEdit}) {
@@ -32,8 +31,6 @@ function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, 
                 </div>
             : <></> }
 
-
-
             <div className={style.itemPermissions}>
                 { typesToMap.map( (t, index) =>
                     <div key={index} className={style.itemIsAllowed}>
@@ -48,23 +45,18 @@ function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, 
             </div>
 
             { isEdit ?
-                <OverContentDiv
-                    className={style.formWindow}
+                <CommunityRoleForm
+                    groupname={groupname}
+                    isCreate={false}
+                    typesToMap={typesToMap}
+                    setIsLoader={setIsLoader}
+                    setError={setError}
+                    setRoles={setRoles}
                     isShow={isShowCreateForm}
                     setIsShow={setIsShowCreateForm}
-                    title="Edit a role:"
-                >
-                    <CommunityRoleForm
-                        groupname={groupname}
-                        isCreate={false}
-                        typesToMap={typesToMap}
-                        setIsLoader={setIsLoader}
-                        setError={setError}
-                        setRoles={setRoles}
-                        setIsShow={setIsShowCreateForm}
-                        roleToEdit={role}
-                    />
-                </OverContentDiv>
+                    formTitle="Edit a role:"
+                    roleToEdit={role}
+                />
             : <></> }
 
         </BorderBottomDiv>

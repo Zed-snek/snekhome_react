@@ -8,7 +8,7 @@ import logo from "../../images/logo.png";
 import signIco from "../../images/icons/signpost.svg";
 import notificationIco from "../../images/icons/directboxnotif.svg";
 import Login from "../login/Login";
-import Search from "./Search";
+import SearchDiv from "./search/SearchDiv";
 
 
 function NavigationBar() {
@@ -40,7 +40,7 @@ function NavigationBar() {
                 </Nav.Link>
 
                 <div className={style.searchDiv} id={style["order_nav_Search"]}>
-                    <Search />
+                    <SearchDiv />
                 </div>
 
                 <div className={style.accountDiv} id={style["order_nav_Account"]}>

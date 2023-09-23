@@ -33,3 +33,24 @@
     border-color: #2c57a599;
     background-color: #2c57a530;
 }
+
+.modal > div {
+    max-width: 650px;
+}
+.modal > div > div {
+    padding: 5px 12px 12px;
+}
+
+.error {
+    margin-top: 10px;
+}
+
+.item {
+    display: flex;
+    gap: 30px;
+}
+
+.itemImg {
+    height: 200px;
+    width: 200px;
+}

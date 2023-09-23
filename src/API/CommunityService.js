@@ -5,8 +5,6 @@ import {
     postParamsRequestWithAuth, putRequestWithAuth
 } from "./requestFunctions";
 
-
-
 export default class CommunityService {
 
     static async newCommunity(data) {
