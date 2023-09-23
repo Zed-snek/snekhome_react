@@ -3,7 +3,7 @@ import MyGreyInput from "../../UI/inputs/MyGreyInput";
 import SearchSvg from "../../UI/svg/SearchSvg";
 
 
-function SearchUI({value, setValue, onClick}) {
+function SearchInputUI({value, setValue, onClick}) {
     return (
         <div className={style.main}>
             <MyGreyInput
@@ -23,4 +23,4 @@ function SearchUI({value, setValue, onClick}) {
     );
 }
 
-export default SearchUI;
+export default SearchInputUI;

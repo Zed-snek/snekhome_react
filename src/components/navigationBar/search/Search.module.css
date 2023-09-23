@@ -45,12 +45,56 @@
     margin-top: 10px;
 }
 
-.item {
-    display: flex;
-    gap: 30px;
+
+.listMain {
+    margin-top: 25px;
 }
 
+.itemListTitle {
+    color: #c2c2c2;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.itemList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.item {
+    display: flex;
+    gap: 10px;
+}
 .itemImg {
     height: 200px;
     width: 200px;
 }
+.itemLink {
+    font-size: 17px;
+}
+.itemTitle {
+    font-family: PressStart, "sans-serif";
+}
+
+.showMoreBtnDiv {
+    display: flex;
+    justify-content: center;
+}
+.showMoreBtn {
+    color: rgba(217, 217, 217, 0.65);
+    font-weight: 600;
+    cursor: pointer;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.showMoreBtn:hover {
+    color: rgba(217, 217, 217, 0.5);
+}
+.showMoreBtn:active {
+    color: rgba(217, 217, 217, 0.3);
+}
+
+
+

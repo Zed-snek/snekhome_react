@@ -6,16 +6,16 @@ export default class SearchService {
         return await getRequest("/search/" + value)
     }
 
-    static async searchByType(value, page, pageSize, type) {
-        return await getRequest(`/search/by_type/${type}/${value}?page=${page}&pageSize=${pageSize}`)
+    static async searchByType(value, page, type) {
+        return await getRequest(`/search/by_type/${type}/${value}?page=${page}`)
     }
 
-    static async searchCommunities(value, page, pageSize) {
-        await this.searchByType(value, page, pageSize, "community")
+    static async searchCommunities(value, page) {
+        await this.searchByType(value, page, "community")
     }
 
-    static async searchUsers(value, page, pageSize) {
-        await this.searchByType(value, page, pageSize, "user")
+    static async searchUsers(value, page) {
+        await this.searchByType(value, page, "user")
     }
 
 }

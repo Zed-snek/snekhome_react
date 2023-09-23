@@ -7,29 +7,40 @@ export function useSearch(value) {
 
     const [usersData, setUsersData] = useState([])
     const [communitiesData, setCommunitiesData] = useState([])
-
     const [error, setError] = useState("")
+
+    async function fetchDataByType(type, data, setData, setCanLoad) {
+        setError("")
+        let responseData
+        if (type === "COMMUNITY")
+            responseData = await SearchService.searchCommunities(value, communityPageNumber)
+        /*else
+            responseData = await SearchService.searchUsers(value, userPageNumber)*/
+
+        if (responseData.length > 0) {
+            if (data.length === 4)
+                responseData.filter((element, index) => index > 3)
+            setData(prev => [...prev, ...responseData])
+        }
+        else {
+            setCanLoad(false)
+        }
+    }
 
     /*fetch communities: */
     const [searchCommunities, isCommunitiesLoading, communitiesError] = useFetching(async () => {
-        setError("")
-        let responseData = await SearchService.searchCommunities(value)
-        if (communitiesData.length === 4)
-            responseData.filter((element, index) => index > 3)
-        setUsersData(prev => [...prev, ...responseData])
+        await fetchDataByType("COMMUNITY", communitiesData, setCommunitiesData, setCanCommunityLoad)
     })
-    //usePaginateLoad(searchCommunities, isCommunitiesLoading)
-
+    const [communityPageNumber, communityTriggerElement, setCanCommunityLoad]
+        = usePaginateLoad(searchCommunities, isCommunitiesLoading)
 
     /*fetch users: */
-    const [searchUsers, isUsersLoading, usersError] = useFetching(async () => {
-        setError("")
-        let responseData = await SearchService.searchUsers(value)
-        if (usersData.length === 4)
-            responseData.filter((element, index) => index > 3)
-        setUsersData(prev => [...prev, ...responseData])
+    /*const [searchUsers, isUsersLoading, usersError] = useFetching(async () => {
+        await fetchDataByType("USER", usersData, setUsersData, setCanUserLoad)
     })
-    //usePaginateLoad(searchUsers, isUsersLoading)
+    const [userPageNumber, userTriggerElement, setCanUserLoad]
+        = usePaginateLoad(searchUsers, isUsersLoading)*/
+
 
     /*fetch both, while first searching: */
     const [searchFirst, isFirstLoading, firstSearchError] = useFetching(async () => {
@@ -43,13 +54,13 @@ export function useSearch(value) {
     useEffect(() => {
         if (communitiesError)
             setError(communitiesError)
-        else if (usersError)
-            setError(usersError)
+        /*else if (usersError)
+            setError(usersError)*/
         else if (firstSearchError)
             setError(firstSearchError)
-    }, [communitiesError, usersError, firstSearchError])
+    }, [communitiesError, /*usersError,*/ firstSearchError])
 
 
-    return [searchFirst, searchCommunities, searchUsers, usersData, communitiesData,
-        error, isCommunitiesLoading || isUsersLoading || isFirstLoading]
+    return [searchFirst, usersData, communitiesData, communityTriggerElement, /*userTriggerElement,*/ error,
+        isCommunitiesLoading || /*isUsersLoading ||*/ isFirstLoading]
 }
