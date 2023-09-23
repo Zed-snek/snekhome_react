@@ -4,12 +4,32 @@ import DarkTransparentBackground from "../../UI/blocks/DarkTransparentBackground
 import MyBoxedTextLink from "../../UI/links/MyBoxedTextLink";
 import {Link} from "react-router-dom";
 import {useState} from "react";
-import BooleanBlock from "../../structureComponents/BooleanBlock";
+import SearchResponseItemListObserver from "./SearchResponseItemListObserver";
+import SearchService from "../../../API/SearchService";
 
-function SearchResponseItemList({array, type, trigger}) { //type = COMMUNITY, USER
+function SearchResponseItemList({data, setData, searchValue, type, setError, setIsLoading}) { //type = COMMUNITY, USER
 
     const linkSuffix = type === "USER" ? "/u/" : "/c/"
     const [isShowMore, setIsShowMore] = useState(false)
+    const [canLoad, setCanLoad] = useState(true)
+
+    async function searchFunction(pageNumber) {
+        let responseData
+        if (type === "COMMUNITY")
+            responseData = await SearchService.searchCommunities(searchValue, pageNumber)
+        else /*if === "USER"*/
+            responseData = await SearchService.searchUsers(searchValue, pageNumber)
+
+        if (responseData.length > 0) {
+            if (data.length === 4)
+                setData(responseData)
+            else
+                setData(prev => [...prev, ...responseData])
+        }
+        else {
+            setCanLoad(false)
+        }
+    }
 
     return (
         <div className={style.listMain}>
@@ -18,7 +38,7 @@ function SearchResponseItemList({array, type, trigger}) { //type = COMMUNITY, US
             </div>
 
             <div className={style.itemList}>
-               { array.map((element, index) =>
+               { data.map((element, index) =>
                    <DarkTransparentBackground className={style.item} key={index}>
                        <Link to={linkSuffix + element.idName}>
                            <img alt="" className="userImage"
@@ -40,11 +60,15 @@ function SearchResponseItemList({array, type, trigger}) { //type = COMMUNITY, US
                )}
             </div>
 
-            <BooleanBlock bool={isShowMore}> {/*trigger element to load more data*/}
-                {trigger}
-            </BooleanBlock>
+            { isShowMore && canLoad ?
+                <SearchResponseItemListObserver
+                    searchFunction={searchFunction}
+                    setError={setError}
+                    setIsLoading={setIsLoading}
+                />
+            : <></> }
 
-            { array.length >= 4 && !isShowMore ?
+            { data.length >= 4 && !isShowMore ?
                 <div className={style.showMoreBtnDiv}>
                     <div className={style.showMoreBtn} onClick={() => setIsShowMore(true)}>
                         Show more...

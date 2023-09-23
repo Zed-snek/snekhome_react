@@ -11,11 +11,11 @@ export default class SearchService {
     }
 
     static async searchCommunities(value, page) {
-        await this.searchByType(value, page, "community")
+        return await this.searchByType(value, page, "community")
     }
 
     static async searchUsers(value, page) {
-        await this.searchByType(value, page, "user")
+        return await this.searchByType(value, page, "user")
     }
 
 }
