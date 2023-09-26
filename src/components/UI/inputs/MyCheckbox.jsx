@@ -1,4 +1,3 @@
-import React from 'react';
 import style from "./MyCheckbox.module.css"
 
 function MyCheckbox({label, ...props}) {

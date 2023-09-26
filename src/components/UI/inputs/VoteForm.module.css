@@ -1,0 +1,45 @@
+.main {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.voted, .notVoted {
+    background: linear-gradient(280deg, #d0368a70 0%, #708ad470 99%);
+    padding: 0 7px 2px 7px;
+    border-radius: 4px;
+}
+
+.voted {
+    display: flex;
+    justify-content: space-between;
+}
+
+.notVoted {
+    cursor: pointer;
+}
+.notVoted:hover {
+    background: linear-gradient(280deg, #d0368aAA 0%, #708ad4AA 99%);
+}
+.notVoted:active, .votedOption {
+    background: linear-gradient(280deg, #d0368aCA 0%, #708ad4CA 99%);
+}
+
+.relative {
+    position: relative;
+}
+
+.percentageLineDiv {
+    position: absolute;
+    height: 26px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    width: 20%;
+}
+
+.voteButton {
+    padding: 0 10px;
+    height: 30px;
+}

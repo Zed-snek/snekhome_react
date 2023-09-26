@@ -13,6 +13,8 @@ function SearchResponseItemList({data, setData, searchValue, type, setError, set
     const [isShowMore, setIsShowMore] = useState(false)
     const [canLoad, setCanLoad] = useState(true)
 
+    const isFound = data.length > 0
+
     async function searchFunction(pageNumber) {
         let responseData
         if (type === "COMMUNITY")
@@ -34,7 +36,10 @@ function SearchResponseItemList({data, setData, searchValue, type, setError, set
     return (
         <div className={style.listMain}>
             <div className={style.itemListTitle}>
-                {type === "USER" ? "Found users:" : "Found communities:"}
+                { type === "USER"
+                    ? isFound ? "Found users:" : "Users not found"
+                    : isFound ? "Found communities:" : "Communities not found"
+                }
             </div>
 
             <div className={style.itemList}>
