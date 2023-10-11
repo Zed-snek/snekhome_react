@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import {useEffect, useState, useContext} from 'react';
 import {useFetching} from "../../../hooks/useFetching";
 import PostService from "../../../API/PostService";
 import style from "./commentary.module.css";
@@ -59,6 +59,7 @@ function NewCommentForm({postId, reference, callbackOnSuccess, addComment, idCom
                 onChange={e => setComment(e.target.value)}
                 rows={rows ?? 2}
                 value={comment}
+                maxLength={1024}
             />
             <div className={style.sendBtnDiv}>
                 { isNewCommentLoading

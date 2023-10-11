@@ -91,7 +91,7 @@ function RegisterPage() {
                             <MyInput
                                 type="text" id="name" placeholder="name"
                                 register={register} name="name"
-                                maxLength={18}
+                                maxLength={16}
                             />
                         </div>
 
@@ -99,7 +99,7 @@ function RegisterPage() {
                             <label htmlFor="surname">Your surname:</label>
                             <MyInput
                                 type="text" id="surname" placeholder="surname"
-                                maxLength={20}
+                                maxLength={22}
                                 register={register} name="surname"
                             />
                         </div>

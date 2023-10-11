@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {useImages} from "../../hooks/useImages";
 import style from "./ImageSelectorModal.module.css";
 import TransparentModal from "../UI/modal/TransparentModal";

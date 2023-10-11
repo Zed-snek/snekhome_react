@@ -111,6 +111,9 @@
 .content {
     max-width: 968px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .additionalInfoBlock {
@@ -128,7 +131,6 @@
     justify-content: space-between;
     gap: 20px;
     padding: 10px 15px 5px 15px !important;
-    margin-bottom: 20px;
 }
 
 .newPostDiv {
@@ -139,7 +141,8 @@
     border-width: 2px;
     border-radius: 2px;
     background-color: rgba(0, 0, 0, 0.1);
-    height: 45px;
+    height: 35px;
+    padding: 2px 8px 0 8px;
 }
 
 .newPostTextArea:hover {
@@ -151,6 +154,7 @@
     display: flex;
     padding-bottom: 6px;
 }
+
 
 
 

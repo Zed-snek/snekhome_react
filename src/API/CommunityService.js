@@ -111,4 +111,8 @@ export default class CommunityService {
         return await getRequestWithAuth(`/community/${groupname}/logs?page=${page}`)
     }
 
+    static async getDemocracyData(groupname) {
+        return await getRequest("/democracy/" + groupname)
+    }
+
 }

@@ -1,6 +1,22 @@
 .main {
     border: 1px #949494 solid;
     border-radius: 15px;
-    padding: 15px 13px;
     background-color: rgba(217, 217, 217, 0.1);
+    padding: 15px 13px;
+}
+
+.divWithShowMore {
+    padding: 0;
+}
+
+.contentDivWithShowMore {
+    padding: 15px 13px 8px 13px;
+}
+
+.showMoreBtn {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    width: 100%;
+    font-weight: 600;
+    color: #a1a1a1;
 }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import style from "./CommunityPage.module.css";
 import {getCommunityImageByArray, getUserImage} from "../../functions/linkFunctions";
 import ImageSelectorModal from "../../components/images/ImageSelectorModal";

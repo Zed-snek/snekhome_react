@@ -1,4 +1,4 @@
-import {useEffect, useState, useContext} from 'react';
+import {useEffect, useState, useContext, useMemo} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import style from "./CommunityPage.module.css";
@@ -19,6 +19,7 @@ import CommunityTypeBlock from "./CommunityTypeBlock";
 import {useFetchCommunity} from "../../hooks/useFetchCommunity";
 import {AuthContext} from "../../components/context";
 import PostList from "../../components/post/PostList";
+import CommunityDemocracyBlock from "./CommunityDemocracyBlock";
 
 function CommunityPage() {
 
@@ -27,8 +28,20 @@ function CommunityPage() {
     const {isAuth} = useContext(AuthContext)
     useDocumentTitle(params.groupname.toLowerCase())
 
+    const [data, setData, isCommunityLoading] = useFetchCommunity(params.groupname)
+
+    const [democracyData, setDemocracyData] = useState()
+
+    const [error, setError] = useState("")
+    const [isModalError, setModalError] = useState(false)
 
     const [activeSortBtn, setActiveSortBtn] = useState(0)
+
+    useEffect(() => {
+        if (error)
+            setModalError(true)
+    }, [error])
+
 
     const communityTypes = [
         {type: "ANARCHY", image: anarchyImage, color: '#ff1177'},
@@ -37,27 +50,23 @@ function CommunityPage() {
         {type: "NEWSPAPER", image: newsImage, color: '#ff9900'},
     ]
 
-    const [data, setData, isCommunityLoading] = useFetchCommunity(params.groupname)
+    const {communityType, groupnameColor, typeImage} = useMemo(() => {
+        let foundType = ""
+        let color = ""
+        let image = ""
+        if (data) {
+            foundType = data.community ? data.community.type : data.type
+            const obj = communityTypes.find(type => type.type === foundType)
+            color = obj.color
+            image = obj.image
+        }
+        return {
+            communityType: foundType,
+            groupnameColor: color,
+            typeImage: image
+        }
+    }, [data])
 
-    const [error, setError] = useState("")
-    const [isModalError, setModalError] = useState(false)
-
-
-    useEffect(() => {
-        if (error)
-            setModalError(true)
-    }, [error])
-
-    function getType() {
-        return data.community ? data.community.type : data.type
-    }
-
-    function getGroupnameColor() {
-        return communityTypes.find(type => type.type === getType()).color
-    }
-    function getTypeImage() {
-        return communityTypes.find(type => type.type === getType()).image
-    }
 
     if (data)
         if (!data.access)
@@ -66,8 +75,8 @@ function CommunityPage() {
                     image={getCommunityImage(data.image)}
                     groupname={data.groupname}
                     name={data.name}
-                    nameColor={getGroupnameColor()}
-                    typeImage={getTypeImage()}
+                    nameColor={groupnameColor}
+                    typeImage={typeImage}
                     isRequestSent={data.requestSent}
                     isBanned={data.banned}
                 />
@@ -82,8 +91,8 @@ function CommunityPage() {
             <CommunityBanner
                     data={data}
                     setData={setData}
-                    groupnameColor={getGroupnameColor()}
-                    typeImage={getTypeImage()}
+                    groupnameColor={groupnameColor}
+                    typeImage={typeImage}
                     groupname={params.groupname}
                     setError={setError}
             />
@@ -91,6 +100,14 @@ function CommunityPage() {
             <div className={style.page}>
 
                 <div className={style.content}>
+                    { communityType === "DEMOCRACY" ?
+                        <CommunityDemocracyBlock
+                            data={democracyData}
+                            setData={setDemocracyData}
+                            groupname={params.groupname}
+                        />
+                    : <></> }
+
                     <OutlineFilledDiv
                         className={style.newPostAndSortBanner}
                     >
@@ -123,9 +140,9 @@ function CommunityPage() {
 
                 <div className={style.additionalInfoBlock}>
                     <CommunityTypeBlock
-                        image={getTypeImage()}
+                        image={typeImage}
                         title={toOnlyFirstLetterUpperCase(data.community.type)}
-                        color={getGroupnameColor()}
+                        color={groupnameColor}
                         isClosed={data.community.closed}
                         isAnonymous={data.community.anonAllowed}
                     />

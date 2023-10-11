@@ -40,6 +40,6 @@
 }
 
 .voteButton {
-    padding: 0 10px;
+    padding: 0 10px !important;
     height: 30px;
 }

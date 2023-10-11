@@ -1,4 +1,3 @@
-import React from 'react';
 import style from "./CommunityCitizenRole.module.css";
 import MyInput from "../../../components/UI/inputs/MyInput";
 
@@ -29,8 +28,8 @@ function CommunityDemocracySettings({settings, setSettings}) {
                             value={settings.citizenDays}
                             type="number"
                             onChange={changeDays}
-                            min="3"
-                            max="365"
+                            min={7}
+                            max={365}
                         />
                     </div>
                     <div>
@@ -41,8 +40,8 @@ function CommunityDemocracySettings({settings, setSettings}) {
                             value={settings.citizenRating}
                             type="number"
                             onChange={changeRating}
-                            min="0"
-                            max="10000"
+                            min={0}
+                            max={10000}
                         />
                     </div>
                 </div>
@@ -59,8 +58,8 @@ function CommunityDemocracySettings({settings, setSettings}) {
                         value={settings.electionDays}
                         type="number"
                         onChange={changeElectionDays}
-                        min="7"
-                        max="365"
+                        min={7}
+                        max={365}
                     />
                 </div>
             </div>

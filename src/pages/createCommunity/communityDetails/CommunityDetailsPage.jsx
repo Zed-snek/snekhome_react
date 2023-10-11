@@ -1,4 +1,3 @@
-import React from 'react';
 import style from "./CommunityDetails.module.css"
 import MyInput from "../../../components/UI/inputs/MyInput";
 import MyTextArea from "../../../components/UI/inputs/MyTextArea";
@@ -21,10 +20,10 @@ function CommunityDetailsPage({setSettings}) {
             <div className="row row-cols-1 row-cols-lg-2">
 
                 <div>
-                    <label htmlFor="communityId"> Community id: </label>
+                    <label htmlFor="communityId"> Unique groupname: </label>
                     <MyInput
                         type="text"
-                        placeholder="community id.."
+                        placeholder="groupname.."
                         maxLength={18}
                         id="communityId"
                         onChange={handleId}

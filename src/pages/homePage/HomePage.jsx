@@ -1,4 +1,3 @@
-import React from 'react';
 import style from "./HomePage.module.css";
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import HomePageCards from "./HomePageCards";

@@ -34,7 +34,7 @@
     .cards {
         display: none;
     }
-    .main {
+    .widthLimit {
         gap: 0;
     }
 }

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import style from "./CreateCommunityRoleFlair.module.css";
 import colorsStyle from "../../pages/userSettings/Account/Colors.module.css";
 import {SketchPicker} from 'react-color';
@@ -67,7 +67,7 @@ function CreateCommunityRoleFlair({flair, setFlair}) {
                     value={flair.title}
                     onChange={e => setFlair(({...flair, title: e.target.value}))}
                     required={true}
-                    maxLength="12"
+                    maxLength={12}
                 />
             </div>
             <div>

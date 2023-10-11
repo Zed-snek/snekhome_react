@@ -1,7 +1,5 @@
-import React from 'react';
 import style from "./CommunityCitizenRole.module.css"
 import CreateCommunityRoleFlair from "../../../components/community/CreateCommunityRoleFlair";
-import MyInput from "../../../components/UI/inputs/MyInput";
 import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 import CommunityDemocracySettings from "./CommunityDemocracySettings";
 

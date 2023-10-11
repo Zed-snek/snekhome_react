@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import style from "./PostForm.module.css";
 import MyMessage from "../../components/UI/message/MyMessage";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
@@ -63,7 +63,7 @@ function PostForm({
                 <div className={style.chosenImages}>
                     <div>
                         <MyFileInput
-                            maxFiles={10}
+                            maxFiles={10 - srcImages.length}
                             maxSize={10}
                             setImage={setImages}
                             setIsShowError={setShowImgError}
@@ -86,18 +86,16 @@ function PostForm({
                         </div>
                     </div>
 
-                    {
-                        srcImages.map((element, index) =>
-                            <ImageToOpen
-                                key={index}
-                                maxWidth={130}
-                                maxHeight={130}
-                                image={element}
-                                toOpenClassname={style.imageIco}
-                                toRemove={() => removeFileByIndex(index)}
-                            />
-                        )
-                    }
+                    { srcImages.map((element, index) =>
+                        <ImageToOpen
+                            key={index}
+                            maxWidth={130}
+                            maxHeight={130}
+                            image={element}
+                            toOpenClassname={style.imageIco}
+                            toRemove={() => removeFileByIndex(index)}
+                        />
+                    )}
 
                 </div>
 

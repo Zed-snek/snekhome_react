@@ -117,16 +117,15 @@ function AboutUserPage({tags, fetchUser, setError, setLoader, setUser}) {
                 </BorderBottomDiv>
 
                 <BorderBottomDiv>
-                {
-                    tags.map(tag =>
-                        <AboutUserElement
-                            key={tag.idTag}
-                            tagId={tag.idTag}
-                            tagTitle={tag.title}
-                            tagText={tag.text}
-                            manageData={manageData}
-                            setDelId={setDelId}
-                        />
+                { tags.map(tag =>
+                    <AboutUserElement
+                        key={tag.idTag}
+                        tagId={tag.idTag}
+                        tagTitle={tag.title}
+                        tagText={tag.text}
+                        manageData={manageData}
+                        setDelId={setDelId}
+                    />
                 )}
                     <br/>
                 </BorderBottomDiv>

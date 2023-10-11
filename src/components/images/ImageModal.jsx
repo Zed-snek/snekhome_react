@@ -1,4 +1,3 @@
-import React from 'react';
 import style from "./ImageModal.module.css";
 import TransparentModal from "../UI/modal/TransparentModal";
 

@@ -46,10 +46,8 @@ function AboutUserElement(props) {
         <div className={style.inputComponentMain}>
             { isEdit
                 ?
-
                 <form onSubmit={manageTag} className="flexDiv flex-wrap justify-content-center">
                     <div className={style.inputDiv}>
-
                         <div>
                             <MyInput
                                 placeholder="title"
@@ -72,8 +70,8 @@ function AboutUserElement(props) {
                                 Cancel
                             </MyTransparentButton>
                         </div>
-
                     </div>
+
                     <div>
                         <MyTextArea
                             placeholder="write here some text..."
@@ -85,9 +83,7 @@ function AboutUserElement(props) {
                         >
                         </MyTextArea>
                     </div>
-
                 </form>
-
 
                 : <div className="flexDiv flex-wrap">
                     <div>
@@ -107,9 +103,7 @@ function AboutUserElement(props) {
                         </MyTransparentButton>
                     </div>
 
-
                 </div>
-
             }
 
         </div>

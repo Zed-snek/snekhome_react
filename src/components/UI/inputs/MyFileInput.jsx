@@ -1,4 +1,3 @@
-import React from 'react';
 import style from './MyFileInput.module.css'
 
 function MyFileInput({className, children, maxSize, maxFiles, setIsShowError, setImage, accept, ...props}) {
@@ -50,7 +49,7 @@ function MyFileInput({className, children, maxSize, maxFiles, setIsShowError, se
                 <input
                     {...props}
                     type="file"
-                    accept={accept ? accept : "image/png, image/jpeg, image/gif"}
+                    accept={accept ?? "image/png, image/jpeg, image/gif"}
                     className={style.input}
                     multiple={maxFiles && maxFiles > 1}
                     onChange={maxFiles ? handleChangeMany : handleChange}

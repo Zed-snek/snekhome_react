@@ -6,7 +6,7 @@ export function useImages(array, setArray, isFromFirst) { //last image in array 
     const isMoreThanOne = array.length > 1
     const [currentIndex, setCurrentIndex] = useState(isFromFirst ? 0 : last)
 
-    const currentImage = (last === -1 ? '' : array[currentIndex].name)
+    const currentImage = last === -1 ? '' : array[currentIndex].name
 
     function plusIndex() {
         if (currentIndex === last)
@@ -37,9 +37,12 @@ export function useImages(array, setArray, isFromFirst) { //last image in array 
     async function deleteCurrentImageRequest() {
         await FileService.deleteImage(currentImage)
             .then(() => {
-                setCurrentIndex(prev => prev - 1)
+                setCurrentIndex(prev => {
+                    return prev === 0 ? 0 : prev - 1
+                })
                 setArray(array.filter(f => f.name !== currentImage))
             })
     }
+
     return [turnLeft, turnRight, currentImage, currentIndex, isMoreThanOne, deleteCurrentImageRequest]
 }
