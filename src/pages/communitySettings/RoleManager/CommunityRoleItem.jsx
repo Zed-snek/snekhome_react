@@ -1,10 +1,10 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import style from './CommunityRoleManager.module.css';
-import edit from "../../../images/icons/edit.svg";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
 import CommunityRoleFlair from "../../../components/community/CommunityRoleFlair";
 import CommunityRoleForm from "./CommunityRoleForm";
 import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
+import EditSvg from "../../../components/svg/EditSvg";
 
 function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, setRoles, isEdit}) {
 
@@ -25,8 +25,12 @@ function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, 
 
             { isEdit ?
                 <div>
-                    <MyTransparentButton className={style.edit} tooltip="Edit" onClick={() => setIsShowCreateForm(true)}>
-                        <img src={edit} alt="edit"/>
+                    <MyTransparentButton
+                        className={style.edit}
+                        tooltip="Edit"
+                        onClick={() => setIsShowCreateForm(true)}
+                    >
+                        <EditSvg />
                     </MyTransparentButton>
                 </div>
             : <></> }

@@ -1,6 +1,6 @@
 import style from "./Search.module.css";
 import MyGreyInput from "../../UI/inputs/MyGreyInput";
-import SearchSvg from "../../UI/svg/SearchSvg";
+import SearchSvg from "../../svg/SearchSvg";
 
 
 function SearchInputUI({value, setValue, onClick}) {

@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import style from "./Account.module.css";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
-import edit from "../../../images/icons/edit.svg";
 import MyInput from "../../../components/UI/inputs/MyInput";
 import MyTextArea from "../../../components/UI/inputs/MyTextArea";
+import EditSvg from "../../../components/svg/EditSvg";
 
 function EditInput({isTextArea, children, current, name, callback, isEdit, ...props}) {
 
@@ -83,7 +83,7 @@ function EditInput({isTextArea, children, current, name, callback, isEdit, ...pr
                             tooltip="Edit"
                             onClick={() => setIsInput(true)}
                         >
-                            <img src={edit} alt="edit"/>
+                            <EditSvg />
                         </MyTransparentButton>
                     : <></> }
                     <div>

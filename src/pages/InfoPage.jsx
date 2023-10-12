@@ -1,5 +1,7 @@
 import {useDocumentTitle} from "usehooks-ts";
 import VoteForm from "../components/UI/inputs/VoteForm";
+import OutlineFilledDiv from "../components/UI/blocks/OutlineFilledDiv";
+import DarkTransparentBackground from "../components/UI/blocks/DarkTransparentBackground";
 
 function InfoPage() {
 
@@ -30,6 +32,14 @@ function InfoPage() {
                     ]}
                 />
                 <br/>
+
+                <OutlineFilledDiv>
+                    <DarkTransparentBackground>
+                        TExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExtTExt
+                        sFDSFSD fsdf dsf <br/>
+                        sfsdgsdg dsg sdg
+                    </DarkTransparentBackground>
+                </OutlineFilledDiv>
             </div>
         </div>
     );

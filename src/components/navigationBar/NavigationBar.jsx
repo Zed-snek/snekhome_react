@@ -5,10 +5,10 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import style from "./NavigationBar.module.css"
 import logo from "../../images/logo.png";
-import signIco from "../../images/icons/signpost.svg";
-import notificationIco from "../../images/icons/directboxnotif.svg";
 import Login from "../login/Login";
 import SearchDiv from "./search/SearchDiv";
+import HomeSignSvg from "./svg/HomeSignSvg";
+import NotificationBoxSvg from "./svg/NotificationBoxSvg";
 
 
 function NavigationBar() {
@@ -35,8 +35,9 @@ function NavigationBar() {
 
             <Navbar.Collapse id="basic-navbar-nav" className={style.collapsedDiv}>
                 <Nav.Link as={Link} to="/home" className={style.communitiesDiv}  id={style["order_nav_Communities"]}>
-                        <img className={style.communitiesIco + " bg-transparent"} src={signIco} />
-                        Home
+                    <HomeSignSvg />
+                        {/*<img className={style.communitiesIco + " bg-transparent"} src={signIco} />*/}
+                    Home
                 </Nav.Link>
 
                 <div className={style.searchDiv} id={style["order_nav_Search"]}>
@@ -47,7 +48,8 @@ function NavigationBar() {
                     { isAuth
                         ? <>
                             <button className={style.notificationButton}>
-                                <img className={style.communitiesIco + " bg-transparent"} src={notificationIco}/>
+                                {/*<img className={style.communitiesIco + " bg-transparent"} src={notificationIco}/>*/}
+                                <NotificationBoxSvg />
                             </button>
 
                             <Nav.Link as={Link} to={'/u/' + userNickname} className={style.accountInfoDiv}>

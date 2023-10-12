@@ -5,7 +5,6 @@ import ImageSelectorModal from "../../components/images/ImageSelectorModal";
 import UserInfo from "../../components/post/postCreatorInfo/UserInfo";
 import {useNavigate} from "react-router-dom";
 import MyTransparentButton from "../../components/UI/buttons/MyTransparentButton";
-import settingIco from "../../images/icons/settingIco.svg";
 import MyOutlineButton from "../../components/UI/buttons/MyOutlineButton";
 import MyPulseLoader from "../../components/UI/loaders/MyPulseLoader";
 import {useFetching} from "../../hooks/useFetching";
@@ -14,6 +13,7 @@ import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 import {formatDateWithMonthName} from "../../functions/timeDateFunctions";
 import GreyLink from "../../components/UI/links/GreyLink";
 import CommunityLogsModal from "./communityLogs/CommunityLogsModal";
+import SettingsSvg from "../../components/svg/user/SettingsSvg";
 
 function CommunityBanner({data, setData, groupname, setError, groupnameColor, typeImage}) {
 
@@ -105,9 +105,11 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                     <UserInfo
                         image={getUserImage(data.ownerImage)}
                         nickname={data.ownerNickname}
-                        flair={data.community.roles.filter(role => role.creator).map(r => (
-                            {title: r.title, textColor: r.textColor, bannerColor: r.bannerColor}
-                        ))[0]}
+                        flair={data.community.roles
+                            .filter(role => role.creator)
+                            .map(r => (
+                                {title: r.title, textColor: r.textColor, bannerColor: r.bannerColor}
+                            ))[0]}
                     />
                 </div>
 
@@ -131,7 +133,7 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                         >
                             Logs
                         </MyTransparentButton>
-                        : <></> }
+                    : <></> }
 
                     { role?.editDescription || role?.creator || role?.editId || role ?
                         <MyTransparentButton
@@ -139,7 +141,7 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                             tooltip="Settings Page"
                             onClick={() => navigate('/community_settings/' + groupname)}
                         >
-                            <img src={settingIco} alt="settings"/>
+                            <SettingsSvg />
                         </MyTransparentButton>
                     : <></> }
 

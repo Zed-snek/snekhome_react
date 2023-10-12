@@ -1,4 +1,4 @@
-import {useSVG} from "../../../hooks/useSVG";
+import {useSVG} from "../../hooks/useSVG";
 
 function ArrowUp({width, height, color}) {
 

@@ -1,4 +1,4 @@
-import {useSVG} from "../../../hooks/useSVG";
+import {useSVG} from "../../hooks/useSVG";
 
 function ArrowLeft({width, height, color}) {
 

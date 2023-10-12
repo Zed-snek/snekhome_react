@@ -4,6 +4,7 @@ import MyPulseLoader from "../../components/UI/loaders/MyPulseLoader";
 import {useEffect} from "react";
 import {useFetching} from "../../hooks/useFetching";
 import CommunityService from "../../API/CommunityService";
+import DarkTransparentBackground from "../../components/UI/blocks/DarkTransparentBackground";
 
 function CommunityDemocracyBlock({data, setData, groupname}) {
 
@@ -33,7 +34,13 @@ function CommunityDemocracyBlock({data, setData, groupname}) {
                 >
                     <div className={style.generalInfo}>
                         <div>
-                            Current president program:
+                            <div>
+                                Current president program:
+                            </div>
+                            <DarkTransparentBackground>
+                                {data.currentPresidentProgram}
+                            </DarkTransparentBackground>
+
                         </div>
 
                         <div>

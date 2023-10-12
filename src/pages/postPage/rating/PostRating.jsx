@@ -1,8 +1,8 @@
 import React from 'react';
 import {useRating} from "./useRating";
 import RatingValue from "./RatingValue";
-import ArrowUp from "../../../components/UI/svg/ArrowUp";
-import ArrowDown from "../../../components/UI/svg/ArrowDown";
+import ArrowUp from "../../../components/svg/ArrowUp";
+import ArrowDown from "../../../components/svg/ArrowDown";
 import style from "./PostCommenataryRating.module.css";
 
 function PostRating({rating, addRating, rateStatus, setRatingStatus, idPost}) { //rateStatus = UPVOTE/DOWNVOTE/NONE

@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import style from './AboutUser.module.css';
 import MyTextArea from "../../../components/UI/inputs/MyTextArea";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
 import InfoTag from "../../userPage/InfoTag";
-import edit from "../../../images/icons/edit.svg";
 import MyInput from "../../../components/UI/inputs/MyInput";
+import EditSvg from "../../../components/svg/EditSvg";
 
 function AboutUserElement(props) {
 
@@ -87,8 +87,12 @@ function AboutUserElement(props) {
 
                 : <div className="flexDiv flex-wrap">
                     <div>
-                        <MyTransparentButton className={style.edit} onClick={() => setIsEdit(true)} tooltip="Edit">
-                            <img src={edit} alt="edit"/>
+                        <MyTransparentButton
+                            className={style.edit}
+                            onClick={() => setIsEdit(true)}
+                            tooltip="Edit"
+                        >
+                            <EditSvg />
                         </MyTransparentButton>
                     </div>
 

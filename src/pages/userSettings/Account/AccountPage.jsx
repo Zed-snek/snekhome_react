@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import InfoDiv from "../../../components/UI/blocks/InfoDiv";
 import style from "./Account.module.css";
 import {UserContext} from "../../../components/context";
@@ -7,7 +7,6 @@ import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../API/UserService";
 import {isNotBannedSymbols} from "../../../functions/stringFunctions"
 import MyFileInput from "../../../components/UI/inputs/MyFileInput";
-import edit from "../../../images/icons/edit.svg";
 import OverImageDiv from "../../../components/UI/blocks/OverImageDiv";
 import FadingMessage from "../../../components/UI/message/FadingMessage";
 import {getUserImage} from "../../../functions/linkFunctions";
@@ -16,6 +15,7 @@ import OverContentDiv from "../../../components/UI/blocks/OverContentDiv";
 import Colors from "./Colors";
 import {isObjectNotEmpty} from "../../../functions/objectFunctions";
 import myButtonStyle from "../../../components/UI/buttons/MyTransparentButton.module.css";
+import EditSvg from "../../../components/svg/EditSvg";
 
 
 function AccountPage(props) {
@@ -120,7 +120,7 @@ function AccountPage(props) {
                                 setIsShowError={setShowError}
                                 setImage={updateValue}
                             >
-                                <img src={edit} alt="edit" className={style.editBtn}/>
+                                <EditSvg />
                             </MyFileInput>
                             <FadingMessage
                                 className={style.fadingMessage}

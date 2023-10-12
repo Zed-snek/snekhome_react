@@ -4,7 +4,7 @@ import PostService from "../../../API/PostService";
 import style from "./commentary.module.css";
 import MyTextArea from "../../UI/inputs/MyTextArea";
 import MyTransparentButton from "../../UI/buttons/MyTransparentButton";
-import SendSvg from "../../UI/svg/SendSvg";
+import SendSvg from "../../svg/SendSvg";
 import MyPulseLoader from "../../UI/loaders/MyPulseLoader";
 import FadingMessage from "../../UI/message/FadingMessage";
 import {UserContext} from "../../context";

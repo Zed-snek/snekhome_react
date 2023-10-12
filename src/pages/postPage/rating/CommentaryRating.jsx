@@ -3,8 +3,8 @@ import {useRating} from "./useRating";
 import style from "./PostCommenataryRating.module.css";
 import RatingValue from "./RatingValue";
 import MyGreyOutlineButton from "../../../components/UI/buttons/MyGreyOutlineButton";
-import ArrowUp from "../../../components/UI/svg/ArrowUp";
-import ArrowDown from "../../../components/UI/svg/ArrowDown";
+import ArrowUp from "../../../components/svg/ArrowUp";
+import ArrowDown from "../../../components/svg/ArrowDown";
 
 function CommentaryRating({rating, addRating, rateStatus, setRatingStatus, idComment}) {
 
