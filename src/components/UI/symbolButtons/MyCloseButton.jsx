@@ -1,4 +1,3 @@
-import React from 'react';
 import {useClasses} from "../../../hooks/useClasses";
 import style from "./MyCloseButton.module.css";
 

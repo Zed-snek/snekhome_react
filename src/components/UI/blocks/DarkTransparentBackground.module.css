@@ -1,5 +1,5 @@
 .main {
     padding: 6px;
     background-image: linear-gradient(280deg, #0000004C 0%, #00000033 99%);
-    border-radius: 10px;
+    border-radius: 10px !important;
 }
