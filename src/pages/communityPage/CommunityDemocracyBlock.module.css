@@ -13,3 +13,40 @@
 .showMoreInfo {
 
 }
+
+.program {
+    height: 85px;
+    overflow-y: auto;
+}
+
+.currentPresidentProgram > h6, .statsInfo > h6, .candidateProfile > h6 {
+    text-align: center;
+    color: #949494;
+}
+
+.currentPresidentProgram {
+    flex: 2;
+}
+
+.statsInfo {
+    flex: 3;
+}
+
+.candidateProfile {
+    flex: 3;
+}
+
+.centerFlex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.candidateBtn {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.mark {
+    margin-left: 7px;
+}

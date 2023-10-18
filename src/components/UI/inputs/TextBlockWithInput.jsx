@@ -1,38 +1,41 @@
 import style from "./TextBlockWithInput.module.css";
 import DarkTransparentBackground from "../blocks/DarkTransparentBackground";
-import OutlineFilledDiv from "../blocks/OutlineFilledDiv";
-import MyTextArea from "./MyTextArea";
 import {useState} from "react";
 import EditSvg from "../../svg/EditSvg";
 import MyTransparentButton from "../buttons/MyTransparentButton";
+import MyDarkTextArea from "./MyDarkTextArea";
+import {useClasses} from "../../../hooks/useClasses";
 
-function TextBlockWithInput({text, className, isEdit, onAcceptCallback}) {
+function TextBlockWithInput({text, isEdit, onAcceptCallback, textAreaProps, contentClass, ...props}) {
 
     const [isEditForm, setIsEditForm] = useState(false)
     const [value, setValue] = useState(text)
 
+    const classes = useClasses(style.content, contentClass)
+
     return (
-        <OutlineFilledDiv className={className}>
+        <div {...props}>
             { isEditForm
                 ? <div className={style.classAreaDiv}>
-                    <MyTextArea
-                        className={style.textarea}
-                        value={value}
-                        onChange={e => setValue(e.target.value)}
-                    />
+                        <MyDarkTextArea
+                            value={value}
+                            onChange={e => setValue(e.target.value)}
+                            {...textAreaProps}
+                        />
 
-                    <MyTransparentButton
-                        className={style.acceptBtn}
-                        onClick={() => {
-                            onAcceptCallback(value)
-                            setIsEditForm(false)
-                        }}
-                    >
-                        ✓
-                    </MyTransparentButton>
-                </div>
+                        <MyTransparentButton
+                            className={style.acceptBtn}
+                            onClick={() => {
+                                onAcceptCallback(value)
+                                setIsEditForm(false)
+                            }}
+                        >
+                            ✓
+                        </MyTransparentButton>
+                    </div>
 
-                : <DarkTransparentBackground className={style.content}>
+
+                : <DarkTransparentBackground className={classes}>
                     {value}
 
                     { isEdit ?
@@ -48,7 +51,7 @@ function TextBlockWithInput({text, className, isEdit, onAcceptCallback}) {
                 </DarkTransparentBackground>
             }
 
-        </OutlineFilledDiv>
+        </div>
     );
 }
 

@@ -5,11 +5,10 @@ import CommunityRoleFlair from "../../../components/community/CommunityRoleFlair
 import CommunityRoleForm from "./CommunityRoleForm";
 import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 import EditSvg from "../../../components/svg/EditSvg";
+import CheckMark from "../../../components/UI/symbols/CheckMark";
+import XMark from "../../../components/UI/symbols/XMark";
 
 function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, setRoles, isEdit}) {
-
-    const allowed = <span className={style.allowed}>✓</span>
-    const disAllowed = <span className={style.disAllowed}>✗</span>
 
     const [isShowCreateForm, setIsShowCreateForm] = useState(false)
 
@@ -42,7 +41,7 @@ function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, 
                             {t.title2}
                         </div>
                         <div>
-                            {role[t.title] ? allowed : disAllowed}
+                            {role[t.title] ? <CheckMark /> : <XMark />}
                         </div>
                     </div>
                 ) }

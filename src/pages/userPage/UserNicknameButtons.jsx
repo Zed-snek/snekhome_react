@@ -58,19 +58,21 @@ function UserNicknameButtons({friendshipType, setFriendshipType}) {
         if (params.nickname.toLowerCase() === userNickname.toLowerCase()) {
             return <>
                 <MyTransparentButton
-                    className={style.nicknameIco}
+                    className={style.settingsIco}
                     tooltip="Settings Page"
                     onClick={() => navigate('/settings')}
                 >
                     <SettingsSvg />
                 </MyTransparentButton>
+
                 <MyTransparentButton
-                    className={style.nicknameIco}
+                    className={style.logoutIco}
                     tooltip="Logout"
                     onClick={() => setLogoutModal(true)}
                 >
                     <LogoutSvg />
                 </MyTransparentButton>
+
                 <MessageModal
                     visible={isLogoutModal}
                     setVisible={setLogoutModal}

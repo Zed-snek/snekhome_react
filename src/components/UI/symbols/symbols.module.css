@@ -1,0 +1,12 @@
+.checkMark, .xMark {
+    font-size: 16px;
+    font-weight: bold;
+    user-select: none;
+}
+
+.checkMark {
+    color: #85B50E;
+}
+.xMark {
+    color: #ff1177;
+}

@@ -68,8 +68,7 @@ function PostList({loadType, entityName, isDeletePermission}) { //loadType: HOME
                         groupTitle={item.groupTitle}
                     />
                 )
-                : <></>
-            }
+            : <></> }
 
             <LoaderAndErrorDiv error={fetchError} isLoading={isFetchLoading}/>
             {lastElement} {/*trigger to load next posts*/}

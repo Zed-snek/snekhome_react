@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import {useContext} from 'react';
 import {AuthContext} from "../context";
 import {Routes, Route} from "react-router-dom";
 import InfoPage from "../../pages/InfoPage";
@@ -37,9 +37,7 @@ function AllRoutes() {
 
             {/*Private - only for authorized*/}
             <Route path='' element={<PrivateRoute auth={isAuth} />}>
-                <Route path='/home'>
-                    <Route index element={<HomePage />} />
-                </Route>
+                <Route index element={<HomePage />} />
                 <Route path='/community_settings/:groupname' element={<CommunitySettingsPage />}/>
                 <Route path='/settings' element={<SettingsPage />} />
                 <Route path='/new_post/:groupname' element={<NewPostPage />} />

@@ -6,6 +6,8 @@ import TextBlockWithInput from "../components/UI/inputs/TextBlockWithInput";
 
 function InfoPage() {
 
+
+
     useDocumentTitle("Information")
 
     return (

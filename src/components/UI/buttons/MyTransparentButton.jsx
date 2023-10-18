@@ -1,4 +1,3 @@
-import React from 'react';
 import style from './MyTransparentButton.module.css';
 import tooltipStyle from "../../../styles/tooltip.module.css";
 import {useClasses} from "../../../hooks/useClasses";

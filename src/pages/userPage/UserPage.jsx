@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import {Link, useParams} from "react-router-dom";
 import style from './UserPage.module.css';
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
