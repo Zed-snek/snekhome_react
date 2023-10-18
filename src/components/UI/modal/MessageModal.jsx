@@ -1,7 +1,7 @@
-import Modal from "react-bootstrap/Modal";
 import style from "./MessageModal.module.css"
 import MyButton from "../buttons/MyButton";
 import {useNavigate} from "react-router-dom";
+import TransparentModal from "./TransparentModal";
 
 function MessageModal({visible, setVisible, children, acceptCallback, navigate}) {
 
@@ -19,34 +19,33 @@ function MessageModal({visible, setVisible, children, acceptCallback, navigate})
     }
 
     return (
-        <Modal show={visible} onHide={onHide}>
-            <div className={style.modalBody + " own_bg_colorHeader"}>
-                <Modal.Body className="bg-transparent">
+        <TransparentModal
+            visible={visible}
+            setVisible={setVisible}
+            centered={false}
+            isCloseBtn={false}
+            className={style.main}
+        >
+            {children}
 
-                    <span className={style.span}>
-                        {children}
-                    </span>
-
+            <div className={style.buttons}>
+                { acceptCallback ?
                     <MyButton
-                        className={style.closeBtn}
-                        onClick={onHide}
-                        float={'right'}
-                        color={acceptCallback ? "red" : "blue"}
+                        onClick={onAccept}
                     >
-                        Close
+                        Accept
                     </MyButton>
-                    { acceptCallback ?
-                        <MyButton
-                            onClick={onAccept}
-                            float={'right'}
-                        >
-                            Accept
-                        </MyButton>
-                    : <></> }
+                : <></> }
 
-                </Modal.Body>
+                <MyButton
+                    className={style.closeBtn}
+                    onClick={onHide}
+                    color={acceptCallback ? "red" : "blue"}
+                >
+                    Close
+                </MyButton>
             </div>
-        </Modal>
+        </TransparentModal>
     );
 }
 

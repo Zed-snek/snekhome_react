@@ -3,7 +3,7 @@ import {Modal} from "react-bootstrap";
 import {useClasses} from "../../../hooks/useClasses";
 import MyCloseButton from "../symbolButtons/MyCloseButton";
 
-function TransparentModal({visible, setVisible, children, className, centered}) {
+function TransparentModal({visible, setVisible, children, className, centered, isCloseBtn}) {
 
     const classes = useClasses(style.main, className)
 
@@ -14,11 +14,14 @@ function TransparentModal({visible, setVisible, children, className, centered}) 
             className={classes}
             centered={centered === undefined ? true : centered}
         >
-            <div className={style.modal}>
-                <MyCloseButton
-                    className={style.cancel}
-                    onClick={() => setVisible(false)}
-                />
+            <div className={style.window}>
+                { isCloseBtn === undefined || isCloseBtn ?
+                    <MyCloseButton
+                        className={style.cancel}
+                        onClick={() => setVisible(false)}
+                    />
+                : <></> }
+
                 <div>
                     {children}
                 </div>

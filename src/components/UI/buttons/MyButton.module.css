@@ -1,13 +1,9 @@
 .button {
-    font-weight: bold;
-    padding: 7px;
+    font-weight: 700;
+    padding: 3px 7px;
     border-width: 2px;
     border-style: solid;
-    border-radius: 10px;
-}
-
-.floatRight {
-    float: right;
+    border-radius: 6px;
 }
 
 .green {

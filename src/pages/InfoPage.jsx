@@ -1,14 +1,10 @@
 import {useDocumentTitle} from "usehooks-ts";
 import VoteForm from "../components/UI/inputs/VoteForm";
-import OutlineFilledDiv from "../components/UI/blocks/OutlineFilledDiv";
-import DarkTransparentBackground from "../components/UI/blocks/DarkTransparentBackground";
-import TextBlockWithInput from "../components/UI/inputs/TextBlockWithInput";
 
 function InfoPage() {
 
-
-
     useDocumentTitle("Information")
+
 
     return (
         <div>
@@ -35,7 +31,6 @@ function InfoPage() {
                     ]}
                 />
                 <br/>
-
             </div>
         </div>
     );

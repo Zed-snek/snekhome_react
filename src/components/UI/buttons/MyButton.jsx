@@ -1,4 +1,3 @@
-import React from 'react';
 import buttonStyle from './MyButton.module.css';
 import {useClasses} from "../../../hooks/useClasses";
 
@@ -9,9 +8,6 @@ function MyButton({children, className, color, disabled, ...props}) {
     const styleObject = {
         width: props.width
     }
-    if (props.float === "right")
-        classes += ' ' + buttonStyle.floatRight
-
 
     const colors = {
         green: buttonStyle.green,
@@ -23,7 +19,6 @@ function MyButton({children, className, color, disabled, ...props}) {
         classes += ' ' + buttonStyle.grey
     else
         classes += ' ' + (colors[color] ?? colors.blue) /* Nullish coalescing operator "??" */
-
 
     return (
         <button
