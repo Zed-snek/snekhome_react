@@ -115,4 +115,8 @@ export default class CommunityService {
         return await getRequest("/democracy/" + groupname)
     }
 
+    static async becomeCandidate(groupname) {
+        return await putRequestWithAuth(`/democracy/candidate/${groupname}/activate`)
+    }
+
 }

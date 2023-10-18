@@ -19,7 +19,7 @@ import CommunityTypeBlock from "./CommunityTypeBlock";
 import {useFetchCommunity} from "../../hooks/useFetchCommunity";
 import {AuthContext} from "../../components/context";
 import PostList from "../../components/post/PostList";
-import CommunityDemocracyBlock from "./CommunityDemocracyBlock";
+import CommunityDemocracyBlock from "./democracyComponents/CommunityDemocracyBlock";
 
 function CommunityPage() {
 

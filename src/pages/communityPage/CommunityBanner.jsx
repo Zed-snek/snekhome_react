@@ -119,7 +119,7 @@ function CommunityBanner({data, setData, groupname, setError, groupnameColor, ty
                     </GreyLink>
                 : <></> }
 
-                <GreyLink to={'/members/' + groupname} className={style.members}>
+                <GreyLink to={'/members/' + groupname}>
                     members ({data.members})
                 </GreyLink>
 
