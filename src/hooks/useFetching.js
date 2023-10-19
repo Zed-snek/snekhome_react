@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {getErrorResponseMessage} from "../functions/objectFunctions";
 
 export function useFetching(callback) {
 
@@ -12,13 +13,7 @@ export function useFetching(callback) {
             await callback()
         }
         catch (err) {
-            console.log(err)
-            if (err.response.data === '') {
-                setError(err.message)
-            }
-            else {
-                setError(err.response.data.message)
-            }
+            setError(getErrorResponseMessage(err))
         }
         finally {
             setIsLoading(false)

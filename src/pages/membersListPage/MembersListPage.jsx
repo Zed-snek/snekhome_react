@@ -14,6 +14,7 @@ import MoreOptionsButton from "../../components/UI/navigation/MoreOptionsButton"
 import CommunityRoleListToSet from "../communitySettings/Users/CommunityRoleListToSet";
 import {useMemoSearch} from "../../hooks/useMemoSearch";
 import MembersItemListMap from "./MembersItemListMap";
+import {getErrorResponseMessage} from "../../functions/objectFunctions";
 
 function MembersListPage({permissions, communityType, isCommunityClosed, setError, setIsLoader}) {
 
@@ -88,7 +89,7 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
     async function banUser(nickname) {
         await CommunityService.banUser(params.groupname, nickname)
             .then(() => setData(prev => ({...prev, users: prev.users.filter(u => u.nickname !== nickname)})))
-            .catch(exception => setError(exception))
+            .catch(exception => setError(getErrorResponseMessage(exception)))
     }
 
     const [isRoleShow, setRoleShow] = useState({isShow: false, nickname: ''})
@@ -102,7 +103,7 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
                     return obj
                 })
             )
-            .catch(err => setError(err.message))
+            .catch(exception => setError(getErrorResponseMessage(exception)))
     }
 
     function setRole(nickname, isDelete) {

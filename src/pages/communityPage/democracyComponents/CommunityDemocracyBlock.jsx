@@ -8,11 +8,13 @@ import TextBlockWithInput from "../../../components/UI/inputs/TextBlockWithInput
 import CurrentUserDemocracyInfo from "./CurrentUserDemocracyInfo";
 import MessageModal from "../../../components/UI/modal/MessageModal";
 
-function CommunityDemocracyBlock({data, setData, groupname}) {
+function CommunityDemocracyBlock({citizenRating, citizenDays, isMember, groupname}) {
+
+    const [democracyData, setDemocracyData] = useState()
 
     const [fetchData, isFetchingLoading, fetchError] = useFetching(async () => {
         const responseData = await CommunityService.getDemocracyData(groupname)
-        setData(responseData)
+        setDemocracyData(responseData)
         console.log("democracy data: ", responseData)
     })
 
@@ -35,7 +37,7 @@ function CommunityDemocracyBlock({data, setData, groupname}) {
         );
     }
 
-    if (data)
+    if (democracyData)
         return (
             <div>
                 <OutlineFilledDivWithShowMore
@@ -56,14 +58,18 @@ function CommunityDemocracyBlock({data, setData, groupname}) {
 
                             <TextBlockWithInput
                                 contentClass={style.program}
-                                text={data.currentPresidentProgram}
+                                text={democracyData.currentPresidentProgram}
                             />
                         </div>
 
                         <CurrentUserDemocracyInfo
-                            groupname={groupname}
                             className={style.candidateProfile}
-                            data={data}
+                            groupname={groupname}
+                            data={democracyData}
+                            setData={setDemocracyData}
+                            citizenRating={citizenRating}
+                            citizenDays={citizenDays}
+                            isMember={isMember}
                             setError={setError}
                         />
                     </div>

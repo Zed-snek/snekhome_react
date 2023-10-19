@@ -90,10 +90,13 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                     idPost={postId}
                     onClick={e => e.preventDefault()}
                 />
+
                 <div className={style.moreOptionsDiv}>
                     {moreOptionsButton()}
                 </div>
+
                 <MySyncLoader loading={isDeleteLoading}/>
+
                 <MessageModal
                     visible={isDeletePostModal}
                     setVisible={setIsDeletePostModal}
@@ -101,14 +104,17 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                 >
                     Are you sure you want to delete this post?
                 </MessageModal>
+
                 <MessageModal
                     visible={isErrorModal}
                     setVisible={setIsErrorModal}
                 >
                     {deleteError}
                 </MessageModal>
+
                 <Link to={postLink} className={style.link}/>
             </div>
+
             <div className={style.imageTextDiv} id={style["order_imageAndText"]}>
                 { postImages.length > 0 ?
                     <PostImagesSelector
@@ -119,7 +125,8 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                         className={style.imageSelector}
                         imgClassName={style.image}
                     />
-                    : <></> }
+                : <></> }
+
                 <Link className={style.link} to={postLink}>
                     <InfoDiv className={style.text}>
                         {text}

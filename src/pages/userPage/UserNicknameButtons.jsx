@@ -86,7 +86,7 @@ function UserNicknameButtons({friendshipType, setFriendshipType}) {
             let type = types.find(t => t.title === friendshipType)
             return (
                 <MyTransparentButton
-                    className={style.nicknameIco}
+                    className={style.friendsIco}
                     tooltip={type.tooltip}
                     onClick={manageFriend}
                 >

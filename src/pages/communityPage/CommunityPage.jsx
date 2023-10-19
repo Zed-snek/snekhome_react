@@ -30,8 +30,6 @@ function CommunityPage() {
 
     const [data, setData, isCommunityLoading] = useFetchCommunity(params.groupname)
 
-    const [democracyData, setDemocracyData] = useState()
-
     const [error, setError] = useState("")
     const [isModalError, setModalError] = useState(false)
 
@@ -102,15 +100,14 @@ function CommunityPage() {
                 <div className={style.content}>
                     { communityType === "DEMOCRACY" ?
                         <CommunityDemocracyBlock
-                            data={democracyData}
-                            setData={setDemocracyData}
+                            citizenDays={data.community.citizenParameters.days}
+                            citizenRating={data.community.citizenParameters.rating}
+                            isMember={data.member}
                             groupname={params.groupname}
                         />
                     : <></> }
 
-                    <OutlineFilledDiv
-                        className={style.newPostAndSortBanner}
-                    >
+                    <OutlineFilledDiv className={style.newPostAndSortBanner}>
                         <div className={style.newPostDiv}>
                             { isAuth ?
                                 <MyTextArea
@@ -121,6 +118,7 @@ function CommunityPage() {
                                 </MyTextArea>
                             : <></> }
                         </div>
+
                         <div className={style.sortButtons}>
                             <SortOutlineButtons
                                 buttons={["Hot", "New"]}

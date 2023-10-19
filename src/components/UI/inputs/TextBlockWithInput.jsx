@@ -6,7 +6,7 @@ import MyTransparentButton from "../buttons/MyTransparentButton";
 import MyDarkTextArea from "./MyDarkTextArea";
 import {useClasses} from "../../../hooks/useClasses";
 
-function TextBlockWithInput({text, isEdit, onAcceptCallback, textAreaProps, contentClass, ...props}) {
+function TextBlockWithInput({text, ifNullText, isEdit, onAcceptCallback, textAreaProps, contentClass, ...props}) { //onAcceptCallback must return boolean value
 
     const [isEditForm, setIsEditForm] = useState(false)
     const [value, setValue] = useState(text)
@@ -26,8 +26,13 @@ function TextBlockWithInput({text, isEdit, onAcceptCallback, textAreaProps, cont
                         <MyTransparentButton
                             className={style.acceptBtn}
                             onClick={() => {
-                                onAcceptCallback(value)
-                                setIsEditForm(false)
+                                if (text !== value) {
+                                    onAcceptCallback(value)
+                                        .then(bool => {
+                                            if (bool)
+                                                setIsEditForm(false)
+                                        })
+                                }
                             }}
                         >
                             ✓
@@ -36,7 +41,7 @@ function TextBlockWithInput({text, isEdit, onAcceptCallback, textAreaProps, cont
 
 
                 : <DarkTransparentBackground className={classes}>
-                    {value}
+                    { value ?? ifNullText }
 
                     { isEdit ?
                         <div>

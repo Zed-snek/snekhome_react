@@ -1,0 +1,21 @@
+label {
+    font-size: 20px;
+}
+
+.loginButtonDiv {
+    display: flex !important;
+    justify-content: space-between;
+
+    align-items: end;
+}
+
+.textAboveLink {
+    font-size: 17px;
+}
+
+.header {
+    padding-top: 5px;
+}
+
+
+
