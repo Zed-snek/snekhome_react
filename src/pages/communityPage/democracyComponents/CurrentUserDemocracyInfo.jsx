@@ -8,10 +8,9 @@ import CommunityService from "../../../API/CommunityService";
 import CheckMark from "../../../components/UI/symbols/CheckMark";
 import XMark from "../../../components/UI/symbols/XMark";
 import {useGlobalError} from "../../../hooks/useLoadingAndError";
+import {getErrorResponseMessage} from "../../../functions/objectFunctions";
 
-function CurrentUserDemocracyInfo({data, groupname, className, setError}) {
-
-    const citizenProgress = data?.citizenProgress
+function CurrentUserDemocracyInfo({data, setData, citizenRating, citizenDays, isMember, groupname, setError, ...props}) {
 
     const [activateCandidate, isCandidateActivationLoading, candidateActivationError] = useFetching(async () => {
         await CommunityService.becomeCandidate(groupname)
@@ -24,8 +23,38 @@ function CurrentUserDemocracyInfo({data, groupname, className, setError}) {
         return <XMark className={style.mark} />
     }
 
+    async function updateProgram(text) {
+        if (text.length < 5) {
+            setError("Program must be at least 5 symbols")
+            return false
+        }
+        else {
+            setError("")
+            let func
+            if (data.currentUserProgram)
+                func = () => CommunityService.updateCandidateProgram(groupname, text)
+            else
+                func = () => CommunityService.createCandidateProgram(groupname, text)
+
+            let boolean
+            await func()
+                .then(() => {
+                    setData(prev => ({...prev,
+                        currentUserProgram: text,
+                        currentUserActiveCandidate: true
+                    }))
+                    boolean = true
+                })
+                .catch(exception => {
+                    setError(getErrorResponseMessage(exception))
+                    boolean = false
+                })
+            return boolean
+        }
+    }
+
     return (
-        <div className={className}>
+        <div {...props}>
             <h6>
                 Your candidate profile:
             </h6>
@@ -34,11 +63,16 @@ function CurrentUserDemocracyInfo({data, groupname, className, setError}) {
                 { data.citizenRight ?
                     <div>
                         <TextBlockWithInput
-                            text={data.currentUserProgram + "safewrfw rwe trwe t34t 34t 34 t34y t34 t34 t3safewrfw rwe trwe t34t 34t 34 t34y t34 t34 t3safewrfw rwe trwe t34t 34t 34 t34y t34 t34 t3"}
-                            textAreaProps={{rows: 3}}
+                            text={data.currentUserProgram}
+                            ifNullText="write your program before become a candidate"
+                            textAreaProps={{
+                                rows: 3,
+                                placeholder: "write your program before become a candidate...",
+                                maxLength: 1024
+                            }}
                             contentClass={parentStyle.program}
                             isEdit={!data.electionsNow}
-                            onAcceptCallback={text => console.log(text)} //todo onAcceptCallback
+                            onAcceptCallback={program => updateProgram(program)}
                         />
 
                         { data.currentUserActiveCandidate ?
@@ -52,47 +86,55 @@ function CurrentUserDemocracyInfo({data, groupname, className, setError}) {
                             <div className={parentStyle.centerFlex}>
                                 { data.electionsNow ?
                                     <div>
-                                        You can't become a candidate until after elections
+                                        You can't become a candidate until current elections will end
                                     </div>
                                     :
-                                    <>
-                                        <div>
-                                            Click below to become an active candidate
-                                        </div>
+                                    data.currentUserProgram ?
+                                        <>
+                                            <div>
+                                                Click below to become an active candidate
+                                            </div>
 
-                                        <div>
-                                            <MyTransparentButton
-                                                className={style.candidateBtn}
-                                                onClick={activateCandidate}
-                                            >
-                                                { isCandidateActivationLoading
-                                                    ? <MyPulseLoader size={9} />
-                                                    : <> Become a candidate </>
-                                                }
-                                            </MyTransparentButton>
+                                            <div>
+                                                <MyTransparentButton
+                                                    className={style.candidateBtn}
+                                                    onClick={activateCandidate}
+                                                >
+                                                    { isCandidateActivationLoading
+                                                        ? <MyPulseLoader size={9} />
+                                                        : <> Become a candidate </>
+                                                    }
+                                                </MyTransparentButton>
+                                            </div>
+                                        </>
+                                        : <div>
+                                            To become a candidate, firstly write the candidate program
                                         </div>
-                                    </>
                                 }
                             </div>
                         }
                     </div>
-                    : <>
-                        <div>
-                            You don't have citizen rights, citizen progress:
-                        </div>
-
-                        <div>
+                    : isMember
+                        ? <>
                             <div>
-                                <bold>•</bold> Days {citizenProgress.currentUserDays}/{citizenProgress.requiredDays}
-                                {isCheckMark(citizenProgress.currentUserDays >= citizenProgress.requiredDays)}
+                                You don't have citizen rights, citizen progress:
                             </div>
 
                             <div>
-                                <bold>•</bold> Rating {citizenProgress.currentUserRating}/{citizenProgress.requiredRating}
-                                {isCheckMark(citizenProgress.currentUserRating >= citizenProgress.requiredRating)}
+                                <div>
+                                    <bold>•</bold> Days {data.currentUserDays}/{citizenDays}
+                                    {isCheckMark(data.currentUserDays >= citizenDays)}
+                                </div>
+
+                                <div>
+                                    <bold>•</bold> Rating {data.currentUserRating}/{citizenRating}
+                                    {isCheckMark(data.currentUserRating >= citizenRating)}
+                                </div>
                             </div>
+                        </>
+                        : <div>
+                            You can't participate in democracy life if you are not a member of the community
                         </div>
-                    </>
                 }
             </div>
         </div>

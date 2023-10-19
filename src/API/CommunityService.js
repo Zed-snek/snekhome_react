@@ -119,4 +119,18 @@ export default class CommunityService {
         return await putRequestWithAuth(`/democracy/candidate/${groupname}/activate`)
     }
 
+    static async createCandidateProgram(groupname, program) {
+        return await postBodyRequestWithAuth("/democracy/candidate", {
+            groupname: groupname,
+            program: program
+        })
+    }
+
+    static async updateCandidateProgram(groupname, program) {
+        return await putRequestWithAuth("/democracy/candidate", {
+            groupname: groupname,
+            program: program
+        })
+    }
+
 }

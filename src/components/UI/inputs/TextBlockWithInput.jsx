@@ -33,6 +33,9 @@ function TextBlockWithInput({text, ifNullText, isEdit, onAcceptCallback, textAre
                                                 setIsEditForm(false)
                                         })
                                 }
+                                else {
+                                    setIsEditForm(false)
+                                }
                             }}
                         >
                             ✓
@@ -41,7 +44,7 @@ function TextBlockWithInput({text, ifNullText, isEdit, onAcceptCallback, textAre
 
 
                 : <DarkTransparentBackground className={classes}>
-                    { value ?? ifNullText }
+                    { value ?? <span className={style.ifNullText}> {ifNullText} </span> }
 
                     { isEdit ?
                         <div>
