@@ -1,4 +1,3 @@
-import React from 'react';
 import style from "./CommunityTypeBlock.module.css";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 

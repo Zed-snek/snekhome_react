@@ -7,14 +7,20 @@ import CommunityService from "../../../API/CommunityService";
 import TextBlockWithInput from "../../../components/UI/inputs/TextBlockWithInput";
 import CurrentUserDemocracyInfo from "./CurrentUserDemocracyInfo";
 import MessageModal from "../../../components/UI/modal/MessageModal";
+import {formatDateWithMonthName} from "../../../functions/timeDateFunctions";
 
-function CommunityDemocracyBlock({citizenRating, citizenDays, isMember, groupname}) {
+function CommunityDemocracyBlock({citizenRating, citizenDays, setPresidencyStats, isMember, groupname}) {
 
     const [democracyData, setDemocracyData] = useState()
 
     const [fetchData, isFetchingLoading, fetchError] = useFetching(async () => {
         const responseData = await CommunityService.getDemocracyData(groupname)
         setDemocracyData(responseData)
+        setPresidencyStats({
+            bannedUsers: responseData.bannedUsersStats,
+            bannedCitizens: responseData.bannedCitizensStats,
+            deletedPosts: responseData.deletedPostsStats
+        })
         console.log("democracy data: ", responseData)
     })
 
@@ -47,8 +53,20 @@ function CommunityDemocracyBlock({citizenRating, citizenDays, isMember, groupnam
 
                         <div className={style.statsInfo}>
                             <h6>
-                                Stats:
+                                Elections status:
                             </h6>
+
+                            <div>
+                                <div>
+                                    { democracyData.electionsNow
+                                        ? "Elections will end in "
+                                        : "Elections will start in "
+                                    }
+                                </div>
+                                <div>
+                                    {formatDateWithMonthName(democracyData.electionsDate)}
+                                </div>
+                            </div>
                         </div>
 
                         <div className={style.currentPresidentProgram}>

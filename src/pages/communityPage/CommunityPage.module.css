@@ -118,6 +118,9 @@
 
 .additionalInfoBlock {
     width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 @media (max-width: 1200px) {

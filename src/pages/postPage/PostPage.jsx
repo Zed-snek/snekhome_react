@@ -120,19 +120,19 @@ function PostPage() {
             <div className={style.infoBannersDiv}>
                 {data.post.anonymous ? <></>
                     :
-                <OutlineFilledDiv
-                    className={style.infoBanner}
-                >
-                    <div className={style.infoBannerName}>
-                        {data.userName + ' ' + data.userSurname}
-                    </div>
-                    <Link to={"/u/" + data.userNickname}>
-                        <img src={getUserImage(data.userImage)} alt=""/>
-                    </Link>
-                    <MyBoxedTextLink to={"/u/" + data.userNickname}>
-                        @{data.userNickname}
-                    </MyBoxedTextLink>
-                </OutlineFilledDiv>
+                    <OutlineFilledDiv
+                        className={style.infoBanner}
+                    >
+                        <div className={style.infoBannerName}>
+                            {data.userName + ' ' + data.userSurname}
+                        </div>
+                        <Link to={"/u/" + data.userNickname}>
+                            <img src={getUserImage(data.userImage)} alt=""/>
+                        </Link>
+                        <MyBoxedTextLink to={"/u/" + data.userNickname}>
+                            @{data.userNickname}
+                        </MyBoxedTextLink>
+                    </OutlineFilledDiv>
                 }
 
                 <OutlineFilledDiv
@@ -151,6 +151,7 @@ function PostPage() {
                         created {formatLocalDate(data.communityDate)}
                     </div>
                 </OutlineFilledDiv>
+
 
             </div>
         </div>

@@ -20,6 +20,7 @@ import {useFetchCommunity} from "../../hooks/useFetchCommunity";
 import {AuthContext} from "../../components/context";
 import PostList from "../../components/post/PostList";
 import CommunityDemocracyBlock from "./democracyComponents/CommunityDemocracyBlock";
+import ModerationStatsOfPresident from "./democracyComponents/ModerationStatsOfPresident";
 
 function CommunityPage() {
 
@@ -47,6 +48,7 @@ function CommunityPage() {
         {type: "DEMOCRACY", image: demImage, color: '#85b50e'},
         {type: "NEWSPAPER", image: newsImage, color: '#ff9900'},
     ]
+    const [presidencyStats, setPresidencyStats] = useState() //for Democracy purpose only
 
     const {communityType, groupnameColor, typeImage} = useMemo(() => {
         let foundType = ""
@@ -104,6 +106,7 @@ function CommunityPage() {
                             citizenRating={data.community.citizenParameters.rating}
                             isMember={data.member}
                             groupname={params.groupname}
+                            setPresidencyStats={setPresidencyStats}
                         />
                     : <></> }
 
@@ -144,7 +147,17 @@ function CommunityPage() {
                         isClosed={data.community.closed}
                         isAnonymous={data.community.anonAllowed}
                     />
+
+                    { presidencyStats ?
+                        <ModerationStatsOfPresident
+                            deletedPosts={presidencyStats.deletedPosts}
+                            bannedCitizens={presidencyStats.bannedCitizens}
+                            bannedUsers={presidencyStats.bannedUsers}
+                        />
+                    : <></> }
                 </div>
+
+
 
             </div>
 

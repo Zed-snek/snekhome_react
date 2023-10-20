@@ -1,0 +1,20 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.description {
+    text-align: center;
+}
+
+.presidentStats {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.presidentStatsTitles > div {
+    color: #D9D9D9;
+    font-weight: 600;
+}

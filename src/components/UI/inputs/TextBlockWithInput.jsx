@@ -37,6 +37,7 @@ function TextBlockWithInput({text, ifNullText, isEdit, onAcceptCallback, textAre
                                     setIsEditForm(false)
                                 }
                             }}
+                            tooltip="Accept"
                         >
                             ✓
                         </MyTransparentButton>
@@ -51,6 +52,7 @@ function TextBlockWithInput({text, ifNullText, isEdit, onAcceptCallback, textAre
                             <MyTransparentButton
                                 className={style.editBtn}
                                 onClick={() => setIsEditForm(true)}
+                                tooltip="Edit"
                             >
                                 <EditSvg />
                             </MyTransparentButton>

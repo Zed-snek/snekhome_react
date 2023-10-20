@@ -3,6 +3,8 @@
     border: none;
     user-select: none;
     position: relative;
+    word-wrap: normal !important;
+    word-break: normal !important;
 }
 
 .main:hover {

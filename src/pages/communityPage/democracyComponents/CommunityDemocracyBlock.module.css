@@ -11,10 +11,6 @@
     align-items: center;
 }
 
-.generalInfo {
-
-}
-
 .showMoreInfo {
 
 }
@@ -32,12 +28,12 @@
 .currentPresidentProgram {
     flex: 2;
 }
-
 .statsInfo {
-    flex: 3;
+    flex: 2;
 }
-
 .candidateProfile {
     flex: 3;
 }
+
+
 
