@@ -3,8 +3,9 @@ import {useState} from "react";
 import OutlineFilledDiv from "./OutlineFilledDiv";
 import MyTransparentButton from "../buttons/MyTransparentButton";
 import {useClasses} from "../../../hooks/useClasses";
+import MyPulseLoader from "../loaders/MyPulseLoader";
 
-function OutlineFilledDivWithShowMore({className, children, showMoreContent, ...props}) {
+function OutlineFilledDivWithShowMore({className, children, showMoreContent, onClickMoreContent, isLoading, ...props}) {
 
     const [isMoreContent, setIsMoreContent] = useState(false)
 
@@ -26,9 +27,18 @@ function OutlineFilledDivWithShowMore({className, children, showMoreContent, ...
                 { showMoreContent ?
                     <MyTransparentButton
                         className={style.showMoreBtn}
-                        onClick={() => setIsMoreContent(prev => !prev)}
+                        onClick={() => {
+                            setIsMoreContent(prev => !prev)
+                            if (onClickMoreContent)
+                                onClickMoreContent()
+                        }}
                     >
-                        { isMoreContent ? "Show less..." : "Show more..." }
+                        { isLoading
+                            ? <MyPulseLoader size={6} color="#2D5DB2" />
+                            : isMoreContent
+                                ? "Show less..."
+                                : "Show more..."
+                        }
                     </MyTransparentButton>
                 : <></> }
             </div>

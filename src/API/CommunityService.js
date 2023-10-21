@@ -133,4 +133,8 @@ export default class CommunityService {
         })
     }
 
+    static async getCandidateList(groupname) {
+        return await getRequest("/democracy/candidates/" + groupname)
+    }
+
 }

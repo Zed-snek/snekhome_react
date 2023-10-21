@@ -5,8 +5,7 @@ label {
 .loginButtonDiv {
     display: flex !important;
     justify-content: space-between;
-
-    align-items: end;
+    align-items: flex-end;
 }
 
 .textAboveLink {

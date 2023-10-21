@@ -8,6 +8,8 @@ import TextBlockWithInput from "../../../components/UI/inputs/TextBlockWithInput
 import CurrentUserDemocracyInfo from "./CurrentUserDemocracyInfo";
 import MessageModal from "../../../components/UI/modal/MessageModal";
 import {formatDateWithMonthName} from "../../../functions/timeDateFunctions";
+import {useGlobalError} from "../../../hooks/useLoadingAndError";
+import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 
 function CommunityDemocracyBlock({citizenRating, citizenDays, setPresidencyStats, isMember, groupname}) {
 
@@ -21,53 +23,75 @@ function CommunityDemocracyBlock({citizenRating, citizenDays, setPresidencyStats
             bannedCitizens: responseData.bannedCitizensStats,
             deletedPosts: responseData.deletedPostsStats
         })
-        console.log("democracy data: ", responseData)
     })
 
     useEffect(() => {
         fetchData()
     }, [])
 
+
+    const [candidateListData, setCandidateListData] = useState()
+    const [fetchCandidateList, isCandidateListLoading, candidateListError] = useFetching(async () => {
+        const responseData = await CommunityService.getCandidateList(groupname)
+        setCandidateListData(responseData)
+    })
+
+    function loadCandidateList() {
+        console.log(candidateListData)
+        if (!candidateListData)
+            fetchCandidateList()
+    }
+
+    //Errors handling
     const [error, setError] = useState("")
     const [isErrorModalOpen, setIsErrorModalOpen] = useState(false)
     useEffect(() => {
         if (error)
             setIsErrorModalOpen(true)
     }, [error])
+    useGlobalError(fetchError, setError)
+    useGlobalError(candidateListError, setError)
+
 
     function showMoreContent() {
-        return (
-            <div className={style.showMoreInfo}>
-                showMoreInfo
-            </div>
-        );
+        if (candidateListData)
+            return (
+                <div>
+                    <br/>
+                    <BorderBottomDiv />
+                    <div className={style.showMoreInfo}>
+                        { democracyData.electionsNow
+                            ? <>Bu</>
+                            : <>NoBu</>
+                        }
+                    </div>
+                </div>
+
+            );
+        else
+            return <></>
     }
+
 
     if (democracyData)
         return (
             <div>
                 <OutlineFilledDivWithShowMore
                     showMoreContent={showMoreContent()}
+                    onClickMoreContent={loadCandidateList}
+                    isLoading={isCandidateListLoading}
                 >
                     <div className={style.generalInfo}>
-
-                        <div className={style.statsInfo}>
-                            <h6>
-                                Elections status:
-                            </h6>
-
-                            <div>
-                                <div>
-                                    { democracyData.electionsNow
-                                        ? "Elections will end in "
-                                        : "Elections will start in "
-                                    }
-                                </div>
-                                <div>
-                                    {formatDateWithMonthName(democracyData.electionsDate)}
-                                </div>
-                            </div>
-                        </div>
+                        <CurrentUserDemocracyInfo
+                            className={style.candidateProfile}
+                            groupname={groupname}
+                            data={democracyData}
+                            setData={setDemocracyData}
+                            citizenRating={citizenRating}
+                            citizenDays={citizenDays}
+                            isMember={isMember}
+                            setError={setError}
+                        />
 
                         <div className={style.currentPresidentProgram}>
                             <h6>
@@ -80,16 +104,24 @@ function CommunityDemocracyBlock({citizenRating, citizenDays, setPresidencyStats
                             />
                         </div>
 
-                        <CurrentUserDemocracyInfo
-                            className={style.candidateProfile}
-                            groupname={groupname}
-                            data={democracyData}
-                            setData={setDemocracyData}
-                            citizenRating={citizenRating}
-                            citizenDays={citizenDays}
-                            isMember={isMember}
-                            setError={setError}
-                        />
+                        <div className={style.statsInfo}>
+                            <h6>
+                                Elections status:
+                            </h6>
+
+                            <div className={style.centerFlex}>
+                                <div>
+                                    { democracyData.electionsNow
+                                        ? "The elections will end in "
+                                        : "Next elections will start in "
+                                    }
+                                </div>
+
+                                <div className={style.electionsDate}>
+                                    {formatDateWithMonthName(democracyData.electionsDate)}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </OutlineFilledDivWithShowMore>
 

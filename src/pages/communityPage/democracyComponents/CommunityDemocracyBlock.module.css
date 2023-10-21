@@ -26,14 +26,17 @@
 }
 
 .currentPresidentProgram {
-    flex: 2;
+    flex: 5;
 }
 .statsInfo {
-    flex: 2;
-}
-.candidateProfile {
     flex: 3;
 }
+.candidateProfile {
+    flex: 6;
+}
 
-
+.electionsDate {
+    font-size: 17px;
+    font-style: italic;
+}
 
