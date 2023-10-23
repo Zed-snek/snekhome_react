@@ -20,6 +20,19 @@ function InfoPage() {
                     ]}
                     onVoteCallback={value => console.log(value)}
                 />
+                <br/>
+
+                <VoteForm
+                    votedId={2}
+                    options={[
+                        {id: 1, title: "spaghetti"},
+                        {id: 2, title: "fish and chips"},
+                        {id: 3, title: "burgers"},
+                        {id: 4, title: "eggs and beacon"}
+                    ]}
+                    onVoteCallback={value => console.log(value)}
+                />
+                <br/>
 
                 <VoteForm
                     votedId={2}
@@ -29,6 +42,8 @@ function InfoPage() {
                         {id: 3, title: "burgers", votes: 19},
                         {id: 4, title: "eggs and beacon", votes: 8}
                     ]}
+                    totalVotes={42}
+                    isResult={true}
                 />
                 <br/>
             </div>

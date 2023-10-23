@@ -3,7 +3,7 @@ import {useState} from "react";
 import {useClasses} from "../../../hooks/useClasses";
 import MyButton from "../buttons/MyButton";
 
-function VoteForm({className, options, onVoteCallback, votedId}) {
+function VoteForm({className, options, onVoteCallback, votedId, isResult, totalVotes}) {
 
     const classes = useClasses(style.main, className)
 
@@ -13,13 +13,13 @@ function VoteForm({className, options, onVoteCallback, votedId}) {
 
     return (
         <div className={classes}>
-            { options.map((element, index) =>
-                <div key={index}>
-                    { isVoted ?
+            { options.map((element, index) => {
+                const isVotedOption = element.id === votedId
+
+                return <div key={index}>
+                    { isResult ?
                         (() => {
-                            const totalVotes = options.reduce((accumulator, element) => accumulator + element.votes, 0)
                             const percentage = ((element.votes / totalVotes) * 100).toFixed(1)
-                            const isVotedOption = element.id === votedId
                             return (
                                 <div
                                     className={style.relative}
@@ -38,22 +38,35 @@ function VoteForm({className, options, onVoteCallback, votedId}) {
                         )})()
                         :
                         <div
-                            className={style.notVoted + " " + (element.id === chosenValue ? style.votedOption : "")}
-                            onClick={() => setChosenValue(element.id)}
+                            className={
+                                (isVoted ? style.voted : style.notVoted) + " " +
+                                (isVotedOption || element.id === chosenValue ? style.votedOption : "") + " " +
+                                (isVotedOption === votedId ? style.votedOption : "")
+                            }
+                            onClick={() => {
+                                if (!isVoted)
+                                    setChosenValue(element.id)
+                            }}
                         >
-                            {element.title}
+                            <div>
+                                {element.title}
+                            </div>
+                            <div>
+                                {isVotedOption ? "✓" : ""}
+                            </div>
                         </div>
                     }
                 </div>
-            )}
+            })}
 
-            { !isVoted ?
-               <div>
+            { isVoted || isResult
+                ? <></>
+                : <div>
                    <MyButton onClick={() => onVoteCallback(chosenValue)} className={style.voteButton}>
                        Vote
                    </MyButton>
-               </div>
-            : <></> }
+                </div>
+            }
         </div>
     );
 }
