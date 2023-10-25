@@ -13,7 +13,7 @@ function VoteForm({className, options, onVoteCallback, votedId, isResult, totalV
 
     return (
         <div className={classes}>
-            { options.map((element, index) => {
+            { options?.map((element, index) => {
                 const isVotedOption = element.id === votedId
 
                 return <div key={index}>

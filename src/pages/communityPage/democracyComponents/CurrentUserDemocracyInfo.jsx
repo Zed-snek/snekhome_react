@@ -14,6 +14,7 @@ function CurrentUserDemocracyInfo({data, setData, citizenRating, citizenDays, is
 
     const [activateCandidate, isCandidateActivationLoading, candidateActivationError] = useFetching(async () => {
         await CommunityService.becomeCandidate(groupname)
+        setData(prev => ({...prev, currentUserActiveCandidate: true}))
     })
     useGlobalError(candidateActivationError, setError)
 
@@ -108,7 +109,7 @@ function CurrentUserDemocracyInfo({data, setData, citizenRating, citizenDays, is
                                             </div>
                                         </>
                                         : <div>
-                                            To become a candidate, firstly write the candidate program
+                                            To become a candidate, write the candidate program first
                                         </div>
                                 }
                             </div>

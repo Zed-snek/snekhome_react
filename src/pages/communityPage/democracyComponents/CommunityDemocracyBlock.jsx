@@ -10,11 +10,13 @@ import MessageModal from "../../../components/UI/modal/MessageModal";
 import {formatDateWithMonthName} from "../../../functions/timeDateFunctions";
 import {useGlobalError} from "../../../hooks/useLoadingAndError";
 import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
+import VoteFormCandidateList from "./VoteFormCandidateList";
 
 function CommunityDemocracyBlock({citizenRating, citizenDays, setPresidencyStats, isMember, groupname}) {
 
-    const [democracyData, setDemocracyData] = useState()
 
+    //Democracy data fetching
+    const [democracyData, setDemocracyData] = useState()
     const [fetchData, isFetchingLoading, fetchError] = useFetching(async () => {
         const responseData = await CommunityService.getDemocracyData(groupname)
         setDemocracyData(responseData)
@@ -30,6 +32,7 @@ function CommunityDemocracyBlock({citizenRating, citizenDays, setPresidencyStats
     }, [])
 
 
+    //Candidate list fetching
     const [candidateListData, setCandidateListData] = useState()
     const [fetchCandidateList, isCandidateListLoading, candidateListError] = useFetching(async () => {
         const responseData = await CommunityService.getCandidateList(groupname)
@@ -37,7 +40,6 @@ function CommunityDemocracyBlock({citizenRating, citizenDays, setPresidencyStats
     })
 
     function loadCandidateList() {
-        console.log(candidateListData)
         if (!candidateListData)
             fetchCandidateList()
     }
@@ -59,19 +61,16 @@ function CommunityDemocracyBlock({citizenRating, citizenDays, setPresidencyStats
                 <div>
                     <br/>
                     <BorderBottomDiv />
-                    <div className={style.showMoreInfo}>
-                        { democracyData.electionsNow
-                            ? <>Bu</>
-                            : <>NoBu</>
-                        }
-                    </div>
+                    <VoteFormCandidateList
+                        isElectionsNow={democracyData.electionsNow}
+                        candidateList={candidateListData}
+                    />
                 </div>
 
             );
         else
             return <></>
     }
-
 
     if (democracyData)
         return (
