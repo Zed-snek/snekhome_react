@@ -1,4 +1,3 @@
-import React from 'react';
 import style from "./MyGreyOutlineButton.module.css";
 import {useClasses} from "../../../hooks/useClasses";
 

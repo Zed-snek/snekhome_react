@@ -2,7 +2,7 @@
     justify-content: space-between;
 }
 
-.flex, .main, .program {
+.flex, .main, .programBtn, .programDiv {
     display: flex;
     gap: 10px;
 }
@@ -13,6 +13,19 @@
     font-family: PressStart, "sans-serif";
 }
 
-.program {
+.programDiv {
+    align-items: flex-start;
+}
+
+.programBtn {
     gap: 5px;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.modalTitle {
+    font-weight: 600;
+    font-size: 20px;
+    padding-bottom: 10px;
+    border-bottom: #939393 1px solid;
 }

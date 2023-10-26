@@ -7,7 +7,6 @@ import CandidateItem from "./CandidateItem";
 function VoteFormCandidateList({isElectionsNow, isCitizenRight, candidateList}) {
 
     const voteOptions = useMemo(() => {
-        console.log(candidateList)
         let options = isElectionsNow ? candidateList.currentCandidates : candidateList.previousCandidates
         if (options?.length > 0) {
             options = options.map(({nickname, votes}, index) => {
@@ -25,7 +24,7 @@ function VoteFormCandidateList({isElectionsNow, isCitizenRight, candidateList}) 
         else {
             return null
         }
-    }, [candidateList.previousCandidates, candidateList.currentCandidates])
+    }, [])
 
 
     return (
@@ -66,6 +65,7 @@ function VoteFormCandidateList({isElectionsNow, isCitizenRight, candidateList}) 
                 <div className={style.candidateList}>
                     { candidateList.currentCandidates.map(({name, surname, nickname, image, program}, index) =>
                         <CandidateItem
+                            key={index}
                             nickname={nickname}
                             title={name + " " + surname}
                             image={image}
