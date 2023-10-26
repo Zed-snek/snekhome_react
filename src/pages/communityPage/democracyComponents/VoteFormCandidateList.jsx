@@ -3,7 +3,7 @@ import parentStyle from './CommunityDemocracyBlock.module.css';
 import VoteForm from "../../../components/UI/inputs/VoteForm";
 import {useMemo} from "react";
 
-function VoteFormCandidateList({isElectionsNow, candidateList}) {
+function VoteFormCandidateList({isElectionsNow, isCitizenRight, candidateList}) {
 
     const voteOptions = useMemo(() => {
         console.log(candidateList)
@@ -16,6 +16,7 @@ function VoteFormCandidateList({isElectionsNow, candidateList}) {
                         votes: candidate.votes
                     }
             })
+            .sort((a, b) => b.votes - a.votes)
         else
             return null
     }, [candidateList.previousCndidates, candidateList.currentCandidates])
@@ -23,10 +24,18 @@ function VoteFormCandidateList({isElectionsNow, candidateList}) {
     return (
         <div className={parentStyle.showMoreInfo}>
             <div className={style.voteForm}>
+                <h6>
+                    { isElectionsNow
+                        ? "Vote for next president:"
+                        : "Results of last elections:"
+                    }
+                </h6>
+
                 { isElectionsNow ?
                     <VoteForm
                         votedId={candidateList.votedId}
                         options={voteOptions}
+                        isAllowToVote={isCitizenRight}
                         onVoteCallback={() => console.log("voted")} //todo finish
                     />
                     :
@@ -40,7 +49,12 @@ function VoteFormCandidateList({isElectionsNow, candidateList}) {
             </div>
 
             <div className={style.candidateList}>
-                bu
+                <h6>
+                    { isElectionsNow
+                        ? "List of candidates of current elections:"
+                        : "List of candidates for next elections:"
+                    }
+                </h6>
             </div>
         </div>
     );

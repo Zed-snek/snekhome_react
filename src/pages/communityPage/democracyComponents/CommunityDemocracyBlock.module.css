@@ -20,7 +20,7 @@
     overflow-y: auto;
 }
 
-.currentPresidentProgram > h6, .statsInfo > h6, .candidateProfile > h6 {
+h6 {
     text-align: center;
     color: #949494;
 }

@@ -2,8 +2,9 @@ import style from './VoteForm.module.css';
 import {useState} from "react";
 import {useClasses} from "../../../hooks/useClasses";
 import MyButton from "../buttons/MyButton";
+import MyMessage from "../message/MyMessage";
 
-function VoteForm({className, options, onVoteCallback, votedId, isResult, totalVotes}) {
+function VoteForm({className, options, onVoteCallback, votedId, isResult, totalVotes, isAllowToVote}) {
 
     const classes = useClasses(style.main, className)
 
@@ -21,13 +22,11 @@ function VoteForm({className, options, onVoteCallback, votedId, isResult, totalV
                         (() => {
                             const percentage = ((element.votes / totalVotes) * 100).toFixed(1)
                             return (
-                                <div
-                                    className={style.relative}
-                                >
+                                <div className={style.relative}>
                                     <div className={style.percentageLineDiv} style={{width: percentage + "%"}} />
 
                                     <div className={style.voted + " " + (isVotedOption ? style.votedOption : "")}>
-                                        <div>
+                                        <div className={style.title}>
                                             {element.title}
                                         </div>
                                         <div>
@@ -37,8 +36,7 @@ function VoteForm({className, options, onVoteCallback, votedId, isResult, totalV
                                 </div>
                         )})()
                         :
-                        <div
-                            className={
+                        <div className={
                                 (isVoted ? style.voted : style.notVoted) + " " +
                                 (isVotedOption || element.id === chosenValue ? style.votedOption : "") + " " +
                                 (isVotedOption === votedId ? style.votedOption : "")
@@ -59,10 +57,18 @@ function VoteForm({className, options, onVoteCallback, votedId, isResult, totalV
                 </div>
             })}
 
+            <MyMessage>
+                { !options || options.length === 0 ? "No options to vote" : ""}
+            </MyMessage>
+
             { isVoted || isResult
                 ? <></>
                 : <div>
-                   <MyButton onClick={() => onVoteCallback(chosenValue)} className={style.voteButton}>
+                   <MyButton
+                       onClick={() => onVoteCallback(chosenValue)}
+                       className={style.voteButton}
+                       disabled={isAllowToVote === false}
+                   >
                        Vote
                    </MyButton>
                 </div>

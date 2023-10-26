@@ -5,13 +5,12 @@ import {useFetching} from "../../../hooks/useFetching";
 import CommunityService from "../../../API/CommunityService";
 import {useEffect, useState} from "react";
 import {useMemoSearch} from "../../../hooks/useMemoSearch";
-import ListItemBlock from "../../../components/UI/blocks/ListItemBlock";
-import {getUserImage} from "../../../functions/linkFunctions";
-import CommunityRoleFlair from "../../../components/community/CommunityRoleFlair";
-import MyMessage from "../../../components/UI/message/MyMessage";
 import MembersItemListMap from "../../membersListPage/MembersItemListMap";
+import {useDocumentTitle} from "usehooks-ts";
 
 function BannedUsersList({setError, setIsLoader, groupname}) {
+
+    useDocumentTitle("Banned users")
 
     const [data, setData] = useState([])
 

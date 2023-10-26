@@ -56,7 +56,7 @@ function CurrentUserDemocracyInfo({data, setData, citizenRating, citizenDays, is
 
     return (
         <div {...props}>
-            <h6>
+            <h6 className={parentStyle.h6Title}>
                 Your candidate profile:
             </h6>
 

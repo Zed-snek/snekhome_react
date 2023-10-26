@@ -61,8 +61,10 @@ function CommunityDemocracyBlock({citizenRating, citizenDays, setPresidencyStats
                 <div>
                     <br/>
                     <BorderBottomDiv />
+                    <br/>
                     <VoteFormCandidateList
                         isElectionsNow={democracyData.electionsNow}
+                        isCitizenRight={democracyData.citizenRight}
                         candidateList={candidateListData}
                     />
                 </div>
