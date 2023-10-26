@@ -2,7 +2,7 @@ import {useState, useContext} from 'react';
 import style from './Commentary.module.css';
 import NewCommentForm from "../../../components/post/commentary/NewCommentForm";
 import {getUserImage} from "../../../functions/linkFunctions";
-import MyBoxedTextLink from "../../../components/UI/links/MyBoxedTextLink";
+import BoxedTextLink from "../../../components/UI/links/BoxedTextLink";
 import CommentaryRating from "../rating/CommentaryRating";
 import {AuthContext, UserContext} from "../../../components/context";
 import MoreOptionsButton from "../../../components/UI/navigation/MoreOptionsButton";
@@ -69,9 +69,9 @@ function Commentary({
             <div className={style.commentDiv + ' ' + (depthLevel > 0 ? style.commentInside : '')}>
                 <div className={style.userInfoDiv}>
                     <img src={getUserImage(comment.image)} className="smallestUserImage"  alt=""/>
-                    <MyBoxedTextLink to={"/u/" + comment.nickname} className={style.nickname}>
+                    <BoxedTextLink to={"/u/" + comment.nickname} className={style.nickname}>
                         {comment.nickname}
-                    </MyBoxedTextLink>
+                    </BoxedTextLink>
                     <div className={style.moreOptionsDiv}>
                         {moreOptionsButton()}
                     </div>

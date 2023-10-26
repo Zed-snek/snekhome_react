@@ -1,6 +1,5 @@
-import React from 'react';
 import style from "./ImageNicknameListItem.module.css";
-import MyBoxedTextLink from "../UI/links/MyBoxedTextLink";
+import BoxedTextLink from "../UI/links/BoxedTextLink";
 
 function ImageNicknameListItem({image, nickname, rightContent}) {
     return (
@@ -12,14 +11,13 @@ function ImageNicknameListItem({image, nickname, rightContent}) {
                     src={image}
                 />
                 <div>
-                    <MyBoxedTextLink to={"/u/" + nickname} className={style.link}>
+                    <BoxedTextLink to={"/u/" + nickname} className={style.link}>
                         @{nickname}
-                    </MyBoxedTextLink>
+                    </BoxedTextLink>
                 </div>
             </div>
 
             {rightContent}
-
         </div>
     );
 }

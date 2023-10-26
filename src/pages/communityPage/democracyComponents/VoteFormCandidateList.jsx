@@ -2,24 +2,31 @@ import style from './VoteFormCandidateList.module.css';
 import parentStyle from './CommunityDemocracyBlock.module.css';
 import VoteForm from "../../../components/UI/inputs/VoteForm";
 import {useMemo} from "react";
+import CandidateItem from "./CandidateItem";
 
 function VoteFormCandidateList({isElectionsNow, isCitizenRight, candidateList}) {
 
     const voteOptions = useMemo(() => {
         console.log(candidateList)
-        const options = isElectionsNow ? candidateList.currentCandidates : candidateList.previousCandidates
-        if (options?.length > 0)
-            return options.map((candidate, index) => {
-                    return {
-                        id: index,
-                        title: "@" + candidate.nickname,
-                        votes: candidate.votes
-                    }
+        let options = isElectionsNow ? candidateList.currentCandidates : candidateList.previousCandidates
+        if (options?.length > 0) {
+            options = options.map(({nickname, votes}, index) => {
+                return {
+                    id: index,
+                    title: "@" + nickname,
+                    votes: votes
+                }
             })
-            .sort((a, b) => b.votes - a.votes)
-        else
+            if (!isElectionsNow)
+                options = options.sort((a, b) => b.votes - a.votes)
+
+            return options
+        }
+        else {
             return null
-    }, [candidateList.previousCndidates, candidateList.currentCandidates])
+        }
+    }, [candidateList.previousCandidates, candidateList.currentCandidates])
+
 
     return (
         <div className={parentStyle.showMoreInfo}>
@@ -48,13 +55,24 @@ function VoteFormCandidateList({isElectionsNow, isCitizenRight, candidateList}) 
                 }
             </div>
 
-            <div className={style.candidateList}>
+            <div className={style.candidateListDiv}>
                 <h6>
                     { isElectionsNow
                         ? "List of candidates of current elections:"
                         : "List of candidates for next elections:"
                     }
                 </h6>
+
+                <div className={style.candidateList}>
+                    { candidateList.currentCandidates.map(({name, surname, nickname, image, program}, index) =>
+                        <CandidateItem
+                            nickname={nickname}
+                            title={name + " " + surname}
+                            image={image}
+                            program={program}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     );

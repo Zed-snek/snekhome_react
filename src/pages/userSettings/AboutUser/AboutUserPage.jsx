@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import style from './AboutUser.module.css';
 import InfoDiv from "../../../components/UI/blocks/InfoDiv";
 import AboutUserElement from "./AboutUserElement";
@@ -7,6 +7,7 @@ import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../API/UserService";
 import MessageModal from "../../../components/UI/modal/MessageModal";
+import {useGlobalError, useGlobalLoading} from "../../../hooks/useLoadingAndError";
 
 
 function AboutUserPage({tags, fetchUser, setError, setLoader, setUser}) {
@@ -41,6 +42,9 @@ function AboutUserPage({tags, fetchUser, setError, setLoader, setUser}) {
         })
         refresh()
     })
+    useGlobalError(newError, setError)
+    useGlobalLoading(isNewLoading, setLoader)
+
 
     const [fetchEdit, isEditLoading, editError] = useFetching(async () => {
         await UserService.updateTag({
@@ -49,19 +53,22 @@ function AboutUserPage({tags, fetchUser, setError, setLoader, setUser}) {
             text: data.text
         })
         refresh()
-
     })
+    useGlobalError(editError, setError)
+    useGlobalLoading(isEditLoading, setLoader)
+
 
     useEffect(() => {
         if (data.text !== '' && data.title !== '') {
             if (editId === 0)
                 fetchNew()
-
             else
                 fetchEdit()
         }
     }, [data])
 
+
+    const [isDeleteModal, setDeleteModal] = useState(false)
     const [delId, setDelId] = useState(0)
     useEffect(() => {
         if (delId !== 0)
@@ -75,28 +82,13 @@ function AboutUserPage({tags, fetchUser, setError, setLoader, setUser}) {
 
         setDeleteModal(false)
     })
-    const [isDeleteModal, setDeleteModal] = useState(false)
+    useGlobalError(delError, setError)
+    useGlobalLoading(isDelLoading, setLoader)
+
     function deleteTag() {
         fetchDel()
     }
 
-    useEffect(() => {
-        if (newError)
-            setError(newError)
-        else if (delError)
-            setError(delError)
-        else if (editError)
-            setError(editError)
-    }, [newError, delError, editError])
-
-
-    useEffect(() => {
-        if (isNewLoading || isDelLoading || isEditLoading)
-            setLoader(true)
-        else
-            setLoader(false)
-
-    }, [isNewLoading, isDelLoading, isEditLoading])
 
 
     return (

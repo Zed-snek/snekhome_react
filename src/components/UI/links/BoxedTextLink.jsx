@@ -1,9 +1,9 @@
 import React from 'react';
-import style from "./MyBoxedTextLink.module.css";
+import style from "./BoxedTextLink.module.css";
 import {Link} from "react-router-dom";
 import {useClasses} from "../../../hooks/useClasses";
 
-function MyBoxedTextLink({to, className, children}) {
+function BoxedTextLink({to, className, children}) {
 
     const classes = useClasses(style.main, className)
 
@@ -17,4 +17,4 @@ function MyBoxedTextLink({to, className, children}) {
     );
 }
 
-export default MyBoxedTextLink;
+export default BoxedTextLink;

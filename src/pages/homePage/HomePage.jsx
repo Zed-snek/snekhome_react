@@ -2,7 +2,7 @@ import style from "./HomePage.module.css";
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import HomePageCards from "./HomePageCards";
 import {useDocumentTitle} from "usehooks-ts";
-import MyBoxedTextLink from "../../components/UI/links/MyBoxedTextLink";
+import BoxedTextLink from "../../components/UI/links/BoxedTextLink";
 import PostList from "../../components/post/PostList";
 
 function HomePage() {
@@ -14,9 +14,9 @@ function HomePage() {
 
                 <div className={style.content}>
                     <div className={style.createCommunityLinkDiv}>
-                        <MyBoxedTextLink to="/new_community" className={style.createCommunityLink}>
+                        <BoxedTextLink to="/new_community" className={style.createCommunityLink}>
                             Create Community
-                        </MyBoxedTextLink>
+                        </BoxedTextLink>
                     </div>
 
                     <PostList loadType="HOME" />

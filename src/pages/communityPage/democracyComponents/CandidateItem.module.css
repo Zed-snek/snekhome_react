@@ -1,0 +1,18 @@
+.main {
+    justify-content: space-between;
+}
+
+.flex, .main, .program {
+    display: flex;
+    gap: 10px;
+}
+
+.title {
+    margin-top: 2px;
+    font-size: 11px;
+    font-family: PressStart, "sans-serif";
+}
+
+.program {
+    gap: 5px;
+}

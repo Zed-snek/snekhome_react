@@ -1,7 +1,7 @@
 import style from "./Search.module.css";
 import {getCommunityImage, getUserImage} from "../../../functions/linkFunctions";
 import DarkTransparentBackground from "../../UI/blocks/DarkTransparentBackground";
-import MyBoxedTextLink from "../../UI/links/MyBoxedTextLink";
+import BoxedTextLink from "../../UI/links/BoxedTextLink";
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import SearchResponseItemListObserver from "./SearchResponseItemListObserver";
@@ -54,12 +54,12 @@ function SearchResponseItemList({data, setData, searchValue, type, setError, set
                            <div className={style.itemTitle}>
                                {element.title}
                            </div>
-                           <MyBoxedTextLink
+                           <BoxedTextLink
                                to={linkSuffix + element.idName}
                                className={style.itemLink}
                            >
                                @{element.idName}
-                           </MyBoxedTextLink>
+                           </BoxedTextLink>
                        </div>
                    </DarkTransparentBackground>
                )}

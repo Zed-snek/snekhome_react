@@ -10,12 +10,14 @@ function CommunityInfo({image, groupname, title}) {
             onClick={() => {navigate('/c/' + groupname)}}
         >
             <div>
-                <img src={image} className={"userImage "} alt=""/>
+                <img src={image} className={"userImage"} alt=""/>
             </div>
+
             <div>
                 <div className={style.groupTitle}>
                     {title}
                 </div>
+
                 <div className={style.groupname}>
                     @{groupname}
                 </div>

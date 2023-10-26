@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import style from "./JoinRequestsPage.module.css";
 import {useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
@@ -52,7 +52,11 @@ function JoinRequestsPage() {
             <div className={style.main}>
                 <div className={style.content}>
                     <h3>You can accept these join requests</h3>
-                    <MyMessage>{error}</MyMessage>
+
+                    <MyMessage>
+                        {error}
+                    </MyMessage>
+
                     <OutlineDiv className={style.outlineDiv}>
                         { data.length === 0
                             ? <MyMessage> No requests left </MyMessage>
@@ -66,8 +70,9 @@ function JoinRequestsPage() {
                                             <MyButton onClick={() => manageRequest(element.nickname, "ACCEPT")}>
                                                 Accept
                                             </MyButton>
-                                            <MyButton color="red"
-                                                      onClick={() => manageRequest(element.nickname, "CANCEL")}
+                                            <MyButton
+                                                color="red"
+                                                onClick={() => manageRequest(element.nickname, "CANCEL")}
                                             >
                                                 Cancel
                                             </MyButton>

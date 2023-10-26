@@ -10,7 +10,7 @@ import UserInfo from "./postCreatorInfo/UserInfo";
 import {getUserImage} from "../../functions/linkFunctions";
 import CommunityInfo from "./postCreatorInfo/CommunityInfo";
 import {formatDate} from "../../functions/timeDateFunctions";
-import MyBoxedTextLink from "../UI/links/MyBoxedTextLink";
+import BoxedTextLink from "../UI/links/BoxedTextLink";
 import NewCommentForm from "./commentary/NewCommentForm";
 import {AuthContext} from "../context";
 import GreyLink from "../UI/links/GreyLink";
@@ -147,12 +147,12 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                                             Anonymous author
                                         </div>
                                         :
-                                        <MyBoxedTextLink
+                                        <BoxedTextLink
                                             className={style.homeNickname}
                                             to={"/u/" + userNickname}
                                         >
                                             {userNickname}
-                                        </MyBoxedTextLink>
+                                        </BoxedTextLink>
                                     }
 
                                     <div className={style.homeDate}>

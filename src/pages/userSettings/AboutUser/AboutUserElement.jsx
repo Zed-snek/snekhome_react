@@ -21,9 +21,8 @@ function AboutUserElement(props) {
 
 
     useEffect(() => {
-        if (props.isForm) {
+        if (props.isForm)
             setIsEdit(true)
-        }
     }, [props.isForm])
 
     function manageTag(e) {
@@ -33,20 +32,17 @@ function AboutUserElement(props) {
     }
 
     function hideEdit() {
-        if (props.isForm) {
+        if (props.isForm)
             props.setIsForm(false)
-        }
-        else {
+        else
             setIsEdit(false)
-        }
     }
 
 
     return (
         <div className={style.inputComponentMain}>
             { isEdit
-                ?
-                <form onSubmit={manageTag} className="flexDiv flex-wrap justify-content-center">
+                ? <form onSubmit={manageTag} className={style.inputForm}>
                     <div className={style.inputDiv}>
                         <div>
                             <MyInput
@@ -56,16 +52,17 @@ function AboutUserElement(props) {
                                 maxLength={50}
                                 required={true}
                             />
+
+                            <div>
+                                The title is required and must not exceed 50 characters
+                            </div>
                         </div>
 
-                        <div>
-                            The title is required and must not exceed 50 characters
-                        </div>
-
-                        <div className={style.buttons + " flexDiv flex-wrap"}>
+                        <div className={style.buttons}>
                             <MyTransparentButton>
                                 Accept
                             </MyTransparentButton>
+
                             <MyTransparentButton type="button" onClick={hideEdit}>
                                 Cancel
                             </MyTransparentButton>
@@ -74,18 +71,18 @@ function AboutUserElement(props) {
 
                     <div>
                         <MyTextArea
+                            className={style.textArea}
                             placeholder="write here some text..."
-                            rows="4" cols="45"
+                            cols="45"
                             required
                             onChange={event => setText(event.target.value)}
                             value={text}
                             maxLength={1024}
-                        >
-                        </MyTextArea>
+                        />
                     </div>
                 </form>
 
-                : <div className="flexDiv flex-wrap">
+                : <div className={style.element}>
                     <div>
                         <MyTransparentButton
                             className={style.edit}
@@ -96,13 +93,19 @@ function AboutUserElement(props) {
                         </MyTransparentButton>
                     </div>
 
-                    <InfoTag
-                        title={props.tagTitle}
-                        text={props.tagText}
-                    />
+                    <div className={style.infoTag}>
+                        <InfoTag
+                            title={props.tagTitle}
+                            text={props.tagText}
+                        />
+                    </div>
 
                     <div>
-                        <MyTransparentButton className={style.cancel} onClick={() => props.setDelId(props.tagId)} tooltip="Delete">
+                        <MyTransparentButton
+                            className={style.cancel}
+                            onClick={() => props.setDelId(props.tagId)}
+                            tooltip="Delete"
+                        >
                             ✗
                         </MyTransparentButton>
                     </div>

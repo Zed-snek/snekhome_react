@@ -11,7 +11,9 @@ function permitted(status) {
 
 export function getLogContent(log) {
     const actor = <>
-        <span className={style.logDate}> {formatDate(log.date)}: </span>
+        <span className={style.logDate}>
+            {formatDate(log.date)}:
+        </span>
         {linkToUser(log.actionNickname)}
     </>
 

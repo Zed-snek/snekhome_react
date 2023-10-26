@@ -1,12 +1,14 @@
-.main {
-
+.voteForm {
+    flex: 1;
 }
 
-.voteForm {
-    flex: 4;
+.candidateListDiv {
+    flex: 1;
+    min-width: 300px;
 }
 
 .candidateList {
-    flex: 5;
-    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

@@ -10,7 +10,7 @@ import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 import {formatDate, formatLocalDate} from "../../functions/timeDateFunctions";
 import {getCommunityImage, getUserImage} from "../../functions/linkFunctions";
 import CommentsListComponent from "./commentary/CommentsListComponent";
-import MyBoxedTextLink from "../../components/UI/links/MyBoxedTextLink";
+import BoxedTextLink from "../../components/UI/links/BoxedTextLink";
 import MoreOptionsButton from "../../components/UI/navigation/MoreOptionsButton";
 import {UserContext} from "../../components/context";
 import MessageModal from "../../components/UI/modal/MessageModal";
@@ -129,9 +129,9 @@ function PostPage() {
                         <Link to={"/u/" + data.userNickname}>
                             <img src={getUserImage(data.userImage)} alt=""/>
                         </Link>
-                        <MyBoxedTextLink to={"/u/" + data.userNickname}>
+                        <BoxedTextLink to={"/u/" + data.userNickname}>
                             @{data.userNickname}
-                        </MyBoxedTextLink>
+                        </BoxedTextLink>
                     </OutlineFilledDiv>
                 }
 
@@ -144,9 +144,9 @@ function PostPage() {
                     <Link to={"/c/" + data.groupname}>
                         <img src={getCommunityImage(data.groupImage)} alt=""/>
                     </Link>
-                    <MyBoxedTextLink to={"/c/" + data.groupname}>
+                    <BoxedTextLink to={"/c/" + data.groupname}>
                         @{data.groupname}
-                    </MyBoxedTextLink>
+                    </BoxedTextLink>
                     <div className={style.communityDate}>
                         created {formatLocalDate(data.communityDate)}
                     </div>

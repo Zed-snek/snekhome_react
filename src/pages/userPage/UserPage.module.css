@@ -66,7 +66,6 @@
     padding-bottom: 7px;
 }
 
-
 .test {
     color: #2D5DB2;
 }
@@ -79,8 +78,8 @@
     display: flex;
     flex-wrap: wrap;
     padding-top: 12px;
-
 }
+
 .communitiesFriendsDiv a {
     text-decoration: none;
 }
@@ -101,9 +100,11 @@
     white-space: nowrap;
     height: 15px;
 }
+
 .friendsBtn div{
     line-height: 0;
 }
+
 .friendsBtn div:hover {
     cursor: pointer;
     color: rgba(227, 227, 227, 0.6);
@@ -116,6 +117,7 @@
 .tagsDiv {
     padding: 10px;
 }
+
 .tagsMap {
     overflow-y: scroll;
     height: 217px;
@@ -133,9 +135,8 @@
     margin-bottom: 10px;
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
-    flex: 1;
 }
+
 .tagTitle {
     color: #949494;
     font-weight: bold;
@@ -143,6 +144,7 @@
     width: 180px;
     margin-right: 20px;
 }
+
 .tagText {
     flex: 1;
     font-size: 16px;

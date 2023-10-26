@@ -17,10 +17,12 @@ function UserInfo({image, nickname, flair, isAnon}) {
             <div>
                 <img src={isAnon ? anonImage : image} className={"userImage"} alt=""/>
             </div>
+
             <div>
                 <div className={style.nickname}>
                     {nickname}
                 </div>
+
                 <div>
                     { flair ?
                         <div className={style.flairDiv}>
