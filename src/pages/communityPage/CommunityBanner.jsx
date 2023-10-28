@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import style from "./CommunityPage.module.css";
-import {getCommunityImageByArray, getUserImage} from "../../functions/linkFunctions";
+import {getCommunityImageByArray, getUserImage} from "../../utils/linkFunctions";
 import ImageSelectorModal from "../../components/images/ImageSelectorModal";
 import UserInfo from "../../components/post/postCreatorInfo/UserInfo";
 import {useNavigate} from "react-router-dom";
@@ -10,7 +10,7 @@ import MyPulseLoader from "../../components/UI/loaders/MyPulseLoader";
 import {useFetching} from "../../hooks/useFetching";
 import CommunityService from "../../API/CommunityService";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
-import {formatDateWithMonthName} from "../../functions/timeDateFunctions";
+import {formatDateWithMonthName} from "../../utils/timeDateFunctions";
 import GreyLink from "../../components/UI/links/GreyLink";
 import CommunityLogsModal from "./communityLogs/CommunityLogsModal";
 import SettingsSvg from "../../components/svg/user/SettingsSvg";

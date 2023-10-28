@@ -7,7 +7,7 @@ import CommunityService from "../../../API/CommunityService";
 import TextBlockWithInput from "../../../components/UI/inputs/TextBlockWithInput";
 import CurrentUserDemocracyInfo from "./CurrentUserDemocracyInfo";
 import MessageModal from "../../../components/UI/modal/MessageModal";
-import {formatDateWithMonthName} from "../../../functions/timeDateFunctions";
+import {formatDateWithMonthName} from "../../../utils/timeDateFunctions";
 import {useGlobalError} from "../../../hooks/useLoadingAndError";
 import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 import VoteFormCandidateList from "./VoteFormCandidateList";
@@ -66,6 +66,9 @@ function CommunityDemocracyBlock({citizenRating, citizenDays, setPresidencyStats
                         isElectionsNow={democracyData.electionsNow}
                         isCitizenRight={democracyData.citizenRight}
                         candidateList={candidateListData}
+                        setCandidateList={setCandidateListData}
+                        groupname={groupname}
+                        setError={setError}
                     />
                 </div>
 

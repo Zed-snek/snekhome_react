@@ -3,7 +3,7 @@ import PostForm from "./PostForm";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import {useNavigate, useParams} from "react-router-dom";
 import {useFetchPost} from "../postPage/useFetchPost";
-import {getImageApiLink} from "../../functions/linkFunctions";
+import {getImageApiLink} from "../../utils/linkFunctions";
 import {useFetching} from "../../hooks/useFetching";
 import PostService from "../../API/PostService";
 

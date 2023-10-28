@@ -9,7 +9,7 @@ import CommunityService from "../../API/CommunityService";
 import ListItemBlock from "../../components/UI/blocks/ListItemBlock";
 import {useDocumentTitle} from "usehooks-ts";
 import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
-import {getCommunityImage} from "../../functions/linkFunctions";
+import {getCommunityImage} from "../../utils/linkFunctions";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import BooleanBlock from "../../components/structureComponents/BooleanBlock";
 import MyGreyInput from "../../components/UI/inputs/MyGreyInput";

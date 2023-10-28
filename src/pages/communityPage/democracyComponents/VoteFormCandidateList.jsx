@@ -3,15 +3,18 @@ import parentStyle from './CommunityDemocracyBlock.module.css';
 import VoteForm from "../../../components/UI/inputs/VoteForm";
 import {useMemo} from "react";
 import CandidateItem from "./CandidateItem";
+import CommunityService from "../../../API/CommunityService";
+import {getErrorResponseMessage} from "../../../utils/objectFunctions";
 
-function VoteFormCandidateList({isElectionsNow, isCitizenRight, candidateList}) {
+function VoteFormCandidateList({groupname, setError, isElectionsNow, isCitizenRight, candidateList, setCandidateList}) {
 
     const voteOptions = useMemo(() => {
         let options = isElectionsNow ? candidateList.currentCandidates : candidateList.previousCandidates
         if (options?.length > 0) {
-            options = options.map(({nickname, votes}, index) => {
+            options = options.map(({id, nickname, votes}, index) => {
                 return {
-                    id: index,
+                    index: index,
+                    id: id,
                     title: "@" + nickname,
                     votes: votes
                 }
@@ -25,6 +28,14 @@ function VoteFormCandidateList({isElectionsNow, isCitizenRight, candidateList}) 
             return null
         }
     }, [])
+
+    async function vote(index) {
+        setError("")
+        const obj = candidateList.currentCandidates[index]
+        await CommunityService.makeVote(groupname, obj.nickname)
+            .then(() => setCandidateList(prev => ({...prev, votedId: obj.id})))
+            .catch(err => setError(() => getErrorResponseMessage(err)))
+    }
 
 
     return (
@@ -42,7 +53,7 @@ function VoteFormCandidateList({isElectionsNow, isCitizenRight, candidateList}) 
                         votedId={candidateList.votedId}
                         options={voteOptions}
                         isAllowToVote={isCitizenRight}
-                        onVoteCallback={() => console.log("voted")} //todo finish
+                        onVoteCallback={vote}
                     />
                     :
                     <VoteForm

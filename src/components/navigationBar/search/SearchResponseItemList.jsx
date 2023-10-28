@@ -1,5 +1,5 @@
 import style from "./Search.module.css";
-import {getCommunityImage, getUserImage} from "../../../functions/linkFunctions";
+import {getCommunityImage, getUserImage} from "../../../utils/linkFunctions";
 import DarkTransparentBackground from "../../UI/blocks/DarkTransparentBackground";
 import BoxedTextLink from "../../UI/links/BoxedTextLink";
 import {Link} from "react-router-dom";

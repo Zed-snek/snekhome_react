@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import style from "./PostImageSelector.module.css";
 import btnStyle from "../images/ImageSelectorModal.module.css";
 import {useImages} from "../../hooks/useImages";
-import {getImage} from "../../functions/linkFunctions";
+import {getImage} from "../../utils/linkFunctions";
 import MyTransparentButton from "../UI/buttons/MyTransparentButton";
 import ArrowLeft from "../svg/ArrowLeft";
 import ArrowRight from "../svg/ArrowRight";

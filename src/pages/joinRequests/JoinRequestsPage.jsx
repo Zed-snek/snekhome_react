@@ -6,7 +6,7 @@ import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import CommunityService from "../../API/CommunityService";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 import ImageNicknameListItem from "../../components/community/ImageNicknameListItem";
-import {getUserImage} from "../../functions/linkFunctions";
+import {getUserImage} from "../../utils/linkFunctions";
 import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import MyButton from "../../components/UI/buttons/MyButton";
 import MyMessage from "../../components/UI/message/MyMessage";

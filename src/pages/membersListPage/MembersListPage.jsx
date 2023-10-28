@@ -14,7 +14,7 @@ import MoreOptionsButton from "../../components/UI/navigation/MoreOptionsButton"
 import CommunityRoleListToSet from "../communitySettings/Users/CommunityRoleListToSet";
 import {useMemoSearch} from "../../hooks/useMemoSearch";
 import MembersItemListMap from "./MembersItemListMap";
-import {getErrorResponseMessage} from "../../functions/objectFunctions";
+import {getErrorResponseMessage} from "../../utils/objectFunctions";
 
 function MembersListPage({permissions, communityType, isCommunityClosed, setError, setIsLoader}) {
 

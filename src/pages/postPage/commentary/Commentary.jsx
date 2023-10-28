@@ -1,14 +1,14 @@
 import {useState, useContext} from 'react';
 import style from './Commentary.module.css';
 import NewCommentForm from "../../../components/post/commentary/NewCommentForm";
-import {getUserImage} from "../../../functions/linkFunctions";
+import {getUserImage} from "../../../utils/linkFunctions";
 import BoxedTextLink from "../../../components/UI/links/BoxedTextLink";
 import CommentaryRating from "../rating/CommentaryRating";
 import {AuthContext, UserContext} from "../../../components/context";
 import MoreOptionsButton from "../../../components/UI/navigation/MoreOptionsButton";
 import MessageModal from "../../../components/UI/modal/MessageModal";
 import ReplyButton from "../../../components/post/commentary/ReplyButton";
-import {formatDate} from "../../../functions/timeDateFunctions";
+import {formatDate} from "../../../utils/timeDateFunctions";
 
 function Commentary({
     postId, comment, depthLevel, data, setData, isPermitToDelete, addComment, deleteComment, editComment

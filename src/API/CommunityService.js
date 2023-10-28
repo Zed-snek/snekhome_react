@@ -137,4 +137,8 @@ export default class CommunityService {
         return await getRequest("/democracy/candidates/" + groupname)
     }
 
+    static async makeVote(groupname, candidateNickname) {
+        return await postParamsRequestWithAuth(`/democracy/vote/${groupname}?nickname=${candidateNickname}`)
+    }
+
 }

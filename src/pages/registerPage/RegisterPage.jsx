@@ -8,7 +8,7 @@ import AuthService from "../../API/AuthService";
 import MyMessage from "../../components/UI/message/MyMessage";
 import MessageModal from "../../components/UI/modal/MessageModal";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
-import {isNotBannedSymbols} from "../../functions/stringFunctions";
+import {isNotBannedSymbols} from "../../utils/stringFunctions";
 import {useDocumentTitle} from "usehooks-ts";
 import BooleanBlock from "../../components/structureComponents/BooleanBlock";
 

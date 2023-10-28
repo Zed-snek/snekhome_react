@@ -5,7 +5,7 @@ import OutlineDiv from "../../components/UI/blocks/OutlineDiv";
 import InfoDiv from "../../components/UI/blocks/InfoDiv";
 import OverImageDiv from "../../components/UI/blocks/OverImageDiv";
 import UserService from "../../API/UserService";
-import {getUserImageByArray} from "../../functions/linkFunctions";
+import {getUserImageByArray} from "../../utils/linkFunctions";
 import InfoTag from "./InfoTag";
 import {useFetching} from "../../hooks/useFetching";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";

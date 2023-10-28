@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {getErrorResponseMessage} from "../functions/objectFunctions";
+import {getErrorResponseMessage} from "../utils/objectFunctions";
 
 export function useFetching(callback) {
 

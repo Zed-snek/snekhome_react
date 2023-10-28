@@ -13,7 +13,7 @@ import InfoDiv from "../../components/UI/blocks/InfoDiv";
 import CommunityRoleManager from "./RoleManager/CommunityRoleManager";
 import CommunityDemocracySettingsPage from "./Democracy/CommunityDemocracySettingsPage";
 import CommunityRulesSettings from "./Rules/CommunityRulesSettings";
-import {getCommunityImageByArray} from "../../functions/linkFunctions";
+import {getCommunityImageByArray} from "../../utils/linkFunctions";
 import MembersListPage from "../membersListPage/MembersListPage";
 import {useFetchCommunity} from "../../hooks/useFetchCommunity";
 import BannedUsersList from "./BannedUsers/BannedUsersList";

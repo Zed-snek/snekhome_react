@@ -1,5 +1,5 @@
 import style from "./CandidateItem.module.css";
-import {getUserImage} from "../../../functions/linkFunctions";
+import {getUserImage} from "../../../utils/linkFunctions";
 import GreyLink from "../../../components/UI/links/GreyLink";
 import DocumentPaperSvg from "../../../components/svg/DocumentPaperSvg";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";

@@ -5,7 +5,7 @@ import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import BooleanBlock from "../../components/structureComponents/BooleanBlock";
 import CommunityService from "../../API/CommunityService";
 import style from "./HomePage.module.css";
-import {getCommunityImage} from "../../functions/linkFunctions";
+import {getCommunityImage} from "../../utils/linkFunctions";
 import HomePageCardItem from "./HomePageCardItem";
 import {UserContext} from "../../components/context";
 

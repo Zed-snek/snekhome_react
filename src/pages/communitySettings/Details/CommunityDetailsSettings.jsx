@@ -3,7 +3,7 @@ import style from "./CommunityDetailsSettings.module.css";
 import EditInput from "../../userSettings/Account/EditInput";
 import {useFetching} from "../../../hooks/useFetching";
 import CommunityService from "../../../API/CommunityService";
-import {isObjectNotEmpty} from "../../../functions/objectFunctions";
+import {isObjectNotEmpty} from "../../../utils/objectFunctions";
 import MyFileInput from "../../../components/UI/inputs/MyFileInput";
 import FadingMessage from "../../../components/UI/message/FadingMessage";
 import HomePageCardItem from "../../homePage/HomePageCardItem";

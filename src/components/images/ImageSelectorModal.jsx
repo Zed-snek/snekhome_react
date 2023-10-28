@@ -3,7 +3,7 @@ import {useImages} from "../../hooks/useImages";
 import style from "./ImageSelectorModal.module.css";
 import TransparentModal from "../UI/modal/TransparentModal";
 import MyTransparentButton from "../UI/buttons/MyTransparentButton";
-import {getCommunityImage, getUserImage} from "../../functions/linkFunctions";
+import {getCommunityImage, getUserImage} from "../../utils/linkFunctions";
 import ArrowLeft from "../svg/ArrowLeft";
 import ArrowRight from "../svg/ArrowRight";
 import MyBlurredButton from "../UI/buttons/MyBlurredButton";

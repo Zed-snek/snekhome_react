@@ -1,5 +1,5 @@
 import ListItemBlock from "../../components/UI/blocks/ListItemBlock";
-import {getUserImage} from "../../functions/linkFunctions";
+import {getUserImage} from "../../utils/linkFunctions";
 import CommunityRoleFlair from "../../components/community/CommunityRoleFlair";
 import MyMessage from "../../components/UI/message/MyMessage";
 

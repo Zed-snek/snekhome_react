@@ -6,7 +6,7 @@ import ListItemBlock from "../../components/UI/blocks/ListItemBlock";
 import {useFetching} from "../../hooks/useFetching";
 import MyMessage from "../../components/UI/message/MyMessage";
 import UserService from "../../API/UserService";
-import {getUserImage} from "../../functions/linkFunctions";
+import {getUserImage} from "../../utils/linkFunctions";
 import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
 import {useDocumentTitle} from "usehooks-ts";
 import MyGreyInput from "../../components/UI/inputs/MyGreyInput";

@@ -8,7 +8,7 @@ import CommunityService from "../../../API/CommunityService";
 import CheckMark from "../../../components/UI/symbols/CheckMark";
 import XMark from "../../../components/UI/symbols/XMark";
 import {useGlobalError} from "../../../hooks/useLoadingAndError";
-import {getErrorResponseMessage} from "../../../functions/objectFunctions";
+import {getErrorResponseMessage} from "../../../utils/objectFunctions";
 
 function CurrentUserDemocracyInfo({data, setData, citizenRating, citizenDays, isMember, groupname, setError, ...props}) {
 

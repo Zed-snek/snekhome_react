@@ -38,12 +38,12 @@ function VoteForm({className, options, onVoteCallback, votedId, isResult, totalV
                         :
                         <div className={
                                 (isVoted ? style.voted : style.notVoted) + " " +
-                                (isVotedOption || element.id === chosenValue ? style.votedOption : "") + " " +
+                                (isVotedOption || element.index === chosenValue ? style.votedOption : "") + " " +
                                 (isVotedOption === votedId ? style.votedOption : "")
                             }
                             onClick={() => {
                                 if (!isVoted)
-                                    setChosenValue(element.id)
+                                    setChosenValue(element.index)
                             }}
                         >
                             <div>

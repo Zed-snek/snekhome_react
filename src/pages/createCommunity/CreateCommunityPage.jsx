@@ -7,7 +7,7 @@ import ChooseCommunityPage from "./chooseCommunity/ChooseCommunityPage";
 import CreateCommunityNextBtn from "./CreateCommunityNextBtn";
 import MessageModal from "../../components/UI/modal/MessageModal";
 import CreateCommunitySettingsPage from "./communitySettings/CreateCommunitySettingsPage";
-import {isNotBannedSymbols} from "../../functions/stringFunctions";
+import {isNotBannedSymbols} from "../../utils/stringFunctions";
 import {useFetching} from "../../hooks/useFetching";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import CommunityCitizenRolePage from "./communityCitizenRole/CommunityCitizenRolePage";

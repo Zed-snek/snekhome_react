@@ -5,15 +5,15 @@ import {UserContext} from "../../../components/context";
 import EditInput from "./EditInput";
 import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../API/UserService";
-import {isNotBannedSymbols} from "../../../functions/stringFunctions"
+import {isNotBannedSymbols} from "../../../utils/stringFunctions"
 import MyFileInput from "../../../components/UI/inputs/MyFileInput";
 import OverImageDiv from "../../../components/UI/blocks/OverImageDiv";
 import FadingMessage from "../../../components/UI/message/FadingMessage";
-import {getUserImage} from "../../../functions/linkFunctions";
+import {getUserImage} from "../../../utils/linkFunctions";
 import MyButton from "../../../components/UI/buttons/MyButton";
 import OverContentDiv from "../../../components/UI/blocks/OverContentDiv";
 import Colors from "./Colors";
-import {isObjectNotEmpty} from "../../../functions/objectFunctions";
+import {isObjectNotEmpty} from "../../../utils/objectFunctions";
 import myButtonStyle from "../../../components/UI/buttons/MyTransparentButton.module.css";
 import EditSvg from "../../../components/svg/EditSvg";
 
