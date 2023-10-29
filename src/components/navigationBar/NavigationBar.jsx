@@ -8,7 +8,7 @@ import logo from "../../images/logo.png";
 import Login from "../login/Login";
 import SearchDiv from "./search/SearchDiv";
 import HomeSignSvg from "./svg/HomeSignSvg";
-import NotificationBoxSvg from "./svg/NotificationBoxSvg";
+import Notification from "./notification/Notification";
 
 
 function NavigationBar() {
@@ -47,10 +47,7 @@ function NavigationBar() {
                 <div className={style.accountDiv} id={style["order_nav_Account"]}>
                     { isAuth
                         ? <>
-                            <button className={style.notificationButton}>
-                                {/*<img className={style.communitiesIco + " bg-transparent"} src={notificationIco}/>*/}
-                                <NotificationBoxSvg />
-                            </button>
+                            <Notification userNickname={userNickname} />
 
                             <Nav.Link as={Link} to={'/u/' + userNickname} className={style.accountInfoDiv}>
                                 <img className={"userImage " + style.userImg} src={userImage} />
