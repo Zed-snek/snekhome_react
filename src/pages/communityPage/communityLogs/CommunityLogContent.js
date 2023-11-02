@@ -1,10 +1,6 @@
-import {Link} from "react-router-dom";
 import style from "./CommunityLogsModal.module.css";
 import {formatDate} from "../../../utils/timeDateFunctions";
-
-function linkToUser(nickname) {
-    return <Link to={"/u/" + nickname} className={style.linkToUser}>{nickname}</Link>
-}
+import {linkToUser} from "../../../utils/linkFunctions";
 
 function permitted(status) {
     return status === "true" ? "permitted" : "banned"

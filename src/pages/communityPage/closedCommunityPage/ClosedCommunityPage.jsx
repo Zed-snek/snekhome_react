@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import style from "./ClosedCommunityPage.module.css";
-import communityPage from "./CommunityPage.module.css";
-import MyButton from "../../components/UI/buttons/MyButton";
-import InfoDiv from "../../components/UI/blocks/InfoDiv";
-import {useFetching} from "../../hooks/useFetching";
-import MyMessage from "../../components/UI/message/MyMessage";
-import MyPulseLoader from "../../components/UI/loaders/MyPulseLoader";
-import CommunityService from "../../API/CommunityService";
+import communityPage from "../CommunityPage.module.css";
+import MyButton from "../../../components/UI/buttons/MyButton";
+import InfoDiv from "../../../components/UI/blocks/InfoDiv";
+import {useFetching} from "../../../hooks/useFetching";
+import MyMessage from "../../../components/UI/message/MyMessage";
+import MyPulseLoader from "../../../components/UI/loaders/MyPulseLoader";
+import CommunityService from "../../../API/CommunityService";
 
 function ClosedCommunityPage({image, groupname, name, nameColor, typeImage, isRequestSent, isBanned}) {
 

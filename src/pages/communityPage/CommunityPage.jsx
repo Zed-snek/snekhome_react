@@ -9,7 +9,7 @@ import newsImage from "../../images/communityTypes/news.png";
 import {getCommunityImage} from "../../utils/linkFunctions";
 import MessageModal from "../../components/UI/modal/MessageModal";
 import {useDocumentTitle} from "usehooks-ts";
-import ClosedCommunityPage from "./ClosedCommunityPage";
+import ClosedCommunityPage from "./closedCommunityPage/ClosedCommunityPage";
 import CommunityBanner from "./CommunityBanner";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 import MyTextArea from "../../components/UI/inputs/MyTextArea";
