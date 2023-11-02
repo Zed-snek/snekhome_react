@@ -43,6 +43,7 @@ function FriendsListPage() {
 
 
     const [searchedElements, setSearchQuery] = useMemoSearch(data, ["name", "surname", "nickname"])
+
     const sortedAndSearchedFriends = useMemo(() => {
         return searchedElements.filter(u => u.friendshipType === types[activeBtn])
     }, [activeBtn, searchedElements])
@@ -68,8 +69,13 @@ function FriendsListPage() {
                     newType = "NOT_FRIENDS"
                     break
             }
-            let index = data.findIndex(element => element.nickname === nickname)
-            setData(prev => ([...prev, prev[index].friendshipType = newType]))
+            setData(prev => {
+                return prev.map(element => {
+                    if (element.nickname === nickname)
+                        return {...element, friendshipType: newType}
+                    return element
+                })
+            })
         })
     }
 

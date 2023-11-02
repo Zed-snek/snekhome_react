@@ -36,7 +36,6 @@ function NavigationBar() {
             <Navbar.Collapse id="basic-navbar-nav" className={style.collapsedDiv}>
                 <Nav.Link as={Link} to="" className={style.communitiesDiv}  id={style["order_nav_Communities"]}>
                     <HomeSignSvg />
-                        {/*<img className={style.communitiesIco + " bg-transparent"} src={signIco} />*/}
                     Home
                 </Nav.Link>
 

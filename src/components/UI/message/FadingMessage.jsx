@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useState} from 'react';
 import style from './FadingMessage.module.css'
 import {useClasses} from "../../../hooks/useClasses";
 import {useInterval} from "usehooks-ts";
@@ -11,8 +11,9 @@ function FadingMessage({className, children, isShow, setIsShow, ...props}) {
 
 
     useInterval(() => {
-        if (transparent > 0)
+        if (transparent > 0) {
             setTransparent(transparent - 0.02)
+        }
         else {
             setIsShow(false)
             setTransparent(1)

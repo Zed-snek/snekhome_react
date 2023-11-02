@@ -210,7 +210,7 @@ function PostItem({type, postId, text, postImages, rating, ratedType, date, imag
                     <Link to={postLink} className={style.link} />
                     <div className={style.flexColumn10px}>
                         <GreyLink className={style.commentsAmount} to={"/post/" + postId}>
-                            {commentsNumber} comments...
+                            {commentsNumber} {commentsNumber === 1 ? "comment..." : "comments..."}
                         </GreyLink>
                         { isAuth ?
                             <NewCommentForm

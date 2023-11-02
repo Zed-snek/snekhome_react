@@ -123,12 +123,12 @@ function CurrentUserDemocracyInfo({data, setData, citizenRating, citizenDays, is
 
                             <div>
                                 <div>
-                                    <bold>•</bold> Days {data.currentUserDays}/{citizenDays}
+                                    <strong>•</strong> Days {data.currentUserDays}/{citizenDays}
                                     {isCheckMark(data.currentUserDays >= citizenDays)}
                                 </div>
 
                                 <div>
-                                    <bold>•</bold> Rating {data.currentUserRating}/{citizenRating}
+                                    <strong>•</strong> Rating {data.currentUserRating}/{citizenRating}
                                     {isCheckMark(data.currentUserRating >= citizenRating)}
                                 </div>
                             </div>

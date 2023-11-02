@@ -5,6 +5,7 @@ import {formatDate} from "../../../utils/timeDateFunctions";
 function linkToUser(nickname) {
     return <Link to={"/u/" + nickname} className={style.linkToUser}>{nickname}</Link>
 }
+
 function permitted(status) {
     return status === "true" ? "permitted" : "banned"
 }

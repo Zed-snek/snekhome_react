@@ -1,16 +1,35 @@
-import style from "../NavigationBar.module.css";
+import navbarStyle from "../NavigationBar.module.css";
+import style from "./Notification.module.css";
 import NotificationBoxSvg from "../svg/NotificationBoxSvg";
 import {useConnectNotification} from "./useConnectNotification";
+import {useEffect, useState} from "react";
+import FadingNotification from "./FadingNotification";
 
 
 function Notification({userNickname}) {
 
-    useConnectNotification(userNickname)
+    const lastNotification = useConnectNotification(userNickname)
+    const [isShowNotification, setIsShowNotification] = useState(false)
+
+    useEffect(() => {
+        if (lastNotification)
+            setIsShowNotification(true)
+    }, [lastNotification])
 
     return (
-        <button className={style.notificationButton}>
-            <NotificationBoxSvg />
-        </button>
+        <div className={style.notificationDiv}>
+            <button className={navbarStyle.notificationButton}>
+                <NotificationBoxSvg />
+            </button>
+
+            { isShowNotification ?
+                <FadingNotification
+                    isShow={isShowNotification}
+                    setIsShow={setIsShowNotification}
+                    notification={lastNotification}
+                />
+            : <></> }
+        </div>
     );
 }
 
