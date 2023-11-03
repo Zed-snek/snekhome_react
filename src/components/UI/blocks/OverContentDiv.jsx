@@ -9,11 +9,11 @@ function OverContentDiv({children, className, title, isShow, setIsShow, ...props
         <>
             { isShow ?
                 <div className={classes} {...props}>
-
                     <div className={style.header}>
                         <div className={style.title}>
                             {title}
                         </div>
+
                         <div className={style.cancel} onClick={() => setIsShow(false)}>
                             ✗
                         </div>
@@ -22,10 +22,8 @@ function OverContentDiv({children, className, title, isShow, setIsShow, ...props
                     <div>
                         {children}
                     </div>
-
                 </div>
-                : <></>
-            }
+            : <></> }
         </>
     );
 }

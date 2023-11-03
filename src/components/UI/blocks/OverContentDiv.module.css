@@ -1,15 +1,13 @@
 .main {
-    background-color: rgba(42, 42, 52, 0.4);
-    backdrop-filter: blur(8px);
     position: absolute;
     z-index: 100;
+    background-color: rgba(42, 42, 52, 0.4);
+    backdrop-filter: blur(8px);
     padding: 6px 18px 18px 18px;
     margin-top: 10px;
-
     border-width: 2px;
     border-style: solid;
     border-image: linear-gradient(280deg, #d0368a 0%, #708ad4 99%) 1;
-
 }
 
 .header {

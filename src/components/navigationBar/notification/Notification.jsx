@@ -2,10 +2,11 @@ import navbarStyle from "../NavigationBar.module.css";
 import style from "./Notification.module.css";
 import NotificationBoxSvg from "../svg/NotificationBoxSvg";
 import {useConnectNotification} from "./useConnectNotification";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import FadingNotification from "./FadingNotification";
 import {useContext} from "react";
 import {UserContext} from "../../context";
+import NotificationWindow from "./NotificationWindow";
 
 
 function Notification() {
@@ -14,6 +15,9 @@ function Notification() {
     const lastNotification = useConnectNotification()
     const [isShowNotification, setIsShowNotification] = useState(false)
 
+    const buttonRef = useRef(null);
+    const [isNotificationsWindowOpen, setNotificationsWindowOpen] = useState(false)
+
     useEffect(() => {
         if (lastNotification)
             setIsShowNotification(true)
@@ -21,7 +25,11 @@ function Notification() {
 
     return (
         <div className={style.notificationDiv}>
-            <button className={navbarStyle.notificationButton}>
+            <button
+                className={navbarStyle.notificationButton}
+                onClick={() => setNotificationsWindowOpen(prev => !prev)}
+                ref={buttonRef}
+            >
                 <NotificationBoxSvg />
 
                 { notificationsCount > 0 ?
@@ -30,6 +38,12 @@ function Notification() {
                     </div>
                 : <></> }
             </button>
+
+            <NotificationWindow
+                isNotificationsWindowOpen={isNotificationsWindowOpen}
+                setNotificationsWindowOpen={setNotificationsWindowOpen}
+                buttonRef={buttonRef}
+            />
 
             { isShowNotification ?
                 <FadingNotification
