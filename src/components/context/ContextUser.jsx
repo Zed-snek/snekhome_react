@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import {useEffect, useState, useContext} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import UserService from "../../API/UserService";
 import {AuthContext, UserContext} from "./index";
@@ -12,22 +12,22 @@ function ContextUser({children}) {
     const [userImageName, setUserImageName] = useState('')
     const [userNickname, setUserNickname] = useState('')
     const [nicknameColor, setNicknameColor] = useState('#E3E3E3')
+    const [notificationsCount, setNotificationsCount] = useState(0)
 
     const [fetchUser, isUserLoading, userError] = useFetching(async () => {
         const data = await UserService.navbarInfo()
-        setUserImage( getUserImage(data['image']) )
+        setUserImage(getUserImage(data['image']))
         setUserImageName(data['image'])
         setUserNickname(data['nickname'])
         setNicknameColor(data['nicknameColor'])
+        setNotificationsCount(data['notifications'])
     })
 
     useEffect( () => {
-        if (isAuth) {
+        if (isAuth)
             fetchUser()
-        }
-        if (userError) {
+        if (userError)
             console.log(userError)
-        }
     }, [isAuth])
 
     return (
@@ -39,6 +39,8 @@ function ContextUser({children}) {
             setUserNickname,
             nicknameColor,
             setNicknameColor,
+            notificationsCount,
+            setNotificationsCount,
             isUserLoading
         }}>
             {children}

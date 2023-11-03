@@ -1,8 +1,12 @@
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
-import {useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
+import {UserContext} from "../../context";
 
-export function useConnectNotification(userNickname) {
+export function useConnectNotification() {
+
+    const {userNickname, setNotificationsCount} = useContext(UserContext)
+
     const socket = new SockJS(process.env.REACT_APP_WS_LINK)
     const headers = {Authorization: localStorage.getItem('authToken')}
 
@@ -15,6 +19,7 @@ export function useConnectNotification(userNickname) {
         stompClient.connect(headers, (frame) => {
             stompClient.subscribe(`/user/${userNickname}/receive-notification`, (message) => {
                 setLastNotification(JSON.parse(message.body))
+                setNotificationsCount(prev => prev + 1)
             });
         });
     }

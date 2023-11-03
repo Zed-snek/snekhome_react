@@ -4,11 +4,14 @@ import NotificationBoxSvg from "../svg/NotificationBoxSvg";
 import {useConnectNotification} from "./useConnectNotification";
 import {useEffect, useState} from "react";
 import FadingNotification from "./FadingNotification";
+import {useContext} from "react";
+import {UserContext} from "../../context";
 
 
-function Notification({userNickname}) {
+function Notification() {
 
-    const lastNotification = useConnectNotification(userNickname)
+    const {notificationsCount} = useContext(UserContext)
+    const lastNotification = useConnectNotification()
     const [isShowNotification, setIsShowNotification] = useState(false)
 
     useEffect(() => {
@@ -20,6 +23,12 @@ function Notification({userNickname}) {
         <div className={style.notificationDiv}>
             <button className={navbarStyle.notificationButton}>
                 <NotificationBoxSvg />
+
+                { notificationsCount > 0 ?
+                    <div className={style.notificationCount}>
+                        { notificationsCount < 100 ? notificationsCount : "99+"}
+                    </div>
+                : <></> }
             </button>
 
             { isShowNotification ?

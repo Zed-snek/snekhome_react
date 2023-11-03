@@ -46,7 +46,7 @@ function NavigationBar() {
                 <div className={style.accountDiv} id={style["order_nav_Account"]}>
                     { isAuth
                         ? <>
-                            <Notification userNickname={userNickname} />
+                            <Notification />
 
                             <Nav.Link as={Link} to={'/u/' + userNickname} className={style.accountInfoDiv}>
                                 <img className={"userImage " + style.userImg} src={userImage} />
