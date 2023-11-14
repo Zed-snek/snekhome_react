@@ -49,6 +49,7 @@ export default class UserService {
     static async addFriend(nickname) {
         return await postParamsRequest('/auth/friend/' + nickname)
     }
+
     static async delFriend(nickname) {
         return await deleteRequestWithAuth('/friend/' + nickname)
     }
@@ -57,6 +58,9 @@ export default class UserService {
         return await getRequest('/user/friends/' + nickname)
     }
 
+    static async getNotifications(page, size) {
+        return await getRequestWithAuth(`/notification/get?page=${page}&size=${size}`)
+    }
 
 }
 

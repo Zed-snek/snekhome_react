@@ -1,9 +1,32 @@
 import style from "./Notification.module.css";
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
+import {useFetching} from "../../../hooks/useFetching";
+import UserService from "../../../API/UserService";
 
-function NotificationWindow({isNotificationsWindowOpen, setNotificationsWindowOpen, buttonRef}) {
+function NotificationWindow({isNotificationsWindowOpen, setNotificationsWindowOpen, buttonRef,
+                                notifications, setNotifications
+}) {
 
-    const ref = useRef(null);
+    const [page, setPage] = useState(0)
+    const [hasLoaded, setHasLoaded] = useState(false)
+
+    const [fetchNotifications, isNotificationsLoading, notificationsError] = useFetching(async () => {
+        let responseData
+        if (!hasLoaded) {
+            responseData = await UserService.getNotifications(page, 5)
+            setHasLoaded(true)
+        }
+        else {
+            responseData = await UserService.getNotifications(page, 15)
+        }
+
+        if (notifications.length === 5)
+            setNotifications(responseData)
+        else
+            setNotifications(prev => [...prev, ...responseData])
+    })
+
+    const ref = useRef(null)
 
     function handleClickOutside(event) {
         if (!(ref.current.contains(event.target) || buttonRef.current.contains(event.target)))
@@ -13,7 +36,8 @@ function NotificationWindow({isNotificationsWindowOpen, setNotificationsWindowOp
     useEffect(() => {
         if (isNotificationsWindowOpen)
             document.addEventListener('click', handleClickOutside, true)
-
+        if (!hasLoaded)
+            fetchNotifications()
         return () => document.removeEventListener('click', handleClickOutside, true)
     }, [isNotificationsWindowOpen]);
 
@@ -24,6 +48,11 @@ function NotificationWindow({isNotificationsWindowOpen, setNotificationsWindowOp
                 <h2>
                     Notification Window
                 </h2>
+                { notifications.map((n, index) =>
+                    <div key={index}>
+                        {n.type}
+                    </div>
+                )}
             </div>
         );
     else

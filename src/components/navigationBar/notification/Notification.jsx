@@ -12,6 +12,9 @@ import NotificationWindow from "./NotificationWindow";
 function Notification() {
 
     const {notificationsCount} = useContext(UserContext)
+
+    const [notifications, setNotifications] = useState([])
+
     const lastNotification = useConnectNotification()
     const [isShowNotification, setIsShowNotification] = useState(false)
 
@@ -34,7 +37,7 @@ function Notification() {
 
                 { notificationsCount > 0 ?
                     <div className={style.notificationCount}>
-                        { notificationsCount < 100 ? notificationsCount : "99+"}
+                        { notificationsCount < 100 ? notificationsCount : "99+" }
                     </div>
                 : <></> }
             </button>
@@ -43,6 +46,9 @@ function Notification() {
                 isNotificationsWindowOpen={isNotificationsWindowOpen}
                 setNotificationsWindowOpen={setNotificationsWindowOpen}
                 buttonRef={buttonRef}
+
+                notifications={notifications}
+                setNotifications={setNotifications}
             />
 
             { isShowNotification ?
