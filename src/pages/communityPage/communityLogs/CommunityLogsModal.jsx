@@ -37,9 +37,9 @@ function CommunityLogsModal({setIsOpen, groupname}) {
                 )}
             </div>
 
-            <LoaderAndErrorDiv error={fetchError} isLoading={isFetchLoading}/>
-            {logsTriggerElement} {/*trigger to load next posts*/}
+            <LoaderAndErrorDiv error={fetchError} isLoading={isFetchLoading} />
 
+            {logsTriggerElement} {/*trigger to load next posts*/}
         </TransparentModal>
     );
 

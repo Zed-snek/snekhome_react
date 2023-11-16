@@ -15,7 +15,7 @@ function Notification() {
 
     const [notifications, setNotifications] = useState([])
 
-    const lastNotification = useConnectNotification()
+    const lastNotification = useConnectNotification(setNotifications)
     const [isShowNotification, setIsShowNotification] = useState(false)
 
     const buttonRef = useRef(null);
@@ -46,9 +46,8 @@ function Notification() {
                 isNotificationsWindowOpen={isNotificationsWindowOpen}
                 setNotificationsWindowOpen={setNotificationsWindowOpen}
                 buttonRef={buttonRef}
-
-                notifications={notifications}
-                setNotifications={setNotifications}
+                lastNotifications={notifications}
+                setLastNotifications={setNotifications}
             />
 
             { isShowNotification ?

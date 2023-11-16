@@ -3,7 +3,7 @@ import SockJS from 'sockjs-client';
 import {useEffect, useState, useContext} from "react";
 import {UserContext} from "../../context";
 
-export function useConnectNotification() {
+export function useConnectNotification(setNotifications) {
 
     const {userNickname, setNotificationsCount} = useContext(UserContext)
 
@@ -18,10 +18,17 @@ export function useConnectNotification() {
     function connectToWebSocket() {
         stompClient.connect(headers, (frame) => {
             stompClient.subscribe(`/user/${userNickname}/receive-notification`, (message) => {
-                setLastNotification(JSON.parse(message.body))
+                const notification = JSON.parse(message.body)
+                setLastNotification(notification)
+                setNotifications(prev => {
+                    if (prev.length === 5)
+                        prev.pop()
+                    prev.unshift(notification)
+                    return prev
+                })
                 setNotificationsCount(prev => prev + 1)
-            });
-        });
+            })
+        })
     }
 
     useEffect(() => {
