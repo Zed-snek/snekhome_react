@@ -49,9 +49,9 @@ function NavigationBar() {
                             <Notification />
 
                             <Nav.Link as={Link} to={'/u/' + userNickname} className={style.accountInfoDiv}>
-                                <img className={"userImage " + style.userImg} src={userImage} />
+                                <img className={"userImage " + style.userImg} src={userImage} alt="" />
                                 <div className={style.nicknameNavBarDiv}>
-                                    {isUserLoading
+                                    { isUserLoading
                                         ? <span>loading...</span>
                                         : <span>{userNickname}</span>
                                     }

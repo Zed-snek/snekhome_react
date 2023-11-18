@@ -5,8 +5,10 @@ import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../API/UserService";
 import {usePaginateLoad} from "../../../hooks/usePaginateLoad";
 import LoaderAndErrorDiv from "../../structureComponents/LoaderAndErrorDiv";
+import NotificationItem from "./NotificationItem";
+import {Modal} from "react-bootstrap";
 
-function NotificationsListModal({setIsModalOpen}) {
+function NotificationsListModal({setIsModalOpen, ...props}) {
 
     const [notifications, setNotifications] = useState([])
 
@@ -25,12 +27,17 @@ function NotificationsListModal({setIsModalOpen}) {
             visible={true}
             setVisible={setIsModalOpen}
             centered={false}
+            {...props}
         >
-            { notifications.map((n, index) =>
-                <div key={index}>
-                    {n.type}
-                </div>
-            )}
+            <Modal.Header className={style.modalHeader}>
+                Notifications:
+            </Modal.Header>
+
+            <div>
+                { notifications.map((n, index) =>
+                    <NotificationItem key={index} notification={n} />
+                )}
+            </div>
 
             <LoaderAndErrorDiv error={notificationsError} isLoading={isNotificationsLoading} />
             {lastElement} {/*element that triggers request*/}

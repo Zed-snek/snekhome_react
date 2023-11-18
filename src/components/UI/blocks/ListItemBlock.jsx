@@ -1,4 +1,3 @@
-import React from 'react';
 import style from "./ListItemBlock.module.css";
 import InfoDiv from "./InfoDiv";
 import MyOutlineButton from "../buttons/MyOutlineButton";
@@ -12,30 +11,34 @@ function ListItemBlock({children, image, title, link, idName, buttonContent, but
             <InfoDiv className={style.main}>
                 <div>
                     <Link to={link}>
-                        <img src={image} className="mediumUserImage" />
+                        <img src={image} className="mediumUserImage" alt="" />
                     </Link>
                 </div>
+
                 <div className={style.centerDiv}>
                     <MyTextLink to={link} className={style.title}>
                         {title}
                     </MyTextLink>
+
                     <div className={style.idName}>
                         @{idName}
                     </div>
+
                     <div>
                         {underIdContent}
                     </div>
                 </div>
+
                 <div className={style.rightDiv}>
                     <div>
                         {rightCornerContent}
                     </div>
+
                     { buttonContent ?
                         <MyOutlineButton className={style.outlineBtn} onClick={buttonClick}>
                             {buttonContent}
                         </MyOutlineButton>
-                        : <> </>
-                    }
+                    : <></> }
                 </div>
             </InfoDiv>
         </div>

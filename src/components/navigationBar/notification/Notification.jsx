@@ -27,7 +27,7 @@ function Notification() {
     }, [lastNotification])
 
     return (
-        <div className={style.notificationDiv}>
+        <div>
             <button
                 className={navbarStyle.notificationButton}
                 onClick={() => setNotificationsWindowOpen(prev => !prev)}

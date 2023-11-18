@@ -4,6 +4,7 @@ import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../API/UserService";
 import NotificationsListModal from "./NotificationsListModal";
 import MyTransparentButton from "../../UI/buttons/MyTransparentButton";
+import NotificationItem from "./NotificationItem";
 
 function NotificationWindow({isNotificationsWindowOpen, setNotificationsWindowOpen, buttonRef,
                                 lastNotifications, setLastNotifications
@@ -21,10 +22,10 @@ function NotificationWindow({isNotificationsWindowOpen, setNotificationsWindowOp
         }
     })
 
-    const ref = useRef(null)
+    const thisRef = useRef(null)
 
     function handleClickOutside(event) {
-        if (!(ref.current.contains(event.target) || buttonRef.current.contains(event.target)))
+        if (!(thisRef.current.contains(event.target) || buttonRef.current.contains(event.target)))
             setNotificationsWindowOpen(false)
     }
 
@@ -40,33 +41,38 @@ function NotificationWindow({isNotificationsWindowOpen, setNotificationsWindowOp
     }, [isNotificationsWindowOpen]);
 
 
-    if (isNotificationsWindowOpen)
-        return (
-            <div className={style.windowMain} ref={ref} >
-                <h2>
-                    Notification Window
-                </h2>
 
-                { lastNotifications.map((n, index) =>
-                    <div key={index}>
-                        {n.type}
+    return (
+        <div className={style.windowMain} ref={thisRef} >
+            { isNotificationsWindowOpen ?
+                <>
+                    <div className={style.windowContent}>
+                        { lastNotifications.map((n, index) =>
+                            <NotificationItem key={index} notification={n} />
+                        )}
                     </div>
-                )}
 
-                <MyTransparentButton onClick={() => setIsModalOpen(true)}>
-                    show more...
-                </MyTransparentButton>
+                    <MyTransparentButton
+                        onClick={() => {
+                            setIsModalOpen(true)
+                            setNotificationsWindowOpen(false)
+                        }}
+                        className={style.showMoreBtn}
+                    >
+                        show more...
+                    </MyTransparentButton>
+                </>
+            : <></> }
 
-                { isModalOpen ?
-                    <NotificationsListModal
-                        isModalOpen={isModalOpen}
-                        setIsModalOpen={setIsModalOpen}
-                    />
-                : <></> }
-            </div>
-        );
-    else
-        return <></>
+
+            { isModalOpen ?
+                <NotificationsListModal
+                    isModalOpen={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
+                />
+            : <></> }
+        </div>
+    );
 }
 
 export default NotificationWindow;
