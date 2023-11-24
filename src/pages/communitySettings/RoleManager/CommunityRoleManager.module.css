@@ -70,6 +70,9 @@
     align-items: center;
     gap: 10px;
 }
+.borderBottom:last-child {
+    border-bottom: none !important;
+}
 
 .permissionTitle {
     color: #939393;

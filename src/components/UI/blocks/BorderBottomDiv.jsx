@@ -1,9 +1,10 @@
-import React from 'react';
 
 function BorderBottomDiv({className, children, ...props}) {
-
     return (
-        <div className={className} {...props} style={{borderBottom: '1px solid #939393'}}>
+        <div className={className}
+             style={{borderBottom: '1px solid #939393'}}
+             {...props}
+        >
             {children}
         </div>
     );

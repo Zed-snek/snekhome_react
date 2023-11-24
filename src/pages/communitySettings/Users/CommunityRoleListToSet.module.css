@@ -4,10 +4,13 @@
     user-select: none;
     border-radius: 15px;
 }
+
 .item:hover {
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.1);
 }
+
 .item:active {
     background-color: rgba(255, 255, 255, 0.15);
 }
+

@@ -75,11 +75,23 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
         }
         return ''
     }
+
+    const [isRoleModalVisible, setIsRoleModalVisible] = useState(false)
+    const [nicknameToGrant, setNicknameToGrant] = useState('')
+
     function moreOptionsContent(userRole, nickname) {
         if (permissions && permissions.creator && communityType !== "ANARCHY"  && !(userRole && userRole.creator)) {
-            let options = [{title: "Set role", onClick: () => setRole(nickname, false)}]
+            let options = [{
+                title: "Set role",
+                onClick: () => {
+                    setIsRoleModalVisible(true)
+                    setNicknameToGrant(nickname)
+                }}]
             if (userRole && !userRole.citizen)
-                options.push({title: "Revoke role", onClick: () => setRole(nickname, true)})
+                options.push({
+                    title: "Revoke role",
+                    onClick: () => revokeRole(nickname)
+                })
             return <MoreOptionsButton
                 options={options}
             />
@@ -92,8 +104,6 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
             .catch(exception => setError(getErrorResponseMessage(exception)))
     }
 
-    const [isRoleShow, setRoleShow] = useState({isShow: false, nickname: ''})
-
     async function revokeRole(nickname) {
         await CommunityService.revokeRole(params.groupname, nickname)
             .then(() =>
@@ -104,13 +114,6 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
                 })
             )
             .catch(exception => setError(getErrorResponseMessage(exception)))
-    }
-
-    function setRole(nickname, isDelete) {
-        if (isDelete)
-            revokeRole(nickname)
-        else
-            setRoleShow({isShow: true, nickname: nickname})
     }
 
 
@@ -153,8 +156,10 @@ function MembersListPage({permissions, communityType, isCommunityClosed, setErro
             <br/>
             { permissions ?
                 <CommunityRoleListToSet
-                    visibleAndNickname={isRoleShow}
-                    setVisibleAndNickname={setRoleShow}
+                    nickname={nicknameToGrant}
+                    setNickname={setNicknameToGrant}
+                    isModalVisible={isRoleModalVisible}
+                    setModalVisible={setIsRoleModalVisible}
                     setError={setError}
                     setIsLoader={setIsLoader}
                     groupname={params.groupname}

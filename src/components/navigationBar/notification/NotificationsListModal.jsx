@@ -34,8 +34,8 @@ function NotificationsListModal({setIsModalOpen, ...props}) {
             centered={false}
             {...props}
         >
-            <Modal.Header className={style.modalHeader}>
-                Notifications:
+            <Modal.Header>
+                <h5>Notifications:</h5>
             </Modal.Header>
 
             <div>

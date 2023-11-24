@@ -3,17 +3,19 @@ import style from './CommunityRoleManager.module.css';
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
 import CommunityRoleFlair from "../../../components/community/CommunityRoleFlair";
 import CommunityRoleForm from "./CommunityRoleForm";
-import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 import EditSvg from "../../../components/svg/EditSvg";
 import CheckMark from "../../../components/UI/symbols/CheckMark";
 import XMark from "../../../components/UI/symbols/XMark";
+import {useClasses} from "../../../hooks/useClasses";
 
-function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, setRoles, isEdit}) {
+function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, setRoles, isEdit, className}) {
 
     const [isShowCreateForm, setIsShowCreateForm] = useState(false)
 
+    const classes = useClasses(style.item, className)
+
     return (
-        <BorderBottomDiv className={style.item}>
+        <div className={classes}>
             <div>
                 <CommunityRoleFlair
                     title={role.title}
@@ -32,7 +34,7 @@ function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, 
                         <EditSvg />
                     </MyTransparentButton>
                 </div>
-            : <></> }
+                : <></> }
 
             <div className={style.itemPermissions}>
                 { typesToMap.map( (t, index) =>
@@ -60,9 +62,8 @@ function CommunityRoleItem({role, typesToMap, groupname, setError, setIsLoader, 
                     formTitle="Edit a role:"
                     roleToEdit={role}
                 />
-            : <></> }
-
-        </BorderBottomDiv>
+                : <></> }
+        </div>
     );
 }
 

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import style from "./CommunityRoleManager.module.css";
 import CommunityRoleItem from "./CommunityRoleItem";
 import CommunityRoleForm from "./CommunityRoleForm";
 import MyTransparentButton from "../../../components/UI/buttons/MyTransparentButton";
-import OverContentDiv from "../../../components/UI/blocks/OverContentDiv";
 import {useGetRoles} from "../useGetRoles";
 import {useDocumentTitle} from "usehooks-ts";
+import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 
 function CommunityRoleManager({communityType, groupname, isCommunityClosed, setError, setIsLoader, isEditPermission}) {
 
@@ -27,16 +27,20 @@ function CommunityRoleManager({communityType, groupname, isCommunityClosed, setE
                 <div className={style.roleItems}>
                     { roles.length > 0 ?
                         roles.map((role, index) =>
-                            <CommunityRoleItem
+                            <BorderBottomDiv
                                 key={index}
-                                role={role}
-                                groupname={groupname}
-                                typesToMap={typesToMap}
-                                setIsLoader={setIsLoader}
-                                setError={setError}
-                                setRoles={setRoles}
-                                isEdit={isEditPermission}
-                            />
+                                className={style.borderBottom}
+                            >
+                                <CommunityRoleItem
+                                    role={role}
+                                    groupname={groupname}
+                                    typesToMap={typesToMap}
+                                    setIsLoader={setIsLoader}
+                                    setError={setError}
+                                    setRoles={setRoles}
+                                    isEdit={isEditPermission}
+                                />
+                            </BorderBottomDiv>
                         )
                     : <></> }
                 </div>
