@@ -16,11 +16,16 @@ function SearchResponseItemList({data, setData, searchValue, type, setError, set
     const isFound = data.length > 0
 
     async function searchFunction(pageNumber) {
-        let responseData
+        setIsLoading(true)
+
+        let func
         if (type === "COMMUNITY")
-            responseData = await SearchService.searchCommunities(searchValue, pageNumber)
+            func = async () => SearchService.searchCommunities(searchValue, pageNumber)
         else /*if === "USER"*/
-            responseData = await SearchService.searchUsers(searchValue, pageNumber)
+            func = async () => SearchService.searchUsers(searchValue, pageNumber)
+
+        const responseData = await func()
+            .finally(() => setIsLoading(false))
 
         if (responseData.length > 0) {
             if (data.length === 4)

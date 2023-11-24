@@ -1,5 +1,5 @@
 import style from "./Notification.module.css";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import TransparentModal from "../../UI/modal/TransparentModal";
 import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../API/UserService";
@@ -20,6 +20,11 @@ function NotificationsListModal({setIsModalOpen, ...props}) {
             setCanLoad(false)
     })
 
+    useEffect(() => {
+        if (notificationsError)
+            setCanLoad(false)
+    }, [notificationsError])
+
     const [pageNumber, lastElement, setCanLoad] = usePaginateLoad(fetchNotifications, isNotificationsLoading)
 
     return (
@@ -39,7 +44,9 @@ function NotificationsListModal({setIsModalOpen, ...props}) {
                 )}
             </div>
 
+            { notificationsError ? <br/> : <></> }
             <LoaderAndErrorDiv error={notificationsError} isLoading={isNotificationsLoading} />
+
             {lastElement} {/*element that triggers request*/}
         </TransparentModal>
     );

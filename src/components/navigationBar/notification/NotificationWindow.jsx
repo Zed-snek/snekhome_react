@@ -5,6 +5,7 @@ import UserService from "../../../API/UserService";
 import NotificationsListModal from "./NotificationsListModal";
 import MyTransparentButton from "../../UI/buttons/MyTransparentButton";
 import NotificationItem from "./NotificationItem";
+import LoaderAndErrorDiv from "../../structureComponents/LoaderAndErrorDiv";
 
 function NotificationWindow({isNotificationsWindowOpen, setNotificationsWindowOpen, buttonRef,
                                 lastNotifications, setLastNotifications
@@ -43,13 +44,21 @@ function NotificationWindow({isNotificationsWindowOpen, setNotificationsWindowOp
 
 
     return (
-        <div className={style.windowMain} ref={thisRef} >
+        <div ref={thisRef}>
             { isNotificationsWindowOpen ?
-                <>
+                <div className={style.windowMain}>
                     <div className={style.windowContent}>
                         { lastNotifications.map((n, index) =>
                             <NotificationItem key={index} notification={n} />
                         )}
+                    </div>
+
+                    <div className={style.windowLoaderError}>
+                        <LoaderAndErrorDiv
+                            isLoading={isNotificationsLoading}
+                            error={notificationsError}
+                            messageClassName={style.windowErrorMessage}
+                        />
                     </div>
 
                     <MyTransparentButton
@@ -61,9 +70,8 @@ function NotificationWindow({isNotificationsWindowOpen, setNotificationsWindowOp
                     >
                         show more...
                     </MyTransparentButton>
-                </>
+                </div>
             : <></> }
-
 
             { isModalOpen ?
                 <NotificationsListModal

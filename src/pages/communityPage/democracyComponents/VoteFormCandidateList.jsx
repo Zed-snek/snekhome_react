@@ -5,8 +5,11 @@ import {useMemo} from "react";
 import CandidateItem from "./CandidateItem";
 import CommunityService from "../../../API/CommunityService";
 import {getErrorResponseMessage} from "../../../utils/objectFunctions";
+import MyMessage from "../../../components/UI/message/MyMessage";
 
-function VoteFormCandidateList({groupname, setError, isElectionsNow, isCitizenRight, candidateList, setCandidateList}) {
+function VoteFormCandidateList({
+       groupname, setError, isElectionsNow, isCitizenRight, isFirstElections, candidateList, setCandidateList
+}) {
 
     const voteOptions = useMemo(() => {
         let options = isElectionsNow ? candidateList.currentCandidates : candidateList.previousCandidates
@@ -55,13 +58,16 @@ function VoteFormCandidateList({groupname, setError, isElectionsNow, isCitizenRi
                         isAllowToVote={isCitizenRight}
                         onVoteCallback={vote}
                     />
-                    :
-                    <VoteForm
-                        votedId={candidateList.votedId}
-                        options={voteOptions}
-                        totalVotes={candidateList.totalVotes}
-                        isResult={true}
-                    />
+                    : isFirstElections
+                        ? <MyMessage className={style.message}>
+                            It hasn't been any elections in this community yet
+                        </MyMessage>
+                        : <VoteForm
+                            votedId={candidateList.votedId}
+                            options={voteOptions}
+                            totalVotes={candidateList.totalVotes}
+                            isResult={true}
+                        />
                 }
             </div>
 

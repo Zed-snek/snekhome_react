@@ -65,6 +65,7 @@ function CommunityDemocracyBlock({citizenRating, citizenDays, setPresidencyStats
                     <VoteFormCandidateList
                         isElectionsNow={democracyData.electionsNow}
                         isCitizenRight={democracyData.citizenRight}
+                        isFirstElections={democracyData.electionsNumber === 1}
                         candidateList={candidateListData}
                         setCandidateList={setCandidateListData}
                         groupname={groupname}

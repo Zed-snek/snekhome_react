@@ -20,7 +20,12 @@ function VoteForm({className, options, onVoteCallback, votedId, isResult, totalV
                 return <div key={index}>
                     { isResult ?
                         (() => {
-                            const percentage = ((element.votes / totalVotes) * 100).toFixed(1)
+                            let percentage
+                            if (!element.votes || element.votes === 0)
+                                percentage = 0
+                            else
+                                percentage = ((element.votes / totalVotes) * 100).toFixed(1)
+
                             return (
                                 <div className={style.relative}>
                                     <div className={style.percentageLineDiv} style={{width: percentage + "%"}} />
