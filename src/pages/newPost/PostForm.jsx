@@ -5,7 +5,7 @@ import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 import MyTextArea from "../../components/UI/inputs/MyTextArea";
 import MyFileInput from "../../components/UI/inputs/MyFileInput";
 import FadingMessage from "../../components/UI/message/FadingMessage";
-import ImageToOpen from "../../components/images/ImageToOpen";
+import ImageToOpen from "../../components/imageComponents/ImageToOpen";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import MyCheckbox from "../../components/UI/inputs/MyCheckbox";
 import MyButton from "../../components/UI/buttons/MyButton";

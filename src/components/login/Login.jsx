@@ -4,8 +4,10 @@ import ModalLogin from "./ModalLogin";
 import {useFetching} from "../../hooks/useFetching";
 import AuthService from "../../API/AuthService";
 import {useLocation} from "react-router-dom";
+import {useSetStateOnReact} from "../../hooks/useLoadingAndError";
 
-function Login(props) {
+
+function Login({visible, setVisible}) { //logic about Authenticate request
 
     const {isAuth, setIsAuth} = useContext(AuthContext)
 
@@ -19,51 +21,39 @@ function Login(props) {
         localStorage.setItem('authToken', 'Bearer ' + data.token)
         localStorage.setItem('refreshToken', 'Bearer ' + data.refreshToken)
         localStorage.setItem('auth', 'true')
-        props.setVisible(false)
+        setVisible(false)
         setIsAuth(true)
     })
 
-    function login(login, pass) {
-        setUserData({login: login, password: pass})
-    }
-
-    useEffect( () => {
-        if (userData.login !== '' && userData.password !== '') {
-            fetchLogin()
-        }
-    }, [userData])
+    useSetStateOnReact(loginError, setMessage)
 
 
-    useEffect( () => {
-
+    useEffect(() => {
         if (isAuth) {
-            props.setVisible(false)
-        }
-        else if (loginError) {
-            setMessage(loginError)
+            setVisible(false)
         }
         else if (location.pathname === "/message/unreachable") {
-            props.setVisible(true)
+            setVisible(true)
             setMessage("Please, log in to continue")
         }
         else if (location.pathname === "/message/verified") {
-            props.setVisible(true)
+            setVisible(true)
             setMessage(location.state)
         }
-
-    }, [loginError, isAuth, location])
-
+    }, [location])
 
 
     return (
         <ModalLogin
             isLoading={isLoginLoading}
+            setMessage={setMessage}
             message={message} /*loginError*/
-            visible={props.visible}
-            setVisible={props.setVisible}
-            loginFunction={login}
+            visible={visible}
+            setVisible={setVisible}
+            loginFunction={fetchLogin}
+            userData={userData}
+            setUserData={setUserData}
         />
-
     );
 }
 

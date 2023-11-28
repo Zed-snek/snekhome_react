@@ -1,4 +1,3 @@
-import style from "./Notification.module.css";
 import {useEffect, useState} from "react";
 import TransparentModal from "../../UI/modal/TransparentModal";
 import {useFetching} from "../../../hooks/useFetching";
@@ -7,13 +6,14 @@ import {usePaginateLoad} from "../../../hooks/usePaginateLoad";
 import LoaderAndErrorDiv from "../../structureComponents/LoaderAndErrorDiv";
 import NotificationItem from "./NotificationItem";
 import {Modal} from "react-bootstrap";
+import style from "./Notification.module.css";
 
 function NotificationsListModal({setIsModalOpen, ...props}) {
 
     const [notifications, setNotifications] = useState([])
 
     const [fetchNotifications, isNotificationsLoading, notificationsError] = useFetching(async () => {
-        const responseData = await UserService.getNotifications(pageNumber, 15)
+        const responseData = await UserService.getNotifications(pageNumber, 15, false)
         setNotifications(prev => [...prev, ...responseData])
 
         if (responseData.length === 0)
@@ -34,8 +34,8 @@ function NotificationsListModal({setIsModalOpen, ...props}) {
             centered={false}
             {...props}
         >
-            <Modal.Header>
-                <h5>Notifications:</h5>
+            <Modal.Header className={style.modalHeader}>
+                <h5> Notifications </h5>
             </Modal.Header>
 
             <div>

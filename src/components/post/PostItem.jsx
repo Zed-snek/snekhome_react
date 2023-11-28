@@ -4,7 +4,7 @@ import ellipsis from "../../styles/ellipsis.module.css";
 import {Link, useNavigate} from "react-router-dom";
 import OutlineDiv from "../UI/blocks/OutlineDiv";
 import PostRating from "../../pages/postPage/rating/PostRating";
-import PostImagesSelector from "../images/PostImagesSelector";
+import PostImagesSelector from "../imageComponents/PostImagesSelector";
 import InfoDiv from "../UI/blocks/InfoDiv";
 import UserInfo from "./postCreatorInfo/UserInfo";
 import {getUserImage} from "../../utils/linkFunctions";

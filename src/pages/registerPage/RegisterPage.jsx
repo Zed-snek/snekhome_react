@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import style from "./RegisterPage.module.css"
 import MyInput from "../../components/UI/inputs/MyInput";
 import MyButton from "../../components/UI/buttons/MyButton";
@@ -10,8 +10,6 @@ import MessageModal from "../../components/UI/modal/MessageModal";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import {isNotBannedSymbols} from "../../utils/stringFunctions";
 import {useDocumentTitle} from "usehooks-ts";
-import BooleanBlock from "../../components/structureComponents/BooleanBlock";
-
 
 function RegisterPage() {
 
@@ -22,6 +20,7 @@ function RegisterPage() {
         password: ''
         }
     )
+
     const [errorMessage, setErrorMessage] = useState('')
     const [messageModal, setMessageModalVisible] = useState(false)
 
@@ -51,7 +50,7 @@ function RegisterPage() {
     }, [registerError])
 
 
-    function sendData(formValues){
+    function sendData(formValues) {
         if (isNotBannedSymbols(formValues.nickname))
             setUserData(formValues)
         else
@@ -61,7 +60,6 @@ function RegisterPage() {
 
     return (
         <div className={style.content}>
-
             <MessageModal
                 visible={messageModal}
                 setVisible={setMessageModalVisible}
@@ -71,15 +69,13 @@ function RegisterPage() {
             </MessageModal>
 
             <div className={style.title}>
-                <h2>Registration</h2>
+                <h3>Registration</h3>
+
                 <MySyncLoader loading={isRegisterLoading} />
 
-                <BooleanBlock bool={!isRegisterLoading}>
-                    <MyMessage>
-                        {errorMessage}
-                    </MyMessage>
-                </BooleanBlock>
-
+                <MyMessage>
+                    {errorMessage}
+                </MyMessage>
             </div>
 
             <form onSubmit={handleSubmit(sendData)}>

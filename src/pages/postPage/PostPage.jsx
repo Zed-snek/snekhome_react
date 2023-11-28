@@ -5,7 +5,7 @@ import {useFetching} from "../../hooks/useFetching";
 import PostService from "../../API/PostService";
 import PostRating from "./rating/PostRating";
 import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
-import PostImagesSelector from "../../components/images/PostImagesSelector";
+import PostImagesSelector from "../../components/imageComponents/PostImagesSelector";
 import OutlineFilledDiv from "../../components/UI/blocks/OutlineFilledDiv";
 import {formatDate, formatLocalDate} from "../../utils/timeDateFunctions";
 import {getCommunityImage, getUserImage} from "../../utils/linkFunctions";

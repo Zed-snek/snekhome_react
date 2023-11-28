@@ -1,21 +1,13 @@
 import {useEffect} from "react";
 
 export function useLoadingAndError(isLoading, setGlobalLoading, error, setGlobalError) {
-
-    useGlobalError(error, setGlobalError)
-    useGlobalLoading(isLoading, setGlobalLoading)
+    useSetStateOnReact(error, setGlobalError)
+    useSetStateOnReact(isLoading, setGlobalLoading)
 }
 
-export function useGlobalError(error, setGlobalError) {
+export function useSetStateOnReact(dependency, setState) {
 
     useEffect(() => {
-        setGlobalError(error)
-    }, [error])
-}
-
-export function useGlobalLoading(isLoading, setGlobalLoading) {
-
-    useEffect(() => {
-        setGlobalLoading(isLoading)
-    }, [isLoading])
+        setState(dependency)
+    }, [dependency])
 }

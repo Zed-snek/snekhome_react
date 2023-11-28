@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import style from "./CommunityPage.module.css";
 import {getCommunityImageByArray, getUserImage} from "../../utils/linkFunctions";
-import ImageSelectorModal from "../../components/images/ImageSelectorModal";
+import ImageSelectorModal from "../../components/imageComponents/ImageSelectorModal";
 import UserInfo from "../../components/post/postCreatorInfo/UserInfo";
 import {useNavigate} from "react-router-dom";
 import MyTransparentButton from "../../components/UI/buttons/MyTransparentButton";

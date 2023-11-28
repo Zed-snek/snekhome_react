@@ -7,7 +7,7 @@ import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../API/UserService";
 import MessageModal from "../../../components/UI/modal/MessageModal";
-import {useGlobalError, useGlobalLoading} from "../../../hooks/useLoadingAndError";
+import {useLoadingAndError} from "../../../hooks/useLoadingAndError";
 
 
 function AboutUserPage({tags, fetchUser, setError, setLoader, setUser}) {
@@ -42,8 +42,7 @@ function AboutUserPage({tags, fetchUser, setError, setLoader, setUser}) {
         })
         refresh()
     })
-    useGlobalError(newError, setError)
-    useGlobalLoading(isNewLoading, setLoader)
+    useLoadingAndError(isNewLoading, setLoader, newError, setError)
 
 
     const [fetchEdit, isEditLoading, editError] = useFetching(async () => {
@@ -54,9 +53,7 @@ function AboutUserPage({tags, fetchUser, setError, setLoader, setUser}) {
         })
         refresh()
     })
-    useGlobalError(editError, setError)
-    useGlobalLoading(isEditLoading, setLoader)
-
+    useLoadingAndError(editError, setError, isEditLoading, setLoader)
 
     useEffect(() => {
         if (data.text !== '' && data.title !== '') {
@@ -82,14 +79,11 @@ function AboutUserPage({tags, fetchUser, setError, setLoader, setUser}) {
 
         setDeleteModal(false)
     })
-    useGlobalError(delError, setError)
-    useGlobalLoading(isDelLoading, setLoader)
+    useLoadingAndError(delError, setError, isDelLoading, setLoader)
 
     function deleteTag() {
         fetchDel()
     }
-
-
 
     return (
         <InfoDiv>

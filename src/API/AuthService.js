@@ -11,6 +11,10 @@ export default class AuthService {
         return await postBodyRequest("/user/register", userData)
     }
 
+    static async sendResetPasswordEmail(email) {
+        return await postBodyRequest("/user/reset_password", { email: email })
+    }
+
     static async manageConfirmation(token) {
         return await postParamsRequest("/user/confirmation?token=" + token)
     }
@@ -19,8 +23,8 @@ export default class AuthService {
         return await putRequestWithAuth("/user/password", data)
     }
 
-    static async changeEmail(address) {
-        return await putRequestWithAuth("/user/email", { email: address } )
+    static async changeEmail(email) {
+        return await putRequestWithAuth("/user/email", { email: email })
     }
 
     static async refreshToken() {

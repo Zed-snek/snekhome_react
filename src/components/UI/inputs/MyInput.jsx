@@ -1,4 +1,3 @@
-import React from 'react';
 import inputSt from './MyInput.module.css'
 import {useClasses} from "../../../hooks/useClasses";
 

@@ -8,7 +8,7 @@ import TextBlockWithInput from "../../../components/UI/inputs/TextBlockWithInput
 import CurrentUserDemocracyInfo from "./CurrentUserDemocracyInfo";
 import MessageModal from "../../../components/UI/modal/MessageModal";
 import {formatDateWithMonthName} from "../../../utils/timeDateFunctions";
-import {useGlobalError} from "../../../hooks/useLoadingAndError";
+import {useSetStateOnReact} from "../../../hooks/useLoadingAndError";
 import BorderBottomDiv from "../../../components/UI/blocks/BorderBottomDiv";
 import VoteFormCandidateList from "./VoteFormCandidateList";
 
@@ -47,12 +47,13 @@ function CommunityDemocracyBlock({citizenRating, citizenDays, setPresidencyStats
     //Errors handling
     const [error, setError] = useState("")
     const [isErrorModalOpen, setIsErrorModalOpen] = useState(false)
+
     useEffect(() => {
         if (error)
             setIsErrorModalOpen(true)
     }, [error])
-    useGlobalError(fetchError, setError)
-    useGlobalError(candidateListError, setError)
+    useSetStateOnReact(fetchError, setError)
+    useSetStateOnReact(candidateListError, setError)
 
 
     function showMoreContent() {

@@ -13,7 +13,7 @@ import {useDocumentTitle} from "usehooks-ts";
 import UserNicknameButtons from "./UserNicknameButtons";
 import {useNotFoundNavigate} from "../../hooks/useNotFoundNavigate";
 import MyBlurredButton from "../../components/UI/buttons/MyBlurredButton";
-import ImageSelectorModal from "../../components/images/ImageSelectorModal";
+import ImageSelectorModal from "../../components/imageComponents/ImageSelectorModal";
 import {useIsCurrentUser} from "../../hooks/useIsCurrentUser";
 import {UserContext} from "../../components/context";
 import PostList from "../../components/post/PostList";

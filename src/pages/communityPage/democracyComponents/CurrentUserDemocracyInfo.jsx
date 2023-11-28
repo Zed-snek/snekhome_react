@@ -7,8 +7,8 @@ import {useFetching} from "../../../hooks/useFetching";
 import CommunityService from "../../../API/CommunityService";
 import CheckMark from "../../../components/UI/symbols/CheckMark";
 import XMark from "../../../components/UI/symbols/XMark";
-import {useGlobalError} from "../../../hooks/useLoadingAndError";
 import {getErrorResponseMessage} from "../../../utils/objectFunctions";
+import {useSetStateOnReact} from "../../../hooks/useLoadingAndError";
 
 function CurrentUserDemocracyInfo({data, setData, citizenRating, citizenDays, isMember, groupname, setError, ...props}) {
 
@@ -16,7 +16,7 @@ function CurrentUserDemocracyInfo({data, setData, citizenRating, citizenDays, is
         await CommunityService.becomeCandidate(groupname)
         setData(prev => ({...prev, currentUserActiveCandidate: true}))
     })
-    useGlobalError(candidateActivationError, setError)
+    useSetStateOnReact(candidateActivationError, setError)
 
     function isCheckMark(predicate) {
         if (predicate)

@@ -15,9 +15,9 @@ function VerifyPage() {
         navigate("../message/verified", {replace: true, state: "Your email is verified, log in to continue"})
     })
 
-    useEffect( () => {
-            fetchVerify()
-        })
+    useEffect(() => {
+        fetchVerify()
+    }, [])
 
     return (
         <div>

@@ -77,6 +77,11 @@
 
 }
 
+.modalHeader {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .itemMain {
     font-size: 15px;
     padding: 5px 10px;

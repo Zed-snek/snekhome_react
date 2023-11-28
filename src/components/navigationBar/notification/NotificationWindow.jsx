@@ -1,23 +1,25 @@
 import style from "./Notification.module.css";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState, useContext} from "react";
 import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../API/UserService";
 import NotificationsListModal from "./NotificationsListModal";
 import MyTransparentButton from "../../UI/buttons/MyTransparentButton";
 import NotificationItem from "./NotificationItem";
 import LoaderAndErrorDiv from "../../structureComponents/LoaderAndErrorDiv";
+import {UserContext} from "../../context";
 
 function NotificationWindow({isNotificationsWindowOpen, setNotificationsWindowOpen, buttonRef,
                                 lastNotifications, setLastNotifications
 }) {
 
+    const {setNotificationsCount} = useContext(UserContext)
     const [isModalOpen, setIsModalOpen] = useState(false)
-
     const [hasLoaded, setHasLoaded] = useState(false)
 
     const [fetchNotifications, isNotificationsLoading, notificationsError] = useFetching(async () => {
         if (!hasLoaded) {
-            const responseData = await UserService.getNotifications(0, 5)
+            const responseData = await UserService.getNotifications(0, 5, true)
+            setNotificationsCount(0)
             setLastNotifications(responseData)
             setHasLoaded(true)
         }

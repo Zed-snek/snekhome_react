@@ -23,6 +23,7 @@ import NewPostPage from "../../pages/newPost/NewPostPage";
 import PostPage from "../../pages/postPage/PostPage";
 import EditPostPage from "../../pages/newPost/EditPostPage";
 import JoinRequestsPage from "../../pages/joinRequests/JoinRequestsPage";
+import PasswordResetPage from "../../pages/passwordRecoveryPage/PasswordResetPage";
 
 
 function AllRoutes() {
@@ -52,6 +53,7 @@ function AllRoutes() {
             <Route path='' element={<UnauthorizedOnlyRoute auth={!isAuth} />}>
                 <Route path='/message/:message' element={<InfoPage />}/>
                 <Route path='/register' element={<RegisterPage />} />
+                <Route path='/password_reset' element={<PasswordResetPage />} />
                 <Route path='/confirmation/:token' element={<VerifyPage />} />
             </Route>
             {/*Only for unauthorized*/}

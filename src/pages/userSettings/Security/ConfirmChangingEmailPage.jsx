@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../../hooks/useFetching";
 import AuthService from "../../../API/AuthService";
@@ -6,8 +6,8 @@ import MySyncLoader from "../../../components/UI/loaders/MySyncLoader";
 import MyMessage from "../../../components/UI/message/MyMessage";
 import {useLogout} from "../../../hooks/useLogout";
 
-
 function ConfirmChangingEmailPage({message}) {
+    const [ms, setMs] = useState('')
 
     const pathParams = useParams()
     const logout = useLogout()
@@ -27,7 +27,7 @@ function ConfirmChangingEmailPage({message}) {
         fetch()
     }, [])
 
-    const [ms, setMs] = useState('')
+
 
     useEffect(() => {
         setMs(error)

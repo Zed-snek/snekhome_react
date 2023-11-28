@@ -6,7 +6,7 @@ function MySyncLoader({loading, ...props}) {
             loading={loading}
             color={'#ff1177'}
             size={15}
-            speedMultiplier={0.7}
+            speedMultiplier={0.6}
             {...props}
         />
     );

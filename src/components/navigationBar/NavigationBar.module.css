@@ -78,8 +78,9 @@
 .accountDiv {
     flex: 1;
     display: flex;
+    justify-content: center;
     gap: 5px;
-    margin-left: 7%;
+
 }
 
 .loginButton {

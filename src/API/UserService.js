@@ -58,8 +58,8 @@ export default class UserService {
         return await getRequest('/user/friends/' + nickname)
     }
 
-    static async getNotifications(page, size) {
-        return await getRequestWithAuth(`/notification/get?page=${page}&size=${size}`)
+    static async getNotifications(page, size, isRead) {
+        return await getRequestWithAuth(`/notification/get?page=${page}&size=${size}&isRead=${isRead}`)
     }
 
 }
