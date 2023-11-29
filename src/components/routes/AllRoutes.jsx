@@ -53,7 +53,7 @@ function AllRoutes() {
             <Route path='' element={<UnauthorizedOnlyRoute auth={!isAuth} />}>
                 <Route path='/message/:message' element={<InfoPage />}/>
                 <Route path='/register' element={<RegisterPage />} />
-                <Route path='/password_reset' element={<PasswordResetPage />} />
+                <Route path='/password_reset/:token' element={<PasswordResetPage />} />
                 <Route path='/confirmation/:token' element={<VerifyPage />} />
             </Route>
             {/*Only for unauthorized*/}
@@ -70,10 +70,10 @@ function AllRoutes() {
             <Route path='/not_found' element={<NotFound />} />
             <Route path='/info' element={<InfoPage />} />
 
-            <Route path='/resetMail/:token'
+            <Route path='/reset_mail/:token'
                    element={<ConfirmChangingEmailPage message="New list is sent on your new email to confirm it"/>}
             />
-            <Route path='/newMail/:token'
+            <Route path='/new_mail/:token'
                    element={<ConfirmChangingEmailPage message="logout"/>}
             />
 

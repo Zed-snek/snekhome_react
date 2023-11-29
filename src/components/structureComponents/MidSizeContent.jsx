@@ -1,4 +1,3 @@
-import React from 'react';
 import style from "./MidSizeContent.module.css";
 import {useClasses} from "../../hooks/useClasses";
 

@@ -115,7 +115,6 @@ function RegisterPage() {
                             <MyInput
                                 type="email" id="email" placeholder="e-mail"
                                 register={register} name="email"
-
                             />
                         </div>
                     </div>

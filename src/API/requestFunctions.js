@@ -8,8 +8,12 @@ export async function getRequest(link) {
     return (await api.get(link)).data
 }
 
+export async function putRequest(link, data) {
+    return (await api.put(link, data)).data
+}
+
 export async function putRequestWithAuth(link, data) {
-    return (await api.put('/auth' + link, data)).data
+    return putRequest('/auth' + link, data)
 }
 
 export async function postParamsRequest(link) {
@@ -24,7 +28,7 @@ export async function postBodyRequest(link, data) {
 }
 
 export async function postBodyRequestWithAuth(link, data) {
-    return (await api.post('/auth' + link, data)).data
+    return postBodyRequest('/auth' + link, data)
 }
 
 export async function deleteRequestWithAuth(link) {

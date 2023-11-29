@@ -40,6 +40,10 @@ function Login({visible, setVisible}) { //logic about Authenticate request
             setVisible(true)
             setMessage(location.state)
         }
+        else if (location.pathname === "/message/reset_password") {
+            setVisible(true)
+            setMessage("Password is changed, log in to continue")
+        }
     }, [location])
 
 

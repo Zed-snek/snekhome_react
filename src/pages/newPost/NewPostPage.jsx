@@ -5,6 +5,7 @@ import MySyncLoader from "../../components/UI/loaders/MySyncLoader";
 import {useFetching} from "../../hooks/useFetching";
 import PostService from "../../API/PostService";
 import PostForm from "./PostForm";
+import {useDocumentTitle} from "usehooks-ts";
 
 function NewPostPage() {
 
@@ -17,6 +18,7 @@ function NewPostPage() {
             navigate("/c/" + params.groupname)
     }, [data])
 
+    useDocumentTitle("New post - " + params.groupname)
 
     const [images, setImages] = useState([])
     const [isAnon, setIsAnon] = useState(false)

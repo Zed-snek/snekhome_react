@@ -1,4 +1,4 @@
-import {postBodyRequest, postParamsRequest, putRequestWithAuth} from "./requestFunctions";
+import {postBodyRequest, postParamsRequest, putRequest, putRequestWithAuth} from "./requestFunctions";
 import {publicApi} from "./apiConfiguration";
 
 export default class AuthService {
@@ -20,7 +20,14 @@ export default class AuthService {
     }
 
     static async changePassword(data) {
-        return await putRequestWithAuth("/user/password", data)
+        return await putRequestWithAuth("/user/password", data) //data: oldPass, newPass
+    }
+
+    static async resetPassword(token, password) {
+        return await putRequest("/user/reset_password", {
+            token: token,
+            newPass: password
+        })
     }
 
     static async changeEmail(email) {
@@ -37,6 +44,7 @@ export default class AuthService {
         localStorage.setItem('authToken', 'Bearer ' + response.token)
         return response
     }
+
 
 }
 
