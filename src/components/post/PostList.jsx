@@ -1,12 +1,13 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import style from "./PostList.module.css";
 import PostService from "../../API/PostService";
 import PostItem from "./PostItem";
 import {usePaginateLoad} from "../../hooks/usePaginateLoad";
 import LoaderAndErrorDiv from "../structureComponents/LoaderAndErrorDiv";
+import MyMessage from "../UI/message/MyMessage";
 
-function PostList({loadType, entityName, isDeletePermission}) { //loadType: HOME / COMMUNITY / USER
+function PostList({loadType, entityName, isDeletePermission, sortType}) { //loadType: HOME / COMMUNITY / USER  | sortType: NEW / HOT (only for community)
 
     const [data, setData] = useState([])
 
@@ -17,7 +18,7 @@ function PostList({loadType, entityName, isDeletePermission}) { //loadType: HOME
                 responseData = await PostService.getPostsForHomePage(pageNumber)
                 break
             case "COMMUNITY":
-                responseData = await PostService.getPostsForCommunityPage(entityName, pageNumber)
+                responseData = await PostService.getPostsForCommunityPage(entityName, pageNumber, sortType)
                 break
             case "USER":
                 responseData = await PostService.getPostsForUserPage(entityName, pageNumber)
@@ -25,10 +26,17 @@ function PostList({loadType, entityName, isDeletePermission}) { //loadType: HOME
         }
         if (responseData.length === 0)
             setCanLoad(false)
-        setData(prev => [...prev, ...responseData])
+        else
+            setData(prev => [...prev, ...responseData])
     })
 
-    const [pageNumber, lastElement, setCanLoad] = usePaginateLoad(fetchPosts, isFetchLoading)
+    const [pageNumber, lastElement, setCanLoad, canLoad, clearPaginationData] = usePaginateLoad(fetchPosts, isFetchLoading)
+
+
+    useEffect(() => {
+        setData([])
+        clearPaginationData()
+    }, [sortType])
 
     function onSuccessDelete(id) {
         setData(prev => prev.filter(obj => obj.post.idPost !== id))
@@ -70,9 +78,14 @@ function PostList({loadType, entityName, isDeletePermission}) { //loadType: HOME
                 )
             : <></> }
 
+            { sortType === "HOT" && !canLoad && data.length === 0 ?
+                <MyMessage>
+                    No posts were created in the last 30 days
+                </MyMessage>
+            : <></> }
+
             <LoaderAndErrorDiv error={fetchError} isLoading={isFetchLoading}/>
             {lastElement} {/*trigger to load next posts*/}
-
         </div>
     );
 }

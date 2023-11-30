@@ -68,8 +68,8 @@ export default class PostService {
         return await getRequest(`/user/posts/${nickname}?page=${page}`)
     }
 
-    static async getPostsForCommunityPage(groupname, page) {
-        return await getRequest(`/community/posts/${groupname}?page=${page}`)
+    static async getPostsForCommunityPage(groupname, page, type) {
+        return await getRequest(`/community/posts/${groupname}?page=${page}&type=${type}`)
     }
 
     static async getPostsForHomePage(page) {

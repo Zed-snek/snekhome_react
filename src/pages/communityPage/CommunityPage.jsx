@@ -35,6 +35,7 @@ function CommunityPage() {
     const [isModalError, setModalError] = useState(false)
 
     const [activeSortBtn, setActiveSortBtn] = useState(0)
+    const sortType = ["NEW", "HOT"]
 
     useEffect(() => {
         if (error)
@@ -98,7 +99,6 @@ function CommunityPage() {
             />
 
             <div className={style.page}>
-
                 <div className={style.content}>
                     { communityType === "DEMOCRACY" ?
                         <CommunityDemocracyBlock
@@ -124,7 +124,7 @@ function CommunityPage() {
 
                         <div className={style.sortButtons}>
                             <SortOutlineButtons
-                                buttons={["Hot", "New"]}
+                                buttons={["New", "Hot"]}
                                 activeBtn={activeSortBtn}
                                 setActiveBtn={setActiveSortBtn}
                             />
@@ -133,10 +133,10 @@ function CommunityPage() {
 
                     <PostList
                         loadType="COMMUNITY"
+                        sortType={sortType[activeSortBtn]}
                         entityName={params.groupname}
                         isDeletePermission={data.currentUserRole?.deletePosts}
                     />
-
                 </div>
 
                 <div className={style.additionalInfoBlock}>

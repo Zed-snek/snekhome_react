@@ -17,6 +17,11 @@ export function usePaginateLoad(fetchFunc, isFetchLoading) {
         fetchFunc()
     }, [pageNumber])
 
-    return [pageNumber, triggerElement, setCanLoad]
+    function clearData() {
+        setCanLoad(true)
+        setTimeout(() => setPageNumber(0), 300)
+    }
+
+    return [pageNumber, triggerElement, setCanLoad, canLoad, clearData]
 }
 
