@@ -8,6 +8,10 @@ import EditSvg from "../../../components/svg/EditSvg";
 function EditInput({isTextArea, children, current, name, callback, isEdit, ...props}) {
 
     const [isInput, setIsInput] = useState(false)
+    useEffect(() => {
+        if (isInput && value.value !== current)
+            setCurrentValue()
+    }, [isInput])
 
     const [value, setValue] = useState({
         name: name,
@@ -28,6 +32,10 @@ function EditInput({isTextArea, children, current, name, callback, isEdit, ...pr
 
     function cancel() {
         setIsInput(false)
+        setCurrentValue()
+    }
+
+    function setCurrentValue() {
         setValue({...value, value: current})
     }
 

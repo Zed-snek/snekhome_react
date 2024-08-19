@@ -25,10 +25,10 @@ function AccountPage(props) {
     const [updatedUser, setUpdatedUser] = useState({})
 
     function updateValue(newValue) {
-        setUpdatedUser( ({[newValue.name]: newValue.value}) )
+        setUpdatedUser(({[newValue.name]: newValue.value}))
     }
 
-    const [fetchUpdateUser, fetchLoading, fetchError] = useFetching(async () => {
+    const [fetchUpdateUser, fetchLoading, fetchError] = useFetching(async ()=> {
         if (updatedUser.image) {
             let response = await UserService.newImage(updatedUser.image)
             setUserImage(getUserImage(response.message))
@@ -37,6 +37,8 @@ function AccountPage(props) {
             await UserService.updateUser(updatedUser)
             if (updatedUser.nickname) {
                 setUserNickname(updatedUser.nickname)
+                window.history.pushState({}, '','/u/' + updatedUser.nickname)
+                window.history.pushState({}, '','/settings')
             }
             else if (updatedUser.nicknameColor) {
                 setNicknameColor(updatedUser.nicknameColor)
@@ -60,12 +62,10 @@ function AccountPage(props) {
 
     useEffect(() => {
         if (isObjectNotEmpty(updatedUser)) { //checks if object updatedUser is empty
-            if (updatedUser.nickname && !isNotBannedSymbols(updatedUser.nickname)) {
+            if (updatedUser.nickname && !isNotBannedSymbols(updatedUser.nickname))
                 props.setError("Nickname must contain only allowed symbols: a-z, A-Z, 0-9, -, _")
-            }
-            else {
+            else
                 fetchUpdateUser()
-            }
         }
     }, [updatedUser])
 

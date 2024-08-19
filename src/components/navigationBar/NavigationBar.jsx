@@ -10,14 +10,12 @@ import SearchDiv from "./search/SearchDiv";
 import HomeSignSvg from "./svg/HomeSignSvg";
 import Notification from "./notification/Notification";
 
-
 function NavigationBar() {
 
     const {isAuth} = useContext(AuthContext)
     const {userImage, userNickname, isUserLoading} = useContext(UserContext)
 
     const [loginModal, setLoginModal] = useState(false)
-
 
     return (
     <header>

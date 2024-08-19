@@ -18,8 +18,7 @@ function RegisterPage() {
     const [userData, setUserData] = useState({
         email: '',
         password: ''
-        }
-    )
+    })
 
     const [errorMessage, setErrorMessage] = useState('')
     const [messageModal, setMessageModalVisible] = useState(false)
@@ -37,7 +36,7 @@ function RegisterPage() {
             email: '',
             password: ''
         }
-    });
+    })
 
     useEffect( () => {
         if (userData.email !== '' && userData.password !== '')
@@ -48,7 +47,6 @@ function RegisterPage() {
     useEffect( () => {
         setErrorMessage(registerError)
     }, [registerError])
-
 
     function sendData(formValues) {
         if (isNotBannedSymbols(formValues.nickname))
@@ -63,7 +61,7 @@ function RegisterPage() {
             <MessageModal
                 visible={messageModal}
                 setVisible={setMessageModalVisible}
-                navigate={"/posts"}
+                navigate={"/"}
             >
                 Verification mail is sent on your email. Verify it, please
             </MessageModal>

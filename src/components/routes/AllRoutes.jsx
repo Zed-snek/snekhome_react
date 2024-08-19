@@ -25,7 +25,6 @@ import EditPostPage from "../../pages/newPost/EditPostPage";
 import JoinRequestsPage from "../../pages/joinRequests/JoinRequestsPage";
 import PasswordResetPage from "../../pages/passwordRecoveryPage/PasswordResetPage";
 
-
 function AllRoutes() {
     const {isAuth, isLoading} = useContext(AuthContext)
 

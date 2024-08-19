@@ -17,6 +17,7 @@ function SearchResponseItemList({data, setData, searchValue, type, setError, set
 
     async function searchFunction(pageNumber) {
         setIsLoading(true)
+        setIsShowMore(false)
 
         let func
         if (type === "COMMUNITY")
