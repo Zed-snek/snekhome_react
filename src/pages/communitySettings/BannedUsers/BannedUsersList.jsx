@@ -49,7 +49,7 @@ function BannedUsersList({setError, setIsLoader, groupname}) {
 
                 <MembersItemListMap
                     array={searchedUsers}
-                    buttonContent={() => "unban"}
+                    buttonContent={() => "Unban"}
                     onClickCallback={unbanUser}
                 />
 

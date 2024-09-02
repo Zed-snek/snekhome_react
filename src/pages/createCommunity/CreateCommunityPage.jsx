@@ -52,23 +52,19 @@ function CreateCommunityPage() {
             case 0:
                 if (type !== -1) {
                     setStage(stage + 1)
-                }
-                else {
+                } else {
                     setMessageModal("Hold your horses. Choose the community type first")
                     setIsMessageModal(true)
                 }
                 break
-
             case 1:
                 setStage(stage + 1)
                 break
-
             case 2:
                 if (!isNotBannedSymbols(settings.idName) || !settings.idName) {
-                    setMessageModal("Group id required and must have only allowed symbols: A-Z, a-z, 0-9, _, - ")
+                    setMessageModal("Groupname required and symbols allowed:\n A-Z, a-z, 0-9, _, - ")
                     setIsMessageModal(true)
-                }
-                else {
+                } else {
                     fetchIsNameNotTaken()
                 }
                 break
@@ -76,20 +72,16 @@ function CreateCommunityPage() {
                 if (!settings.title) {
                     setMessageModal("Provide the title of citizen role flair")
                     setIsMessageModal(true)
-                }
-                else if (settings.citizenDays < 3 || settings.citizenDays > 365) {
+                } else if (settings.citizenDays < 3 || settings.citizenDays > 365) {
                     setMessageModal("The amount of days, member needs to become a citizen must be in range: [3, 365]")
                     setIsMessageModal(true)
-                }
-                else if (settings.citizenRating < 0 || settings.citizenRating > 10000) {
+                } else if (settings.citizenRating < 0 || settings.citizenRating > 10000) {
                     setMessageModal("The amount of rating, member needs to become a citizen must be in range: [0, 10000]")
                     setIsMessageModal(true)
-                }
-                else if (settings.electionDays < 7 || settings.electionDays > 365) {
+                } else if (settings.electionDays < 7 || settings.electionDays > 365) {
                     setMessageModal("The amount of days with which elections will be must be in range: [0, 10000]")
                     setIsMessageModal(true)
-                }
-                else {
+                } else {
                     fetchNewCommunity()
                 }
                 break
@@ -112,8 +104,7 @@ function CreateCommunityPage() {
         if (isNameNotTaken) {
             if (type === 2) {
                 setStage(s => s + 1)
-            }
-            else {
+            } else {
                 fetchNewCommunity()
             }
         }

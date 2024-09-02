@@ -31,7 +31,6 @@ export default class UserService {
         formData.append('image', file);
 
         return await postBodyRequestWithAuth('/user/current/image', formData)
-
     }
 
     static async newTag(data) {

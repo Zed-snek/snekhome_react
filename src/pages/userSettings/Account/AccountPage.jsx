@@ -31,19 +31,16 @@ function AccountPage(props) {
     const [fetchUpdateUser, fetchLoading, fetchError] = useFetching(async ()=> {
         if (updatedUser.image) {
             let response = await UserService.newImage(updatedUser.image)
-            setUserImage(getUserImage(response.message))
-        }
-        else {
+            setUserImage(getUserImage(response))
+        } else {
             await UserService.updateUser(updatedUser)
             if (updatedUser.nickname) {
                 setUserNickname(updatedUser.nickname)
                 window.history.pushState({}, '','/u/' + updatedUser.nickname)
                 window.history.pushState({}, '','/settings')
-            }
-            else if (updatedUser.nicknameColor) {
+            } else if (updatedUser.nicknameColor) {
                 setNicknameColor(updatedUser.nicknameColor)
-            }
-            else {
+            } else {
                 let key = Object.keys(updatedUser)
                 props.setUser(prev => ( {...prev, [key]:updatedUser[key]} ))
             }

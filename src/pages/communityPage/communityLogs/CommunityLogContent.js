@@ -8,10 +8,7 @@ function permitted(status) {
 
 export function getLogContent(log) {
     const actor = <>
-        <span className={style.logDate}>
-            {formatDate(log.date)}:
-        </span>
-        {linkToUser(log.actionNickname)}
+        <span className={style.logDate}>{formatDate(log.date)}:</span> {linkToUser(log.actionNickname)}
     </>
 
     switch (log.logType) {
