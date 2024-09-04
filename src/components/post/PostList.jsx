@@ -34,8 +34,10 @@ function PostList({loadType, entityName, isDeletePermission, sortType}) { //load
 
 
     useEffect(() => {
-        setData([])
-        clearPaginationData()
+        if (data.length > 0) {
+            setData([])
+            clearPaginationData()
+        }
     }, [sortType])
 
     function onSuccessDelete(id) {
