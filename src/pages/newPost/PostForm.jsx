@@ -21,7 +21,6 @@ function PostForm({
 
     const [showImgError, setShowImgError] = useState(false)
 
-
     return (
         <div className={style.main}>
 
@@ -33,6 +32,7 @@ function PostForm({
             <MyMessage>
                 {error}
             </MyMessage>
+            <br/>
 
             <OutlineFilledDiv className={style.form}>
                 <div className={style.titleDiv}>

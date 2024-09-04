@@ -68,7 +68,6 @@ function CommunityPage() {
         }
     }, [data])
 
-
     if (data)
         if (!data.access)
             return (
@@ -112,7 +111,7 @@ function CommunityPage() {
 
                     <OutlineFilledDiv className={style.newPostAndSortBanner}>
                         <div className={style.newPostDiv}>
-                            { isAuth ?
+                            { isAuth && (communityType !== "NEWSPAPER" || data.hasOwnProperty("currentUserRole")) ?
                                 <MyTextArea
                                     onClick={() => navigate("/new_post/" + params.groupname)}
                                     placeholder="New post..."
