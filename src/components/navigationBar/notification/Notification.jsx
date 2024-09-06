@@ -11,7 +11,7 @@ import NotificationWindow from "./NotificationWindow";
 
 function Notification() {
 
-    const {notificationsCount} = useContext(UserContext)
+    const {notificationsCount, setNotificationsCount} = useContext(UserContext)
 
     const [notifications, setNotifications] = useState([])
 
@@ -25,6 +25,11 @@ function Notification() {
         if (lastNotification)
             setIsShowNotification(true)
     }, [lastNotification])
+
+    useEffect(() => {
+        if (isNotificationsWindowOpen)
+            setNotificationsCount(0)
+    }, [isNotificationsWindowOpen])
 
     return (
         <div>
