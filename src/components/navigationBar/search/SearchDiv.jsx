@@ -20,9 +20,11 @@ function SearchDiv() {
     const [isLoading, setIsLoading] = useState(false)
 
     const [searchFirst, isFirstLoading, firstSearchError] = useFetching(async () => {
-        const responseData = await SearchService.firstSearch(value)
-        setUsersData(responseData.users)
-        setCommunitiesData(responseData.communities)
+        if (value) {
+            const responseData = await SearchService.firstSearch(value)
+            setUsersData(responseData.users)
+            setCommunitiesData(responseData.communities)
+        }
     })
 
     function firstSearch() {

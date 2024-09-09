@@ -16,8 +16,12 @@ function SearchResponseItemList({data, setData, searchValue, type, setError, set
     const isFound = data.length > 0
 
     async function searchFunction(pageNumber) {
+        if (!searchValue) {
+            setCanLoad(false)
+            return
+        }
+        setCanLoad(true)
         setIsLoading(true)
-        setIsShowMore(false)
 
         let func
         if (type === "COMMUNITY")
@@ -33,8 +37,7 @@ function SearchResponseItemList({data, setData, searchValue, type, setError, set
                 setData(responseData)
             else
                 setData(prev => [...prev, ...responseData])
-        }
-        else {
+        } else {
             setCanLoad(false)
         }
     }

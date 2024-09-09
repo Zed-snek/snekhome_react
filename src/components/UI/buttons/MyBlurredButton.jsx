@@ -4,7 +4,7 @@ import {useClasses} from "../../../hooks/useClasses";
 
 function MyBlurredButton({className, children, ...props}) {
 
-    const classes = useClasses(style.main, className)
+    const classes= useClasses(style.main, className)
 
     return (
         <button
@@ -15,5 +15,4 @@ function MyBlurredButton({className, children, ...props}) {
         </button>
     );
 }
-
 export default MyBlurredButton;
